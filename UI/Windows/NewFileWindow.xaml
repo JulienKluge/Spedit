@@ -1,0 +1,26 @@
+﻿<controls:MetroWindow x:Class="Spedit.UI.Windows.NewFileWindow"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             Width="800" Height="500" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" EnableDWMDropShadow="True" Title="New" ShowTitleBar="False">
+    <controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:MetroWindow.Resources>
+    <Grid>
+        <ListBox Name="TemplateListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="250" Margin="0,0,0,50" SelectionChanged="TemplateListBox_SelectionChanged" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,10,0,0" Text="Preview:" />
+        <TextBox Name="PrevieBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="260,30,5,50" IsReadOnly="True" />
+        <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,5" Content=". . ." Width="30" Click="Button_Click" />
+        <TextBox Name="PathBox" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,120,5" />
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" Content="Save" Width="100" Click="Button_Click_1" />
+    </Grid>
+</controls:MetroWindow>
