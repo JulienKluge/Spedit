@@ -473,8 +473,6 @@ namespace Spedit.UI.Components
             Point p;
             if (forcedXPos != int.MaxValue)
             {
-                //var caretPosition = editor.TextArea.Caret.Position;
-                //caretPosition.Column = caretPosition.Location.Column = (int)forcedXPos + 1;
                 TextViewPosition tvp = new TextViewPosition(editor.TextArea.Caret.Position.Line, forcedXPos + 1);
                 p = editor.TextArea.TextView.GetVisualPosition(tvp, VisualYPosition.LineBottom) - editor.TextArea.TextView.ScrollOffset;
             }
@@ -482,7 +480,28 @@ namespace Spedit.UI.Components
             {
                 p = editor.TextArea.TextView.GetVisualPosition(editor.TextArea.Caret.Position, VisualYPosition.LineBottom) - editor.TextArea.TextView.ScrollOffset;
             }
-            ISAC_Grid.Margin = new Thickness(p.X + ((LineNumberMargin)editor.TextArea.LeftMargins[0]).ActualWidth + 20.0, p.Y, 0.0, 0.0);
+            IS_FuncDescription.Measure(new Size(double.MaxValue, double.MaxValue));
+            double y = p.Y;
+            double ISACHeight = 0.0;
+            if (AC_Open && IS_Open)
+            {
+                double ISHeight = IS_FuncDescription.DesiredSize.Height;
+                ISACHeight = Math.Max(175.0, ISHeight);
+            }
+            else if (AC_Open)
+            {
+                ISACHeight = 175.0;
+            }
+            else if (IS_Open)
+            {
+                ISACHeight = IS_FuncDescription.DesiredSize.Height;
+            }
+            if ((y + ISACHeight) > editor.ActualHeight)
+            {
+                y = (editor.TextArea.TextView.GetVisualPosition(editor.TextArea.Caret.Position, VisualYPosition.LineTop) - editor.TextArea.TextView.ScrollOffset).Y;
+                y -= ISACHeight;
+            }
+            ISAC_Grid.Margin = new Thickness(p.X + ((LineNumberMargin)editor.TextArea.LeftMargins[0]).ActualWidth + 20.0, y, 0.0, 0.0);
         }
 
         private void FadeISACOut_Completed(object sender, EventArgs e)
