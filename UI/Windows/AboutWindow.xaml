@@ -35,6 +35,14 @@
         <ScrollViewer Margin="0,70,0,0">
             <StackPanel Name="ContentStackPanel">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="Contributers/Betatesters:" FontSize="20" FontWeight="Thin" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,0,0,0" Foreground="Red" FontWeight="Bold">
+                        <TextBlock.Text>
+                            Here comes your (Real-)Name (and E-Mail / Alliedmodders-link) if you want.
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <Image HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" Source="/Spedit;component/Res/AboutImages/MahAppsMetro.png" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,5,0,0" Text="MahApps.Metro" FontSize="18" />
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="450,5,0,0" Text="a UI toolkit for WPF" FontSize="18" FontWeight="Thin" />

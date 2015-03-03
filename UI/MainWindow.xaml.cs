@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -66,7 +67,7 @@ namespace Spedit.UI
             sc.Close(TimeSpan.FromMilliseconds(500.0));
         }
 
-        public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true)
+        public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             if (fileInfo.Exists)
@@ -83,6 +84,29 @@ namespace Spedit.UI
                     }
                 }
                 AddEditorElement(finalPath, fileInfo.Name);
+                if (TryOpenIncludes && Program.OptionsObject.Program_OpenCustomIncludes)
+                {
+                    using (var textReader = fileInfo.OpenText())
+                    {
+                        string source = Regex.Replace(textReader.ReadToEnd(), @"/\*.*?\*/", string.Empty, RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
+                        Regex regex = new Regex(@"^\s*\#include\s+((\<|"")(?<name>.+?)(\>|""))", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+                        MatchCollection mc = regex.Matches(source);
+                        for (int i = 0; i < mc.Count; ++i)
+                        {
+                            try
+                            {
+                                string fileName = mc[i].Groups["name"].Value;
+                                if (!(fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith(".sp", StringComparison.InvariantCultureIgnoreCase)))
+                                {
+                                    fileName = fileName + ".inc";
+                                }
+                                fileName = System.IO.Path.Combine(fileInfo.DirectoryName, fileName);
+                                TryLoadSourceFile(fileName, false, Program.OptionsObject.Program_OpenIncludesRecursively);
+                            }
+                            catch (Exception) { }
+                        }
+                    }
+                }
                 if (UseBlendoverEffect)
                 {
                     BlendOverEffect.Begin();

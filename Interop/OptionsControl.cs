@@ -20,6 +20,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool Program_UseHardwareAcceleration = true;
 
+        public bool Program_OpenCustomIncludes = false;
+        public bool Program_OpenIncludesRecursively = false;
+
         public bool UI_Animations = true;
 
         public bool Editor_WordWrap = false;

@@ -54,6 +54,18 @@ namespace Spedit.UI.Windows
             ToggleRestartText();
         }
 
+        private void AutoOpenInclude_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.Program_OpenCustomIncludes = OpenIncludes.IsChecked.Value;
+            OpenIncludesRecursive.IsEnabled = OpenIncludes.IsChecked.Value;
+        }
+        private void OpenIncludeRecursivly_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.Program_OpenIncludesRecursively = OpenIncludesRecursive.IsChecked.Value;
+        }
+
         private void FontSize_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -132,6 +144,12 @@ namespace Spedit.UI.Windows
         {
             HardwareAcc.IsChecked = Program.OptionsObject.Program_UseHardwareAcceleration;
             UIAnimation.IsChecked = Program.OptionsObject.UI_Animations;
+            OpenIncludes.IsChecked = Program.OptionsObject.Program_OpenCustomIncludes;
+            OpenIncludesRecursive.IsChecked = Program.OptionsObject.Program_OpenIncludesRecursively;
+            if (!Program.OptionsObject.Program_OpenCustomIncludes)
+            {
+                OpenIncludesRecursive.IsEnabled = false;
+            }
             SMInclude.Text = Program.OptionsObject.SPIncludePath;
             SMCopy.Text = Program.OptionsObject.SPCopyPath;
             ServerExec.Text = Program.OptionsObject.ServerPath;
