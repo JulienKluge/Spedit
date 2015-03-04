@@ -40,6 +40,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public int VerboseLevel = 1;
         */
 
+        public bool SH_HighlightDeprecateds = true;
+
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x00, 0x80, 0x00);
         public SerializeableColor SH_CommentsMarker = new SerializeableColor(0xFF, 0xD0, 0x20, 0x20);
         public SerializeableColor SH_Strings = new SerializeableColor(0xFF, 0xC8, 0x00, 0x00);

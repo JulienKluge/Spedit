@@ -62,6 +62,29 @@ namespace Spedit.UI.Components
                     EndColor = new HighlightingColor() { Foreground = stringBrush },
                     RuleSet = excludeInnerSingleLineComment
                 });
+                if (Program.OptionsObject.SH_HighlightDeprecateds)
+                {
+                    rs.Rules.Add(new HighlightingRule() //deprecated variable declaration
+                    {
+                        Regex = new Regex(@"^\s*(decl|new)\s+([a-zA-z_][a-zA-z1-9_]*:)?", RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.ExplicitCapture),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
+                    });
+                    rs.Rules.Add(new HighlightingRule() //deprecated function declaration
+                    {
+                        Regex = new Regex(@"^(public|stock|forward)\s+[a-zA-z_][a-zA-z1-9_]*:", RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.ExplicitCapture),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
+                    });
+                    rs.Rules.Add(new HighlightingRule() //deprecated taggings (from std types)
+                    {
+                        Regex = new Regex(@"\b(bool|Float|float|Handle|String|char|void|int):", RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.ExplicitCapture),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
+                    });
+                    rs.Rules.Add(new HighlightingRule() //deprecated keywords
+                    {
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "decl", "String", "Float", "functag", "funcenum" }),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
+                    });
+                }
                 rs.Rules.Add(new HighlightingRule() //preprocessor keywords
                 {
                     //Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "#include", "#if", "#else", "#elif", "#endif", "#define", "#undef", "#pragma", "#endinput" }),
@@ -107,16 +130,6 @@ namespace Spedit.UI.Components
                 {
                     Regex = new Regex(@"\s[<]\w+(\.\w+)?[>]", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     Color = new HighlightingColor() { Foreground = stringBrush }
-                });
-                rs.Rules.Add(new HighlightingRule() //deprecateds
-                {
-                    Regex = new Regex(@"\b(decl|new)\s+[a-zA-z_][a-zA-z1-9_]*:", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
-                });
-                rs.Rules.Add(new HighlightingRule() //deprecateds
-                {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "decl", "String", "Float", "functag", "funcenum" }),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
                 });
                 var def = Program.Configs[Program.SelectedConfig].GetSMDef();
                 if (def.Types.Length > 0)

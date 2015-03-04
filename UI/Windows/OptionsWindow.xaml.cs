@@ -104,6 +104,13 @@ namespace Spedit.UI.Windows
             }
         }
 
+        private void HighlightDeprecateds_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.SH_HighlightDeprecateds = HighlightDeprecateds.IsChecked.Value;
+            ToggleRestartText();
+        }
+
         /*private void SMInclude_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -150,6 +157,7 @@ namespace Spedit.UI.Windows
             {
                 OpenIncludesRecursive.IsEnabled = false;
             }
+            HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             /*SMInclude.Text = Program.OptionsObject.SPIncludePath;
             SMCopy.Text = Program.OptionsObject.SPCopyPath;
             ServerExec.Text = Program.OptionsObject.ServerPath;

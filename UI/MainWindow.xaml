@@ -94,7 +94,7 @@
                 </MenuItem>
 
                 <MenuItem Header="Configuration">
-                    <MenuItem Header="Make New Configuration" />
+                    <MenuItem Header="Edit Configurations" />
                     <Separator />
                 </MenuItem>
 
