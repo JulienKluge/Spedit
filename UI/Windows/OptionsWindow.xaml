@@ -93,6 +93,7 @@
             </controls:MetroTabItem>
             <controls:MetroTabItem Header="Sourcepawn / Compiling">
                 <Grid>
+                    <!--
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Sourcemod Include Directory:" />
                     <TextBox Name="SMInclude" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,25,5,0" TextChanged="SMInclude_Changed" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Text="smx-copy Directory:" />
@@ -105,6 +106,7 @@
                     <Slider Name="OptimizeLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,205,0,0" Width="100" Minimum="0" Maximum="2" AutoToolTipPlacement="TopLeft" TickFrequency="2" IsSnapToTickEnabled="True" ValueChanged="OptimizeLevel_Changed" TickPlacement="BottomRight" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,235,0,0" Text="Verbose Level:" />
                     <Slider Name="VerboseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,235,0,0" Width="100" Minimum="0" Maximum="2" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" ValueChanged="VerboseLevel_Changed" TickPlacement="BottomRight" />
+                    -->
                 </Grid>
             </controls:MetroTabItem>
         </controls:MetroAnimatedSingleRowTabControl>

@@ -110,29 +110,47 @@ namespace Spedit.UI.Components
                 });
                 rs.Rules.Add(new HighlightingRule() //deprecateds
                 {
+                    Regex = new Regex(@"\b(decl|new)\s+[a-zA-z_][a-zA-z1-9_]*:", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
+                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
+                });
+                rs.Rules.Add(new HighlightingRule() //deprecateds
+                {
                     Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "decl", "String", "Float", "functag", "funcenum" }),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Deprecated) }
                 });
-                rs.Rules.Add(new HighlightingRule() //types
+                var def = Program.Configs[Program.SelectedConfig].GetSMDef();
+                if (def.Types.Length > 0)
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(Program.spDefinition.Types, true),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Types) }
-                });
-                rs.Rules.Add(new HighlightingRule() //constants
+                    rs.Rules.Add(new HighlightingRule() //types
+                    {
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.Types, true),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Types) }
+                    });
+                }
+                if (def.Constants.Length > 0)
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(Program.spDefinition.Constants, true),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Constants) }
-                });
-                rs.Rules.Add(new HighlightingRule() //Functions
+                    rs.Rules.Add(new HighlightingRule() //constants
+                    {
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.Constants, true),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Constants) }
+                    });
+                }
+                if (def.FunctionNames.Length > 0)
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(Program.spDefinition.FunctionNames, true),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Functions) }
-                });
-                rs.Rules.Add(new HighlightingRule() //Methods
+                    rs.Rules.Add(new HighlightingRule() //Functions
+                    {
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.FunctionNames, true),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Functions) }
+                    });
+                }
+                if (def.MethodNames.Length > 0)
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(Program.spDefinition.MethodNames, true),
-                    Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Methods) }
-                });
+                    rs.Rules.Add(new HighlightingRule() //Methods
+                    {
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.MethodNames, true),
+                        Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Methods) }
+                    });
+                }
                 rs.Rules.Add(new HighlightingRule() //unknown function calls
                 {
                     Regex = new Regex(@"\b\w+(?=\s*\()", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),

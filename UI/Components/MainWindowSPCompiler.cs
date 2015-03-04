@@ -21,8 +21,10 @@ namespace Spedit.UI
             Command_SaveAll();
             if (InCompiling) { return; }
             InCompiling = true;
-            string spCompPath = Path.Combine(Environment.CurrentDirectory + @"\sourcepawn\spcomp.exe");
-            if (File.Exists(spCompPath))
+            var c = Program.Configs[Program.SelectedConfig];
+            //string spCompPath = Path.Combine(Environment.CurrentDirectory + @"\sourcepawn\spcomp.exe");
+            FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
+            if (spCompInfo.Exists)
             {
                 List<string> filesToCompile = new List<string>();
                 EditorElement[] editors = GetAllEditorElements();
@@ -54,13 +56,13 @@ namespace Spedit.UI
                                 process.StartInfo.UseShellExecute = true;
                                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 process.StartInfo.CreateNoWindow = true;
-                                process.StartInfo.FileName = spCompPath;
+                                process.StartInfo.FileName = spCompInfo.FullName;
                                 string destinationFileName = ShortenScriptFileName(fileInfo.Name) + ".smx";
                                 string outFile = Path.Combine(fileInfo.DirectoryName, destinationFileName);
                                 if (File.Exists(outFile)) { File.Delete(outFile); }
                                 string errorFile = Environment.CurrentDirectory + @"\sourcepawn\errorfiles\error_" + Environment.TickCount.ToString() + "_" + file.GetHashCode().ToString("X") + "_" + i.ToString() + ".txt";
                                 if (File.Exists(errorFile)) { File.Delete(errorFile); }
-                                process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\" -i=" + Program.OptionsObject.SPIncludePath + " -O=" + Program.OptionsObject.OptimizationLevel.ToString() + " -v=" + Program.OptionsObject.VerboseLevel.ToString();
+                                process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\" -i=" + c.SMDirectory + " -O=" + c.OptimizeLevel.ToString() + " -v=" + c.VerboseLevel.ToString();
                                 progressTask.SetProgress((((double)(i + 1)) - 0.5d) / ((double)compileCount));
                                 MainWindow.ProcessUITasks();
                                 process.Start();
@@ -80,7 +82,7 @@ namespace Spedit.UI
                                     {
                                         try
                                         {
-                                            string copyFileDestination = Path.Combine(Program.OptionsObject.SPCopyPath, destinationFileName);
+                                            string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
                                             File.Copy(outFile, copyFileDestination, true);
                                             stringOutput.AppendLine("Plugin copied.");
                                         }
@@ -113,12 +115,13 @@ namespace Spedit.UI
 
         public async void Server_Start()
         {
-            string serverOptionsPath = Program.OptionsObject.ServerPath;
+            var c = Program.Configs[Program.SelectedConfig];
+            string serverOptionsPath = c.ServerFile;
             if (string.IsNullOrWhiteSpace(serverOptionsPath))
             {
                 return;
             }
-            FileInfo serverExec = new FileInfo(Program.OptionsObject.ServerPath);
+            FileInfo serverExec = new FileInfo(serverOptionsPath);
             if (!serverExec.Exists)
             {
                 return;
@@ -129,7 +132,7 @@ namespace Spedit.UI
                 process.StartInfo.UseShellExecute = true;
                 process.StartInfo.FileName = serverExec.FullName;
                 process.StartInfo.WorkingDirectory = serverExec.DirectoryName;
-                process.StartInfo.Arguments = Program.OptionsObject.ServerArgs;
+                process.StartInfo.Arguments = c.ServerArgs;
                 process.Start();
                 process.WaitForExit();
                 await progressTask.CloseAsync();

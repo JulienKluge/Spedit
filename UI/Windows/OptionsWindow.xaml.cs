@@ -104,7 +104,7 @@ namespace Spedit.UI.Windows
             }
         }
 
-        private void SMInclude_Changed(object sender, RoutedEventArgs e)
+        /*private void SMInclude_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
             Program.OptionsObject.SPIncludePath = SMInclude.Text;
@@ -138,7 +138,7 @@ namespace Spedit.UI.Windows
         {
             if (!AllowChanging) { return; }
             Program.OptionsObject.VerboseLevel = (int)VerboseLevel.Value;
-        }
+        }*/
 
         private void LoadSettings()
         {
@@ -150,12 +150,12 @@ namespace Spedit.UI.Windows
             {
                 OpenIncludesRecursive.IsEnabled = false;
             }
-            SMInclude.Text = Program.OptionsObject.SPIncludePath;
+            /*SMInclude.Text = Program.OptionsObject.SPIncludePath;
             SMCopy.Text = Program.OptionsObject.SPCopyPath;
             ServerExec.Text = Program.OptionsObject.ServerPath;
             ServerArg.Text = Program.OptionsObject.ServerArgs;
             OptimizeLevel.Value = Program.OptionsObject.OptimizationLevel;
-            VerboseLevel.Value = Program.OptionsObject.VerboseLevel;
+            VerboseLevel.Value = Program.OptionsObject.VerboseLevel;*/
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
             FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";

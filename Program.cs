@@ -18,7 +18,9 @@ namespace Spedit
     {
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
-        public static CondensedSourcepawnDefinition spDefinition;
+        //public static CondensedSourcepawnDefinition spDefinition;
+        public static Config[] Configs;
+        public static int SelectedConfig = 0;
 
         [STAThread]
         public static void Main()
@@ -31,7 +33,7 @@ namespace Spedit
                     SplashScreen splashScreen = new SplashScreen("Res/Icon256x.png");
                     splashScreen.Show(false, true);
                     OptionsObject = OptionsControlIOObject.Load();
-                    spDefinition = SourcepawnCondenser.Condense(Program.OptionsObject.SPIncludePath);
+                    Configs = ConfigLoader.Load();
                     if (!OptionsObject.Program_UseHardwareAcceleration)
                     {
                         RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;

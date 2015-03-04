@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\AssemblyInfo1.cs" />
+    <Compile Include="Interop\ConfigControl.cs" />
     <Compile Include="Interop\PipeInteropClient.cs" />
     <Compile Include="Interop\PipeInteropServer.cs" />
     <Compile Include="Interop\OptionsControl.cs" />
@@ -220,11 +221,148 @@
     <Resource Include="Res\AboutImages\IconMonstr.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Res\Misc\Configurations\Configs.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\admin.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adminmenu.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_array.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_stack.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_trie.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\banning.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\basecomm.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\bitbuffer.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\clientprefs.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\clients.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\commandfilters.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\commandline.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\console.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\convars.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\core.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\cstrike.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\datapack.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\dbi.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\entity.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\entity_prop_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\events.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\files.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\float.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\functions.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\geoip.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\halflife.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\handles.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\helpers.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\keyvalues.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\lang.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\logging.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\mapchooser.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\menus.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\nextmap.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\profiler.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\protobuf.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\regex.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdkhooks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_client.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_engine.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_entinput.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_entoutput.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_functions.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_gamerules.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_hooks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_sound.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_stringtables.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_tempents.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_tempents_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_trace.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_voice.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sorting.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sourcemod.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\string.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\testing.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\textparse.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\tf2.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\tf2_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\timers.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\topmenus.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\usermessages.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\vector.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\version.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\include\version_auto.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_seven\spcomp.exe" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\admin.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\adminmenu.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_array.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_stack.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_trie.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\banning.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\basecomm.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\bitbuffer.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\clientprefs.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\clients.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\commandfilters.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\console.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\core.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\cstrike.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\datapack.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\dbi.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\entity.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\entity_prop_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\events.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\files.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\float.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\functions.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\geoip.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\halflife.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\handles.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\helpers.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\keyvalues.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\lang.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\logging.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\mapchooser.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\menus.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\nextmap.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\profiler.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\protobuf.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\regex.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdkhooks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_client.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_engine.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_entinput.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_entoutput.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_functions.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_gamerules.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_hooks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_sound.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_stringtables.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_tempents.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_tempents_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_trace.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_voice.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sorting.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\sourcemod.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\string.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\textparse.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\tf2.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\tf2_stocks.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\timers.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\topmenus.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\usermessages.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\vector.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\version.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\include\version_auto.inc" />
+    <Content Include="Res\Misc\Configurations\sm_one_six\spcomp.exe" />
     <Content Include="Res\Misc\Templates\ExtensionIncludeTemplate.inc" />
     <Content Include="Res\Misc\Templates\IncludeTemplate.inc" />
     <Content Include="Res\Misc\Templates\NativeIncludeTemplate.inc" />
     <Content Include="Res\Misc\Templates\Templates.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
@@ -233,7 +371,9 @@
   <PropertyGroup>
     <PostBuildEvent>md ".\sourcepawn"
 md ".\sourcepawn\templates"
-copy /y ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*"</PostBuildEvent>
+md ".\sourcepawn\configs"
+xcopy ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y
+xcopy ".\..\..\Res\Misc\Configurations" ".\sourcepawn\configs" /e /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

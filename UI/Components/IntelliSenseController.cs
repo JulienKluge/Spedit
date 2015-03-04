@@ -34,6 +34,8 @@ namespace Spedit.UI.Components
 
         private bool AC_IsFuncC = true;
 
+        private bool AnimationsLoaded = false;
+
         private int LastShowedLine = -1;
 
         private string[] funcNames;
@@ -41,20 +43,31 @@ namespace Spedit.UI.Components
         private ACNode[] acEntrys;
         private ISNode[] isEntrys;
         //private string[] methodNames;
-        private void LoadAutoCompletes()
+        public void LoadAutoCompletes()
         {
-            FadeISACIn = (Storyboard)this.Resources["FadeISACIn"];
-            FadeISACOut = (Storyboard)this.Resources["FadeISACOut"];
-            FadeACIn = (Storyboard)this.Resources["FadeACIn"];
-            FadeACOut = (Storyboard)this.Resources["FadeACOut"];
-            FadeAC_FuncC_In = (Storyboard)this.Resources["FadeAC_FuncC_In"];
-            FadeAC_MethodC_In = (Storyboard)this.Resources["FadeAC_MethodC_In"];
-            FadeISACOut.Completed += FadeISACOut_Completed;
-            FadeACOut.Completed += FadeACOut_Completed;
-            funcNames = Program.spDefinition.FunctionNames;
-            funcs = Program.spDefinition.Functions;
-            acEntrys = Program.spDefinition.ACNodes;
-            isEntrys = Program.spDefinition.ISNodes;
+            if (!AnimationsLoaded)
+            {
+                FadeISACIn = (Storyboard)this.Resources["FadeISACIn"];
+                FadeISACOut = (Storyboard)this.Resources["FadeISACOut"];
+                FadeACIn = (Storyboard)this.Resources["FadeACIn"];
+                FadeACOut = (Storyboard)this.Resources["FadeACOut"];
+                FadeAC_FuncC_In = (Storyboard)this.Resources["FadeAC_FuncC_In"];
+                FadeAC_MethodC_In = (Storyboard)this.Resources["FadeAC_MethodC_In"];
+                FadeISACOut.Completed += FadeISACOut_Completed;
+                FadeACOut.Completed += FadeACOut_Completed;
+                AnimationsLoaded = true;
+            }
+            if (ISAC_Open)
+            {
+                HideISAC();
+            }
+            var def = Program.Configs[Program.SelectedConfig].GetSMDef();
+            funcNames = def.FunctionNames;
+            funcs = def.Functions;
+            acEntrys = def.ACNodes;
+            isEntrys = def.ISNodes;
+            AutoCompleteBox.Items.Clear();
+            MethodAutoCompleteBox.Items.Clear();
             for (int i = 0; i < acEntrys.Length; ++i)
             {
                 AutoCompleteBox.Items.Add(acEntrys[i].Name);

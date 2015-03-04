@@ -27,16 +27,18 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
-        public string Editor_FontFamily = "consolas";
+        public string Editor_FontFamily = "Consolas";
 
         public string[] LastOpenFiles = new string[0];
 
+        /*
         public string SPIncludePath = "sourcepawn\\";
         public string SPCopyPath = "";
         public string ServerPath = "";
         public string ServerArgs = "";
         public int OptimizationLevel = 2;
         public int VerboseLevel = 1;
+        */
 
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x00, 0x80, 0x00);
         public SerializeableColor SH_CommentsMarker = new SerializeableColor(0xFF, 0xD0, 0x20, 0x20);

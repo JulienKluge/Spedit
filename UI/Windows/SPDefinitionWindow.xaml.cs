@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using MahApps.Metro.Controls;
+using Spedit.SPCondenser;
 
 namespace Spedit.UI.Windows
 {
@@ -22,24 +23,33 @@ namespace Spedit.UI.Windows
     /// </summary>
     public partial class SPDefinitionWindow : MetroWindow
     {
+        CondensedSourcepawnDefinition def;
+
         public SPDefinitionWindow()
         {
             InitializeComponent();
-            for (int i = 0; i < Program.spDefinition.Functions.Length; ++i)
+            def = Program.Configs[Program.SelectedConfig].GetSMDef();
+            if (def == null)
             {
-                SPFunctionsListBox.Items.Add(Program.spDefinition.Functions[i].Name);
+                MessageBox.Show("The config was not able to parse a sourcepawn definiton.", "Stop", MessageBoxButton.OK, MessageBoxImage.Warning);
+                this.Close();
+                return;
             }
-            for (int i = 0; i < Program.spDefinition.Constants.Length; ++i)
+            for (int i = 0; i < def.Functions.Length; ++i)
             {
-                ConstantsList.Items.Add(Program.spDefinition.Constants[i]);
+                SPFunctionsListBox.Items.Add(def.Functions[i].Name);
             }
-            for (int i = 0; i < Program.spDefinition.Types.Length; ++i)
+            for (int i = 0; i < def.Constants.Length; ++i)
             {
-                TypesList.Items.Add(Program.spDefinition.Types[i]);
+                ConstantsList.Items.Add(def.Constants[i]);
             }
-            for (int i = 0; i < Program.spDefinition.MethodNames.Length; ++i)
+            for (int i = 0; i < def.Types.Length; ++i)
             {
-                MethodsList.Items.Add(Program.spDefinition.MethodNames[i]);
+                TypesList.Items.Add(def.Types[i]);
+            }
+            for (int i = 0; i < def.MethodNames.Length; ++i)
+            {
+                MethodsList.Items.Add(def.MethodNames[i]);
             }
             if (SPFunctionsListBox.Items.Count > 0)
             {
@@ -49,18 +59,18 @@ namespace Spedit.UI.Windows
 
         private void SPFunctionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SPFunctionNameBlock.Text = Program.spDefinition.Functions[SPFunctionsListBox.SelectedIndex].Name;
-            SPFunctionFullNameBlock.Text = Program.spDefinition.Functions[SPFunctionsListBox.SelectedIndex].FullName;
-            SPFunctionCommentBox.Text = Program.spDefinition.Functions[SPFunctionsListBox.SelectedIndex].Comment;
+            SPFunctionNameBlock.Text = def.Functions[SPFunctionsListBox.SelectedIndex].Name;
+            SPFunctionFullNameBlock.Text = def.Functions[SPFunctionsListBox.SelectedIndex].FullName;
+            SPFunctionCommentBox.Text = def.Functions[SPFunctionsListBox.SelectedIndex].Comment;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchString = ((TextBox)sender).Text;
             bool foundOccurence = false;
-            for (int i = 0; i < Program.spDefinition.Functions.Length; ++i)
+            for (int i = 0; i < def.Functions.Length; ++i)
             {
-                if (Program.spDefinition.Functions[i].Name.StartsWith(searchString, StringComparison.InvariantCultureIgnoreCase))
+                if (def.Functions[i].Name.StartsWith(searchString, StringComparison.InvariantCultureIgnoreCase))
                 {
                     SPFunctionsListBox.SelectedIndex = i;
                     SPFunctionsListBox.ScrollIntoView(SPFunctionsListBox.SelectedItem);
