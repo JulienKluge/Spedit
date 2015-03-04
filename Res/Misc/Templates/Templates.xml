@@ -1,0 +1,13 @@
+<Templates>
+	<Template Name="Sourcepawn Script" NewName="New Sourcepawn Script.sp" File="ScriptTemplate.sp" />
+	<Template Name="Empty Sourcepawn Script" NewName="New Script.sp" File="EmptyScriptTemplate.sp" />
+	<Template Name="Include" NewName="New Include.inc" File="IncludeTemplate.inc" />
+	<Template Name="Extension Include" NewName="New Extension Include.inc" File="ExtensionIncludeTemplate.inc" />
+	<Template Name="Interoperability Include" NewName="New Plugin Include.inc" File="NativeIncludeTemplate.inc" />
+	<Template Name="CS:S / CS:GO Script" NewName="New CS Sourcepawn Script.sp" File="CSSCSGOTemplate.sp" />
+	<Template Name="TF Script" NewName="New TF Sourcepawn Script.sp" File="TFTemplate.sp" />
+	<Template Name="Simple Sourcepawn Script" NewName="New Script.sp" File="SimpleScriptTemplate.sp" />
+	<Template Name="Sourcepawn Script (SM 1.6 Syntax)" NewName="New Sourcepawn Script.sp" File="OldSyntaxScriptTemplate.sp" />
+	<Template Name="CS:S / CS:GO Script (SM 1.6 Syntax)" NewName="New CS Sourcepawn Script.sp" File="OldSyntaxCSSCSGOTemplate.sp" />
+	<Template Name="TF Script (SM 1.6 Syntax)" NewName="New TF Sourcepawn Script.sp" File="OldSyntaxTFTemplate.sp" />
+</Templates>

@@ -58,6 +58,14 @@
   <ItemGroup>
     <None Include="App\App.config" />
     <None Include="packages.config" />
+    <None Include="Res\Misc\Templates\CSSCSGOTemplate.sp" />
+    <None Include="Res\Misc\Templates\EmptyScriptTemplate.sp" />
+    <None Include="Res\Misc\Templates\OldSyntaxCSSCSGOTemplate.sp" />
+    <None Include="Res\Misc\Templates\OldSyntaxScriptTemplate.sp" />
+    <None Include="Res\Misc\Templates\OldSyntaxTFTemplate.sp" />
+    <None Include="Res\Misc\Templates\ScriptTemplate.sp" />
+    <None Include="Res\Misc\Templates\SimpleScriptTemplate.sp" />
+    <None Include="Res\Misc\Templates\TFTemplate.sp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit">
@@ -211,7 +219,22 @@
   <ItemGroup>
     <Resource Include="Res\AboutImages\IconMonstr.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Res\Misc\Templates\ExtensionIncludeTemplate.inc" />
+    <Content Include="Res\Misc\Templates\IncludeTemplate.inc" />
+    <Content Include="Res\Misc\Templates\NativeIncludeTemplate.inc" />
+    <Content Include="Res\Misc\Templates\Templates.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>md ".\sourcepawn"
+md ".\sourcepawn\templates"
+copy /y ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
