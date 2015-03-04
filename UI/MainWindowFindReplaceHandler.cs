@@ -20,12 +20,29 @@ namespace Spedit.UI
             if (IsSearchFieldOpen)
             {
                 IsSearchFieldOpen = false;
-                FadeFindReplaceGridOut.Begin();
+                FindReplaceGrid.IsHitTestVisible = false;
+                if (Program.OptionsObject.UI_Animations)
+                {
+                    FadeFindReplaceGridOut.Begin();
+                }
+                else
+                {
+                    FindReplaceGrid.Opacity = 0.0;
+                }
             }
             else
             {
                 IsSearchFieldOpen = true;
-                FadeFindReplaceGridIn.Begin();
+                FindReplaceGrid.IsHitTestVisible = true;
+                if (Program.OptionsObject.UI_Animations)
+                {
+                    FadeFindReplaceGridIn.Begin();
+                }
+                else
+                {
+                    FindReplaceGrid.Opacity = 1.0;
+                    FindBox.Focus();
+                }
             }
         }
 
