@@ -149,12 +149,13 @@ namespace Spedit.UI.Components
                 }
             }
             Program.MainWindow.EditorsReferences.Remove(this);
-            if (Parent.IsFloating)
-            {
-                Parent.Close();
-            }
+            //if (Parent.IsFloating) why was this here?...
+            //{
+            Parent.Close();
+            //}
             Program.MainWindow.DockingPane.Children.Remove(Parent);
             Parent = null; //to prevent a ring depency which disables the GC from work
+
         }
 
         private void editor_TextChanged(object sender, EventArgs e)
