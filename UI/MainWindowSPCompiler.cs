@@ -38,6 +38,7 @@ namespace Spedit.UI
                 int compileCount = filesToCompile.Count;
                 if (compileCount > 0)
                 {
+                    var conf = Program.Configs[Program.SelectedConfig];
                     var progressTask = await this.ShowProgressAsync("Compiling", "", false, this.MetroDialogOptions);
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
@@ -50,6 +51,11 @@ namespace Spedit.UI
                         stringOutput.AppendLine(fileInfo.Name);
                         if (fileInfo.Exists)
                         {
+                            string execResult = ExecuteCommandLine(conf.PreCmd, fileInfo.DirectoryName);
+                            if (!string.IsNullOrWhiteSpace(execResult))
+                            {
+                                stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
+                            }
                             using (Process process = new Process())
                             {
                                 process.StartInfo.WorkingDirectory = Environment.CurrentDirectory + @"\sourcepawn";
@@ -92,6 +98,11 @@ namespace Spedit.UI
                                 stringOutput.AppendLine();
                                 progressTask.SetProgress(((double)(i + 1)) / ((double)compileCount));
                                 MainWindow.ProcessUITasks();
+                            }
+                            execResult = ExecuteCommandLine(conf.PostCmd, fileInfo.DirectoryName);
+                            if (!string.IsNullOrWhiteSpace(execResult))
+                            {
+                                stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
                             }
                         }
                     }
@@ -147,6 +158,34 @@ namespace Spedit.UI
                 return fileName.Substring(0, fileName.Length - 3);
             }
             return fileName;
+        }
+
+        private string ExecuteCommandLine(string code, string directory)
+        {
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return null;
+            }
+            string batchFile = (new FileInfo(Path.Combine("sourcepawn\\temp\\", Environment.TickCount.ToString() + "_" + (code.GetHashCode() ^ directory.GetHashCode()).ToString() + "_temp.bat"))).FullName;
+            File.WriteAllText(batchFile, code);
+            string result = null;
+            using (Process process = new Process())
+            {
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.WorkingDirectory = directory;
+                process.StartInfo.Arguments = "/c \"" + batchFile + "\"";
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.Start();
+                process.WaitForExit();
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            return result;
         }
     }
 }

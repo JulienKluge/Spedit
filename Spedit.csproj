@@ -122,7 +122,7 @@
     <Compile Include="UI\Components\EditorElementHighlighter.cs" />
     <Compile Include="UI\Components\EditorFoldingStrategy.cs" />
     <Compile Include="UI\Components\IntelliSenseController.cs" />
-    <Compile Include="UI\Components\MainWindowSPCompiler.cs" />
+    <Compile Include="UI\MainWindowSPCompiler.cs" />
     <Compile Include="UI\MainWindowCommands.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -131,6 +131,9 @@
     <Compile Include="UI\MainWindowInputHandler.cs" />
     <Compile Include="UI\MainWindowMenuHandler.cs" />
     <Compile Include="UI\MeinWindowConfigHandler.cs" />
+    <Compile Include="UI\Windows\ConfigWindow.xaml.cs">
+      <DependentUpon>ConfigWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\NewFileWindow.xaml.cs">
       <DependentUpon>NewFileWindow.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
     <Page Include="UI\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\ConfigWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Windows\NewFileWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -373,8 +380,8 @@
     <PostBuildEvent>md ".\sourcepawn"
 md ".\sourcepawn\templates"
 md ".\sourcepawn\configs"
-xcopy ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y
-xcopy ".\..\..\Res\Misc\Configurations" ".\sourcepawn\configs" /e /y</PostBuildEvent>
+xcopy ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
+xcopy ".\..\..\Res\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

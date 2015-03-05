@@ -31,8 +31,6 @@
                         <CheckBox Name="UIAnimation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="UI Animations" Checked="UIAnimation_Changed" Unchecked="UIAnimation_Changed" />
                         <CheckBox Name="OpenIncludes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Content="Auto Open Includes" Checked="AutoOpenInclude_Changed" Unchecked="AutoOpenInclude_Changed" />
                         <CheckBox Name="OpenIncludesRecursive" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,80,0,0" Content="Open Includes Recursivly" Checked="OpenIncludeRecursivly_Changed" Unchecked="OpenIncludeRecursivly_Changed" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,0,0" Text="Log:" />
-                        <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="300" Margin="5,120,5,5" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>

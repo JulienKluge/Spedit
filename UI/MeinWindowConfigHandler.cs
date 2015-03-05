@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Spedit.UI.Components;
+using Spedit.UI.Windows;
 
 namespace Spedit.UI
 {
     public partial class MainWindow
     {
-        private void FillConfigMenu()
+        public void FillConfigMenu()
         {
             ConfigMenu.Items.Clear();
             for (int i = 0; i < Program.Configs.Length; ++i)
@@ -22,10 +23,18 @@ namespace Spedit.UI
                 ConfigMenu.Items.Add(item);
             }
             ConfigMenu.Items.Add(new Separator());
-            ConfigMenu.Items.Add(new MenuItem() { Header = "Edit Configurations" });
+            MenuItem editItem = new MenuItem() { Header = "Edit Configurations" };
+            editItem.Click += editItem_Click;
+            ConfigMenu.Items.Add(editItem);
         }
 
-        void item_Click(object sender, RoutedEventArgs e)
+        private void editItem_Click(object sender, RoutedEventArgs e)
+        {
+            ConfigWindow configWindow = new ConfigWindow() { Owner = this, ShowInTaskbar = false };
+            configWindow.ShowDialog();
+        }
+
+        private void item_Click(object sender, RoutedEventArgs e)
         {
             string name = (string)(((MenuItem)sender).Header);
             ChangeConfig(name);
@@ -37,7 +46,7 @@ namespace Spedit.UI
             string Name = (string)item.Header;
         }
         
-        private void ChangeConfig(int index)
+        public void ChangeConfig(int index)
         {
             if (index < 0 || index >= Program.Configs.Length)
             {
@@ -58,7 +67,7 @@ namespace Spedit.UI
                 editors[i].InvalidateVisual();
             }
         }
-        private void ChangeConfig(string name)
+        public void ChangeConfig(string name)
         {
             for (int i = 0; i < Program.Configs.Length; ++i)
             {

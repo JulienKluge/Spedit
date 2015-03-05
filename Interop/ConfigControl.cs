@@ -89,7 +89,7 @@ namespace Spedit.Interop
         public string Name;
 
         public bool Standart = false;
-        public bool IsTemporary = false;
+        //public bool IsTemporary = false;
 
         public string SMDirectory;
         public string CopyDirectory;
@@ -111,6 +111,11 @@ namespace Spedit.Interop
                 LoadSMDef();
             }
             return SMDef;
+        }
+
+        public void InvalidateSMDef()
+        {
+            this.SMDef = null;
         }
 
         public void LoadSMDef()
