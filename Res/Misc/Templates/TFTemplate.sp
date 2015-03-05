@@ -22,5 +22,8 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
-	
+	if(GetEngineVersion() != Engine_TF2)
+	{
+		SetFailState("This plugin is for TF2 only.");	
+	}	
 }
