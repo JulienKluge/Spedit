@@ -173,5 +173,10 @@ namespace Spedit.UI
             OptionsWindow optionsWindow = new OptionsWindow() { Owner = this, ShowInTaskbar = false };
             optionsWindow.ShowDialog();
         }
+
+        private void ReportBug_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(@"https://github.com/TheJelle/Spedit/issues/new"));
+        }
     }
 }

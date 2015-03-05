@@ -108,6 +108,7 @@
                         <MenuItem Header="New Api Webside" Click="Menu_OpenWebsideFromTag" Tag="https://sm.alliedmods.net/new-api/" />
                     </MenuItem>
                     <Separator />
+                    <MenuItem Header="Report a Bug" Click="ReportBug_Click" />
                     <MenuItem Header="About" Click="Menu_About" />
                 </MenuItem>
             </Menu>
