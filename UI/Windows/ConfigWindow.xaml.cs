@@ -62,7 +62,7 @@ namespace Spedit.UI.Windows
 
         private void NewButton_Clicked(object sender, RoutedEventArgs e)
         {
-            Config c = new Config() { Name = "New Config", Standart = false, OptimizeLevel = 2, VerboseLevel = 1 };
+            Config c = new Config() { Name = "New Config", Standard = false, OptimizeLevel = 2, VerboseLevel = 1 };
             List<Config> configList = new List<Config>(Program.Configs);
             configList.Add(c);
             Program.Configs = configList.ToArray();
@@ -73,7 +73,7 @@ namespace Spedit.UI.Windows
         {
             int index = ConfigListBox.SelectedIndex;
             Config c = Program.Configs[index];
-            if (c.Standart)
+            if (c.Standard)
             {
                 this.ShowMessageAsync("Cannot delete config", "You cannot delete this config!", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                 return;
@@ -155,7 +155,7 @@ namespace Spedit.UI.Windows
                     writer.WriteStartElement("Config");
                     writer.WriteAttributeString("Name", c.Name);
                     writer.WriteAttributeString("SMDirectory", c.SMDirectory);
-                    writer.WriteAttributeString("Standart", (c.Standart) ? "1" : "0");
+                    writer.WriteAttributeString("Standard", (c.Standard) ? "1" : "0");
                     writer.WriteAttributeString("CopyDirectory", c.CopyDirectory);
                     writer.WriteAttributeString("ServerFile", c.ServerFile);
                     writer.WriteAttributeString("ServerArgs", c.ServerArgs);
