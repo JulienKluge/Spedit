@@ -130,7 +130,7 @@
     <Compile Include="UI\MainWindowFindReplaceHandler.cs" />
     <Compile Include="UI\MainWindowInputHandler.cs" />
     <Compile Include="UI\MainWindowMenuHandler.cs" />
-    <Compile Include="UI\MeinWindowConfigHandler.cs" />
+    <Compile Include="UI\MainWindowConfigHandler.cs" />
     <Compile Include="UI\Windows\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
     </Compile>
