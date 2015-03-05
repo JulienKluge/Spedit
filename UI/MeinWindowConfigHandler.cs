@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using Spedit.UI.Components;
+
+namespace Spedit.UI
+{
+    public partial class MainWindow
+    {
+        private void FillConfigMenu()
+        {
+            ConfigMenu.Items.Clear();
+            for (int i = 0; i < Program.Configs.Length; ++i)
+            {
+                MenuItem item = new MenuItem() { Header = Program.Configs[i].Name, IsCheckable = true };
+                item.IsChecked = (i == Program.SelectedConfig);
+                item.Click += item_Click;
+                ConfigMenu.Items.Add(item);
+            }
+            ConfigMenu.Items.Add(new Separator());
+            ConfigMenu.Items.Add(new MenuItem() { Header = "Edit Configurations" });
+        }
+
+        void item_Click(object sender, RoutedEventArgs e)
+        {
+            string name = (string)(((MenuItem)sender).Header);
+            ChangeConfig(name);
+        }
+
+        private void ConfigSelected(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = (MenuItem)sender;
+            string Name = (string)item.Header;
+        }
+        
+        private void ChangeConfig(int index)
+        {
+            if (index < 0 || index >= Program.Configs.Length)
+            {
+                return;
+            }
+            Program.Configs[index].LoadSMDef();
+            string Name = Program.Configs[index].Name;
+            for (int i = 0; i < ConfigMenu.Items.Count - 2; ++i)
+            {
+                ((MenuItem)ConfigMenu.Items[i]).IsChecked = (Name == (string)(((MenuItem)ConfigMenu.Items[i]).Header));
+            }
+            Program.SelectedConfig = index;
+            EditorElement[] editors = GetAllEditorElements();
+            for (int i = 0; i < editors.Length; ++i)
+            {
+                editors[i].LoadAutoCompletes();
+                editors[i].editor.SyntaxHighlighting = new AeonEditorHighlighting();
+                editors[i].InvalidateVisual();
+            }
+        }
+        private void ChangeConfig(string name)
+        {
+            for (int i = 0; i < Program.Configs.Length; ++i)
+            {
+                if (Program.Configs[i].Name == name)
+                {
+                    ChangeConfig(i);
+                    return;
+                }
+            }
+        }
+
+    }
+}

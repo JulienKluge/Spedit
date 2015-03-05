@@ -42,6 +42,7 @@ namespace Spedit.UI
         public MainWindow(SplashScreen sc)
         {
             InitializeComponent();
+            FillConfigMenu();
             this.MetroDialogOptions.AnimateHide = this.MetroDialogOptions.AnimateShow = false;
             BlendOverEffect = (Storyboard)this.Resources["BlendOverEffect"];
             FadeFindReplaceGridIn = (Storyboard)this.Resources["FadeFindReplaceGridIn"];

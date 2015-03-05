@@ -93,9 +93,7 @@
                     <MenuItem Header="Start Server" Click="Menu_StartServer" InputGestureText="F7" />
                 </MenuItem>
 
-                <MenuItem Header="Configuration">
-                    <MenuItem Header="Edit Configurations" />
-                    <Separator />
+                <MenuItem Name="ConfigMenu" Header="Configuration">
                 </MenuItem>
 
                 <MenuItem Header="Tools">

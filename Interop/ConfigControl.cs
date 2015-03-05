@@ -115,6 +115,10 @@ namespace Spedit.Interop
 
         public void LoadSMDef()
         {
+            if (this.SMDef != null)
+            {
+                return;
+            }
             try
             {
                 this.SMDef = SourcepawnCondenser.Condense(SMDirectory);
