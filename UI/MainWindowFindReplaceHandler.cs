@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Globalization;
 using Spedit.UI.Components;
+using System.Windows.Input;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Editing;
 
@@ -34,6 +35,11 @@ namespace Spedit.UI
             {
                 IsSearchFieldOpen = true;
                 FindReplaceGrid.IsHitTestVisible = true;
+                EditorElement ee = GetCurrentEditorElement();
+                if (ee.editor.SelectionLength > 0)
+                {
+                    FindBox.Text = ee.editor.SelectedText;
+                }
                 if (Program.OptionsObject.UI_Animations)
                 {
                     FadeFindReplaceGridIn.Begin();
@@ -66,6 +72,20 @@ namespace Spedit.UI
         private void SearchBoxTextChanged(object sender, RoutedEventArgs e)
         {
             FindResultBlock.Text = string.Empty;
+        }
+        private void SearchBoxKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Search();
+            }
+        }
+        private void ReplaceBoxKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Search(true);
+            }
         }
 
         public void Search(bool Replace = false)

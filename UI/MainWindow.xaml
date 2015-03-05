@@ -133,8 +133,8 @@
         </Grid>
         <Grid Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="215" Width="450" IsHitTestVisible="False" Opacity="0">
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{StaticResource BlackBrush}" Fill="{StaticResource AccentColorBrush2}" />
-            <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,5,5" controls:TextBoxHelper.Watermark="Find" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" />
-            <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" controls:TextBoxHelper.Watermark="Replace" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" />
+            <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,5,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
+            <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" Height="45" controls:TextBoxHelper.Watermark="Replace" VerticalScrollBarVisibility="Visible" KeyDown="ReplaceBoxKeyUp" />
             <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{StaticResource WhiteBrush}" Click="SearchButtonClicked" />
             <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{StaticResource WhiteBrush}" />
             <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{StaticResource WhiteBrush}" />
