@@ -91,14 +91,14 @@ namespace Spedit.UI.Components
                     Regex = new Regex(@"\#[a-zA-Z_][a-zA-Z0-9_]+", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_PreProcessor) }
                 });
-                rs.Rules.Add(new HighlightingRule() //type keywords
+                rs.Rules.Add(new HighlightingRule() //type-values keywords
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "sizeof", "true", "false" }),
+                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "sizeof", "true", "false", "null" }),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_TypesValues) }
                 });
                 rs.Rules.Add(new HighlightingRule() //main keywords
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "if", "else", "switch", "case", "default", "for", "while", "do", "break", "continue", "return", "new", "view_as" }),
+                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "if", "else", "switch", "case", "default", "for", "while", "do", "break", "continue", "return", "new", "view_as", "delete" }),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Keywords) }
                 });
                 rs.Rules.Add(new HighlightingRule() //context keywords
