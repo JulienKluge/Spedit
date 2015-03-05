@@ -185,6 +185,7 @@ namespace Spedit.UI
                     result = reader.ReadToEnd();
                 }
             }
+            File.Delete(batchFile);
             return result;
         }
     }
