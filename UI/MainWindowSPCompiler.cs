@@ -51,11 +51,6 @@ namespace Spedit.UI
                         stringOutput.AppendLine(fileInfo.Name);
                         if (fileInfo.Exists)
                         {
-                            string execResult = ExecuteCommandLine(conf.PreCmd, fileInfo.DirectoryName);
-                            if (!string.IsNullOrWhiteSpace(execResult))
-                            {
-                                stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
-                            }
                             using (Process process = new Process())
                             {
                                 process.StartInfo.WorkingDirectory = Environment.CurrentDirectory + @"\sourcepawn";
@@ -70,6 +65,11 @@ namespace Spedit.UI
                                 if (File.Exists(errorFile)) { File.Delete(errorFile); }
                                 process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\" -i=" + c.SMDirectory + " -O=" + c.OptimizeLevel.ToString() + " -v=" + c.VerboseLevel.ToString();
                                 progressTask.SetProgress((((double)(i + 1)) - 0.5d) / ((double)compileCount));
+                                string execResult = ExecuteCommandLine(conf.PreCmd, fileInfo.DirectoryName, conf.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
+                                if (!string.IsNullOrWhiteSpace(execResult))
+                                {
+                                    stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
+                                }
                                 MainWindow.ProcessUITasks();
                                 process.Start();
                                 process.WaitForExit();
@@ -97,12 +97,12 @@ namespace Spedit.UI
                                 }
                                 stringOutput.AppendLine();
                                 progressTask.SetProgress(((double)(i + 1)) / ((double)compileCount));
+                                execResult = ExecuteCommandLine(conf.PostCmd, fileInfo.DirectoryName, conf.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
+                                if (!string.IsNullOrWhiteSpace(execResult))
+                                {
+                                    stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
+                                }
                                 MainWindow.ProcessUITasks();
-                            }
-                            execResult = ExecuteCommandLine(conf.PostCmd, fileInfo.DirectoryName);
-                            if (!string.IsNullOrWhiteSpace(execResult))
-                            {
-                                stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
                             }
                         }
                     }
@@ -160,13 +160,14 @@ namespace Spedit.UI
             return fileName;
         }
 
-        private string ExecuteCommandLine(string code, string directory)
+        private string ExecuteCommandLine(string code, string directory, string copyDir, string scriptFile, string scriptName, string pluginFile, string pluginName)
         {
+            code = ReplaceCMDVaraibles(code, directory, copyDir, scriptFile, scriptName, pluginFile, pluginName);
             if (string.IsNullOrWhiteSpace(code))
             {
                 return null;
             }
-            string batchFile = (new FileInfo(Path.Combine("sourcepawn\\temp\\", Environment.TickCount.ToString() + "_" + (code.GetHashCode() ^ directory.GetHashCode()).ToString() + "_temp.bat"))).FullName;
+            string batchFile = (new FileInfo(Path.Combine("sourcepawn\\temp\\", Environment.TickCount.ToString() + "_" + ((uint)code.GetHashCode() ^ (uint)directory.GetHashCode()).ToString() + "_temp.bat"))).FullName;
             File.WriteAllText(batchFile, code);
             string result = null;
             using (Process process = new Process())
@@ -187,6 +188,18 @@ namespace Spedit.UI
             }
             File.Delete(batchFile);
             return result;
+        }
+
+        private string ReplaceCMDVaraibles(string CMD, string scriptDir, string copyDir, string scriptFile, string scriptName, string pluginFile, string pluginName)
+        {
+            CMD = CMD.Replace("{editordir}", Environment.CurrentDirectory.Trim('\\'));
+            CMD = CMD.Replace("{scriptdir}", scriptDir);
+            CMD = CMD.Replace("{copydir}", copyDir);
+            CMD = CMD.Replace("{scriptfile}", scriptFile);
+            CMD = CMD.Replace("{scriptname}", scriptName);
+            CMD = CMD.Replace("{pluginfile}", pluginFile);
+            CMD = CMD.Replace("{pluginname}", pluginName);
+            return CMD;
         }
     }
 }

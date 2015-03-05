@@ -3,7 +3,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             Width="700" Height="400" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" EnableDWMDropShadow="True" Title="Configurations" ShowTitleBar="False" Closed="MetroWindow_Closed">
+             Width="700" Height="410" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" EnableDWMDropShadow="True" Title="Configurations" ShowTitleBar="False" Closed="MetroWindow_Closed">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,8 +24,8 @@
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,90,0,0" Text="Copy Directory: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,120,0,0" Text="Server Executable: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,150,0,0" Text="Server-Start Arguments: " />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,180,0,0" Text="Pre-Build Commandline: " />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,250,0,0" Text="Post-Build Commandline: " />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,185,0,0" Text="Pre-Build Commandline: " />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,255,0,0" Text="Post-Build Commandline: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,320,0,0" Text="Optimization Level: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,350,0,0" Text="Verbose Level: " />
         <TextBox Name="C_Name" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,25,5,0" TextChanged="C_Name_TextChanged" />
@@ -33,9 +33,18 @@
         <TextBox Name="C_CopyDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,85,5,0" TextChanged="C_CopyDir_TextChanged" />
         <TextBox Name="C_ServerFile" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,115,5,0" TextChanged="C_ServerFile_TextChanged" />
         <TextBox Name="C_ServerArgs" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,145,5,0" TextChanged="C_ServerArgs_TextChanged" />
-        <TextBox Name="C_PreBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,200,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PreBuildCmd_TextChanged" />
-        <TextBox Name="C_PostBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,270,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PostBuildCmd_TextChanged" />
-        <Slider Name="C_OptimizationLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,320,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="2" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_OptimizationLevel_ValueChanged" />
-        <Slider Name="C_VerboseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,350,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_VerboseLevel_ValueChanged" />
+        <TextBox Name="C_PreBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,205,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PreBuildCmd_TextChanged" />
+        <TextBox Name="C_PostBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,275,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PostBuildCmd_TextChanged" />
+        <Slider Name="C_OptimizationLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,330,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="2" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_OptimizationLevel_ValueChanged" />
+        <Slider Name="C_VerboseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,360,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_VerboseLevel_ValueChanged" />
+        <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,177,5,0" Text="Commandline Variables" Width="150">
+            <ComboBoxItem Content="{}{editordir} - Directory of the SPEdit binary" />
+            <ComboBoxItem Content="{}{scriptdir} - Directory of the Compiling script" />
+            <ComboBoxItem Content="{}{copydir} - Directory where the smx should be copied" />
+            <ComboBoxItem Content="{}{scriptfile} - Full Directory and Name of the script" />
+            <ComboBoxItem Content="{}{scriptname} - File Name of the script" />
+            <ComboBoxItem Content="{}{pluginfile} - Full Directory and Name of the compiled script" />
+            <ComboBoxItem Content="{}{pluginname} - File Name of the compiled script" />
+        </ComboBox>
     </Grid>
 </controls:MetroWindow>
