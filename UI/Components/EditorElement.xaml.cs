@@ -23,6 +23,8 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Utils;
 using ICSharpCode.AvalonEdit.Editing;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.Rendering;
 using System.Timers;
 
 namespace Spedit.UI.Components
@@ -36,8 +38,10 @@ namespace Spedit.UI.Components
 
         FoldingManager foldingManager;
         SPFoldingStrategy foldingStrategy;
+        ColorizeSelection colorizeSelection;
         Timer regularyTimer;
         bool WantFoldingUpdate = false;
+        bool SelectionIsHighlited = false;
 
         public string FullFilePath
         {
@@ -77,6 +81,9 @@ namespace Spedit.UI.Components
             editor.WordWrap = Program.OptionsObject.Editor_WordWrap;
             UpdateFontSize(Program.OptionsObject.Editor_FontSize);
 
+            colorizeSelection = new ColorizeSelection();
+
+            editor.TextArea.TextView.LineTransformers.Add(colorizeSelection);
             editor.SyntaxHighlighting = new AeonEditorHighlighting();
 
             LoadAutoCompletes();
@@ -97,6 +104,40 @@ namespace Spedit.UI.Components
 
         private void regularyTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            this.Dispatcher.Invoke(() =>
+                    {
+                        if (editor.SelectionLength > 0 && editor.SelectionLength < 50)
+                        {
+                            string selectionString = editor.SelectedText;
+                            if (IsValidSearchSelectionString(selectionString))
+                            {
+                                colorizeSelection.SelectionString = selectionString;
+                                colorizeSelection.HighlightSelection = true;
+                                SelectionIsHighlited = true;
+                                editor.TextArea.TextView.Redraw();
+                            }
+                            else
+                            {
+                                colorizeSelection.HighlightSelection = false;
+                                colorizeSelection.SelectionString = string.Empty;
+                                if (SelectionIsHighlited)
+                                {
+                                    editor.TextArea.TextView.Redraw();
+                                    SelectionIsHighlited = false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            colorizeSelection.HighlightSelection = false;
+                            colorizeSelection.SelectionString = string.Empty;
+                            if (SelectionIsHighlited)
+                            {
+                                editor.TextArea.TextView.Redraw();
+                                SelectionIsHighlited = false;
+                            }
+                        }
+                    });
             if (WantFoldingUpdate)
             {
                 WantFoldingUpdate = false;
@@ -211,5 +252,51 @@ namespace Spedit.UI.Components
             ((MenuItem)((ContextMenu)sender).Items[0]).IsEnabled = editor.CanUndo;
             ((MenuItem)((ContextMenu)sender).Items[1]).IsEnabled = editor.CanRedo;
         }
+
+        private bool IsValidSearchSelectionString(string s)
+        {
+            int length = s.Length;
+            for (int i = 0; i < length; ++i)
+            {
+                if (!((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= '0' && s[i] <= '9') || (s[i] == '_')))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
+
+    public class ColorizeSelection : DocumentColorizingTransformer
+    {
+        public string SelectionString = string.Empty;
+        public bool HighlightSelection = false;
+
+        protected override void ColorizeLine(DocumentLine line)
+        {
+            if (HighlightSelection)
+            {
+                if (string.IsNullOrWhiteSpace(SelectionString))
+                {
+                    return;
+                }
+                int lineStartOffset = line.Offset;
+                string text = CurrentContext.Document.GetText(line);
+                int start = 0;
+                int index;
+                while ((index = text.IndexOf(SelectionString, start)) >= 0)
+                {
+                    base.ChangeLinePart(
+                        lineStartOffset + index,
+                        lineStartOffset + index + SelectionString.Length,
+                        (VisualLineElement element) =>
+                        {
+                            element.BackgroundBrush = Brushes.LightGray;
+                        });
+                    start = index + 1;
+                }
+            }
+        }
+    }
+
 }
