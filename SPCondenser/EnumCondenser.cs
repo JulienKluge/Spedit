@@ -11,7 +11,7 @@ namespace Spedit.SPCondenser
         public static void Condense(string source, ref SourcepawnDefinitionCondeser sdc)
         {
             int length = source.Length;
-            Regex regex = new Regex(@"\benum(\s+(?<name>[a-zA-Z_][a-zA-Z_1-9]+))?\s*\{"
+            Regex regex = new Regex(@"\benum(\s+(?<name>[a-zA-Z_][a-zA-Z_1-9]+\:?))?(\s*//.+)?\s*\{"
                 , RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.IgnoreCase | RegexOptions.Multiline);
             //^[ \f\t\v]*(?<name>[a-zA-Z_][a-zA-Z1-9_]+)(\s*=\s*[a-zA-Z0-9-\+\s\"]+)?,
             Regex inEnumRegex = new Regex(@"^[ \f\t\v]*(?<name>[a-zA-Z_][a-zA-Z1-9_]+)"
