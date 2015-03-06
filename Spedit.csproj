@@ -147,6 +147,7 @@
     <Compile Include="UI\Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\FTP.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Components\ColorChangeControl.xaml">

@@ -11,6 +11,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.UI.Components;
 using System.Globalization;
+using Spedit.Utils;
 
 namespace Spedit.UI
 {
@@ -182,7 +183,57 @@ namespace Spedit.UI
 
         public void FTPUpload_Plugins()
         {
-            throw new NotImplementedException();
+            if (compiledFiles.Count <= 0)
+            {
+                return;
+            }
+            var c = Program.Configs[Program.SelectedConfig];
+            if ((string.IsNullOrWhiteSpace(c.FTPHost)) || (string.IsNullOrWhiteSpace(c.FTPUser)))
+            {
+                return;
+            }
+            StringBuilder stringOutput = new StringBuilder();
+            try
+            {
+                FTP ftp = new FTP(c.FTPHost, c.FTPUser, c.FTPPassword);
+                for (int i = 0; i < compiledFiles.Count; ++i)
+                {
+                    FileInfo fileInfo = new FileInfo(compiledFiles[i]);
+                    if (fileInfo.Exists)
+                    {
+                        string uploadDir;
+                        if (string.IsNullOrWhiteSpace(c.FTPDir))
+                        {
+                            uploadDir = fileInfo.Name;
+                        }
+                        else
+                        {
+                            uploadDir = c.FTPDir.TrimEnd(new char[] { '/' }) + "/" + fileInfo.Name;
+                        }
+                        try
+                        {
+                            ftp.upload(uploadDir, compiledFiles[i]);
+                            stringOutput.AppendLine("Uploaded: " + compiledFiles[i]);
+                        }
+                        catch (Exception e)
+                        {
+                            stringOutput.AppendLine("Error while uploading file: " + compiledFiles[i]);
+                            stringOutput.AppendLine("Details: " + e.Message);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                stringOutput.AppendLine("Error while uploading files");
+                stringOutput.AppendLine("Details: " + e.Message);
+            }
+            stringOutput.AppendLine("Done");
+            CompileOutput.Text = stringOutput.ToString();
+            if (CompileOutputRow.Height.Value < 11.0)
+            {
+                CompileOutputRow.Height = new GridLength(200.0);
+            }
         }
 
         public async void Server_Start()

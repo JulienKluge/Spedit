@@ -56,9 +56,30 @@ namespace Spedit.Interop
                         {
                             _VerboseLevel = subValue;
                         }
-                        Config c = new Config() { Name = _Name, SMDirectory = _SMDirectory, Standard = IsStandardConfig
-                            , CopyDirectory = _CopyDirectory, ServerFile = _ServerFile, ServerArgs = _ServerArgs
-                            , PostCmd = _PostCmd, PreCmd = _PreCmd, OptimizeLevel = _OptimizationLevel, VerboseLevel = _VerboseLevel};
+                        string _FTPHost = node.Attributes["FTPHost"].Value;
+                        string _FTPUser = node.Attributes["FTPUser"].Value;
+                        string _FTPPW = node.Attributes["FTPPassword"].Value;
+                        string _FTPDir = node.Attributes["FTPDir"].Value;
+                        Config c = new Config()
+                        {
+                            Name = _Name,
+                            SMDirectory = _SMDirectory,
+                            Standard = IsStandardConfig
+                            ,
+                            CopyDirectory = _CopyDirectory,
+                            ServerFile = _ServerFile,
+                            ServerArgs = _ServerArgs
+                            ,
+                            PostCmd = _PostCmd,
+                            PreCmd = _PreCmd,
+                            OptimizeLevel = _OptimizationLevel,
+                            VerboseLevel = _VerboseLevel
+                            ,
+                            FTPHost = _FTPHost,
+                            FTPUser = _FTPUser,
+                            FTPPassword = _FTPPW,
+                            FTPDir = _FTPDir
+                        };
                         if (IsStandardConfig)
                         {
                             c.LoadSMDef();
@@ -100,6 +121,11 @@ namespace Spedit.Interop
 
         public int OptimizeLevel = 2;
         public int VerboseLevel = 1;
+
+        public string FTPHost = "ftp://localhost/";
+        public string FTPUser = string.Empty;
+        public string FTPPassword = string.Empty; //securestring? No! Because it's saved in plaintext and if you want to keep it a secret, you shouldn't automaticly uploade it anyways...
+        public string FTPDir = string.Empty;
 
         private CondensedSourcepawnDefinition SMDef;
 

@@ -58,6 +58,10 @@ namespace Spedit.UI.Windows
             C_PostBuildCmd.Text = c.PostCmd;
             C_OptimizationLevel.Value = c.OptimizeLevel;
             C_VerboseLevel.Value = c.VerboseLevel;
+            C_FTPHost.Text = c.FTPHost;
+            C_FTPUser.Text = c.FTPUser;
+            C_FTPPW.Text = c.FTPPassword;
+            C_FTPDir.Text = c.FTPDir;
         }
 
         private void NewButton_Clicked(object sender, RoutedEventArgs e)
@@ -136,6 +140,26 @@ namespace Spedit.UI.Windows
             Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int)C_VerboseLevel.Value;
         }
 
+        private void C_FTPHost_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].FTPHost = C_FTPHost.Text;
+        }
+
+        private void C_FTPUser_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].FTPUser = C_FTPUser.Text;
+        }
+
+        private void C_FTPPW_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].FTPPassword = C_FTPPW.Text;
+        }
+
+        private void C_FTPDir_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].FTPDir = C_FTPDir.Text;
+        }
+
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
             for (int i = 0; i < Program.Configs.Length; ++i)
@@ -163,6 +187,10 @@ namespace Spedit.UI.Windows
                     writer.WriteAttributeString("PreCmd", c.PreCmd);
                     writer.WriteAttributeString("OptimizationLevel", c.OptimizeLevel.ToString());
                     writer.WriteAttributeString("VerboseLevel", c.VerboseLevel.ToString());
+                    writer.WriteAttributeString("FTPHost", c.FTPHost.ToString());
+                    writer.WriteAttributeString("FTPUser", c.FTPUser.ToString());
+                    writer.WriteAttributeString("FTPPassword", c.FTPPassword.ToString());
+                    writer.WriteAttributeString("FTPDir", c.FTPDir.ToString());
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
@@ -170,5 +198,6 @@ namespace Spedit.UI.Windows
             }
             File.WriteAllText("sourcepawn\\configs\\Configs.xml", outString.ToString());
         }
+
     }
 }
