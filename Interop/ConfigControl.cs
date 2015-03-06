@@ -35,11 +35,11 @@ namespace Spedit.Interop
                         XmlNode node = mainNode.ChildNodes[i];
                         string _Name = node.Attributes["Name"].Value;
                         string _SMDirectory = node.Attributes["SMDirectory"].Value;
-                        string _Standart = node.Attributes["Standart"].Value;
-                        bool IsStandartConfig = false;
-                        if (_Standart != "0" && !string.IsNullOrWhiteSpace(_Standart))
+                        string _Standard = node.Attributes["Standard"].Value;
+                        bool IsStandardConfig = false;
+                        if (_Standard != "0" && !string.IsNullOrWhiteSpace(_Standard))
                         {
-                            IsStandartConfig = true;
+                            IsStandardConfig = true;
                         }
                         string _CopyDirectory = node.Attributes["CopyDirectory"].Value;
                         string _ServerFile = node.Attributes["ServerFile"].Value;
@@ -56,10 +56,10 @@ namespace Spedit.Interop
                         {
                             _VerboseLevel = subValue;
                         }
-                        Config c = new Config() { Name = _Name, SMDirectory = _SMDirectory, Standart = IsStandartConfig
+                        Config c = new Config() { Name = _Name, SMDirectory = _SMDirectory, Standard = IsStandardConfig
                             , CopyDirectory = _CopyDirectory, ServerFile = _ServerFile, ServerArgs = _ServerArgs
                             , PostCmd = _PostCmd, PreCmd = _PreCmd, OptimizeLevel = _OptimizationLevel, VerboseLevel = _VerboseLevel};
-                        if (IsStandartConfig)
+                        if (IsStandardConfig)
                         {
                             c.LoadSMDef();
                         }
@@ -88,7 +88,7 @@ namespace Spedit.Interop
     {
         public string Name;
 
-        public bool Standart = false;
+        public bool Standard = false;
         //public bool IsTemporary = false;
 
         public string SMDirectory;

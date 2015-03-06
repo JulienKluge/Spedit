@@ -1,5 +1,5 @@
 <Configurations>
-  <Config Name="Standart SM 1.7" SMDirectory="sourcepawn\configs\sm_one_seven" Standart="1" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" />
-  <Config Name="Standart SM 1.6" SMDirectory="sourcepawn\configs\sm_one_six" Standart="0" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" />
+  <Config Name="Standard SM 1.7" SMDirectory="sourcepawn\configs\sm_one_seven" Standard="1" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" />
+  <Config Name="Standard SM 1.6" SMDirectory="sourcepawn\configs\sm_one_six" Standard="0" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" />
 </Configurations>
 <!--NEVER EDIT THIS FILE MANUALLY UNLESS YOU REALLY KNOW WHAT YOU DO HERE!!!-->

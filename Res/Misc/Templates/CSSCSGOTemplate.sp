@@ -10,14 +10,6 @@
 #include <cstrike>
 //#include <sdkhooks>
 
-enum CS_GameMod
-{
-	Game_Css,
-	Game_Csgo,
-	Game_Indeterminate,
-}
-CS_GameMod g_Game = Game_Indeterminate;
-
 public Plugin myinfo = 
 {
 	name = "",
@@ -27,10 +19,13 @@ public Plugin myinfo =
 	url = ""
 };
 
-public void OnPluginStart()
+EngineVersion g_Game;
+
+public OnPluginStart()
 {
-	char gameName[MAX_NAME_LENGTH]; //name length is enough...
-	GetGameFolderName(gameName, MAX_NAME_LENGTH);
-	if (StrEqual(gameName, "cstrike", false)) { g_Game = Game_Css; }
-	else if (StrEqual(gameName, "csgo", false)) { g_Game = Game_Csgo; }
+	g_Game = GetEngineVersion();
+	if(g_Game != Engine_CSGO && g_Game != Engine_CSS)
+	{
+		SetFailState("This plugin is for CSGO/CSS only.");	
+	}
 }
