@@ -88,9 +88,13 @@
                 </MenuItem>
                 
                 <MenuItem Header="Build">
-                    <MenuItem Header="Compile" Click="Menu_Compile" InputGestureText="F5" />
-                    <MenuItem Header="Compile &amp; Copy" Click="Menu_CompileCopy" InputGestureText="F6" />
-                    <MenuItem Header="Start Server" Click="Menu_StartServer" InputGestureText="F7" />
+                    <MenuItem Header="Compile All" Click="Menu_CompileAll" InputGestureText="F5" />
+                    <MenuItem Header="Compile Current" Click="Menu_Compile" InputGestureText="F6" />
+                    <Separator/>
+                    <MenuItem Header="Copy Plugins" Click="Menu_CopyPlugin" InputGestureText="F7" />
+                    <MenuItem Header="FTP Upload Plugins" Click="Menu_FTPUpload" InputGestureText="F8" />
+                    <Separator/>
+                    <MenuItem Header="Start Server" Click="Menu_StartServer" InputGestureText="F9" />
                 </MenuItem>
 
                 <MenuItem Name="ConfigMenu" Header="Configuration">

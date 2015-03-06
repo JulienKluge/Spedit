@@ -16,24 +16,43 @@ namespace Spedit.UI
 {
     public partial class MainWindow : MetroWindow
     {
+        private List<string> compiledFiles = new List<string>();
+
         private bool InCompiling = false;
-        private async void Compile_SPScripts(bool Copy)
+        private async void Compile_SPScripts(bool All = true)
         {
             Command_SaveAll();
             if (InCompiling) { return; }
             InCompiling = true;
+            compiledFiles.Clear();
             var c = Program.Configs[Program.SelectedConfig];
             //string spCompPath = Path.Combine(Environment.CurrentDirectory + @"\sourcepawn\spcomp.exe");
             FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
             if (spCompInfo.Exists)
             {
                 List<string> filesToCompile = new List<string>();
-                EditorElement[] editors = GetAllEditorElements();
-                for (int i = 0; i < editors.Length; ++i)
+                if (All)
                 {
-                    if (editors[i].CompileBox.IsChecked.Value)
+                    EditorElement[] editors = GetAllEditorElements();
+                    for (int i = 0; i < editors.Length; ++i)
                     {
-                        filesToCompile.Add(editors[i].FullFilePath);
+                        if (editors[i].CompileBox.IsChecked.Value)
+                        {
+                            filesToCompile.Add(editors[i].FullFilePath);
+                        }
+                    }
+                }
+                else
+                {
+                    EditorElement ee = GetCurrentEditorElement();
+                    /*
+                    ** I've struggled a bit here. Should i check, if the CompileBox is checked 
+                    ** and only compile if it's checked or should it be ignored and compiled anyway?
+                    ** I decided, to compile anyway but give me feedback/opinions.
+                    */
+                    if (ee.FullFilePath.EndsWith(".sp"))
+                    {
+                        filesToCompile.Add(ee.FullFilePath);
                     }
                 }
                 int compileCount = filesToCompile.Count;
@@ -94,18 +113,9 @@ namespace Spedit.UI
                                     File.Delete(errorFile);
                                 }
                                 stringOutput.AppendLine("Done");
-                                if (Copy)
+                                if (File.Exists(outFile))
                                 {
-                                    if (File.Exists(outFile))
-                                    {
-                                        try
-                                        {
-                                            string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
-                                            File.Copy(outFile, copyFileDestination, true);
-                                            stringOutput.AppendLine("Plugin copied.");
-                                        }
-                                        catch (Exception) { }
-                                    }
+                                    compiledFiles.Add(outFile);
                                 }
                                 stringOutput.AppendLine();
                                 progressTask.SetProgress(((double)(i + 1)) / ((double)compileCount));
@@ -135,6 +145,45 @@ namespace Spedit.UI
             InCompiling = false;
         }
 
+        public void Copy_Plugins()
+        {
+            if (compiledFiles.Count > 0)
+            {
+                var c = Program.Configs[Program.SelectedConfig];
+                if (!string.IsNullOrWhiteSpace(c.CopyDirectory))
+                {
+                    StringBuilder stringOutput = new StringBuilder();
+                    for (int i = 0; i < compiledFiles.Count; ++i)
+                    {
+                        try
+                        {
+                            FileInfo destFile = new FileInfo(compiledFiles[i]);
+                            if (destFile.Exists)
+                            {
+                                string destinationFileName = ShortenScriptFileName(destFile.Name) + ".smx";
+                                string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
+                                File.Copy(compiledFiles[i], copyFileDestination, true);
+                                stringOutput.AppendLine("Copied: " + compiledFiles[i]);
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            stringOutput.AppendLine("Failed to copy: " + compiledFiles[i]);
+                        }
+                    }
+                    CompileOutput.Text = stringOutput.ToString();
+                    if (CompileOutputRow.Height.Value < 11.0)
+                    {
+                        CompileOutputRow.Height = new GridLength(200.0);
+                    }
+                }
+            }
+        }
+
+        public void FTPUpload_Plugins()
+        {
+            throw new NotImplementedException();
+        }
 
         public async void Server_Start()
         {
