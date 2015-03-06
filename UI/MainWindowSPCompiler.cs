@@ -44,7 +44,7 @@ namespace Spedit.UI
                     var progressTask = await this.ShowProgressAsync("Compiling", "", false, this.MetroDialogOptions);
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
-                    Regex errorFilterRegex = new Regex(@"^(?<file>.+?)\((?<line>[0-9]+(\s*--\s*[0-9]+)?)\)\s*:\s*(?<type>[a-zA-Z]+\s+[0-9]+)\s*:(?<details>.+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+                    Regex errorFilterRegex = new Regex(@"^(?<file>.+?)\((?<line>[0-9]+(\s*--\s*[0-9]+)?)\)\s*:\s*(?<type>[a-zA-Z]+\s+([a-zA-Z]+\s+)?[0-9]+)\s*:(?<details>.+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
                     for (int i = 0; i < compileCount; ++i)
                     {
                         string file = filesToCompile[i];
@@ -85,10 +85,10 @@ namespace Spedit.UI
                                     {
                                         ErrorResultGrid.Items.Add(new ErrorDataGridRow()
                                         {
-                                            file = mc[i].Groups["file"].Value.Trim(),
-                                            line = mc[i].Groups["line"].Value.Trim(),
-                                            type = mc[i].Groups["type"].Value.Trim(),
-                                            details = mc[i].Groups["details"].Value.Trim()
+                                            file = mc[j].Groups["file"].Value.Trim(),
+                                            line = mc[j].Groups["line"].Value.Trim(),
+                                            type = mc[j].Groups["type"].Value.Trim(),
+                                            details = mc[j].Groups["details"].Value.Trim()
                                         });
                                     }
                                     File.Delete(errorFile);
