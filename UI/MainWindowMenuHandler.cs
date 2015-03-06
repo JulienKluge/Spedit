@@ -150,7 +150,7 @@ namespace Spedit.UI
             Server_Start();
         }
 
-        private void Menu_OpenWebsideFromTag(object sender, RoutedEventArgs e)
+        private void Menu_OpenWebsiteFromTag(object sender, RoutedEventArgs e)
         {
             string url = (string)((MenuItem)sender).Tag;
             Process.Start(new ProcessStartInfo(url));

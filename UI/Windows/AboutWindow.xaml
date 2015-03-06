@@ -49,7 +49,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Paul Jenkins + MahApps GitHub Community" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
-                        <Hyperlink NavigateUri="http://mahapps.com/" RequestNavigate="HyperlinkRequestNavigate">MahApps Webside</Hyperlink>
+                        <Hyperlink NavigateUri="http://mahapps.com/" RequestNavigate="HyperlinkRequestNavigate">MahApps Website</Hyperlink>
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="HyperlinkRequestNavigate">MahApps GitHub Repository</Hyperlink>
@@ -66,7 +66,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Daniel Grunwald + SharpDevelop Community" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  The MIT License (MIT)" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
-                        <Hyperlink NavigateUri="http://www.icsharpcode.net/" RequestNavigate="HyperlinkRequestNavigate">SharpDevelop Webside</Hyperlink>
+                        <Hyperlink NavigateUri="http://www.icsharpcode.net/" RequestNavigate="HyperlinkRequestNavigate">SharpDevelop Website</Hyperlink>
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/icsharpcode/SharpDevelop/" RequestNavigate="HyperlinkRequestNavigate">SharpDevelop GitHub Repository</Hyperlink>
@@ -83,7 +83,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Xceed Software Inc." FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
-                        <Hyperlink NavigateUri="http://xceed.com/" RequestNavigate="HyperlinkRequestNavigate">XCEED Webside</Hyperlink>
+                        <Hyperlink NavigateUri="http://xceed.com/" RequestNavigate="HyperlinkRequestNavigate">XCEED Website</Hyperlink>
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/chandramouleswaran/AvalonDock" RequestNavigate="HyperlinkRequestNavigate">AvalonDock GitHub Repository</Hyperlink>
@@ -100,7 +100,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Alexander Kahlkopf" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Own License, © 2014 iconmonstr" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
-                        <Hyperlink NavigateUri="http://iconmonstr.com/" RequestNavigate="HyperlinkRequestNavigate">iconmonstr Webside</Hyperlink>
+                        <Hyperlink NavigateUri="http://iconmonstr.com/" RequestNavigate="HyperlinkRequestNavigate">iconmonstr Website</Hyperlink>
                     </TextBlock>
                 </Grid>
             </StackPanel>
