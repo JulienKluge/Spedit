@@ -19,9 +19,12 @@ public Plugin myinfo =
 	url = ""
 };
 
-public void OnPluginStart()
+EngineVersion g_Game;
+
+public OnPluginStart()
 {
-	if(GetEngineVersion() != Engine_CSGO && GetEngineVersion() != Engine_CSS)
+	g_Game = GetEngineVersion();
+	if(g_Game != Engine_CSGO && g_Game != Engine_CSS)
 	{
 		SetFailState("This plugin is for CSGO/CSS only.");	
 	}
