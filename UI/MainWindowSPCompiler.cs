@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
@@ -38,10 +39,12 @@ namespace Spedit.UI
                 int compileCount = filesToCompile.Count;
                 if (compileCount > 0)
                 {
+                    ErrorResultGrid.Items.Clear();
                     var conf = Program.Configs[Program.SelectedConfig];
                     var progressTask = await this.ShowProgressAsync("Compiling", "", false, this.MetroDialogOptions);
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
+                    Regex errorFilterRegex = new Regex(@"^(?<file>.+?)\((?<line>[0-9]+(\s*--\s*[0-9]+)?)\)\s*:\s*(?<type>[a-zA-Z]+\s+[0-9]+)\s*:(?<details>.+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
                     for (int i = 0; i < compileCount; ++i)
                     {
                         string file = filesToCompile[i];
@@ -75,13 +78,22 @@ namespace Spedit.UI
                                 process.WaitForExit();
                                 if (File.Exists(errorFile))
                                 {
-                                    stringOutput.AppendLine(File.ReadAllText(errorFile).Trim(new char[] { '\n', '\r' } ));
+                                    string errorStr = File.ReadAllText(errorFile);
+                                    stringOutput.AppendLine(errorStr.Trim(new char[] { '\n', '\r' } ));
+                                    MatchCollection mc = errorFilterRegex.Matches(errorStr);
+                                    for (int j = 0; j < mc.Count; ++j)
+                                    {
+                                        ErrorResultGrid.Items.Add(new ErrorDataGridRow()
+                                        {
+                                            file = mc[i].Groups["file"].Value.Trim(),
+                                            line = mc[i].Groups["line"].Value.Trim(),
+                                            type = mc[i].Groups["type"].Value.Trim(),
+                                            details = mc[i].Groups["details"].Value.Trim()
+                                        });
+                                    }
                                     File.Delete(errorFile);
                                 }
-                                else
-                                {
-                                    stringOutput.AppendLine("No Errors");
-                                }
+                                stringOutput.AppendLine("Done");
                                 if (Copy)
                                 {
                                     if (File.Exists(outFile))
@@ -201,5 +213,13 @@ namespace Spedit.UI
             CMD = CMD.Replace("{pluginname}", pluginName);
             return CMD;
         }
+    }
+
+    public class ErrorDataGridRow
+    {
+        public string file { set; get; }
+        public string line { set; get; }
+        public string type { set; get; }
+        public string details { set; get; }
     }
 }

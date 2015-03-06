@@ -22,6 +22,9 @@ using Xceed.Wpf.AvalonDock.Layout;
 using Spedit.UI.Components;
 using System.IO;
 using Spedit.UI.Windows;
+using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Editing;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace Spedit.UI
 {
@@ -172,6 +175,49 @@ namespace Spedit.UI
                 return null;
             }), null);
             Dispatcher.PushFrame(frame);
+        }
+
+        private void ErrorResultGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var row = ((ErrorDataGridRow)ErrorResultGrid.SelectedItem);
+            string fileName = row.file;
+            EditorElement[] editors = GetAllEditorElements();
+            for (int i = 0; i < editors.Length; ++i)
+            {
+                if (editors[i].FullFilePath == fileName)
+                {
+                    ((LayoutDocument)editors[i].Parent).IsSelected = true;
+                    int line = GetLineInteger(row.line);
+                    if (line > 0 && line <= editors[i].editor.LineCount)
+                    {
+                        var lineObj = editors[i].editor.Document.Lines[line - 1];
+                        editors[i].editor.ScrollToLine(line - 1);
+                        editors[i].editor.Select(lineObj.Offset, lineObj.Length);
+                    }
+                }
+            }
+        }
+
+        private int GetLineInteger(string lineStr)
+        {
+            int end = 0;
+            for (int i = 0; i < lineStr.Length; ++i)
+            {
+                if (lineStr[i] >= '0' && lineStr[i] <= '9')
+                {
+                    end = i;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            int line;
+            if (int.TryParse(lineStr.Substring(0, end + 1), out line))
+            {
+                return line;
+            }
+            return -1;
         }
     }
 }
