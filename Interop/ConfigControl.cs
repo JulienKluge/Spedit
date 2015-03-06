@@ -86,18 +86,17 @@ namespace Spedit.Interop
 
     public class Config
     {
-        public string Name;
+        public string Name = string.Empty;
 
         public bool Standard = false;
-        //public bool IsTemporary = false;
 
-        public string SMDirectory;
-        public string CopyDirectory;
-        public string ServerFile;
-        public string ServerArgs;
+        public string SMDirectory = string.Empty;
+        public string CopyDirectory = string.Empty;
+        public string ServerFile = string.Empty;
+        public string ServerArgs = string.Empty;
 
-        public string PostCmd;
-        public string PreCmd;
+        public string PostCmd = string.Empty;
+        public string PreCmd = string.Empty;
 
         public int OptimizeLevel = 2;
         public int VerboseLevel = 1;
