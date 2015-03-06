@@ -104,8 +104,8 @@
                     </MenuItem>
                     <MenuItem Header="Sourcepawn API">
                         <MenuItem Header="Parsed from Include Directory" Click="Menu_OpenSPDef" />
-                        <MenuItem Header="Old Api Webside" Click="Menu_OpenWebsideFromTag" Tag="https://sm.alliedmods.net/api/" />
-                        <MenuItem Header="New Api Webside" Click="Menu_OpenWebsideFromTag" Tag="https://sm.alliedmods.net/new-api/" />
+                        <MenuItem Header="Old Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/api/" />
+                        <MenuItem Header="New Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/new-api/" />
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Report a Bug" Click="ReportBug_Click" />
