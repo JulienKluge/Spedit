@@ -56,6 +56,12 @@ namespace Spedit.Interop
                         {
                             _VerboseLevel = subValue;
                         }
+                        bool _DeleteAfterCopy = false;
+                        string DeleteAfterCopyStr = node.Attributes["DeleteAfterCopy"].Value;
+                        if (!(DeleteAfterCopyStr == "0" || string.IsNullOrWhiteSpace(DeleteAfterCopyStr)))
+                        {
+                            _DeleteAfterCopy = true;
+                        }
                         string _FTPHost = node.Attributes["FTPHost"].Value;
                         string _FTPUser = node.Attributes["FTPUser"].Value;
                         string _FTPPW = node.Attributes["FTPPassword"].Value;
@@ -73,7 +79,8 @@ namespace Spedit.Interop
                             PostCmd = _PostCmd,
                             PreCmd = _PreCmd,
                             OptimizeLevel = _OptimizationLevel,
-                            VerboseLevel = _VerboseLevel
+                            VerboseLevel = _VerboseLevel,
+                            DeleteAfterCopy = _DeleteAfterCopy
                             ,
                             FTPHost = _FTPHost,
                             FTPUser = _FTPUser,
@@ -118,6 +125,8 @@ namespace Spedit.Interop
 
         public string PostCmd = string.Empty;
         public string PreCmd = string.Empty;
+
+        public bool DeleteAfterCopy = false;
 
         public int OptimizeLevel = 2;
         public int VerboseLevel = 1;

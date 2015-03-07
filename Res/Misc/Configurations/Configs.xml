@@ -1,5 +1,5 @@
 <Configurations>
-  <Config Name="Standard SM 1.7" SMDirectory="sourcepawn\configs\sm_one_seven" Standard="1" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" FTPHost="ftp://localhost/" FTPUser="" FTPPassword="" FTPDir="" />
-  <Config Name="Standard SM 1.6" SMDirectory="sourcepawn\configs\sm_one_six" Standard="0" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" FTPHost="ftp://localhost/" FTPUser="" FTPPassword="" FTPDir="" />
+  <Config Name="Standard SM 1.7" SMDirectory="sourcepawn\configs\sm_one_seven" Standard="1" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" DeleteAfterCopy="0" FTPHost="ftp://localhost/" FTPUser="" FTPPassword="" FTPDir="" />
+  <Config Name="Standard SM 1.6" SMDirectory="sourcepawn\configs\sm_one_six" Standard="0" CopyDirectory="" ServerFile="" ServerArgs="" PostCmd="" PreCmd="" OptimizationLevel="2" VerboseLevel="1" DeleteAfterCopy="0" FTPHost="ftp://localhost/" FTPUser="" FTPPassword="" FTPDir="" />
 </Configurations>
 <!--NEVER EDIT THIS FILE MANUALLY UNLESS YOU REALLY KNOW WHAT YOU DO HERE!!!-->

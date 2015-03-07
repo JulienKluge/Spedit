@@ -58,6 +58,7 @@ namespace Spedit.UI.Windows
             C_PostBuildCmd.Text = c.PostCmd;
             C_OptimizationLevel.Value = c.OptimizeLevel;
             C_VerboseLevel.Value = c.VerboseLevel;
+            C_DeleteAfterCopy.IsChecked = c.DeleteAfterCopy;
             C_FTPHost.Text = c.FTPHost;
             C_FTPUser.Text = c.FTPUser;
             C_FTPPW.Text = c.FTPPassword;
@@ -140,6 +141,11 @@ namespace Spedit.UI.Windows
             Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int)C_VerboseLevel.Value;
         }
 
+        private void C_DeleteAfterCopy_Changed(object sender, RoutedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].DeleteAfterCopy = C_DeleteAfterCopy.IsChecked.Value;
+        }
+
         private void C_FTPHost_TextChanged(object sender, TextChangedEventArgs e)
         {
             Program.Configs[ConfigListBox.SelectedIndex].FTPHost = C_FTPHost.Text;
@@ -187,6 +193,7 @@ namespace Spedit.UI.Windows
                     writer.WriteAttributeString("PreCmd", c.PreCmd);
                     writer.WriteAttributeString("OptimizationLevel", c.OptimizeLevel.ToString());
                     writer.WriteAttributeString("VerboseLevel", c.VerboseLevel.ToString());
+                    writer.WriteAttributeString("DeleteAfterCopy", (c.DeleteAfterCopy) ? "1" : "0");
                     writer.WriteAttributeString("FTPHost", c.FTPHost.ToString());
                     writer.WriteAttributeString("FTPUser", c.FTPUser.ToString());
                     writer.WriteAttributeString("FTPPassword", c.FTPPassword.ToString());

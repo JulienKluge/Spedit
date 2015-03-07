@@ -26,8 +26,9 @@
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,150,0,0" Text="Server-Start Arguments: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,185,0,0" Text="Pre-Build Commandline: " />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,255,0,0" Text="Post-Build Commandline: " />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,320,0,0" Text="Optimization Level: " />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,350,0,0" Text="Verbose Level: " />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,330,0,0" Text="Optimization Level: " />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,360,0,0" Text="Verbose Level: " />
+        <CheckBox Name="C_DeleteAfterCopy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,330,0,0" Content="Delete old .smx after copy" Checked="C_DeleteAfterCopy_Changed" Unchecked="C_DeleteAfterCopy_Changed" />
         <TextBox Name="C_Name" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,25,5,0" TextChanged="C_Name_TextChanged" />
         <TextBox Name="C_SMDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,55,5,0" TextChanged="C_SMDir_TextChanged" />
         <TextBox Name="C_CopyDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,85,5,0" TextChanged="C_CopyDir_TextChanged" />
@@ -35,8 +36,8 @@
         <TextBox Name="C_ServerArgs" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,145,5,0" TextChanged="C_ServerArgs_TextChanged" />
         <TextBox Name="C_PreBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,205,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PreBuildCmd_TextChanged" />
         <TextBox Name="C_PostBuildCmd" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,275,5,0" Height="45" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_PostBuildCmd_TextChanged" />
-        <Slider Name="C_OptimizationLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,330,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="2" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_OptimizationLevel_ValueChanged" />
-        <Slider Name="C_VerboseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,360,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_VerboseLevel_ValueChanged" />
+        <Slider Name="C_OptimizationLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,330,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="2" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_OptimizationLevel_ValueChanged" />
+        <Slider Name="C_VerboseLevel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="330,360,0,0" Width="75" Minimum="0" Maximum="2" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="C_VerboseLevel_ValueChanged" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,395,0,0" Text="FTP Host:" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,425,0,0" Text="FTP User:" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,455,0,0" Text="FTP Password:" />

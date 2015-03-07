@@ -20,6 +20,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool Program_UseHardwareAcceleration = true;
 
+        public string Program_SelectedConfig = string.Empty;
+
         public bool Program_OpenCustomIncludes = false;
         public bool Program_OpenIncludesRecursively = false;
 

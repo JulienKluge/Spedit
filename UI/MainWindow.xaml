@@ -6,7 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             Title="Spedit" EnableDWMDropShadow="True" MinHeight="100" MinWidth="200" KeyDown="MainWindowEvent_KeyDown" Closing="MetroWindow_Closing" AllowDrop="True" Drop="MetroWindow_Drop">
+             Title="Spedit" EnableDWMDropShadow="True" MinHeight="100" MinWidth="200" KeyDown="MainWindowEvent_KeyDown" Closing="MetroWindow_Closing"
+                      AllowDrop="True" Drop="MetroWindow_Drop">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -134,9 +135,9 @@
                 </dock:LayoutRoot>
             </dock:DockingManager>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" Background="{StaticResource GrayBrush5}" />
-            <TextBox Name="CompileOutput" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1"
-                     Margin="0,5,0,0" Height="Auto" IsReadOnly="True" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" Width="300" />
-            <DataGrid Name="ErrorResultGrid" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,300,0" IsReadOnly="True"
+            <TextBox Name="CompileOutput" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap"
+                     Margin="0,5,0,0" Height="Auto" IsReadOnly="True" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" Width="350" />
+            <DataGrid Name="ErrorResultGrid" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,350,0" IsReadOnly="True"
                       SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="ErrorResultGrid_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="File Name" Width="7*" Binding="{Binding file}" />

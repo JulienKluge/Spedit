@@ -94,8 +94,21 @@ namespace Spedit.UI
                                     stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
                                 }
                                 MainWindow.ProcessUITasks();
-                                process.Start();
-                                process.WaitForExit();
+                                try
+                                {
+                                    process.Start();
+                                    process.WaitForExit();
+                                }
+                                catch (Exception)
+                                {
+                                    InCompiling = false;
+                                }
+                                if (!InCompiling) //cannot await in catch
+                                {
+                                    await progressTask.CloseAsync();
+                                    await this.ShowMessageAsync("The 'spcomp.exe' compiler did not started correctly", "Error", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                                    return;
+                                }
                                 if (File.Exists(errorFile))
                                 {
                                     string errorStr = File.ReadAllText(errorFile);
@@ -165,6 +178,11 @@ namespace Spedit.UI
                                 string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
                                 File.Copy(compiledFiles[i], copyFileDestination, true);
                                 stringOutput.AppendLine("Copied: " + compiledFiles[i]);
+                                if (c.DeleteAfterCopy)
+                                {
+                                    File.Delete(compiledFiles[i]);
+                                    stringOutput.AppendLine("Deleted: " + compiledFiles[i]);
+                                }
                             }
                         }
                         catch (Exception)

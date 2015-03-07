@@ -59,6 +59,7 @@ namespace Spedit.UI
                 ((MenuItem)ConfigMenu.Items[i]).IsChecked = (Name == (string)(((MenuItem)ConfigMenu.Items[i]).Header));
             }
             Program.SelectedConfig = index;
+            Program.OptionsObject.Program_SelectedConfig = Program.Configs[Program.SelectedConfig].Name;
             EditorElement[] editors = GetAllEditorElements();
             for (int i = 0; i < editors.Length; ++i)
             {

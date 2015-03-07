@@ -34,6 +34,14 @@ namespace Spedit
                     splashScreen.Show(false, true);
                     OptionsObject = OptionsControlIOObject.Load();
                     Configs = ConfigLoader.Load();
+                    for (int i = 0; i < Configs.Length; ++i)
+                    {
+                        if (Configs[i].Name == OptionsObject.Program_SelectedConfig)
+                        {
+                            Program.SelectedConfig = i;
+                            break;
+                        }
+                    }
                     if (!OptionsObject.Program_UseHardwareAcceleration)
                     {
                         RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
