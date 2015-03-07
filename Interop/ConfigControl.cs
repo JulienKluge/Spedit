@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Spedit.SPCondenser;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spedit.SPCondenser;
 using System.IO;
-using System.Xml;
 using System.Windows;
+using System.Xml;
 
 namespace Spedit.Interop
 {

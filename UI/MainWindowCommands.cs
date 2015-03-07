@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Spedit.UI.Components;
-using System.IO;
+﻿using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
-using MahApps.Metro.Controls.Dialogs;
+using Spedit.UI.Components;
 using Spedit.UI.Windows;
+using System.Text;
 
 namespace Spedit.UI
 {

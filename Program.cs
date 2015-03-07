@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Spedit.Interop;
+using Spedit.UI;
+using System;
+using System.IO;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Spedit.UI;
 using System.Windows;
 using System.Windows.Media;
-using System.IO;
-using Spedit.SPCondenser;
-using Spedit.Interop;
-using System.Reflection;
 
 namespace Spedit
 {

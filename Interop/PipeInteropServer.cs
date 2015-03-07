@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using Spedit.UI;
+using System;
 using System.IO.Pipes;
-using Spedit.UI;
+using System.Text;
 
 namespace Spedit.Interop
 {

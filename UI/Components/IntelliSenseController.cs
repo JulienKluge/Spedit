@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Rendering;
+﻿using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Editing;
-using System.Windows.Media.Animation;
-using System.Windows.Input;
+using ICSharpCode.AvalonEdit.Rendering;
 using Spedit.SPCondenser;
+using System;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace Spedit.UI.Components
 {

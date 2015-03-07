@@ -1,31 +1,15 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using Spedit.UI.Components;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using MahApps.Metro;
-using MahApps.Metro.Controls;
-using Xceed.Wpf.AvalonDock;
-using Xceed.Wpf.AvalonDock.Controls;
 using Xceed.Wpf.AvalonDock.Layout;
-using Spedit.UI.Components;
-using System.IO;
-using Spedit.UI.Windows;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.Document;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace Spedit.UI
 {
