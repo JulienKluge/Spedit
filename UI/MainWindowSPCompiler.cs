@@ -27,7 +27,6 @@ namespace Spedit.UI
             InCompiling = true;
             compiledFiles.Clear();
             var c = Program.Configs[Program.SelectedConfig];
-            //string spCompPath = Path.Combine(Environment.CurrentDirectory + @"\sourcepawn\spcomp.exe");
             FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
             if (spCompInfo.Exists)
             {
@@ -163,6 +162,7 @@ namespace Spedit.UI
         {
             if (compiledFiles.Count > 0)
             {
+                int copyCount = 0;
                 var c = Program.Configs[Program.SelectedConfig];
                 if (!string.IsNullOrWhiteSpace(c.CopyDirectory))
                 {
@@ -174,10 +174,11 @@ namespace Spedit.UI
                             FileInfo destFile = new FileInfo(compiledFiles[i]);
                             if (destFile.Exists)
                             {
-                                string destinationFileName = ShortenScriptFileName(destFile.Name) + ".smx";
+                                string destinationFileName = destFile.Name;
                                 string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
                                 File.Copy(compiledFiles[i], copyFileDestination, true);
                                 stringOutput.AppendLine("Copied: " + compiledFiles[i]);
+                                ++copyCount;
                                 if (c.DeleteAfterCopy)
                                 {
                                     File.Delete(compiledFiles[i]);
@@ -189,6 +190,10 @@ namespace Spedit.UI
                         {
                             stringOutput.AppendLine("Failed to copy: " + compiledFiles[i]);
                         }
+                    }
+                    if (copyCount == 0)
+                    {
+                        stringOutput.AppendLine("No files copied.");
                     }
                     CompileOutput.Text = stringOutput.ToString();
                     if (CompileOutputRow.Height.Value < 11.0)

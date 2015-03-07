@@ -383,6 +383,7 @@ md ".\sourcepawn\templates"
 md ".\sourcepawn\configs"
 md ".\sourcepawn\temp"
 md ".\sourcepawn\scripts"
+md ".\sourcepawn\errorfiles"
 xcopy ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
 xcopy ".\..\..\Res\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
   </PropertyGroup>
