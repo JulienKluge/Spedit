@@ -230,6 +230,7 @@
     <Resource Include="Res\AboutImages\IconMonstr.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Res\AboutImages\sourcemod.png" />
     <Content Include="Res\Misc\Configurations\Configs.xml">
       <SubType>Designer</SubType>
     </Content>

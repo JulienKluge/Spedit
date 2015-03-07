@@ -17,8 +17,8 @@
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
-            <controls:Flyout x:Name="LicenseFlyout" Header="License" Position="Right" Width="520" IsOpen="False" Theme="Inverse" IsModal="True" IsPinned="False">
-                <TextBox x:Name="LicenseField" IsReadOnly="True" Background="Transparent" BorderBrush="Transparent" Margin="3,0,3,3" />
+            <controls:Flyout x:Name="LicenseFlyout" Header="License" Position="Right" Width="450" IsOpen="False" Theme="Inverse" IsModal="True" IsPinned="False">
+                <TextBox x:Name="LicenseField" IsReadOnly="True" Background="Transparent" BorderBrush="Transparent" Margin="3,0,3,3" VerticalScrollBarVisibility="Visible" />
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
@@ -34,13 +34,17 @@
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Stuff used from:" FontSize="16" Margin="0,50,0,0" />
         <ScrollViewer Margin="0,70,0,0">
             <StackPanel Name="ContentStackPanel">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="220" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="Contributers/Betatesters:" FontSize="20" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="325,0,0,0" Foreground="Red" FontWeight="Bold">
-                        <TextBlock.Text>
-                            Here comes your (Real-)Name (and E-Mail / Alliedmodders-link) if you want.
-                        </TextBlock.Text>
-                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,17,0,0" Text="- Bara (Tester, Proposer, Contributor)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,32,0,0" Text="- necavi (Tester, Proposer, Contributor)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,47,0,0" Text="- WildCard65 (Tester, Proposer)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,62,0,0" Text="- ClassicSpeed (ClassicGuzzi) (Tester, Proposer)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,77,0,0" Text="- TnTSCS  (Tester, Proposer)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,92,0,0" Text="- kossolax (Tester, Proposer)" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,107,0,0" Text="- Keith Warren (r3dw3r3w0lf; Drixevel) (Tester) http://www.drixevel.com/" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,122,0,0" Text="  KeithAllenWarren@gmail.com" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,150,0,0" Text="Tester &#013;ecca; pimpinjuice; Hackmastr; m_bNightstalker; Franc1sco; Oshizu; Powerlord;&#013;urban_ninja; Impact123; Black-Rabbit; Maxximou5, Tank Missile, Brrdy, buzzace" />
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <Image HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" Source="/Spedit;component/Res/AboutImages/MahAppsMetro.png" />
@@ -87,6 +91,23 @@
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/chandramouleswaran/AvalonDock" RequestNavigate="HyperlinkRequestNavigate">AvalonDock GitHub Repository</Hyperlink>
+                    </TextBlock>
+                </Grid>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/sourcemod.png" Stretch="Uniform" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,5,0,0" Text="Sourcemod" FontSize="18" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="430,5,0,0" Text="Sourcemod compiler &amp; includes" FontSize="18" FontWeight="Thin" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  AlliedModders Community" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="http://www.sourcemod.net/" RequestNavigate="HyperlinkRequestNavigate">Sourcemod Website</Hyperlink>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/alliedmodders/sourcemod" RequestNavigate="HyperlinkRequestNavigate">Soucemod GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
