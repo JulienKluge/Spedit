@@ -13,28 +13,28 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="FadeISACIn">
-                        <DoubleAnimation Duration="00:00:00.2" To="1" Storyboard.TargetName="ISAC_Grid" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="ISAC_Grid" Storyboard.TargetProperty="Opacity" />
                     </Storyboard>
                     <Storyboard x:Key="FadeISACOut">
-                        <DoubleAnimation Duration="00:00:00.2" To="0" Storyboard.TargetName="ISAC_Grid" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="ISAC_Grid" Storyboard.TargetProperty="Opacity" />
                     </Storyboard>
 
                     <Storyboard x:Key="FadeACIn">
-                        <DoubleAnimation Duration="00:00:00.2" To="260" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Width" />
-                        <DoubleAnimation Duration="00:00:00.2" To="260" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Width" />
+                        <DoubleAnimation Duration="00:00:00.1" To="260" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Width" />
+                        <DoubleAnimation Duration="00:00:00.1" To="260" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Width" />
                     </Storyboard>
                     <Storyboard x:Key="FadeACOut">
-                        <DoubleAnimation Duration="00:00:00.2" To="0" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Width" />
-                        <DoubleAnimation Duration="00:00:00.2" To="0" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Width" />
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Width" />
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Width" />
                     </Storyboard>
 
                     <Storyboard x:Key="FadeAC_FuncC_In">
-                        <DoubleAnimation Duration="00:00:00.2" To="1" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Opacity" />
-                        <DoubleAnimation Duration="00:00:00.2" To="0" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Opacity" />
                     </Storyboard>
                     <Storyboard x:Key="FadeAC_MethodC_In">
-                        <DoubleAnimation Duration="00:00:00.2" To="0" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Opacity" />
-                        <DoubleAnimation Duration="00:00:00.2" To="1" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Opacity" />
+                        <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Opacity" />
                     </Storyboard>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
