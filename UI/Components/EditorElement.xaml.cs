@@ -203,7 +203,7 @@ namespace Spedit.UI.Components
 
         private void PrevMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            editor.ScrollToVerticalOffset(editor.VerticalOffset + ((double)e.Delta * editor.FontSize * -0.01));
+            editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
             e.Handled = true;
             HideISAC();
         }

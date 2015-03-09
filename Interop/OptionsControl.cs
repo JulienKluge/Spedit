@@ -23,6 +23,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
         public string Editor_FontFamily = "Consolas";
+        public double Editor_ScrollSpeed = 0.01;
 
         public string[] LastOpenFiles = new string[0];
 

@@ -65,6 +65,12 @@ namespace Spedit.UI.Windows
             }
         }
 
+        private void ScrollSpeed_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.Editor_ScrollSpeed = ScrollSpeed.Value / 1000.0;
+        }
+
         private void WordWrap_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -145,13 +151,8 @@ namespace Spedit.UI.Windows
                 OpenIncludesRecursive.IsEnabled = false;
             }
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
-            /*SMInclude.Text = Program.OptionsObject.SPIncludePath;
-            SMCopy.Text = Program.OptionsObject.SPCopyPath;
-            ServerExec.Text = Program.OptionsObject.ServerPath;
-            ServerArg.Text = Program.OptionsObject.ServerArgs;
-            OptimizeLevel.Value = Program.OptionsObject.OptimizationLevel;
-            VerboseLevel.Value = Program.OptionsObject.VerboseLevel;*/
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
+            ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollSpeed * 1000.0;
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
             FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
