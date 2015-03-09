@@ -147,8 +147,11 @@ namespace Spedit.UI.Components
 
         public void UpdateFontSize(double size)
         {
-            editor.FontSize = size;
-            StatusLine_FontSize.Text = size.ToString("n0") + " pt";
+            if (size > 2 && size < 31)
+            {
+                editor.FontSize = size;
+                StatusLine_FontSize.Text = size.ToString("n0") + " pt";
+            }
         }
 
         public async void Close(bool ForcedToSave = false, bool CheckSavings = true)
@@ -203,7 +206,14 @@ namespace Spedit.UI.Components
 
         private void PrevMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                UpdateFontSize(editor.FontSize + Math.Sign(e.Delta));
+            }
+            else
+            {
+                editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
+            }
             e.Handled = true;
             HideISAC();
         }
