@@ -31,6 +31,10 @@ namespace Spedit.UI
                 if (All)
                 {
                     EditorElement[] editors = GetAllEditorElements();
+                    if (editors == null)
+                    {
+                        return;
+                    }
                     for (int i = 0; i < editors.Length; ++i)
                     {
                         if (editors[i].CompileBox.IsChecked.Value)
@@ -42,6 +46,10 @@ namespace Spedit.UI
                 else
                 {
                     EditorElement ee = GetCurrentEditorElement();
+                    if (ee == null)
+                    {
+                        return;
+                    }
                     /*
                     ** I've struggled a bit here. Should i check, if the CompileBox is checked 
                     ** and only compile if it's checked or should it be ignored and compiled anyway?

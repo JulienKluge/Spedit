@@ -39,23 +39,6 @@ namespace Spedit.UI
         {
             NewFileWindow nfWindow = new NewFileWindow() { Owner = this, ShowInTaskbar = false };
             nfWindow.ShowDialog();
-            /*string TemplateText = Environment.NewLine;
-            if (File.Exists(@"sourcepawn\Template.sp"))
-            {
-                TemplateText = File.ReadAllText(@"sourcepawn\Template.sp");
-            }
-            SaveFileDialog sfd = new SaveFileDialog() { AddExtension = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", OverwritePrompt = true, Title = "New File" };
-            //sfd.FileName = "New Sourcepawn Script.sp";
-            sfd.ShowDialog(this);
-            if (!string.IsNullOrWhiteSpace(sfd.FileName))
-            {
-                using (StreamWriter streamWriter = new StreamWriter(sfd.FileName))
-                {
-                    streamWriter.Write(TemplateText);
-                }
-                TryLoadSourceFile(sfd.FileName);
-                BlendOverEffect.Begin();
-            }*/
         }
 
         private void Command_Open()
@@ -107,6 +90,10 @@ namespace Spedit.UI
         private void Command_SaveAll()
         {
             EditorElement[] editors = GetAllEditorElements();
+            if (editors == null)
+            {
+                return;
+            }
             if (editors.Length > 0)
             {
                 for (int i = 0; i < editors.Length; ++i)
@@ -129,6 +116,10 @@ namespace Spedit.UI
         private async void Command_CloseAll()
         {
             EditorElement[] editors = GetAllEditorElements();
+            if (editors == null)
+            {
+                return;
+            }
             if (editors.Length > 0)
             {
                 bool UnsavedEditorsExisting = false;

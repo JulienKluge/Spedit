@@ -31,6 +31,10 @@ namespace Spedit.UI
                 IsSearchFieldOpen = true;
                 FindReplaceGrid.IsHitTestVisible = true;
                 EditorElement ee = GetCurrentEditorElement();
+                if (ee == null)
+                {
+                    return;
+                }
                 if (ee.editor.SelectionLength > 0)
                 {
                     FindBox.Text = ee.editor.SelectedText;
