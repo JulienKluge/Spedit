@@ -57,6 +57,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App\App.config" />
+    <None Include="Deploy\DotNetChecker.nsh" />
+    <None Include="Deploy\FileAssociation.nsh" />
+    <None Include="Deploy\SPEdit.nsi" />
     <None Include="packages.config" />
     <None Include="Res\Misc\Templates\CSSCSGOTemplate.sp" />
     <None Include="Res\Misc\Templates\EmptyScriptTemplate.sp" />
@@ -231,6 +234,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Res\AboutImages\sourcemod.png" />
+    <Content Include="Deploy\GPLv3.txt" />
+    <Content Include="Deploy\icon.ico" />
     <Content Include="Res\Misc\Configurations\Configs.xml">
       <SubType>Designer</SubType>
     </Content>
