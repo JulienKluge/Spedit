@@ -151,7 +151,7 @@ namespace Spedit.UI
         private Regex GetSearchRegex()
         {
             string findString = FindBox.Text;
-            if (string.IsNullOrWhiteSpace(findString))
+            if (string.IsNullOrEmpty(findString))
             {
                 FindResultBlock.Text = "Empty search pattern";
                 return null;
