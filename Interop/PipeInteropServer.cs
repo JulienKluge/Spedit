@@ -38,10 +38,6 @@ namespace Spedit.Interop
 
         private void PipeConnection_MessageIn(IAsyncResult iar)
         {
-            if (!pipeServer.IsConnected)
-            {
-                return;
-            }
             pipeServer.EndWaitForConnection(iar);
             byte[] byteBuffer = new byte[4];
             pipeServer.Read(byteBuffer, 0, sizeof(Int32));

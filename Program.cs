@@ -48,7 +48,6 @@ namespace Spedit
                     pipeServer.Start();
                     Application app = new Application();
                     app.Run(MainWindow);
-                    pipeServer.Close();
                     OptionsControlIOObject.Save();
                 }
                 else
