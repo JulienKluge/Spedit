@@ -2,6 +2,7 @@
 using Spedit.UI;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -27,6 +28,7 @@ namespace Spedit
                 {
                     SplashScreen splashScreen = new SplashScreen("Res/Icon256x.png");
                     splashScreen.Show(false, true);
+                    Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                     OptionsObject = OptionsControlIOObject.Load();
                     Configs = ConfigLoader.Load();
                     for (int i = 0; i < Configs.Length; ++i)

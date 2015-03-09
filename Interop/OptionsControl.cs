@@ -26,15 +26,6 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public string[] LastOpenFiles = new string[0];
 
-        /*
-        public string SPIncludePath = "sourcepawn\\";
-        public string SPCopyPath = "";
-        public string ServerPath = "";
-        public string ServerArgs = "";
-        public int OptimizationLevel = 2;
-        public int VerboseLevel = 1;
-        */
-
         public bool SH_HighlightDeprecateds = true;
 
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x00, 0x80, 0x00);
