@@ -59,10 +59,13 @@ namespace Spedit.UI.Windows
             double size = FontSizeD.Value;
             Program.OptionsObject.Editor_FontSize = size;
             EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
-            for (int i = 0; i < editors.Length; ++i)
-            {
-                editors[i].UpdateFontSize(size);
-            }
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].UpdateFontSize(size);
+				}
+			}
         }
 
         private void ScrollSpeed_Changed(object sender, RoutedEventArgs e)
@@ -77,10 +80,13 @@ namespace Spedit.UI.Windows
             bool wrapping = WordWrap.IsChecked.Value;
             Program.OptionsObject.Editor_WordWrap = wrapping;
             EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
-            for (int i = 0; i < editors.Length; ++i)
-            {
-                editors[i].editor.WordWrap = wrapping;
-            }
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].editor.WordWrap = wrapping;
+				}
+			}
         }
 
         private void FontFamily_Changed(object sender, RoutedEventArgs e)
@@ -91,10 +97,13 @@ namespace Spedit.UI.Windows
             Program.OptionsObject.Editor_FontFamily = FamilyString;
             FontFamilyTB.Text = "Font (" + FamilyString + "):";
             EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
-            for (int i = 0; i < editors.Length; ++i)
-            {
-                editors[i].editor.FontFamily = family;
-            }
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].editor.FontFamily = family;
+				}
+			}
         }
 
         private void HighlightDeprecateds_Changed(object sender, RoutedEventArgs e)

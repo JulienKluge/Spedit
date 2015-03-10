@@ -11,7 +11,12 @@ namespace Spedit.UI
     {
         private void FileMenu_Open(object sender, RoutedEventArgs e)
         {
-            bool EditorsAreOpen = (GetAllEditorElements().Length > 0);
+			var editors = GetAllEditorElements();
+            bool EditorsAreOpen = false;
+			if (editors != null)
+			{
+				EditorsAreOpen = (editors.Length > 0);
+			}
             bool EditorIsSelected = (GetCurrentEditorElement() != null);
             ((MenuItem)((MenuItem)sender).Items[3]).IsEnabled = EditorIsSelected;
             ((MenuItem)((MenuItem)sender).Items[5]).IsEnabled = EditorIsSelected;

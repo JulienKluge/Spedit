@@ -129,40 +129,43 @@ namespace Spedit.UI
             List<string> lastOpenFiles = new List<string>();
             EditorElement[] editors = GetAllEditorElements();
             bool? SaveUnsaved = null;
-            for (int i = 0; i < editors.Length; ++i)
-            {
-                if (File.Exists(editors[i].FullFilePath))
-                {
-                    lastOpenFiles.Add(editors[i].FullFilePath);
-                    if (editors[i].NeedsSave)
-                    {
-                        if (SaveUnsaved == null)
-                        {
-                            var result = MessageBox.Show(this, "Save all unsaved files?", "Saving", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                            if (result == MessageBoxResult.Yes)
-                            {
-                                SaveUnsaved = true;
-                            }
-                            else
-                            {
-                                SaveUnsaved = false;
-                            }
-                        }
-                        if (SaveUnsaved.Value)
-                        {
-                            editors[i].Close(true, true);
-                        }
-                        else
-                        {
-                            editors[i].Close(false, false);
-                        }
-                    }
-                    else
-                    {
-                        editors[i].Close(false, false);
-                    }
-                }
-            }
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					if (File.Exists(editors[i].FullFilePath))
+					{
+						lastOpenFiles.Add(editors[i].FullFilePath);
+						if (editors[i].NeedsSave)
+						{
+							if (SaveUnsaved == null)
+							{
+								var result = MessageBox.Show(this, "Save all unsaved files?", "Saving", MessageBoxButton.YesNo, MessageBoxImage.Question);
+								if (result == MessageBoxResult.Yes)
+								{
+									SaveUnsaved = true;
+								}
+								else
+								{
+									SaveUnsaved = false;
+								}
+							}
+							if (SaveUnsaved.Value)
+							{
+								editors[i].Close(true, true);
+							}
+							else
+							{
+								editors[i].Close(false, false);
+							}
+						}
+						else
+						{
+							editors[i].Close(false, false);
+						}
+					}
+				}
+			}
             Program.OptionsObject.LastOpenFiles = lastOpenFiles.ToArray();
         }
 
@@ -192,8 +195,16 @@ namespace Spedit.UI
         private void ErrorResultGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = ((ErrorDataGridRow)ErrorResultGrid.SelectedItem);
+            if (row == null)
+            {
+                return;
+            }
             string fileName = row.file;
             EditorElement[] editors = GetAllEditorElements();
+            if (editors == null)
+            {
+                return;
+            }
             for (int i = 0; i < editors.Length; ++i)
             {
                 if (editors[i].FullFilePath == fileName)
