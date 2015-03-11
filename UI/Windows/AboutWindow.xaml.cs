@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -13,6 +14,7 @@ namespace Spedit.UI.Windows
         public AboutWindow()
         {
             InitializeComponent();
+            TitleBox.Text = "SPEdit (" + Assembly.GetEntryAssembly().GetName().Version.ToString() + ") - a lightweight sourcepawn editor";
             LicenseField.Text = LicenseString;
         }
 
