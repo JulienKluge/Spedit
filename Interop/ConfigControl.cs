@@ -1,4 +1,5 @@
 ﻿using Spedit.SPCondenser;
+using Spedit.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,7 +62,8 @@ namespace Spedit.Interop
                         }
                         string _FTPHost = node.Attributes["FTPHost"].Value;
                         string _FTPUser = node.Attributes["FTPUser"].Value;
-                        string _FTPPW = node.Attributes["FTPPassword"].Value;
+                        string encryptedFTPPW = node.Attributes["FTPPassword"].Value;
+                        string _FTPPW = ManagedAES.Decrypt(encryptedFTPPW);
                         string _FTPDir = node.Attributes["FTPDir"].Value;
                         Config c = new Config()
                         {

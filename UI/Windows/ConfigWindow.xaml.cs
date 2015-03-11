@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.Interop;
+using Spedit.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -51,7 +52,7 @@ namespace Spedit.UI.Windows
             C_DeleteAfterCopy.IsChecked = c.DeleteAfterCopy;
             C_FTPHost.Text = c.FTPHost;
             C_FTPUser.Text = c.FTPUser;
-            C_FTPPW.Text = c.FTPPassword;
+            C_FTPPW.Password = c.FTPPassword;
             C_FTPDir.Text = c.FTPDir;
         }
 
@@ -146,9 +147,9 @@ namespace Spedit.UI.Windows
             Program.Configs[ConfigListBox.SelectedIndex].FTPUser = C_FTPUser.Text;
         }
 
-        private void C_FTPPW_TextChanged(object sender, TextChangedEventArgs e)
+        private void C_FTPPW_TextChanged(object sender, RoutedEventArgs e)
         {
-            Program.Configs[ConfigListBox.SelectedIndex].FTPPassword = C_FTPPW.Text;
+            Program.Configs[ConfigListBox.SelectedIndex].FTPPassword = C_FTPPW.Password;
         }
 
         private void C_FTPDir_TextChanged(object sender, TextChangedEventArgs e)
@@ -186,7 +187,7 @@ namespace Spedit.UI.Windows
                     writer.WriteAttributeString("DeleteAfterCopy", (c.DeleteAfterCopy) ? "1" : "0");
                     writer.WriteAttributeString("FTPHost", c.FTPHost.ToString());
                     writer.WriteAttributeString("FTPUser", c.FTPUser.ToString());
-                    writer.WriteAttributeString("FTPPassword", c.FTPPassword.ToString());
+                    writer.WriteAttributeString("FTPPassword", ManagedAES.Encrypt(c.FTPPassword.ToString()));
                     writer.WriteAttributeString("FTPDir", c.FTPDir.ToString());
                     writer.WriteEndElement();
                 }

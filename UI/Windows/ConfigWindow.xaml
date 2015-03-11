@@ -44,7 +44,7 @@
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,485,0,0" Text="FTP Directory:" />
         <TextBox Name="C_FTPHost" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,390,5,0" TextChanged="C_FTPHost_TextChanged"/>
         <TextBox Name="C_FTPUser" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,420,5,0" TextChanged="C_FTPUser_TextChanged" />
-        <TextBox Name="C_FTPPW" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,450,5,0" TextChanged="C_FTPPW_TextChanged" />
+        <PasswordBox Name="C_FTPPW" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,450,5,0" PasswordChanged="C_FTPPW_TextChanged" />
         <TextBox Name="C_FTPDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="350,480,5,0" TextChanged="C_FTPDir_TextChanged" />
         <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,177,5,0" Text="Commandline Variables" Width="150" SelectedIndex="0">
             <ComboBoxItem Content="{}{editordir} - Directory of the SPEdit binary" />

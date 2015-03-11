@@ -152,6 +152,7 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\FTP.cs" />
+    <Compile Include="Utils\ManagedAES.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Components\ColorChangeControl.xaml">

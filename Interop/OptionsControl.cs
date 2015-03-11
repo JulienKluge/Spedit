@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Windows.Media;
 
 namespace Spedit //leave this here instead of .Interop because of reasons...
@@ -10,6 +11,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     {
         public static int SVersion = 0;
         public int Version = 0;
+
+        public byte[] Program_CryptoKey = null;
 
         public bool Program_UseHardwareAcceleration = true;
 
@@ -50,6 +53,15 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public void FillNullToDefaults()
         {
+            if (this.Program_CryptoKey == null)
+            {
+                byte[] buffer = new byte[16];
+                using (RNGCryptoServiceProvider cryptoRandomProvider = new RNGCryptoServiceProvider()) //generate global unique cryptokey
+                {
+                    cryptoRandomProvider.GetBytes(buffer);
+                }
+                this.Program_CryptoKey = buffer;
+            }
             if (OptionsControl.SVersion > this.Version)
             {
                 //new Optionsversion - reset new fields to default
