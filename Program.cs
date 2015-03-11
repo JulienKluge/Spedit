@@ -50,11 +50,15 @@ namespace Spedit
                     PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
                     pipeServer.Start();
                     Application app = new Application();
+#if !DEBUG
                     Updater u = new Updater();
                     u.CheckForUpdatesAsynchronously();
+#endif
                     app.Run(MainWindow);
                     OptionsControlIOObject.Save();
+#if !DEBUG
                     u.StopThreadAndCheckIfUpdateIsAvailable();
+#endif
                 }
                 else
                 {
