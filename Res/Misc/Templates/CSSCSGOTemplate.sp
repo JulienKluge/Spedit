@@ -10,6 +10,8 @@
 #include <cstrike>
 //#include <sdkhooks>
 
+EngineVersion g_Game;
+
 public Plugin myinfo = 
 {
 	name = "",
@@ -19,9 +21,7 @@ public Plugin myinfo =
 	url = ""
 };
 
-EngineVersion g_Game;
-
-public OnPluginStart()
+public void OnPluginStart()
 {
 	g_Game = GetEngineVersion();
 	if(g_Game != Engine_CSGO && g_Game != Engine_CSS)

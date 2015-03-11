@@ -10,6 +10,8 @@
 #include <cstrike>
 //#include <sdkhooks>
 
+EngineVersion g_Game;
+
 public Plugin:myinfo = 
 {
 	name = "",
@@ -18,8 +20,6 @@ public Plugin:myinfo =
 	version = PLUGIN_VERSION,
 	url = ""
 };
-
-EngineVersion g_Game;
 
 public OnPluginStart()
 {

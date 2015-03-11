@@ -9,10 +9,12 @@
 
 
 /*
+#if !defined REQUIRE_PLUGIN
 public __pl_INTERFACE_SetNTVOptional()
 {
 	MarkNativeAsOptional("");
 }
+#endif
 */
 
 public SharedPlugin __pl_INTERFACE =

@@ -8,6 +8,15 @@
 
 
 
+/*
+#if !defined REQUIRE_EXTENSIONS
+public __ext_INTERFACE_SetNTVOptional()
+{
+	MarkNativeAsOptional("");
+}
+#endif
+*/
+
 public Extension __ext_INTERFACE = 
 {
 	name = "",
