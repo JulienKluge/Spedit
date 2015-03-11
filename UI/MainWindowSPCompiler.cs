@@ -80,7 +80,7 @@ namespace Spedit.UI
                         {
                             using (Process process = new Process())
                             {
-                                process.StartInfo.WorkingDirectory = Environment.CurrentDirectory + @"\sourcepawn";
+                                process.StartInfo.WorkingDirectory = fileInfo.DirectoryName;
                                 process.StartInfo.UseShellExecute = true;
                                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 process.StartInfo.CreateNoWindow = true;
