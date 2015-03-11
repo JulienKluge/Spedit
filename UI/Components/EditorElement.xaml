@@ -40,7 +40,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
      </UserControl.Resources>
-    <Grid Background="{StaticResource WhiteBrush}">
+    <Grid>
         <editor:TextEditor x:Name="editor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,20" ShowLineNumbers="True" FontFamily="Consolas"
                            TextChanged="editor_TextChanged">
             <editor:TextEditor.ContextMenu>
@@ -82,14 +82,14 @@
                 <ColumnDefinition Name="ISenseColumn" Width="0" />
             </Grid.ColumnDefinitions>
             <Grid VerticalAlignment="Top" Name="ISenseGrid" Grid.Column="1" Width="Auto" Height="Auto">
-                <Border Name="ISenseBorder" BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="Auto">
-                    <Grid Height="Auto" Background="#F0FFFFFF">
+                <Border BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="Auto">
+                    <Grid Height="Auto" Background="#FFFFFFFF">
                         <TextBlock Name="IS_FuncName" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,2,0" Width="Auto" FontSize="16" Foreground="{StaticResource AccentColorBrush}" />
                         <TextBlock Name="IS_FuncDescription" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Margin="2,20,2,0" />
                     </Grid>
                 </Border>
             </Grid>
-            <Border Name="ACBorder" Grid.Column="0" Background="#F0FFFFFF" VerticalAlignment="Top" BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="0">
+            <Border Name="ACBorder" Grid.Column="0" Background="#FFFFFFFF" VerticalAlignment="Top" BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="0">
                 <Grid>
                     <ListBox Name="AutoCompleteBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="0" Width="0"
                          Height="175" Background="Transparent" Opacity="1"

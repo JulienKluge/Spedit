@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.AvalonDock.Layout;
+using ICSharpCode.AvalonEdit.Indentation;
 
 namespace Spedit.UI.Components
 {
@@ -66,9 +67,9 @@ namespace Spedit.UI.Components
             UpdateFontSize(Program.OptionsObject.Editor_FontSize);
 
             colorizeSelection = new ColorizeSelection();
-
             editor.TextArea.TextView.LineTransformers.Add(colorizeSelection);
             editor.SyntaxHighlighting = new AeonEditorHighlighting();
+            editor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
 
             LoadAutoCompletes();
 

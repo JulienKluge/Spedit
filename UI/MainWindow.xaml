@@ -125,7 +125,7 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="{StaticResource WhiteBrush}" Foreground="{StaticResource BlackBrush}">
+            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="#FFFFFFFF" Foreground="#00000000">
                 <dock:LayoutRoot>
                     <dock:LayoutPanel>
                         <dock:LayoutDocumentPaneGroup>

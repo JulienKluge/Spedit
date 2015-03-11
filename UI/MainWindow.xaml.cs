@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using Spedit.UI.Components;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Layout;
