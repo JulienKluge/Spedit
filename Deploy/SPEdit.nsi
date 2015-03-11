@@ -42,6 +42,11 @@ File Xceed.Wpf.AvalonDock.dll
 File Xceed.Wpf.AvalonDock.Themes.Metro.dll
 File GPLv3.txt
 
+IfFileExists $INSTDIR\options_0.dat OptionsExist OptionsDoesNotExist
+OptionsExist:
+Delete $INSTDIR\options_0.dat
+OptionsDoesNotExist:
+
 CreateDirectory "$INSTDIR\sourcepawn"
 CreateDirectory "$INSTDIR\sourcepawn\errorfiles"
 CreateDirectory "$INSTDIR\sourcepawn\scripts"
@@ -83,6 +88,12 @@ ${registerExtension} "$INSTDIR\Spedit.exe" ".inc" "Sourcepawn Include-File"
 System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
 SectionEnd
 
+
+
+Section "Desktop Shortcut" prog04
+SectionIn 1
+CreateShortCut "$DESKTOP\SPEdit.lnk" "$INSTDIR\Spedit.exe" ""
+SectionEnd
 
 
 
