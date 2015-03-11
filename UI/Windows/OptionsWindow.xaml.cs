@@ -53,6 +53,12 @@ namespace Spedit.UI.Windows
             Program.OptionsObject.Program_OpenIncludesRecursively = OpenIncludesRecursive.IsChecked.Value;
         }
 
+        private void AutoUpdate_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.Program_CheckForUpdates = AutoUpdate.IsChecked.Value;
+        }
+
         private void FontSize_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -113,48 +119,13 @@ namespace Spedit.UI.Windows
             ToggleRestartText();
         }
 
-        /*private void SMInclude_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.SPIncludePath = SMInclude.Text;
-        }
-
-        private void SMCopy_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.SPCopyPath = SMCopy.Text;
-        }
-
-        private void ServerExec_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.ServerPath = ServerExec.Text;
-        }
-
-        private void ServerArg_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.ServerArgs = ServerArg.Text;
-        }
-
-        private void OptimizeLevel_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.OptimizationLevel = (int)OptimizeLevel.Value;
-        }
-
-        private void VerboseLevel_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.VerboseLevel = (int)VerboseLevel.Value;
-        }*/
-
         private void LoadSettings()
         {
             HardwareAcc.IsChecked = Program.OptionsObject.Program_UseHardwareAcceleration;
             UIAnimation.IsChecked = Program.OptionsObject.UI_Animations;
             OpenIncludes.IsChecked = Program.OptionsObject.Program_OpenCustomIncludes;
             OpenIncludesRecursive.IsChecked = Program.OptionsObject.Program_OpenIncludesRecursively;
+            AutoUpdate.IsChecked = Program.OptionsObject.Program_CheckForUpdates;
             if (!Program.OptionsObject.Program_OpenCustomIncludes)
             {
                 OpenIncludesRecursive.IsEnabled = false;
