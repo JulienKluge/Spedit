@@ -23,15 +23,6 @@ namespace Spedit.UI
 
         public EditorElement[] GetAllEditorElements()
         {
-            /*List<EditorElement> editors = new List<EditorElement>();
-            for (int i = 0; i < DockingPane.Children.Count; ++i)
-            {
-                if (DockingPane.Children[i].Content is EditorElement)
-                {
-                    editors.Add((EditorElement)DockingPane.Children[i].Content);
-                }
-            }
-            return editors.ToArray();*/
             return this.EditorsReferences.ToArray();
         }
 

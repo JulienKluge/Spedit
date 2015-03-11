@@ -148,7 +148,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="215" Width="450" IsHitTestVisible="False" Opacity="0">
+        <Grid Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="215" Width="500" IsHitTestVisible="False" Opacity="0">
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{StaticResource BlackBrush}" Fill="{StaticResource AccentColorBrush2}" />
             <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,5,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
             <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" Height="45" controls:TextBoxHelper.Watermark="Replace" VerticalScrollBarVisibility="Visible" KeyDown="ReplaceBoxKeyUp" />
@@ -156,6 +156,12 @@
             <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{StaticResource WhiteBrush}" />
             <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{StaticResource WhiteBrush}" />
             <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{StaticResource WhiteBrush}" />
+            <ComboBox Name="FindDestinies" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,105,0,0" Width="150">
+                <ComboBox.Items>
+                    <ComboBoxItem IsSelected="True" Content="Current Document" />
+                    <ComboBoxItem Content="All Open Documents" />
+                </ComboBox.Items>
+            </ComboBox>
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,105,5,5" Content="Find (F3)" Width="150" Click="SearchButtonClicked" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,132.5,5,5" Content="Replace" Width="150" Click="ReplaceButtonClicked" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,160,5,5" Content="Replace All" Width="150" Click="ReplaceAllButtonClicked" />

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using Xceed.Wpf.AvalonDock.Layout;
 
 namespace Spedit.UI
 {
@@ -62,7 +63,7 @@ namespace Spedit.UI
         }
         private void ReplaceButtonClicked(object sender, RoutedEventArgs e)
         {
-            Search(true);
+            Replace();
         }
         private void ReplaceAllButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -83,73 +84,163 @@ namespace Spedit.UI
         {
             if (e.Key == Key.Enter)
             {
-                Search(true);
+                Replace();
             }
         }
 
-        public void Search(bool Replace = false)
+        private void Search()
         {
-            EditorElement editorElement = GetCurrentEditorElement();
-            if (editorElement == null)
-            {
-                return;
-            }
+            int editorIndex = 0;
+            EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
+            if (editors == null) { return; }
             Regex regex = GetSearchRegex();
-            if (regex == null)
+            if (regex == null) { return; }
+            int startFileCaretOffset = 0;
+            bool foundOccurence = false;
+            for (int i = editorIndex; i < (editors.Length + editorIndex + 1); ++i)
             {
-                return;
-            }
-
-            int index = editorElement.editor.CaretOffset;
-            MatchCollection matchCollection = regex.Matches(editorElement.editor.Text, 0);
-
-            FindResultBlock.Text = matchCollection.Count.ToString() + " Occurences";
-            if (matchCollection.Count > 0)
-            {
-                int matchIndexTaken = 0;
-                for (int i = 0; i < matchCollection.Count; ++i)
+                int index = ValueUnderMap(i, editors.Length);
+                string searchText;
+                int addToOffset = 0;
+                if (i == editorIndex)
                 {
-                    if (matchCollection[i].Index >= index)
-                    {
-                        matchIndexTaken = i;
-                        break;
-                    }
+                    startFileCaretOffset = editors[index].editor.CaretOffset;
+                    addToOffset = startFileCaretOffset;
+                    if (startFileCaretOffset < 0) { startFileCaretOffset = 0; }
+                    searchText = editors[index].editor.Text.Substring(startFileCaretOffset);
                 }
-                if (Replace)
+                else if (i == (editors.Length + editorIndex))
                 {
-                    string replaceString = ReplaceBox.Text;
-                    editorElement.editor.Document.Replace(matchCollection[matchIndexTaken].Index, matchCollection[matchIndexTaken].Length, replaceString);
-                    editorElement.editor.Select(matchCollection[matchIndexTaken].Index, replaceString.Length);
-                    editorElement.NeedsSave = true;
+                    if (startFileCaretOffset == 0)
+                    {
+                        searchText = string.Empty;
+                    }
+                    else
+                    {
+                        searchText = editors[index].editor.Text.Substring(0, startFileCaretOffset);
+                    }
                 }
                 else
                 {
-                    editorElement.editor.Select(matchCollection[matchIndexTaken].Index, matchCollection[matchIndexTaken].Length);
+                    searchText = editors[index].editor.Text;
                 }
-                editorElement.editor.TextArea.Caret.BringCaretToView();
+                if (!string.IsNullOrWhiteSpace(searchText))
+                {
+                    Match m = regex.Match(searchText);
+                    if (m != null) //can this happen?
+                    {
+                        if (m.Success)
+                        {
+                            foundOccurence = true;
+                            ((LayoutDocument)editors[index].Parent).IsSelected = true;
+                            editors[index].editor.CaretOffset = m.Index + addToOffset + m.Length;
+                            editors[index].editor.Select(m.Index + addToOffset, m.Length);
+                            var location = editors[index].editor.Document.GetLocation(m.Index + addToOffset);
+                            editors[index].editor.ScrollTo(location.Line, location.Column);
+                            FindResultBlock.Text = "Found in offset " + (m.Index + addToOffset).ToString() + " with length " + m.Length.ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!foundOccurence)
+            {
+                FindResultBlock.Text = "Found nothing";
+            }
+        }
+
+        private void Replace()
+        {
+            int editorIndex = 0;
+            EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
+            if (editors == null) { return; }
+            Regex regex = GetSearchRegex();
+            if (regex == null) { return; }
+            string replaceString = ReplaceBox.Text;
+            int startFileCaretOffset = 0;
+            bool foundOccurence = false;
+            for (int i = editorIndex; i < (editors.Length + editorIndex + 1); ++i)
+            {
+                int index = ValueUnderMap(i, editors.Length);
+                string searchText;
+                int addToOffset = 0;
+                if (i == editorIndex)
+                {
+                    startFileCaretOffset = editors[index].editor.CaretOffset;
+                    addToOffset = startFileCaretOffset;
+                    if (startFileCaretOffset < 0) { startFileCaretOffset = 0; }
+                    searchText = editors[index].editor.Text.Substring(startFileCaretOffset);
+                }
+                else if (i == (editors.Length + editorIndex))
+                {
+                    if (startFileCaretOffset == 0)
+                    {
+                        searchText = string.Empty;
+                    }
+                    else
+                    {
+                        searchText = editors[index].editor.Text.Substring(0, startFileCaretOffset);
+                    }
+                }
+                else
+                {
+                    searchText = editors[index].editor.Text;
+                }
+                if (!string.IsNullOrWhiteSpace(searchText))
+                {
+                    Match m = regex.Match(searchText);
+                    if (m != null)
+                    {
+                        if (m.Success)
+                        {
+                            foundOccurence = true;
+                            ((LayoutDocument)editors[index].Parent).IsSelected = true;
+                            string result = m.Result(replaceString);
+                            editors[index].editor.Document.Replace(m.Index + addToOffset, m.Length, result);
+                            editors[index].editor.CaretOffset = m.Index + addToOffset + result.Length;
+                            editors[index].editor.Select(m.Index + addToOffset, result.Length);
+                            var location = editors[index].editor.Document.GetLocation(m.Index + addToOffset);
+                            editors[index].editor.ScrollTo(location.Line, location.Column);
+                            FindResultBlock.Text = "Replaced in offset " + (m.Index + addToOffset).ToString();
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!foundOccurence)
+            {
+                FindResultBlock.Text = "Found nothing";
             }
         }
 
         private void ReplaceAll()
         {
-            EditorElement editorElement = GetCurrentEditorElement();
-            if (editorElement == null)
-            {
-                return;
-            }
+            int editorIndex = 0;
+            EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
+            if (editors == null) { return; }
             Regex regex = GetSearchRegex();
-            if (regex == null)
-            {
-                return;
-            }
-            MatchCollection matchCollection = regex.Matches(editorElement.editor.Text, 0);
+            if (regex == null) { return; }
+            int count = 0;
+            int fileCount = 0;
             string replaceString = ReplaceBox.Text;
-            for (int i = matchCollection.Count - 1; i >= 0; --i)
+            for (int i = 0; i < editors.Length; ++i)
             {
-                editorElement.editor.Document.Replace(matchCollection[i].Index, matchCollection[i].Length, replaceString);
+                MatchCollection mc = regex.Matches(editors[i].editor.Text);
+                if (mc.Count > 0)
+                {
+                    fileCount++;
+                    count += mc.Count;
+                    editors[i].editor.BeginChange();
+                    for (int j = mc.Count - 1; j >= 0; --j)
+                    {
+                        string replace = mc[j].Result(replaceString);
+                        editors[i].editor.Document.Replace(mc[j].Index, mc[j].Length, replace);
+                    }
+                    editors[i].editor.EndChange();
+                    editors[i].NeedsSave = true;
+                }
             }
-            FindResultBlock.Text = matchCollection.Count.ToString() + " occurences replaced";
-
+            FindResultBlock.Text = "Replaced " + count.ToString() + " occurences in " + fileCount.ToString() + " documents";
         }
 
         private Regex GetSearchRegex()
@@ -181,10 +272,9 @@ namespace Spedit.UI
             }
             else //if (RSearch_RButton.IsChecked.Value)
             {
+                regexOptions |= RegexOptions.Multiline;
                 if (MLRBox.IsChecked.Value)
-                { regexOptions |= RegexOptions.Multiline; }
-                else
-                { regexOptions |= RegexOptions.Singleline; }
+                { regexOptions |= RegexOptions.Singleline; } //paradox, isn't it? ^^
                 try
                 {
                     regex = new Regex(findString, regexOptions);
@@ -192,6 +282,46 @@ namespace Spedit.UI
                 catch (Exception) { FindResultBlock.Text = "No valid regex pattern!"; return null; }
             }
             return regex;
+        }
+
+        private EditorElement[] GetEditorElementsForFRAction(out int editorIndex)
+        {
+            int editorStartIndex = 0;
+            EditorElement[] editors = null;
+            if (FindDestinies.SelectedIndex == 0)
+            { editors = new EditorElement[] { GetCurrentEditorElement() }; }
+            else
+            {
+                editors = GetAllEditorElements();
+                if (DockingPane.SelectedContent != null)
+                {
+                    object checkElement = DockingPane.SelectedContent.Content;
+                    if (checkElement != null)
+                    {
+                        if (checkElement is EditorElement)
+                        {
+                            for (int i = 0; i < editors.Length; ++i)
+                            {
+                                if (editors[i] == checkElement)
+                                {
+                                    editorStartIndex = i;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            editorIndex = editorStartIndex;
+            return editors;
+        }
+
+        private int ValueUnderMap(int value, int map)
+        {
+            while (value >= map)
+            {
+                value -= map;
+            }
+            return value;
         }
     }
 }
