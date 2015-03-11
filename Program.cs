@@ -19,6 +19,7 @@ namespace Spedit
         public static OptionsControl OptionsObject;
         //public static CondensedSourcepawnDefinition spDefinition;
         public static Config[] Configs;
+        public static Updater GlobalUpdater;
         public static int SelectedConfig = 0;
 
         [STAThread]
@@ -51,13 +52,13 @@ namespace Spedit
                     pipeServer.Start();
                     Application app = new Application();
 #if !DEBUG
-                    Updater u = new Updater();
-                    u.CheckForUpdatesAsynchronously();
+                    GlobalUpdater = new Updater();
+                    GlobalUpdater.CheckForUpdatesAsynchronously();
 #endif
                     app.Run(MainWindow);
                     OptionsControlIOObject.Save();
 #if !DEBUG
-                    u.StopThreadAndCheckIfUpdateIsAvailable();
+                    GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
 #endif
                 }
                 else

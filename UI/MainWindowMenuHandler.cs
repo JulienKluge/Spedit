@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using Spedit.Interop.Updater;
 using Spedit.UI.Components;
 using Spedit.UI.Windows;
 using System.Diagnostics;
@@ -174,6 +175,17 @@ namespace Spedit.UI
         private void ReportBug_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo(@"https://github.com/TheJelle/Spedit/issues/new"));
+        }
+
+        private void UpdateCheck_Click(object sender, RoutedEventArgs e)
+        {
+#if !DEBUG
+            UpdateCheckItem.IsEnabled = false;
+            Program.GlobalUpdater.Stop();
+            Updater u = new Updater() { OverrideOptions = true, UIFeedback = true };
+            Program.GlobalUpdater = u;
+            Program.GlobalUpdater.CheckForUpdatesAsynchronously();
+#endif
         }
     }
 }

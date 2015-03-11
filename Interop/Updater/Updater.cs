@@ -15,11 +15,15 @@ namespace Spedit.Interop.Updater
         private string UpdateExecutable = string.Empty;
         private string UpdateInfo = string.Empty;
 
+        public bool OverrideOptions = false;
+
+        public bool UIFeedback = false;
+
         private Thread t;
 
         public void CheckForUpdatesAsynchronously()
         {
-            if (Program.OptionsObject.Program_CheckForUpdates)
+            if (Program.OptionsObject.Program_CheckForUpdates || OverrideOptions)
             {
                 t = new Thread(new ThreadStart(Check));
                 t.Start();
@@ -29,14 +33,16 @@ namespace Spedit.Interop.Updater
 
         public void StopThreadAndCheckIfUpdateIsAvailable()
         {
+            bool UpdateCheckPermission = Program.OptionsObject.Program_CheckForUpdates;
+            UpdateCheckPermission |= OverrideOptions;
             if (InChecking) //time was not enough...
             {
                 t.Abort();
             }
-            else if (UpdateAvailable && Program.OptionsObject.Program_CheckForUpdates && File.Exists(UpdateExecutable))
+            else if (UpdateAvailable && UpdateCheckPermission && File.Exists(UpdateExecutable))
             {
                 var result = MessageBox.Show("An update is available." + Environment.NewLine + "Do you want to update?" + Environment.NewLine + Environment.NewLine + UpdateInfo,
-                    "Update available", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        "Update available", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     try
@@ -56,6 +62,14 @@ namespace Spedit.Interop.Updater
                             "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
+            }
+        }
+
+        public void Stop()
+        {
+            if (InChecking)
+            {
+                t.Abort();
             }
         }
 
@@ -88,6 +102,26 @@ namespace Spedit.Interop.Updater
                         UpdateInfo = updateInfoString.ToString();
                         UpdateExecutable = destinationFile;
                         UpdateAvailable = true;
+                        if (UIFeedback)
+                        {
+                            string FeedbackText;
+                            if (UpdateAvailable)
+                            {
+                                FeedbackText = "An Updated is available." + Environment.NewLine + "Close Editor to install it!";
+                            }
+                            else
+                            {
+                                FeedbackText = "No Update is available yet.";
+                            }
+                            Program.MainWindow.Dispatcher.Invoke(() =>
+                            {
+                                MessageBox.Show(Program.MainWindow, FeedbackText,
+                                    "Update Check",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Information);
+                            });
+
+                        }
                     }
                     else //use async-time to cleanup old updaters
                     {

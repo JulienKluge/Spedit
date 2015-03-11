@@ -37,6 +37,7 @@ namespace Spedit.UI
             BlendOverEffect = (Storyboard)this.Resources["BlendOverEffect"];
             FadeFindReplaceGridIn = (Storyboard)this.Resources["FadeFindReplaceGridIn"];
             FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
+            UpdateCheckItem.IsEnabled = !Program.OptionsObject.Program_CheckForUpdates; //they dont have to search it manually when it is already done..
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);
 #endif

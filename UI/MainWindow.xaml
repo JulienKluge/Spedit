@@ -114,6 +114,7 @@
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Report a Bug" Click="ReportBug_Click" />
+                    <MenuItem Name="UpdateCheckItem" Header="Check for Updates" Click="UpdateCheck_Click" />
                     <MenuItem Header="About" Click="Menu_About" />
                 </MenuItem>
             </Menu>
