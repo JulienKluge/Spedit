@@ -1,4 +1,5 @@
 ﻿using Spedit.Interop;
+using Spedit.Interop.Updater;
 using Spedit.UI;
 using System;
 using System.IO;
@@ -12,6 +13,8 @@ namespace Spedit
 {
     public static class Program
     {
+        public const string ProgramInternalVersion = "0";
+
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
         //public static CondensedSourcepawnDefinition spDefinition;
@@ -47,8 +50,11 @@ namespace Spedit
                     PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
                     pipeServer.Start();
                     Application app = new Application();
+                    Updater u = new Updater();
+                    u.CheckForUpdatesAsynchronously();
                     app.Run(MainWindow);
                     OptionsControlIOObject.Save();
+                    u.StopThreadAndCheckIfUpdateIsAvailable();
                 }
                 else
                 {

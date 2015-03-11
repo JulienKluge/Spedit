@@ -111,6 +111,7 @@
     <Compile Include="Interop\PipeInteropClient.cs" />
     <Compile Include="Interop\PipeInteropServer.cs" />
     <Compile Include="Interop\OptionsControl.cs" />
+    <Compile Include="Interop\Updater\Updater.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SPCondenser\ConstantsCondenser.cs" />
     <Compile Include="SPCondenser\EnumCondenser.cs" />
