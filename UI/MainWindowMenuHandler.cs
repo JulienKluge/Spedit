@@ -179,13 +179,14 @@ namespace Spedit.UI
 
         private void UpdateCheck_Click(object sender, RoutedEventArgs e)
         {
-#if !DEBUG
             UpdateCheckItem.IsEnabled = false;
-            Program.GlobalUpdater.Stop();
+            if (Program.GlobalUpdater != null)
+            {
+                Program.GlobalUpdater.Stop();
+            }
             Updater u = new Updater() { OverrideOptions = true, UIFeedback = true };
             Program.GlobalUpdater = u;
             Program.GlobalUpdater.CheckForUpdatesAsynchronously();
-#endif
         }
     }
 }

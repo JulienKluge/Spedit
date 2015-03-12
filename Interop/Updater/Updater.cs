@@ -79,7 +79,11 @@ namespace Spedit.Interop.Updater
             {
                 using (WebClient client = new WebClient())
                 {
+#if DEBUG
+                    string versionString = client.DownloadString("http://updater.spedit.info/version_test_0.txt");
+#else
                     string versionString = client.DownloadString("http://updater.spedit.info/version_0.txt");
+#endif
                     string[] versionLines = versionString.Split('\n');
                     string version = (versionLines[0].Trim()).Trim('\r');
                     if (version != Program.ProgramInternalVersion)
@@ -102,26 +106,6 @@ namespace Spedit.Interop.Updater
                         UpdateInfo = updateInfoString.ToString();
                         UpdateExecutable = destinationFile;
                         UpdateAvailable = true;
-                        if (UIFeedback)
-                        {
-                            string FeedbackText;
-                            if (UpdateAvailable)
-                            {
-                                FeedbackText = "An Updated is available." + Environment.NewLine + "Close Editor to install it!";
-                            }
-                            else
-                            {
-                                FeedbackText = "No Update is available yet.";
-                            }
-                            Program.MainWindow.Dispatcher.Invoke(() =>
-                            {
-                                MessageBox.Show(Program.MainWindow, FeedbackText,
-                                    "Update Check",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Information);
-                            });
-
-                        }
                     }
                     else //use async-time to cleanup old updaters
                     {
@@ -135,11 +119,39 @@ namespace Spedit.Interop.Updater
                             }
                         }
                     }
+                    if (UIFeedback)
+                    {
+                        string FeedbackText;
+                        if (UpdateAvailable)
+                        {
+                            FeedbackText = "An Updated is available." + Environment.NewLine + "Close Editor to install it!";
+                        }
+                        else
+                        {
+                            FeedbackText = "No Update is available yet.";
+                        }
+                        Program.MainWindow.Dispatcher.Invoke(() =>
+                        {
+                            MessageBox.Show(Program.MainWindow, FeedbackText,
+                                "Update Check",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+                        });
+                    }
                 }
             }
             catch (Exception)
             {
-                //nobody wants to know that...
+                if (UIFeedback)
+                {
+                    Program.MainWindow.Dispatcher.Invoke(() =>
+                    {
+                        MessageBox.Show(Program.MainWindow, "Error while trying to update.",
+                            "Update Check",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Asterisk);
+                    });
+                }
             }
             InChecking = false;
         }
