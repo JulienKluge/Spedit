@@ -126,6 +126,7 @@
     <Compile Include="UI\Components\EditorElementBracketHighlighter.cs" />
     <Compile Include="UI\Components\EditorElementHighlighter.cs" />
     <Compile Include="UI\Components\EditorFoldingStrategy.cs" />
+    <Compile Include="UI\Components\EditorIndetation.cs" />
     <Compile Include="UI\Components\IntelliSenseController.cs" />
     <Compile Include="UI\MainWindowSPCompiler.cs" />
     <Compile Include="UI\MainWindowCommands.cs" />

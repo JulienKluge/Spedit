@@ -54,6 +54,7 @@ namespace Spedit.UI.Components
 
             bracketSearcher = new SPBracketSearcher();
             bracketHighlightRenderer = new BracketHighlightRenderer(editor.TextArea.TextView);
+            editor.TextArea.IndentationStrategy = new EditorIndetationStrategy();
 
             editor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             editor.TextArea.SelectionChanged += TextArea_SelectionChanged;
@@ -74,7 +75,6 @@ namespace Spedit.UI.Components
             colorizeSelection = new ColorizeSelection();
             editor.TextArea.TextView.LineTransformers.Add(colorizeSelection);
             editor.SyntaxHighlighting = new AeonEditorHighlighting();
-            editor.TextArea.IndentationStrategy = new DefaultIndentationStrategy();
 
             LoadAutoCompletes();
 
