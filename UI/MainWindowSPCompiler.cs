@@ -148,6 +148,10 @@ namespace Spedit.UI
                     }
                     progressTask.SetProgress(1.0);
                     CompileOutput.Text = stringOutput.ToString();
+                    if (c.AutoCopy)
+                    {
+                        Copy_Plugins(true);
+                    }
                     if (CompileOutputRow.Height.Value < 11.0)
                     {
                         CompileOutputRow.Height = new GridLength(200.0);
@@ -163,7 +167,7 @@ namespace Spedit.UI
             InCompiling = false;
         }
 
-        public void Copy_Plugins()
+        public void Copy_Plugins(bool OvertakeOutString = false)
         {
             if (compiledFiles.Count > 0)
             {
@@ -200,7 +204,14 @@ namespace Spedit.UI
                     {
                         stringOutput.AppendLine("No files copied.");
                     }
-                    CompileOutput.Text = stringOutput.ToString();
+                    if (OvertakeOutString)
+                    {
+                        CompileOutput.AppendText(stringOutput.ToString());
+                    }
+                    else
+                    {
+                        CompileOutput.Text = stringOutput.ToString();
+                    }
                     if (CompileOutputRow.Height.Value < 11.0)
                     {
                         CompileOutputRow.Height = new GridLength(200.0);

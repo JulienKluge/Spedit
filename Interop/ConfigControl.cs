@@ -39,6 +39,12 @@ namespace Spedit.Interop
                         {
                             IsStandardConfig = true;
                         }
+                        string _AutoCopyStr = node.Attributes["AutoCopy"].Value;
+                        bool _AutoCopy = false;
+                        if (_AutoCopyStr != "0" && !string.IsNullOrWhiteSpace(_AutoCopyStr))
+                        {
+                            _AutoCopy = true;
+                        }
                         string _CopyDirectory = node.Attributes["CopyDirectory"].Value;
                         string _ServerFile = node.Attributes["ServerFile"].Value;
                         string _ServerArgs = node.Attributes["ServerArgs"].Value;
@@ -71,6 +77,7 @@ namespace Spedit.Interop
                             SMDirectory = _SMDirectory,
                             Standard = IsStandardConfig
                             ,
+                            AutoCopy = _AutoCopy,
                             CopyDirectory = _CopyDirectory,
                             ServerFile = _ServerFile,
                             ServerArgs = _ServerArgs
@@ -116,6 +123,8 @@ namespace Spedit.Interop
         public string Name = string.Empty;
 
         public bool Standard = false;
+
+        public bool AutoCopy = false;
 
         public string SMDirectory = string.Empty;
         public string CopyDirectory = string.Empty;

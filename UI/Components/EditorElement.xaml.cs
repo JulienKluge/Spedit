@@ -62,6 +62,8 @@ namespace Spedit.UI.Components
             editor.PreviewMouseWheel += PrevMouseWheel;
             editor.MouseDown += editor_MouseDown;
 
+            //editor.TextArea.TextView.ElementGenerators.Add();
+
             _FullFilePath = filePath;
             editor.Options.ConvertTabsToSpaces = false;
             editor.Options.EnableHyperlinks = false;

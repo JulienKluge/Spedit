@@ -42,6 +42,7 @@ namespace Spedit.UI.Windows
             Config c = Program.Configs[index];
             C_Name.Text = c.Name;
             C_SMDir.Text = c.SMDirectory;
+            C_AutoCopy.IsChecked = c.AutoCopy;
             C_CopyDir.Text = c.CopyDirectory;
             C_ServerFile.Text = c.ServerFile;
             C_ServerArgs.Text = c.ServerArgs;
@@ -132,6 +133,11 @@ namespace Spedit.UI.Windows
             Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int)C_VerboseLevel.Value;
         }
 
+        private void C_AutoCopy_Changed(object sender, RoutedEventArgs e)
+        {
+            Program.Configs[ConfigListBox.SelectedIndex].AutoCopy = C_AutoCopy.IsChecked.Value;
+        }
+
         private void C_DeleteAfterCopy_Changed(object sender, RoutedEventArgs e)
         {
             Program.Configs[ConfigListBox.SelectedIndex].DeleteAfterCopy = C_DeleteAfterCopy.IsChecked.Value;
@@ -178,6 +184,7 @@ namespace Spedit.UI.Windows
                     writer.WriteAttributeString("SMDirectory", c.SMDirectory);
                     writer.WriteAttributeString("Standard", (c.Standard) ? "1" : "0");
                     writer.WriteAttributeString("CopyDirectory", c.CopyDirectory);
+                    writer.WriteAttributeString("AutoCopy", (c.AutoCopy) ? "1" : "0");
                     writer.WriteAttributeString("ServerFile", c.ServerFile);
                     writer.WriteAttributeString("ServerArgs", c.ServerArgs);
                     writer.WriteAttributeString("PostCmd", c.PostCmd);
