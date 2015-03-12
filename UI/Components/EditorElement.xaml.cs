@@ -24,6 +24,8 @@ namespace Spedit.UI.Components
         FoldingManager foldingManager;
         SPFoldingStrategy foldingStrategy;
         ColorizeSelection colorizeSelection;
+        SPBracketSearcher bracketSearcher;
+        BracketHighlightRenderer bracketHighlightRenderer;
         Timer regularyTimer;
         bool WantFoldingUpdate = false;
         bool SelectionIsHighlited = false;
@@ -49,6 +51,9 @@ namespace Spedit.UI.Components
         public EditorElement(string filePath)
         {
             InitializeComponent();
+
+            bracketSearcher = new SPBracketSearcher();
+            bracketHighlightRenderer = new BracketHighlightRenderer(editor.TextArea.TextView);
 
             editor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             editor.TextArea.SelectionChanged += TextArea_SelectionChanged;
@@ -198,6 +203,8 @@ namespace Spedit.UI.Components
             StatusLine_Coloumn.Text = "Col " + editor.TextArea.Caret.Column.ToString();
             StatusLine_Line.Text = "Ln " + editor.TextArea.Caret.Line.ToString();
             EvaluateIntelliSense();
+            var result = bracketSearcher.SearchBracket(editor.Document, editor.CaretOffset);
+            bracketHighlightRenderer.SetHighlight(result);
         }
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)

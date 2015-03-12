@@ -123,6 +123,7 @@
     <Compile Include="UI\Components\EditorElement.xaml.cs">
       <DependentUpon>EditorElement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Components\EditorElementBracketHighlighter.cs" />
     <Compile Include="UI\Components\EditorElementHighlighter.cs" />
     <Compile Include="UI\Components\EditorFoldingStrategy.cs" />
     <Compile Include="UI\Components\IntelliSenseController.cs" />
