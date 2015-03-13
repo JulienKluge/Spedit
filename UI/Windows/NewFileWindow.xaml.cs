@@ -68,12 +68,15 @@ namespace Spedit.UI.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog() { AddExtension = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", OverwritePrompt = true, Title = "New File" };
-            sfd.ShowDialog(this);
-            if (!string.IsNullOrWhiteSpace(sfd.FileName))
+            var result = sfd.ShowDialog(this);
+            if (result.Value)
             {
-                FileInfo fileInfo = new FileInfo(sfd.FileName);
-                PathStr = fileInfo.DirectoryName;
-                PathBox.Text = fileInfo.FullName;
+                if (!string.IsNullOrWhiteSpace(sfd.FileName))
+                {
+                    FileInfo fileInfo = new FileInfo(sfd.FileName);
+                    PathStr = fileInfo.DirectoryName;
+                    PathBox.Text = fileInfo.FullName;
+                }
             }
         }
 

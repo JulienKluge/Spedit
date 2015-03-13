@@ -35,18 +35,21 @@ namespace Spedit.UI
         private void Command_Open()
         {
             OpenFileDialog ofd = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", Multiselect = true, Title = "Open new File" };
-            ofd.ShowDialog(this);
-            bool AnyFileLoaded = false;
-            if (ofd.FileNames.Length > 0)
+            var result = ofd.ShowDialog(this);
+            if (result.Value)
             {
-                for (int i = 0; i < ofd.FileNames.Length; ++i)
+                bool AnyFileLoaded = false;
+                if (ofd.FileNames.Length > 0)
                 {
-                    AnyFileLoaded |= TryLoadSourceFile(ofd.FileNames[i]);
-                }
-                if (!AnyFileLoaded)
-                {
-                    this.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Theme;
-                    this.ShowMessageAsync("No Files Openend.", "None of the selected files could be opened.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                    for (int i = 0; i < ofd.FileNames.Length; ++i)
+                    {
+                        AnyFileLoaded |= TryLoadSourceFile(ofd.FileNames[i]);
+                    }
+                    if (!AnyFileLoaded)
+                    {
+                        this.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Theme;
+                        this.ShowMessageAsync("No Files Openend.", "None of the selected files could be opened.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                    }
                 }
             }
         }
@@ -67,13 +70,16 @@ namespace Spedit.UI
             if (ee != null)
             {
                 SaveFileDialog sfd = new SaveFileDialog() { AddExtension = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", OverwritePrompt = true, Title = "Save File As" };
-                sfd.FileName = ee.Parent.Title;
-                sfd.ShowDialog(this);
-                if (!string.IsNullOrWhiteSpace(sfd.FileName))
+                sfd.FileName = ee.Parent.Title.Trim(new char[] { '*' });
+                var result = sfd.ShowDialog(this);
+                if (result.Value)
                 {
-                    ee.FullFilePath = sfd.FileName;
-                    ee.Save(true);
-                    BlendOverEffect.Begin();
+                    if (!string.IsNullOrWhiteSpace(sfd.FileName))
+                    {
+                        ee.FullFilePath = sfd.FileName;
+                        ee.Save(true);
+                        BlendOverEffect.Begin();
+                    }
                 }
             }
         }
@@ -125,9 +131,9 @@ namespace Spedit.UI
                     for (int i = 0; i < editors.Length; ++i)
                     {
                         if (i == 0)
-                        { str.Append(editors[i].Parent.Title); }
+                        { str.Append(editors[i].Parent.Title.Trim(new char[] { '*' })); }
                         else
-                        { str.AppendLine(editors[i].Parent.Title); }
+                        { str.AppendLine(editors[i].Parent.Title.Trim(new char[] { '*' })); }
                     }
                     var Result = await this.ShowMessageAsync("Save following Files:", str.ToString(), MessageDialogStyle.AffirmativeAndNegative, this.MetroDialogOptions);
                     if (Result == MessageDialogResult.Affirmative)
