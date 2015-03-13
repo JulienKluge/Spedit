@@ -69,6 +69,10 @@ namespace Spedit.UI
         {
             ReplaceAll();
         }
+        private void CountButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Count();
+        }
         private void SearchBoxTextChanged(object sender, RoutedEventArgs e)
         {
             FindResultBlock.Text = string.Empty;
@@ -93,6 +97,8 @@ namespace Spedit.UI
             int editorIndex = 0;
             EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
             if (editors == null) { return; }
+            if (editors.Length < 1) { return; }
+            if (editors[0] == null) { return; }
             Regex regex = GetSearchRegex();
             if (regex == null) { return; }
             int startFileCaretOffset = 0;
@@ -154,6 +160,8 @@ namespace Spedit.UI
             int editorIndex = 0;
             EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
             if (editors == null) { return; }
+            if (editors.Length < 1) { return; }
+            if (editors[0] == null) { return; }
             Regex regex = GetSearchRegex();
             if (regex == null) { return; }
             string replaceString = ReplaceBox.Text;
@@ -218,6 +226,8 @@ namespace Spedit.UI
             int editorIndex = 0;
             EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
             if (editors == null) { return; }
+            if (editors.Length < 1) { return; }
+            if (editors[0] == null) { return; }
             Regex regex = GetSearchRegex();
             if (regex == null) { return; }
             int count = 0;
@@ -241,6 +251,24 @@ namespace Spedit.UI
                 }
             }
             FindResultBlock.Text = "Replaced " + count.ToString() + " occurences in " + fileCount.ToString() + " documents";
+        }
+
+        private void Count()
+        {
+            int editorIndex = 0;
+            EditorElement[] editors = GetEditorElementsForFRAction(out editorIndex);
+            if (editors == null) { return; }
+            if (editors.Length < 1) { return; }
+            if (editors[0] == null) { return; }
+            Regex regex = GetSearchRegex();
+            if (regex == null) { return; }
+            int count = 0;
+            for (int i = 0; i < editors.Length; ++i)
+            {
+                MatchCollection mc = regex.Matches(editors[i].editor.Text);
+                count += mc.Count;
+            }
+            FindResultBlock.Text = count.ToString() + " occurences found";
         }
 
         private Regex GetSearchRegex()
