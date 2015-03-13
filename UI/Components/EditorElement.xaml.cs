@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Rendering;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -10,7 +11,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.AvalonDock.Layout;
-using ICSharpCode.AvalonEdit.Indentation;
 
 namespace Spedit.UI.Components
 {
@@ -26,6 +26,9 @@ namespace Spedit.UI.Components
         ColorizeSelection colorizeSelection;
         SPBracketSearcher bracketSearcher;
         BracketHighlightRenderer bracketHighlightRenderer;
+
+        FileSystemWatcher fileWatcher;
+
         Timer regularyTimer;
         bool WantFoldingUpdate = false;
         bool SelectionIsHighlited = false;
@@ -38,11 +41,41 @@ namespace Spedit.UI.Components
                 FileInfo fInfo = new FileInfo(value);
                 _FullFilePath = fInfo.FullName;
                 Parent.Title = fInfo.Name;
+                if (fileWatcher != null)
+                {
+                    fileWatcher.Path = fInfo.DirectoryName;
+                }
             }
         }
         private string _FullFilePath = "";
 
-        public bool NeedsSave = false;
+        private bool _NeedsSave = false;
+        public bool NeedsSave
+        {
+            get
+            {
+                return _NeedsSave;
+            }
+            set
+            {
+                if (!(value ^ _NeedsSave)) //when not changed
+                {
+                    return;
+                }
+                _NeedsSave = value;
+                if (Parent != null)
+                {
+                    if (_NeedsSave)
+                    {
+                        Parent.Title = "*" + Parent.Title;
+                    }
+                    else
+                    {
+                        Parent.Title = Parent.Title.Trim(new char[] { '*' });
+                    }
+                }
+            }
+        }
 
         public EditorElement()
         {
@@ -62,8 +95,15 @@ namespace Spedit.UI.Components
             editor.PreviewMouseWheel += PrevMouseWheel;
             editor.MouseDown += editor_MouseDown;
 
-            //editor.TextArea.TextView.ElementGenerators.Add();
-
+            FileInfo fInfo = new FileInfo(filePath);
+            if (fInfo.Exists)
+            {
+                fileWatcher = new FileSystemWatcher(fInfo.DirectoryName) { IncludeSubdirectories = false };
+                fileWatcher.NotifyFilter = NotifyFilters.Size | NotifyFilters.LastWrite;
+                fileWatcher.Filter = "*" + fInfo.Extension;
+                fileWatcher.Changed += fileWatcher_Changed;
+                fileWatcher.EnableRaisingEvents = true;
+            }
             _FullFilePath = filePath;
             editor.Options.ConvertTabsToSpaces = false;
             editor.Options.EnableHyperlinks = false;
@@ -81,7 +121,7 @@ namespace Spedit.UI.Components
             LoadAutoCompletes();
 
             editor.Load(filePath);
-            NeedsSave = false;
+            _NeedsSave = false;
 
             foldingManager = FoldingManager.Install(editor.TextArea);
             foldingStrategy = new SPFoldingStrategy();
@@ -92,6 +132,45 @@ namespace Spedit.UI.Components
             regularyTimer.Start();
 
             CompileBox.IsChecked = (bool?)filePath.EndsWith(".sp");
+        }
+
+        private void fileWatcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            if (e.FullPath == _FullFilePath)
+            {
+                bool ReloadFile = false;
+                if (_NeedsSave)
+                {
+                    var result = MessageBox.Show(_FullFilePath + " has changed." + Environment.NewLine + "Try reloading file?", "File Changed", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+                    ReloadFile = (result == MessageBoxResult.Yes);
+                }
+                else //when the user didnt changed anything, we just reload the file since we are intelligent...
+                {
+                    ReloadFile = true;
+                }
+                if (ReloadFile)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        FileStream stream;
+                        bool IsNotAccessed = true;
+                        while (IsNotAccessed)
+                        {
+                            try
+                            {
+                                using (stream = new FileStream(_FullFilePath, FileMode.OpenOrCreate))
+                                {
+                                    editor.Load(stream);
+                                    NeedsSave = false;
+                                    IsNotAccessed = false;
+                                }
+                            }
+                            catch (Exception) { }
+                            System.Threading.Thread.Sleep(100); //dont include System.Threading in the using directives, cause its onlyused once and the Timer class will double
+                        }
+                    });
+                }
+            }
         }
 
         private void regularyTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -146,10 +225,18 @@ namespace Spedit.UI.Components
 
         public void Save(bool Force = false)
         {
-            if (NeedsSave || Force)
+            if (_NeedsSave || Force)
             {
+                if (fileWatcher != null)
+                {
+                    fileWatcher.EnableRaisingEvents = false;
+                }
                 editor.Save(_FullFilePath);
                 NeedsSave = false;
+                if (fileWatcher != null)
+                {
+                    fileWatcher.EnableRaisingEvents = true;
+                }
             }
         }
 
@@ -166,9 +253,14 @@ namespace Spedit.UI.Components
         {
             regularyTimer.Stop();
             regularyTimer.Close();
+            if (fileWatcher != null)
+            {
+                fileWatcher.EnableRaisingEvents = false;
+                fileWatcher.Dispose();
+            }
             if (CheckSavings)
             {
-                if (NeedsSave)
+                if (_NeedsSave)
                 {
                     if (ForcedToSave)
                     {
@@ -176,7 +268,7 @@ namespace Spedit.UI.Components
                     }
                     else
                     {
-                        var Result = await Program.MainWindow.ShowMessageAsync("Saving File '" + Parent.Title + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
+                        var Result = await Program.MainWindow.ShowMessageAsync("Saving File '" + Parent.Title.Trim(new char[] { '*' }) + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
                         if (Result == MessageDialogResult.Affirmative)
                         {
                             Save();
