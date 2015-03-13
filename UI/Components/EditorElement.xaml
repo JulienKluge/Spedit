@@ -9,7 +9,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="FadeISACIn">
@@ -40,7 +39,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
      </UserControl.Resources>
-    <Grid>
+    <Grid Background="White">
         <editor:TextEditor x:Name="editor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,20" ShowLineNumbers="True" FontFamily="Consolas"
                            TextChanged="editor_TextChanged">
             <editor:TextEditor.ContextMenu>
@@ -56,11 +55,11 @@
                 </ContextMenu>
             </editor:TextEditor.ContextMenu>
         </editor:TextEditor>
-        <CheckBox x:Name="CompileBox" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,0" Content="Compile" />
-        <TextBlock Name="StatusLine_FontSize" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2" Text="14 pt" />
-        <TextBlock Name="StatusLine_Coloumn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,100,2" Text="Col 0" />
-        <TextBlock Name="StatusLine_Line" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,200,2" Text="Ln 0" />
-        <TextBlock Name="StatusLine_SelectionLength" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,300,2" Text="Len 0" />
+        <CheckBox x:Name="CompileBox" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,0" Content="Compile" Foreground="Black" />
+        <TextBlock Name="StatusLine_FontSize" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2" Text="14 pt" Foreground="Black" />
+        <TextBlock Name="StatusLine_Coloumn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,100,2" Text="Col 0" Foreground="Black" />
+        <TextBlock Name="StatusLine_Line" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,200,2" Text="Ln 0" Foreground="Black" />
+        <TextBlock Name="StatusLine_SelectionLength" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="2,2,300,2" Text="Len 0" Foreground="Black" />
         <Grid Name="ISAC_Grid" Opacity="0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" IsHitTestVisible="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
