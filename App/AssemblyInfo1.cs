@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Spedit")]
-[assembly: AssemblyDescription("Sourcepawn Editor")]
+[assembly: AssemblyDescription("SPEedit - a lightweight sourcepawn editor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Spedit")]
+[assembly: AssemblyProduct("SPEdit")]
 [assembly: AssemblyCopyright("Copyright © Julien Kluge 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
