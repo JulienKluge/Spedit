@@ -27,6 +27,9 @@ namespace Spedit.UI.Components
                     }
                     else if (lastLineTextTrimmed == "}")
                     {
+                        DocumentLine pp_line = previousLine.PreviousLine; //nice...
+                        indentationSegment = TextUtilities.GetWhitespaceAfter(document, pp_line.Offset);
+                        indentation = document.GetText(indentationSegment);
                         if (indentation.Length > 0)
                         {
                             indentation = indentation.Substring(0, indentation.Length - 1);
@@ -37,7 +40,6 @@ namespace Spedit.UI.Components
                         }
                         indentationSegment = TextUtilities.GetWhitespaceAfter(document, previousLine.Offset);
                         document.Replace(indentationSegment, indentation);
-                        return;
                     }
                 }
                 indentationSegment = TextUtilities.GetWhitespaceAfter(document, line.Offset);
