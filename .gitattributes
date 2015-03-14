@@ -15,6 +15,3 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-
-# Language override for include files
-*.inc linguist-language=SourcePawn
