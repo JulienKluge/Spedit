@@ -95,6 +95,13 @@ namespace Spedit.UI.Windows
 			}
         }
 
+        private void AIndentation_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            bool aIndentation = AgressiveIndentation.IsChecked.Value;
+            Program.OptionsObject.Editor_AgressiveIndentation = aIndentation;
+        }
+
         private void FontFamily_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -134,6 +141,7 @@ namespace Spedit.UI.Windows
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollSpeed * 1000.0;
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
+            AgressiveIndentation.IsChecked = Program.OptionsObject.Editor_AgressiveIndentation;
             FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             LoadSH();
