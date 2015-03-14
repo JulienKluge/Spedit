@@ -57,10 +57,9 @@
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILANDO (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Impact123 (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Keith Warren (r3dw3r3w0lf; Drixevel) (Tester, Proposer) http://www.drixevel.com/" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="  KeithAllenWarren@gmail.com" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Powerlord (Proposer)" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Wliu (Proposer)" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Text="Tester &#013;ecca; pimpinjuice; Hackmastr; m_bNightstalker; Franc1sco; Oshizu&#013;Black-Rabbit; Maxximou5, Tank Missile, Brrdy, buzzace" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Xerrion (Tester, Proposer)" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Text="Proposer: &#013;Powerlord; Wliu; barel31; asherkin; BAILANDO; Arkarr" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Text="Tester: &#013;ecca; pimpinjuice; Hackmastr; m_bNightstalker; Franc1sco; Oshizu&#013;Black-Rabbit; Maxximou5; Tank Missile; Brrdy; buzzace; kossolax; {PHILMAGROIN}" />
                     </StackPanel>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
@@ -139,6 +138,23 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Own License, © 2014 iconmonstr" FontSize="16" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://iconmonstr.com/" RequestNavigate="HyperlinkRequestNavigate">iconmonstr Website</Hyperlink>
+                    </TextBlock>
+                </Grid>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/smlib.png" Stretch="Uniform" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="200,5,0,0" Text="SMLib" FontSize="18" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="400,5,0,0" Text="Sourcemod Library" FontSize="18" FontWeight="Thin" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  berni" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="https://www.sourcemodplugins.org/smlib/" RequestNavigate="HyperlinkRequestNavigate">SMLib Website</Hyperlink>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/bcserv/smlib" RequestNavigate="HyperlinkRequestNavigate">SMLib GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
             </StackPanel>
