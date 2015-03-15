@@ -47,7 +47,7 @@ namespace Spedit.SPCondenser
             {
                 commentBlocks.Add(new TextMarker() { Position = mc[i].Index, EndPosition = mc[i].Index + mc[i].Length, Value = mc[i].Value });
             }
-            regex = new Regex(@"(?<fullname>\b(public|stock|native|forward|normal)\s+((public|stock|native|static|forward|normal)\s+){0,2}((([a-zA-z]+\:)|([a-zA-z]+\s+)))?(?<name>[a-zA-Z][a-zA-Z1-9_]+)(\(.*?\))(?=(\s*(\;|\{))))"
+            regex = new Regex(@"(?<fullname>\b(public|stock|native|forward|normal)\s+((public|stock|native|static|forward|normal)\s+){0,2}((([a-zA-z]+\:)|([a-zA-z]+\s+)))?(?<name>[a-zA-Z][a-zA-Z1-9_]+)(\(.*?\))(\s*\=.+?)?(?=(\s*(\;|\{))))"
                 , RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.ExplicitCapture);
             mc = regex.Matches(source, 0);
             for (int i = 0; i < mc.Count; ++i)
