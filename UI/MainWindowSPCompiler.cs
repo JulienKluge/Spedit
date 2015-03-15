@@ -19,8 +19,8 @@ namespace Spedit.UI
         private bool InCompiling = false;
         private async void Compile_SPScripts(bool All = true)
         {
-            Command_SaveAll();
             if (InCompiling) { return; }
+            Command_SaveAll();
             InCompiling = true;
             compiledFiles.Clear();
             var c = Program.Configs[Program.SelectedConfig];
@@ -64,7 +64,6 @@ namespace Spedit.UI
                 if (compileCount > 0)
                 {
                     ErrorResultGrid.Items.Clear();
-                    var conf = Program.Configs[Program.SelectedConfig];
                     var progressTask = await this.ShowProgressAsync("Compiling", "", false, this.MetroDialogOptions);
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
@@ -92,7 +91,7 @@ namespace Spedit.UI
                                 if (File.Exists(errorFile)) { File.Delete(errorFile); }
                                 process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\" -i=\"" + c.SMDirectory + "\" -O=" + c.OptimizeLevel.ToString() + " -v=" + c.VerboseLevel.ToString();
                                 progressTask.SetProgress((((double)(i + 1)) - 0.5d) / ((double)compileCount));
-                                string execResult = ExecuteCommandLine(conf.PreCmd, fileInfo.DirectoryName, conf.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
+                                string execResult = ExecuteCommandLine(c.PreCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
                                 if (!string.IsNullOrWhiteSpace(execResult))
                                 {
                                     stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
@@ -137,7 +136,7 @@ namespace Spedit.UI
                                 }
                                 stringOutput.AppendLine();
                                 progressTask.SetProgress(((double)(i + 1)) / ((double)compileCount));
-                                execResult = ExecuteCommandLine(conf.PostCmd, fileInfo.DirectoryName, conf.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
+                                execResult = ExecuteCommandLine(c.PostCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
                                 if (!string.IsNullOrWhiteSpace(execResult))
                                 {
                                     stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
