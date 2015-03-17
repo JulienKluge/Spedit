@@ -107,10 +107,15 @@
                             <Image Source="/Spedit;component/Res/Icons/Icon_Settings.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator />
                     <MenuItem Header="Sourcepawn API">
                         <MenuItem Header="Parsed from Include Directory" Click="Menu_OpenSPDef" />
                         <MenuItem Header="Old Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/api/" />
                         <MenuItem Header="New Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/new-api/" />
+                    </MenuItem>
+                    <MenuItem Header="Syntax Reformatter">
+                        <MenuItem Header="Reformat Current" InputGestureText="Ctrl+R" Click="Menu_ReFormatCurrent" />
+                        <MenuItem Header="Reformat All" Click="Menu_ReFormatAll" />
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Report a Bug" Click="ReportBug_Click" />

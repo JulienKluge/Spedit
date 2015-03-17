@@ -172,6 +172,16 @@ namespace Spedit.UI
             optionsWindow.ShowDialog();
         }
 
+        private void Menu_ReFormatCurrent(object sender, RoutedEventArgs e)
+        {
+            Command_TidyCode(false);
+        }
+
+        private void Menu_ReFormatAll(object sender, RoutedEventArgs e)
+        {
+            Command_TidyCode(true);
+        }
+
         private void ReportBug_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo(@"https://github.com/TheJelle/Spedit/issues/new"));

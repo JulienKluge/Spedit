@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using Spedit.UI.Components;
 using Spedit.UI.Windows;
+using Spedit.Utils.SPSyntaxTidy;
 using System.Text;
 
 namespace Spedit.UI
@@ -205,6 +206,30 @@ namespace Spedit.UI
             if (ee != null)
             {
                 ee.editor.SelectAll();
+            }
+        }
+
+        private void Command_TidyCode(bool All)
+        {
+            EditorElement[] editors;
+            if (All)
+            {
+                editors = GetAllEditorElements();
+            }
+            else
+            {
+                editors = new EditorElement[] { GetCurrentEditorElement() };
+            }
+            for (int i = 0; i < editors.Length; ++i)
+            {
+                EditorElement ee = editors[i];
+                if (ee != null)
+                {
+                    ee.editor.Document.BeginUpdate();
+                    string source = ee.editor.Text;
+                    ee.editor.Document.Replace(0, source.Length, SPSyntaxTidy.TidyUp(source));
+                    ee.editor.Document.EndUpdate();
+                }
             }
         }
 

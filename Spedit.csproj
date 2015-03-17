@@ -155,6 +155,8 @@
     </Compile>
     <Compile Include="Utils\FTP.cs" />
     <Compile Include="Utils\ManagedAES.cs" />
+    <Compile Include="Utils\SPSyntaxTidy\SPSyntaxTidy.cs" />
+    <Compile Include="Utils\SPSyntaxTidy\SPTokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\Components\ColorChangeControl.xaml">

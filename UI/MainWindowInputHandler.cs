@@ -38,6 +38,7 @@ namespace Spedit.UI
                         case Key.S: { Command_Save(); e.Handled = true; break; }
                         case Key.F: { ToggleSearchField(); e.Handled = true; break; }
                         case Key.W: { Command_Close(); e.Handled = true; break; }
+                        case Key.R: { Command_TidyCode(false); e.Handled = true; break; }
                     }
                 }
             }
