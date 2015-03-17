@@ -104,6 +104,10 @@ namespace Spedit.UI.Components
                 fileWatcher.Changed += fileWatcher_Changed;
                 fileWatcher.EnableRaisingEvents = true;
             }
+            else
+            {
+                fileWatcher = null;
+            }
             _FullFilePath = filePath;
             editor.Options.ConvertTabsToSpaces = false;
             editor.Options.EnableHyperlinks = false;
@@ -136,6 +140,7 @@ namespace Spedit.UI.Components
 
         private void fileWatcher_Changed(object sender, FileSystemEventArgs e)
         {
+            if (e == null) { return; }
             if (e.FullPath == _FullFilePath)
             {
                 bool ReloadFile = false;
@@ -257,6 +262,7 @@ namespace Spedit.UI.Components
             {
                 fileWatcher.EnableRaisingEvents = false;
                 fileWatcher.Dispose();
+                fileWatcher = null;
             }
             if (CheckSavings)
             {
