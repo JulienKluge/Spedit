@@ -181,7 +181,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                             continue;
                         }
                     }
-                    if (c != '!' && c != '|' && c != '&' && c != '+' && c != '-') //they can have another meaning so they are handled on their own
+                    if (c != '!' && c != '|' && c != '&' && c != '+' && c != '-' && c != '<' && c != '>') //they can have another meaning so they are handled on their own
                     {
                         token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = source.Substring(i, 1) });
                         continue;
@@ -199,6 +199,34 @@ namespace Spedit.Utils.SPSyntaxTidy
                         }
                     }
                     token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "|" });
+                    continue;
+                }
+                if (c == '>')
+                {
+                    if ((i + 1) < length)
+                    {
+                        if (buffer[i + 1] == '>')
+                        {
+                            token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = ">>" });
+                            ++i;
+                            continue;
+                        }
+                    }
+                    token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = ">" });
+                    continue;
+                }
+                if (c == '<')
+                {
+                    if ((i + 1) < length)
+                    {
+                        if (buffer[i + 1] == '<')
+                        {
+                            token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "<<" });
+                            ++i;
+                            continue;
+                        }
+                    }
+                    token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "<" });
                     continue;
                 }
                 if (c == '&') //the & operator is a little bit problematic. It can mean bitwise AND or address of variable. This is not easy to determinate

@@ -160,6 +160,14 @@ namespace Spedit.Utils.SPSyntaxTidy
                             continue;
                         }
                     }
+                    if (token[i].Value == "(")
+                    {
+                        ++indentationLevel;
+                    }
+                    else if (token[i].Value == ")")
+                    {
+                        --indentationLevel;
+                    }
                 }
                 outString.Append(token[i].Value);
             }
