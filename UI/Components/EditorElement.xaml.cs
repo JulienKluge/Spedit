@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Xceed.Wpf.AvalonDock.Layout;
+using Spedit.Utils.SPSyntaxTidy;
 
 namespace Spedit.UI.Components
 {
@@ -94,6 +95,7 @@ namespace Spedit.UI.Components
             editor.TextArea.PreviewKeyDown += TextArea_PreviewKeyDown;
             editor.PreviewMouseWheel += PrevMouseWheel;
             editor.MouseDown += editor_MouseDown;
+            //editor.TextArea.TextEntered += TextArea_TextEntered;
 
             FileInfo fInfo = new FileInfo(filePath);
             if (fInfo.Exists)
@@ -306,6 +308,23 @@ namespace Spedit.UI.Components
             var result = bracketSearcher.SearchBracket(editor.Document, editor.CaretOffset);
             bracketHighlightRenderer.SetHighlight(result);
         }
+
+        /*private void TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        {
+            if (Program.OptionsObject.Ediotr_IndentLineAfterSemicolon)
+            {
+                if (e.Text == ";")
+                {
+                    if (editor.CaretOffset >= 0)
+                    {
+                        var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+                        var leadingIndentation = editor.Document.GetText(TextUtilities.GetLeadingWhitespace(editor.Document, line));
+                        string newLineStr = leadingIndentation + SPSyntaxTidy.TidyUp(editor.Document.GetText(line)).Trim();
+                        editor.Document.Replace(line, newLineStr);
+                    }
+                }
+            }
+        }*/
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)
         {

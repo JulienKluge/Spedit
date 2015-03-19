@@ -30,6 +30,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public string Editor_FontFamily = "Consolas";
         public double Editor_ScrollSpeed = 0.01;
         public bool Editor_AgressiveIndentation = true;
+        //public bool Editor_IndentLineAfterSemicolon = true;
 
         public string[] LastOpenFiles = new string[0];
 
