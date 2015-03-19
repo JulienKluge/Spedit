@@ -13,6 +13,8 @@ namespace Spedit.Utils.SPSyntaxTidy
             List<SPToken> token = new List<SPToken>();
             char[] buffer = source.ToCharArray();
             int length = buffer.Length;
+            bool AllowLTOperator = true;
+            bool AllowGTOperator = true;
             for (int i = 0; i < length; ++i)
             {
                 char c = buffer[i];
@@ -139,7 +141,12 @@ namespace Spedit.Utils.SPSyntaxTidy
                         endindex = j;
                     }
                     i = endindex;
-                    token.Add(new SPToken() { Kind = SPTokenKind.Name, Value = source.Substring(startIndex, endindex - startIndex + 1) });
+                    string strValue = source.Substring(startIndex, endindex - startIndex + 1);
+                    if (strValue == "view_as")
+                    {
+                        AllowGTOperator = AllowLTOperator = false;
+                    }
+                    token.Add(new SPToken() { Kind = SPTokenKind.Name, Value = strValue });
                     continue;
                 }
                 #endregion
@@ -212,8 +219,15 @@ namespace Spedit.Utils.SPSyntaxTidy
                             continue;
                         }
                     }
-                    token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = ">" });
-                    continue;
+                    if (AllowGTOperator)
+                    {
+                        token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = ">" });
+                        continue;
+                    }
+                    else
+                    {
+                        AllowGTOperator = true;
+                    }
                 }
                 if (c == '<')
                 {
@@ -226,8 +240,15 @@ namespace Spedit.Utils.SPSyntaxTidy
                             continue;
                         }
                     }
-                    token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "<" });
-                    continue;
+                    if (AllowLTOperator)
+                    {
+                        token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "<" });
+                        continue;
+                    }
+                    else
+                    {
+                        AllowLTOperator = true;
+                    }
                 }
                 if (c == '&') //the & operator is a little bit problematic. It can mean bitwise AND or address of variable. This is not easy to determinate
                 {
