@@ -200,6 +200,22 @@ namespace Spedit.UI
             }
         }
 
+        private void Command_FlushFoldingState(bool state)
+        {
+            EditorElement ee = GetCurrentEditorElement();
+            if (ee != null)
+            {
+                if (ee.foldingManager != null)
+                {
+                    var foldings = ee.foldingManager.AllFoldings;
+                    foreach (var folding in foldings)
+                    {
+                        folding.IsFolded = state;
+                    }
+                }
+            }
+        }
+
         private void Command_SelectAll()
         {
             EditorElement ee = GetCurrentEditorElement();

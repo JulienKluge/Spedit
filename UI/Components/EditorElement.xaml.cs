@@ -22,7 +22,7 @@ namespace Spedit.UI.Components
     {
         public new LayoutDocument Parent;
 
-        FoldingManager foldingManager;
+        public FoldingManager foldingManager;
         SPFoldingStrategy foldingStrategy;
         ColorizeSelection colorizeSelection;
         SPBracketSearcher bracketSearcher;

@@ -113,6 +113,16 @@ namespace Spedit.UI
             Command_Paste();
         }
 
+        private void Menu_ExpandAll(object sender, RoutedEventArgs e)
+        {
+            Command_FlushFoldingState(false);
+        }
+
+        private void Menu_CollapseAll(object sender, RoutedEventArgs e)
+        {
+            Command_FlushFoldingState(true);
+        }
+
         private void Menu_SelectAll(object sender, RoutedEventArgs e)
         {
             Command_SelectAll();

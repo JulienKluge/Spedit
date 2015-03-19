@@ -15,10 +15,9 @@ namespace Spedit.UI
             {
                 if (e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
                 {
-                    if (e.Key == Key.S)
+                    switch (e.Key)
                     {
-                        Command_SaveAs();
-                        e.Handled = true;
+                        case Key.S: { Command_SaveAs(); e.Handled = true; break; }
                     }
                 }
                 else if (e.KeyboardDevice.IsKeyDown(Key.LeftShift))
@@ -27,6 +26,7 @@ namespace Spedit.UI
                     {
                         case Key.S: { Command_SaveAll(); e.Handled = true; break; }
                         case Key.W: { Command_CloseAll(); e.Handled = true; break; }
+                        case Key.P: { Command_FlushFoldingState(true); e.Handled = true; break; }
                     }
                 }
                 else
@@ -39,6 +39,7 @@ namespace Spedit.UI
                         case Key.F: { ToggleSearchField(); e.Handled = true; break; }
                         case Key.W: { Command_Close(); e.Handled = true; break; }
                         case Key.R: { Command_TidyCode(false); e.Handled = true; break; }
+                        case Key.P: { Command_FlushFoldingState(false); e.Handled = true; break; }
                     }
                 }
             }

@@ -83,6 +83,10 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
+                    <MenuItem Header="Foldings">
+                        <MenuItem Header="Expand All" InputGestureText="Ctrl+P" Click="Menu_ExpandAll" />
+                        <MenuItem Header="Collapse All" InputGestureText="Ctrl+Shift+P" Click="Menu_CollapseAll" />
+                    </MenuItem>
                     <MenuItem Header="Select All" Click="Menu_SelectAll" InputGestureText="Ctrl+A" />
                     <Separator />
                     <MenuItem Header="Find &amp; Replace" Click="Menu_FindAndReplace" InputGestureText="Ctrl+F" />
