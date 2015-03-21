@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Spedit")]
-[assembly: AssemblyDescription("SPEedit - a lightweight sourcepawn editor")]
+[assembly: AssemblyDescription("SPEdit - a lightweight sourcepawn editor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SPEdit")]
@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 #if (DEBUG)
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.01.*")]
 #else
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
 #endif
