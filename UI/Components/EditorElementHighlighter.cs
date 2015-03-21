@@ -52,7 +52,7 @@ namespace Spedit.UI.Components
                 SimpleHighlightingBrush stringBrush = new SimpleHighlightingBrush(Program.OptionsObject.SH_Strings);
                 rs.Spans.Add(new HighlightingSpan() //strings
                 {
-                    StartExpression = new Regex(@"""", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
+                    StartExpression = new Regex(@"(?<!')""", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     EndExpression = new Regex(@"""", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     SpanColor = new HighlightingColor() { Foreground = stringBrush },
                     StartColor = new HighlightingColor() { Foreground = stringBrush },
@@ -110,7 +110,7 @@ namespace Spedit.UI.Components
                 });
                 rs.Rules.Add(new HighlightingRule() //char type
                 {
-                    Regex = new Regex(@"'.?'", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
+                    Regex = new Regex(@"'\\?.?'", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Chars) }
                 });
                 rs.Rules.Add(new HighlightingRule() //numbers
