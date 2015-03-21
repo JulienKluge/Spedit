@@ -23,7 +23,7 @@ namespace Spedit
         public static int SelectedConfig = 0;
 
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
             bool mutexReserved;
             using (Mutex appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
@@ -34,6 +34,16 @@ namespace Spedit
                     splashScreen.Show(false, true);
                     Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                     OptionsObject = OptionsControlIOObject.Load();
+                    for (int i = 0; i < args.Length; ++i)
+                    {
+                        var opt = OptionsObject;
+                        if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
+                        {
+                            OptionsObject.ReCreateCryptoKey();
+                            MessageBox.Show("All FTP passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
+                                "Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
                     Configs = ConfigLoader.Load();
                     for (int i = 0; i < Configs.Length; ++i)
                     {
@@ -65,7 +75,6 @@ namespace Spedit
                 {
                     try
                     {
-                        string[] args = Environment.GetCommandLineArgs();
                         StringBuilder sBuilder = new StringBuilder();
                         bool addedFiles = false;
                         for (int i = 0; i < args.Length; ++i)
