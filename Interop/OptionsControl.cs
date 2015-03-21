@@ -57,18 +57,23 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         {
             if (this.Program_CryptoKey == null)
             {
-                byte[] buffer = new byte[16];
-                using (RNGCryptoServiceProvider cryptoRandomProvider = new RNGCryptoServiceProvider()) //generate global unique cryptokey
-                {
-                    cryptoRandomProvider.GetBytes(buffer);
-                }
-                this.Program_CryptoKey = buffer;
+                this.ReCreateCryptoKey();
             }
             if (OptionsControl.SVersion > this.Version)
             {
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars
             }
+        }
+
+        public void ReCreateCryptoKey()
+        {
+            byte[] buffer = new byte[16];
+            using (RNGCryptoServiceProvider cryptoRandomProvider = new RNGCryptoServiceProvider()) //generate global unique cryptokey
+            {
+                cryptoRandomProvider.GetBytes(buffer);
+            }
+            this.Program_CryptoKey = buffer;
         }
     }
 
@@ -123,7 +128,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                 }
             }
             catch (Exception) { }
-            return new OptionsControl();
+            OptionsControl oco = new OptionsControl();
+            oco.ReCreateCryptoKey();
+            return oco;
         }
     }
 }
