@@ -121,6 +121,7 @@
                         <MenuItem Header="Reformat Current" InputGestureText="Ctrl+R" Click="Menu_ReFormatCurrent" />
                         <MenuItem Header="Reformat All" Click="Menu_ReFormatAll" />
                     </MenuItem>
+                    <MenuItem Header="Decompile .smx (Lysis)" Click="Menu_DecompileLysis" />
                     <Separator />
                     <MenuItem Header="Report a Bug" Click="ReportBug_Click" />
                     <MenuItem Name="UpdateCheckItem" Header="Check for Updates" Click="UpdateCheck_Click" />

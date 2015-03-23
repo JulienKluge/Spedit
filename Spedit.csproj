@@ -476,7 +476,12 @@
     <Content Include="Res\Misc\Templates\NativeIncludeTemplate.inc" />
     <Content Include="Res\Misc\Templates\Templates.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="Lysis\LysisForSpedit.csproj">
+      <Project>{a8d94e5a-0cdc-4f01-8801-5770b3ca2b5b}</Project>
+      <Name>LysisForSpedit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

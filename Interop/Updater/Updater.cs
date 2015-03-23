@@ -79,11 +79,7 @@ namespace Spedit.Interop.Updater
             {
                 using (WebClient client = new WebClient())
                 {
-#if DEBUG
-                    string versionString = client.DownloadString("http://updater.spedit.info/version_test_0.txt");
-#else
                     string versionString = client.DownloadString("http://updater.spedit.info/version_0.txt");
-#endif
                     string[] versionLines = versionString.Split('\n');
                     string version = (versionLines[0].Trim()).Trim('\r');
                     if (version != Program.ProgramInternalVersion)
@@ -140,13 +136,13 @@ namespace Spedit.Interop.Updater
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 if (UIFeedback)
                 {
                     Program.MainWindow.Dispatcher.Invoke(() =>
                     {
-                        MessageBox.Show(Program.MainWindow, "Error while trying to update.",
+                        MessageBox.Show(Program.MainWindow, "Error while trying to update." + Environment.NewLine + "Details: " + Environment.NewLine + e.Message,
                             "Update Check",
                             MessageBoxButton.OK,
                             MessageBoxImage.Asterisk);

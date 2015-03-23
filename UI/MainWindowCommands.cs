@@ -4,6 +4,9 @@ using Spedit.UI.Components;
 using Spedit.UI.Windows;
 using Spedit.Utils.SPSyntaxTidy;
 using System.Text;
+using System.Threading.Tasks;
+using Lysis;
+using System.IO;
 
 namespace Spedit.UI
 {
@@ -245,6 +248,37 @@ namespace Spedit.UI
                     string source = ee.editor.Text;
                     ee.editor.Document.Replace(0, source.Length, SPSyntaxTidy.TidyUp(source));
                     ee.editor.Document.EndUpdate();
+                }
+            }
+        }
+
+        private async void Command_Decompile(MainWindow win)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Sourcepawn Plugins (*.smx)|*.smx";
+            ofd.Title = "Select plugin to decompile";
+            var result = ofd.ShowDialog();
+            if (result.Value)
+            {
+                if (!string.IsNullOrWhiteSpace(ofd.FileName))
+                {
+                    FileInfo fInfo = new FileInfo(ofd.FileName);
+                    if (fInfo.Exists)
+                    {
+                        ProgressDialogController task = null;
+                        if (win != null)
+                        {
+                            task = await this.ShowProgressAsync("Decompiling", fInfo.FullName, false, this.MetroDialogOptions);
+                            MainWindow.ProcessUITasks();
+                        }
+                        string destFile = fInfo.FullName + ".sp";
+                        File.WriteAllText(destFile, LysisDecompiler.Analyze(fInfo), Encoding.UTF8);
+                        TryLoadSourceFile(destFile, true, false);
+                        if (task != null)
+                        {
+                            await task.CloseAsync();
+                        }
+                    }
                 }
             }
         }

@@ -192,6 +192,11 @@ namespace Spedit.UI
             Command_TidyCode(true);
         }
 
+        private void Menu_DecompileLysis(object sender, RoutedEventArgs e)
+        {
+            Command_Decompile(this);
+        }
+
         private void ReportBug_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(new ProcessStartInfo(@"https://github.com/TheJelle/Spedit/issues/new"));

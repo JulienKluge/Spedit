@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spedit", "Spedit.csproj", "{60D2BA42-B59B-4B49-928E-C0CDDE254917}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B} = {A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LysisForSpedit", "Lysis\LysisForSpedit.csproj", "{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{60D2BA42-B59B-4B49-928E-C0CDDE254917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60D2BA42-B59B-4B49-928E-C0CDDE254917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60D2BA42-B59B-4B49-928E-C0CDDE254917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
