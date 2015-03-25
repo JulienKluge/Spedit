@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 0;
-        public int Version = 0;
+        public static int SVersion = 1;
+        public int Version = 1;
 
         public byte[] Program_CryptoKey = null;
 
@@ -29,6 +29,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public double Editor_FontSize = 16.0;
         public string Editor_FontFamily = "Consolas";
         public double Editor_ScrollSpeed = 0.01;
+        public bool Editor_NativeScrolling = false;
         public bool Editor_AgressiveIndentation = true;
         //public bool Editor_IndentLineAfterSemicolon = true;
 
@@ -61,6 +62,14 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
             }
             if (OptionsControl.SVersion > this.Version)
             {
+                switch (this.Version)
+                {
+                    case 0:
+                        {
+                            this.Editor_NativeScrolling = false;
+                            break;
+                        }
+                }
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars
             }

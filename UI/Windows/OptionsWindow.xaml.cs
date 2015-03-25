@@ -80,6 +80,12 @@ namespace Spedit.UI.Windows
             Program.OptionsObject.Editor_ScrollSpeed = ScrollSpeed.Value / 1000.0;
         }
 
+        private void NScrolling_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.Editor_NativeScrolling = NativeScrolling.IsChecked.Value;
+        }
+
         private void WordWrap_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -140,6 +146,7 @@ namespace Spedit.UI.Windows
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollSpeed * 1000.0;
+            NativeScrolling.IsChecked = Program.OptionsObject.Editor_NativeScrolling;
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
             AgressiveIndentation.IsChecked = Program.OptionsObject.Editor_AgressiveIndentation;
             FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";

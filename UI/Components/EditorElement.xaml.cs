@@ -333,15 +333,18 @@ namespace Spedit.UI.Components
 
         private void PrevMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (!Program.OptionsObject.Editor_NativeScrolling)
             {
-                UpdateFontSize(editor.FontSize + Math.Sign(e.Delta));
+                if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    UpdateFontSize(editor.FontSize + Math.Sign(e.Delta));
+                }
+                else
+                {
+                    editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
+                }
+                e.Handled = true;
             }
-            else
-            {
-                editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
-            }
-            e.Handled = true;
             HideISAC();
         }
 
