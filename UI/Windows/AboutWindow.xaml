@@ -47,6 +47,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" Background="#CCFEFEFE">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="325,15,0,15">
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILOPAN (writer of: Lysis decompiler &amp; smxdasm dissasembler)" FontWeight="Bold" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Bara (Tester, Proposer, Contributor, Updateserver owner)" FontWeight="Bold" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- necavi (Tester, Proposer, Contributor)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- WildCard65 (Tester, Proposer)" />

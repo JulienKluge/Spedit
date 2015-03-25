@@ -82,12 +82,16 @@ namespace Spedit
                             if (!string.IsNullOrWhiteSpace(args[i]))
                             {
                                 FileInfo fInfo = new FileInfo(args[i]);
-                                if (fInfo.Exists && (fInfo.Extension == ".sp" || fInfo.Extension == ".inc"))
+                                if (fInfo.Exists)
                                 {
-                                    addedFiles = true;
-                                    sBuilder.Append(fInfo.FullName);
-                                    if ((i + 1) != args.Length)
-                                    { sBuilder.Append("|"); }
+                                    string ext = fInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
+                                    if (ext == "sp" || ext == "inc" || ext == "txt" || ext == "smx")
+                                    {
+                                        addedFiles = true;
+                                        sBuilder.Append(fInfo.FullName);
+                                        if ((i + 1) != args.Length)
+                                        { sBuilder.Append("|"); }
+                                    }
                                 }
                             }
                         }

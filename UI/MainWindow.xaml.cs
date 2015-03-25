@@ -64,40 +64,54 @@ namespace Spedit.UI
             FileInfo fileInfo = new FileInfo(filePath);
             if (fileInfo.Exists)
             {
-                string finalPath = fileInfo.FullName;
-                for (int i = 0; i < DockingPane.Children.Count; ++i)
+                string extension = fileInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
+                if (extension == "sp" || extension == "inc" || extension == "txt")
                 {
-                    if (DockingPane.Children[i].Content is EditorElement)
+                    string finalPath = fileInfo.FullName;
+                    EditorElement[] editors = GetAllEditorElements();
+                    if (editors != null)
                     {
-                        if (((EditorElement)DockingPane.Children[i].Content).FullFilePath == finalPath)
+                        for (int i = 0; i < editors.Length; ++i)
                         {
-                            return false;
+                            if (editors[i].FullFilePath == finalPath)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    AddEditorElement(finalPath, fileInfo.Name);
+                    if (TryOpenIncludes && Program.OptionsObject.Program_OpenCustomIncludes)
+                    {
+                        using (var textReader = fileInfo.OpenText())
+                        {
+                            string source = Regex.Replace(textReader.ReadToEnd(), @"/\*.*?\*/", string.Empty, RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
+                            Regex regex = new Regex(@"^\s*\#include\s+((\<|"")(?<name>.+?)(\>|""))", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+                            MatchCollection mc = regex.Matches(source);
+                            for (int i = 0; i < mc.Count; ++i)
+                            {
+                                try
+                                {
+                                    string fileName = mc[i].Groups["name"].Value;
+                                    if (!(fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith(".sp", StringComparison.InvariantCultureIgnoreCase)))
+                                    {
+                                        fileName = fileName + ".inc";
+                                    }
+                                    fileName = System.IO.Path.Combine(fileInfo.DirectoryName, fileName);
+                                    TryLoadSourceFile(fileName, false, Program.OptionsObject.Program_OpenIncludesRecursively);
+                                }
+                                catch (Exception) { }
+                            }
                         }
                     }
                 }
-                AddEditorElement(finalPath, fileInfo.Name);
-                if (TryOpenIncludes && Program.OptionsObject.Program_OpenCustomIncludes)
+                else if (extension == "smx")
                 {
-                    using (var textReader = fileInfo.OpenText())
-                    {
-                        string source = Regex.Replace(textReader.ReadToEnd(), @"/\*.*?\*/", string.Empty, RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
-                        Regex regex = new Regex(@"^\s*\#include\s+((\<|"")(?<name>.+?)(\>|""))", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
-                        MatchCollection mc = regex.Matches(source);
-                        for (int i = 0; i < mc.Count; ++i)
-                        {
-                            try
-                            {
-                                string fileName = mc[i].Groups["name"].Value;
-                                if (!(fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith(".sp", StringComparison.InvariantCultureIgnoreCase)))
-                                {
-                                    fileName = fileName + ".inc";
-                                }
-                                fileName = System.IO.Path.Combine(fileInfo.DirectoryName, fileName);
-                                TryLoadSourceFile(fileName, false, Program.OptionsObject.Program_OpenIncludesRecursively);
-                            }
-                            catch (Exception) { }
-                        }
-                    }
+                    LayoutDocument layoutDocument = new LayoutDocument();
+                    layoutDocument.Title = "DASM: " + fileInfo.Name;
+                    DASMElement dasmElement = new DASMElement(fileInfo);
+                    layoutDocument.Content = dasmElement;
+                    DockingPane.Children.Add(layoutDocument);
+                    DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
                 }
                 if (UseBlendoverEffect)
                 {

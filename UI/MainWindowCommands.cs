@@ -19,7 +19,11 @@ namespace Spedit.UI
             {
                 if (DockingPane.SelectedContent.Content != null)
                 {
-                    outElement = (EditorElement)DockingPane.SelectedContent.Content;
+                    var possElement = DockingPane.SelectedContent.Content;
+                    if (possElement is EditorElement)
+                    {
+                        outElement = (EditorElement)possElement;
+                    }
                 }
             }
             return outElement;
@@ -27,6 +31,10 @@ namespace Spedit.UI
 
         public EditorElement[] GetAllEditorElements()
         {
+            if (this.EditorsReferences.Count < 1)
+            {
+                return null;
+            }
             return this.EditorsReferences.ToArray();
         }
 
@@ -38,7 +46,7 @@ namespace Spedit.UI
 
         private void Command_Open()
         {
-            OpenFileDialog ofd = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", Multiselect = true, Title = "Open new File" };
+            OpenFileDialog ofd = new OpenFileDialog() { AddExtension = true, CheckFileExists = true, CheckPathExists = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|Sourcemod Plugins (*.smx)|*.smx|All Files (*.*)|*.*", Multiselect = true, Title = "Open new File" };
             var result = ofd.ShowDialog(this);
             if (result.Value)
             {
