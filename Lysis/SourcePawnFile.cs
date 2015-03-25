@@ -265,13 +265,19 @@ namespace SourcePawn
             return shadow;
         }
 
-        private static string ReadString(byte[] bytes, int offset)
+        private static string ReadString(byte[] bytes, int offset, int dataoffs)
         {
             int count = offset;
             for (; count < bytes.Length; count++)
             {
                 if (bytes[count] == 0)
+                {
                     break;
+                }
+                if ((dataoffs - 1) == count)
+                {
+                    break;
+                }
             }
             return System.Text.Encoding.UTF8.GetString(bytes, offset, count - offset);
         }
@@ -452,7 +458,7 @@ namespace SourcePawn
                 int nameOffset = (int)reader.ReadUInt32();
                 int dataoffs = (int)reader.ReadUInt32();
                 int size = (int)reader.ReadUInt32();
-                string name = ReadString(binary, header_.stringtab + nameOffset);
+                string name = ReadString(binary, header_.stringtab + nameOffset, header_.dataoffs);
                 sections_[name] = new Section(dataoffs, size);
             }
 
@@ -491,7 +497,7 @@ namespace SourcePawn
                 {
                     uint address = br.ReadUInt32();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset, header_.dataoffs);
                     publics_[i] = new Public(name, address);
                 }
             }
@@ -506,7 +512,7 @@ namespace SourcePawn
                 {
                     uint address = br.ReadUInt32();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset, header_.dataoffs);
                     pubvars_[i] = new PubVar(name, address);
                 }
             }
@@ -520,7 +526,7 @@ namespace SourcePawn
                 for (int i = 0; i < numNatives; i++)
                 {
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset, header_.dataoffs);
                     natives_[i] = new Native(name, i);
                 }
             }
@@ -535,7 +541,7 @@ namespace SourcePawn
                 {
                     uint tag_id = br.ReadUInt32();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".names"].dataoffs + (int)nameOffset, header_.dataoffs);
                     tags_[i] = new Tag(name, tag_id);
                 }
             }
@@ -558,7 +564,7 @@ namespace SourcePawn
                 {
                     uint address = br.ReadUInt32();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset, header_.dataoffs);
                     debugFiles_[i] = new DebugFile(name, nameOffset);
                 }
             }
@@ -593,7 +599,7 @@ namespace SourcePawn
                     Scope vclass = (Scope)br.ReadByte();
                     ushort dimcount = br.ReadUInt16();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset, header_.dataoffs);
 
                     if (ident == IDENT_FUNCTION)
                     {
@@ -649,7 +655,7 @@ namespace SourcePawn
                 {
                     uint index = br.ReadUInt32();
                     uint nameOffset = br.ReadUInt32();
-                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset);
+                    string name = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)nameOffset, header_.dataoffs);
                     short tagid = br.ReadInt16();
                     Tag tag = tagid >= tags_.Length ? null : tags_[tagid];
                     ushort nargs = br.ReadUInt16();
@@ -661,7 +667,7 @@ namespace SourcePawn
                         short arg_tagid = br.ReadInt16();
                         ushort dimcount = br.ReadUInt16();
                         uint argNameOffset = br.ReadUInt32();
-                        string argName = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)argNameOffset);
+                        string argName = ReadString(binary, sections_[".dbg.strings"].dataoffs + (int)argNameOffset, header_.dataoffs);
                         Tag argTag = arg_tagid >= tags_.Length ? null : tags_[arg_tagid];
                         VariableType type = FromIdent(ident);
 
@@ -808,7 +814,7 @@ namespace SourcePawn
 
         public override string stringFromData(int address)
         {
-            return ReadString(data.bytes, address);
+            return ReadString(data.bytes, address, header_.dataoffs);
         }
         public override int int32FromData(int address)
         {
