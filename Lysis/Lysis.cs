@@ -13,13 +13,37 @@ namespace Lysis
     {
         public static string Analyze(FileInfo fInfo)
         {
-            PawnFile file = PawnFile.FromFile(fInfo.FullName);
-
+            PawnFile file;
+            try
+            {
+                file = PawnFile.FromFile(fInfo.FullName);
+            }
+            catch (Exception e)
+            {
+                return "Error while loading file." + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
+            }
             StringBuilder outString = new StringBuilder();
 
-            SourceBuilder source = new SourceBuilder(file, outString);
-            source.writeGlobals();
-
+            SourceBuilder source;
+            try
+            {
+                source = new SourceBuilder(file, outString);
+            }
+            catch (Exception e) //I admit: i have no clue if this can happen, i was too lazy to look.
+            {
+                return "Error while building source." + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
+            }
+            try
+            {
+                source.writeGlobals();
+            }
+            catch (Exception e)
+            {
+                outString.AppendLine();
+                outString.AppendLine("Error while write Globals");
+                outString.AppendLine("Details: " + e.Message);
+                outString.AppendLine("Stacktrace: " + e.StackTrace);
+            }
             for (int i = 0; i < file.functions.Length; i++)
             {
                 Function fun = file.functions[i];
