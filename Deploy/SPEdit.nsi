@@ -91,7 +91,15 @@ SectionEnd
 
 
 
-Section "Desktop Shortcut" prog04
+Section "File Association (.smx)" prog04
+SectionIn 1
+${registerExtension} "$INSTDIR\Spedit.exe" ".smx" "Sourcemod Plugin"
+System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
+SectionEnd
+
+
+
+Section "Desktop Shortcut" prog05
 SectionIn 1
 CreateShortCut "$DESKTOP\SPEdit.lnk" "$INSTDIR\Spedit.exe" ""
 SectionEnd
@@ -113,10 +121,13 @@ Delete $INSTDIR\*.dat
 RMDir /r $INSTDIR\sourcepawn
 RMDir $INSTDIR
 
+Delete "$DESKTOP\SPEdit.lnk"
+
 DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\spedit"
 
 ${unregisterExtension} ".sp" "Sourcepawn Script"
 ${unregisterExtension} ".inc" "Sourcepawn Include-File"
+${unregisterExtension} ".smx" "Sourcemod Plugin"
 System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
  
 SectionEnd
