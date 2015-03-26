@@ -23,9 +23,9 @@
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
-        <TextBlock Name="TitleBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" FontSize="16" FontWeight="Light" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Text="written by: Julien Kluge  (Julien.Kluge@gmail.com)" FontSize="16" FontWeight="Thin" />
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,15,180,5" Text="License:" FontSize="16" FontWeight="Thin" FontStyle="Italic" />
+        <TextBlock Name="TitleBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" FontSize="16" FontWeight="Light" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Text="written by: Julien Kluge  (Julien.Kluge@gmail.com)" FontSize="16" FontWeight="Thin" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,15,180,5" Text="License:" FontSize="16" FontWeight="Thin" FontStyle="Italic" IsHitTestVisible="False" />
         <Button Name="LicenseOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,130,0" Width="40" Height="40" Click="OpenLicenseFlyout" Style="{StaticResource MetroCircleButtonStyle}">
             <Button.Content>
                 <Image Source="/Spedit;component/Res/AboutImages/license.png" Width="20" Height="20" />
@@ -44,11 +44,11 @@
         </Rectangle>
         <ScrollViewer Margin="0,65,0,0">
             <StackPanel Name="ContentStackPanel">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" Background="#CCFEFEFE">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" Background="#CCFEFEFE" IsHitTestVisible="False">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="325,15,0,15">
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILOPAN (writer of: Lysis decompiler &amp; smxdasm dissasembler)" FontWeight="Bold" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Bara (Tester, Proposer, Contributor, Updateserver owner)" FontWeight="Bold" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILOPAN (Proposer, Help)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- necavi (Tester, Proposer, Contributor)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- WildCard65 (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- ClassicSpeed (ClassicGuzzi) (Tester, Proposer)" />
@@ -64,11 +64,15 @@
                     </StackPanel>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
-                    <Image HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" Source="/Spedit;component/Res/AboutImages/MahAppsMetro.png" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,5,0,0" Text="MahApps.Metro" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="450,5,0,0" Text="a UI toolkit for WPF" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Paul Jenkins + MahApps GitHub Community" FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" />
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/MahAppsMetro.png" Stretch="Uniform" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,5,0,0" Text="MahApps.Metro" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="450,5,0,0" Text="a UI toolkit for WPF" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Paul Jenkins + MahApps GitHub Community" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://mahapps.com/" RequestNavigate="HyperlinkRequestNavigate">MahApps Website</Hyperlink>
                     </TextBlock>
@@ -77,15 +81,15 @@
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
-                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/SharpDevelop.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="190,5,0,0" Text="SharpDevelop" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="410,5,0,0" Text="AvalonEdit" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Daniel Grunwald + SharpDevelop Community" FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  The MIT License (MIT)" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="190,5,0,0" Text="SharpDevelop" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="410,5,0,0" Text="AvalonEdit" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Daniel Grunwald + SharpDevelop Community" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  The MIT License (MIT)" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://www.icsharpcode.net/" RequestNavigate="HyperlinkRequestNavigate">SharpDevelop Website</Hyperlink>
                     </TextBlock>
@@ -94,15 +98,15 @@
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
-                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/AvalonDock.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="XCEED" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="380,5,0,0" Text="AvalonDock" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Xceed Software Inc." FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="XCEED" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="380,5,0,0" Text="AvalonDock" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Xceed Software Inc." FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Microsoft Public License (Ms-PL)" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://xceed.com/" RequestNavigate="HyperlinkRequestNavigate">XCEED Website</Hyperlink>
                     </TextBlock>
@@ -111,15 +115,15 @@
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
-                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/sourcemod.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,5,0,0" Text="Sourcemod" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="430,5,0,0" Text="Sourcemod compiler &amp; includes" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  AlliedModders Community" FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,5,0,0" Text="Sourcemod" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="430,5,0,0" Text="Sourcemod compiler &amp; includes" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  AlliedModders Community" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://www.sourcemod.net/" RequestNavigate="HyperlinkRequestNavigate">Sourcemod Website</Hyperlink>
                     </TextBlock>
@@ -128,34 +132,51 @@
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
-                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/IconMonstr.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="iconmonstr" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="380,5,0,0" Text="Icons" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Alexander Kahlkopf" FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Own License, © 2014 iconmonstr" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="iconmonstr" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="380,5,0,0" Text="Icons" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Alexander Kahlkopf" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  Own License, © 2014 iconmonstr" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="http://iconmonstr.com/" RequestNavigate="HyperlinkRequestNavigate">iconmonstr Website</Hyperlink>
                     </TextBlock>
                 </Grid>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
-                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/smlib.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="200,5,0,0" Text="SMLib" FontSize="18" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="400,5,0,0" Text="Sourcemod Library" FontSize="18" FontWeight="Thin" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  berni" FontSize="16" />
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,5,0,0" Text="SMLib" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="420,5,0,0" Text="Sourcemod Library" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  berni" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" IsHitTestVisible="False" />
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://www.sourcemodplugins.org/smlib/" RequestNavigate="HyperlinkRequestNavigate">SMLib Website</Hyperlink>
                     </TextBlock>
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="525,100,5,0" FontSize="16">
                         <Hyperlink NavigateUri="https://github.com/bcserv/smlib" RequestNavigate="HyperlinkRequestNavigate">SMLib GitHub Repository</Hyperlink>
+                    </TextBlock>
+                </Grid>
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
+                    <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/alliedmodders.png" Stretch="Uniform" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,5,0,0" Text="Lysis, smxdasm" FontSize="18" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="480,5,0,0" Text="Decompiler, Dissasembler" FontSize="18" FontWeight="Thin" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,40,5,0" Text="Authors:  Alliedmodders Community" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,70,5,0" Text="License:  GNU GPLv3" FontSize="16" IsHitTestVisible="False" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="325,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="https://github.com/alliedmodders/smxtools/tree/master/smxdasm/" RequestNavigate="HyperlinkRequestNavigate">smxdasm Github Repository</Hyperlink>
+                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="575,100,5,0" FontSize="16">
+                        <Hyperlink NavigateUri="https://hg.alliedmods.net/users/dvander_alliedmods.net/lysis/" RequestNavigate="HyperlinkRequestNavigate">Lysis Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
             </StackPanel>

@@ -254,6 +254,7 @@
     <Content Include="Deploy\GPLv3.txt" />
     <Content Include="Deploy\icon.ico" />
     <Resource Include="Res\AboutImages\smlib.png" />
+    <Resource Include="Res\AboutImages\alliedmodders.png" />
     <Content Include="Res\Misc\Configurations\Configs.xml">
       <SubType>Designer</SubType>
     </Content>
