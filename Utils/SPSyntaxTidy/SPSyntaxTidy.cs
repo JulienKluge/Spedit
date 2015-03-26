@@ -10,6 +10,8 @@ namespace Spedit.Utils.SPSyntaxTidy
     {
         public static string TidyUp(string source)
         {
+            bool LookForSingleIndentationSegment = false;
+            int SingleIndentationSegmentScope = 0;
             int indentationLevel = 0;
             StringBuilder outString = new StringBuilder();
             SPToken[] token = SPTokenizer.Tokenize(source);
@@ -26,10 +28,22 @@ namespace Spedit.Utils.SPSyntaxTidy
                         --subIndentLevel;
                         if (subIndentLevel < 0) { subIndentLevel = 0; }
                     }
+                    else if (nextToken.Kind != SPTokenKind.BracketOpen)
+                    {
+                        if (LookForSingleIndentationSegment)
+                        {
+                            if (SingleIndentationSegmentScope == 0)
+                            {
+                                subIndentLevel++;
+                            }
+                        }
+                    }
                     else if (nextToken.Kind == SPTokenKind.PreProcessorLine) //preporcessor directives should not indented
                     {
                         subIndentLevel = 0;
                     }
+                    LookForSingleIndentationSegment = false;
+                    SingleIndentationSegmentScope = 0;
                     for (int j = 0; j < subIndentLevel; ++j)
                     {
                         outString.Append('\t');
@@ -38,6 +52,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                 }
                 if (token[i].Kind == SPTokenKind.BracketOpen)
                 {
+                    LookForSingleIndentationSegment = false;
                     var lastToken = GetTokenSave(i - 1, token, length);
                     if (lastToken.Kind != SPTokenKind.Newline && lastToken.Kind != SPTokenKind.Comma)
                     {
@@ -124,6 +139,11 @@ namespace Spedit.Utils.SPSyntaxTidy
                 }
                 if (token[i].Kind == SPTokenKind.Name)
                 {
+                    if (token[i].Value == "if" || token[i].Value == "else" || token[i].Value == "for" || token[i].Value == "while")
+                    {
+                        LookForSingleIndentationSegment = true;
+                        SingleIndentationSegmentScope = 0;
+                    }
                     outString.Append(token[i].Value);
                     if (GetTokenSave(i + 1, token, length).Kind == SPTokenKind.Name)
                     {
@@ -142,6 +162,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                 }
                 if (token[i].Kind == SPTokenKind.Semicolon)
                 {
+                    LookForSingleIndentationSegment = false;
                     outString.Append(";");
                     var nextToken = GetTokenSave(i + 1, token, length);
                     if (nextToken.Kind != SPTokenKind.Newline && nextToken.Kind != SPTokenKind.BracketClose && nextToken.Kind != SPTokenKind.SingleLineComment)
@@ -162,10 +183,12 @@ namespace Spedit.Utils.SPSyntaxTidy
                     }
                     if (token[i].Value == "(")
                     {
+                        ++SingleIndentationSegmentScope;
                         ++indentationLevel;
                     }
                     else if (token[i].Value == ")")
                     {
+                        --SingleIndentationSegmentScope;
                         --indentationLevel;
                     }
                 }
