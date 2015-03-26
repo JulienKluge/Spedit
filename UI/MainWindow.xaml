@@ -178,7 +178,7 @@
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,186,5,5" Content="Count" Width="150" Click="CountButtonClicked" />
             <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{StaticResource WhiteBrush}" />
             <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{StaticResource WhiteBrush}" />
-            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,190,160,5" Text="" Width="Auto" FontSize="14" Foreground="{StaticResource WhiteBrush}" />
+            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,190,160,5" Text="" Width="Auto" FontSize="14" Foreground="{StaticResource WhiteBrush}" IsHitTestVisible="False" />
         </Grid>
         <Rectangle x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource AccentColorBrush4}" />
     </Grid>

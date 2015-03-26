@@ -20,11 +20,11 @@
         <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="Black" />
         <TextBlock Name="ColorName" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" />
         <Rectangle Name="BrushRect" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Height="20" Width="150" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Text="R:" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Text="R:" IsHitTestVisible="False" />
         <Slider Name="RSlider" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="25,30,5,0" Minimum="0" Maximum="255" TickFrequency="8" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="SliderValue_Changed" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Text="G:" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Text="G:" IsHitTestVisible="False" />
         <Slider Name="GSlider" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="25,55,5,0" Minimum="0" Maximum="255" TickFrequency="8" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="SliderValue_Changed" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,0,0" Text="B:" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,0,0" Text="B:" IsHitTestVisible="False" />
         <Slider Name="BSlider" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="25,80,5,0" Minimum="0" Maximum="255" TickFrequency="8" TickPlacement="BottomRight" AutoToolTipPlacement="TopLeft" ValueChanged="SliderValue_Changed" />
     </Grid>
 </UserControl>

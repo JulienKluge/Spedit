@@ -17,7 +17,7 @@
     </controls:MetroWindow.Resources>
     <Grid>
         <ListBox Name="TemplateListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="250" Margin="0,0,0,50" SelectionChanged="TemplateListBox_SelectionChanged" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,10,0,0" Text="Preview:" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260,10,0,0" Text="Preview:" IsHitTestVisible="False" />
         <TextBox Name="PrevieBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="260,30,5,50" IsReadOnly="True" />
         <Button HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,5" Content=". . ." Width="30" Click="Button_Click" />
         <TextBox Name="PathBox" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="50,0,120,5" />

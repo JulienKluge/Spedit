@@ -38,15 +38,15 @@
             <controls:MetroTabItem Header="Editor">
                 <ScrollViewer>
                     <Grid>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Font Size:" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Font Size:" IsHitTestVisible="False" />
                         <Slider Name="FontSizeD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,0,0" Width="280" Minimum="5" Maximum="30" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="FontSize_Changed" />
 
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,5,0,0" Text="Scroll Speed:" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,5,0,0" Text="Scroll Speed:" IsHitTestVisible="False" />
                         <Slider Name="ScrollSpeed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,25,0,0" Width="280" Minimum="2" Maximum="100" AutoToolTipPlacement="TopLeft" TickFrequency="2" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="ScrollSpeed_Changed" />
                         <CheckBox Name="WordWrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Content="Word Wrap" Checked="WordWrap_Changed" Unchecked="WordWrap_Changed" />
                         <CheckBox Name="NativeScrolling" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,55,0,0" Content="Native Scrolling (ignores Scroll Speed)" Checked="NScrolling_Changed" Unchecked="NScrolling_Changed" />
                         <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
-                        <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" />
+                        <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
                         <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
                             <ComboBox.Resources>
                                 <CollectionViewSource x:Key="myFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
@@ -68,10 +68,10 @@
                                 <Binding Source="{StaticResource myFonts}" />
                             </ComboBox.ItemsSource>
                         </ComboBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,140,0,0" Text="Syntaxhighlighting:" />
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,140,0,0" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
 
                         <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,155,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
-                        
+
                         <components:ColorChangeControl x:Name="SH_Comments" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0" Height="105" Width="300" ColorChanged="Comments_Changed" />
                         <components:ColorChangeControl x:Name="SH_CommentMarkers" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,180,5,0" Height="105" Width="300" ColorChanged="CommentMarker_Changed" />
 
@@ -83,7 +83,7 @@
 
                         <components:ColorChangeControl x:Name="SH_Keywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,510,0,0" Height="105" Width="300" ColorChanged="Keywords_Changed" />
                         <components:ColorChangeControl x:Name="SH_ContextKeywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,510,5,0" Height="105" Width="300" ColorChanged="ContextKeywords_Changed" />
-                            
+
                         <components:ColorChangeControl x:Name="SH_Chars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,620,0,0" Height="105" Width="300" ColorChanged="Chars_Changed" />
                         <components:ColorChangeControl x:Name="SH_UnknownFunctions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,620,5,0" Height="105" Width="300" ColorChanged="UFunctions_Changed" />
 
@@ -94,8 +94,8 @@
                         <components:ColorChangeControl x:Name="SH_Constants" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,840,5,0" Height="105" Width="300" ColorChanged="Constants_Changed" />
 
                         <components:ColorChangeControl x:Name="SH_Functions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,950,0,0" Height="105" Width="300" ColorChanged="Functions_Changed" />
-                                <components:ColorChangeControl x:Name="SH_Methods" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,950,5,0" Height="105" Width="300" ColorChanged="Methods_Changed" />
-                            </Grid>
+                        <components:ColorChangeControl x:Name="SH_Methods" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,950,5,0" Height="105" Width="300" ColorChanged="Methods_Changed" />
+                    </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>
         </controls:MetroAnimatedSingleRowTabControl>
