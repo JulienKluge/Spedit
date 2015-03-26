@@ -105,19 +105,47 @@ namespace Lysis
         private string buildTag(PawnType type)
         {
             if (type.type == CellType.Bool)
-                return "bool:";
+                return "bool ";
             if (type.type == CellType.Float)
-                return "Float:";
+                return "float ";
             if (type.type == CellType.Tag)
                 return buildTag(type.tag);
+            return "";
+        }
+        private string buildConTag(PawnType type)
+        {
+            if (type.type == CellType.Bool)
+                return "view_as<bool>";
+            if (type.type == CellType.Float)
+                return "view_as<float>";
+            if (type.type == CellType.Tag)
+                return buildConTag(type.tag);
             return "";
         }
 
         private string buildTag(Tag tag)
         {
-            if (tag.name == "_" || tag.name == "any")
-                return "";
-            return tag.name + ":";
+            if (tag.name == "_")
+            {
+                return "int ";
+            }
+            if (tag.name == "Float")
+            {
+                return "float ";
+            }
+            if (tag.name == "String")
+            {
+                return "char "; //no array def. cause syntax is: char str[]
+            }
+            return tag.name + " ";
+        }
+        private string buildConTag(Tag tag)
+        {
+            if (tag.name == "_")
+            {
+                return "view_as<int>";
+            }
+            return "view_as<" + tag.name + ">";
         }
 
         private void writeSignature(NodeBlock entry)
@@ -155,7 +183,7 @@ namespace Lysis
             {
                 TypeUnit tu = node.typeSet[0];
                 if (tu.kind == TypeUnit.Kind.Cell && tu.type.type == CellType.Tag)
-                    prefix = tu.type.tag.name + ":";
+                    prefix = tu.type.tag.name + " ";
             }
             return prefix + node.value.ToString();
         }
@@ -473,12 +501,14 @@ namespace Lysis
 
             if (local.value == null)
             {
-                outputLine("decl " + decl + ";");
+                //outputLine("decl " + decl + ";");
+                outputLine(decl + ";");
                 return;
             }
 
             string expr = buildExpression(local.value);
-            outputLine("new " + decl + " = " + expr + ";");
+            //outputLine("new " + decl + " = " + expr + ";");
+            outputLine(decl + " = " + expr + ";");
         }
 
         private void writeStatic(DDeclareStatic decl)
@@ -522,9 +552,9 @@ namespace Lysis
         private void writeTempName(DTempName name)
         {
             if (name.getOperand(0) != null)
-                outputLine("new " + name.name + " = " + buildExpression(name.getOperand(0)) + ";");
+                outputLine("int " + name.name + " = " + buildExpression(name.getOperand(0)) + ";");
             else
-                outputLine("new " + name.name + ";");
+                outputLine("int " + name.name + ";");
         }
 
         private void writeStatement(DNode node)
@@ -926,7 +956,7 @@ namespace Lysis
         private void writeGlobal(Variable var)
         {
             string decl = var.scope == Scope.Global
-                                       ? "new"
+                                       ? "" //"new"
                                        : "static";
             if (var.tag.name == "Plugin")
             {
@@ -956,7 +986,7 @@ namespace Lysis
             {
                 if (var.dims.Length == 1)
                 {
-                    string text = decl + " String:" + var.name + "[" + var.dims[0].size + "]";
+                    string text = decl + " char " + var.name + "[" + var.dims[0].size + "]";
                     string primer = file_.stringFromData(var.address);
                     if (primer.Length > 0)
                         text += " = " + buildString(primer);
