@@ -3,7 +3,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             Width="1000" Height="600" ResizeMode="CanResize" WindowStartupLocation="CenterOwner" EnableDWMDropShadow="True" ShowTitleBar="False" Title="Parsed Sourcepawn Definion">
+             Width="1000" Height="600" ResizeMode="CanResize" WindowStartupLocation="CenterOwner" EnableDWMDropShadow="True" Title="Parsed Sourcepawn Definion">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,11 +16,28 @@
         </ResourceDictionary>
     </controls:MetroWindow.Resources>
     <Grid>
-        <TextBox Name="SPSearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" controls:TextBoxHelper.Watermark="Search" TextChanged="TextBox_TextChanged" />
-        <controls:MetroProgressBar Name="SPProgress" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="0,26,0,0" IsIndeterminate="False" IsHitTestVisible="False" Height="4" />
-        <ListBox Name="SPBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="0,30,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
-        <TextBlock Name="SPNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,15,0,0" FontSize="20" Foreground="{StaticResource AccentColorBrush}" IsHitTestVisible="False" />
-        <TextBlock Name="SPFullNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,45,0,0" FontSize="18" IsHitTestVisible="False" />
-        <TextBox Name="SPCommentBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="305,80,5,5" IsReadOnly="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" controls:TextBoxHelper.Watermark="Search" TextChanged="TextBox_TextChanged" />
+        <ListBox Name="SPFunctionsListBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="0,26,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
+        <TextBlock Name="SPFunctionNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,5,0,0" FontSize="20" Foreground="{StaticResource AccentColorBrush}" />
+        <TextBlock Name="SPFunctionFullNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,35,0,0" FontSize="18" />
+        <TextBox Name="SPFunctionCommentBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="305,70,5,5" IsReadOnly="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" />
+        <GridSplitter HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="5" Background="LightGray" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Constants / Dynamic Variables / Enum Values" />
+            <ListBox Grid.Column="0" Name="ConstantsList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0" />
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Types" />
+            <ListBox Grid.Column="1" Name="TypesList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0" />
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Methods" />
+            <ListBox Grid.Column="2" Name="MethodsList" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0" />
+        </Grid>
     </Grid>
 </controls:MetroWindow>
