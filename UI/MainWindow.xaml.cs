@@ -26,6 +26,9 @@ namespace Spedit.UI
         Storyboard BlendOverEffect;
         Storyboard FadeFindReplaceGridIn;
         Storyboard FadeFindReplaceGridOut;
+        Storyboard EnableServerAnim;
+        Storyboard DisableServerAnim;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -45,6 +48,8 @@ namespace Spedit.UI
             BlendOverEffect = (Storyboard)this.Resources["BlendOverEffect"];
             FadeFindReplaceGridIn = (Storyboard)this.Resources["FadeFindReplaceGridIn"];
             FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
+            EnableServerAnim = (Storyboard)this.Resources["EnableServerAnim"];
+            DisableServerAnim = (Storyboard)this.Resources["DisableServerAnim"];
             UpdateCheckItem.IsEnabled = !Program.OptionsObject.Program_CheckForUpdates; //they dont have to search it manually when it is already done..
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);

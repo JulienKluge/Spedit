@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 
 namespace Spedit.UI
@@ -277,8 +278,13 @@ namespace Spedit.UI
             }
         }
 
-        public async void Server_Start()
+        public bool ServerIsRunning = false;
+        public Process ServerProcess;
+
+        public void Server_Start()
         {
+            if (ServerIsRunning)
+            { return; }
             var c = Program.Configs[Program.SelectedConfig];
             string serverOptionsPath = c.ServerFile;
             if (string.IsNullOrWhiteSpace(serverOptionsPath))
@@ -290,17 +296,49 @@ namespace Spedit.UI
             {
                 return;
             }
-            using (Process process = new Process())
+            try
             {
-                var progressTask = await this.ShowProgressAsync("Running local server", "Waiting for server to terminating.", false, this.MetroDialogOptions);
-                process.StartInfo.UseShellExecute = true;
-                process.StartInfo.FileName = serverExec.FullName;
-                process.StartInfo.WorkingDirectory = serverExec.DirectoryName;
-                process.StartInfo.Arguments = c.ServerArgs;
-                process.Start();
-                process.WaitForExit();
-                await progressTask.CloseAsync();
+                ServerProcess = new Process();
+                ServerProcess.StartInfo.UseShellExecute = true;
+                ServerProcess.StartInfo.FileName = serverExec.FullName;
+                ServerProcess.StartInfo.WorkingDirectory = serverExec.DirectoryName;
+                ServerProcess.StartInfo.Arguments = c.ServerArgs;
+                Thread t = new Thread(new ThreadStart(ProcessCheckWorker));
+                t.Start();
             }
+            catch (Exception)
+            {
+                if (ServerProcess != null)
+                {
+                    ServerProcess.Dispose();
+                }
+                return;
+            }
+
+        }
+
+        private void ProcessCheckWorker()
+        {
+            try
+            {
+                ServerProcess.Start();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            ServerIsRunning = true;
+            Program.MainWindow.Dispatcher.Invoke(() =>
+            {
+                EnableServerAnim.Begin();
+            });
+            ServerProcess.WaitForExit();
+            ServerProcess.Dispose();
+            Program.MainWindow.Dispatcher.Invoke(() =>
+            {
+                DisableServerAnim.Begin();
+            });
+            ServerIsRunning = false;
         }
 
 
