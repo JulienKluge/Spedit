@@ -1,15 +1,22 @@
-﻿using MahApps.Metro.Controls;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.Interop;
 using Spedit.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml;
+using Microsoft.CSharp;
+using Microsoft.Win32;
 
 namespace Spedit.UI.Windows
 {
@@ -202,6 +209,112 @@ namespace Spedit.UI.Windows
                 writer.Flush();
             }
             File.WriteAllText("sourcepawn\\configs\\Configs.xml", outString.ToString());
+        }
+
+        private ICommand textBoxButtonFolderCmd;
+
+        public ICommand TextBoxButtonFolderCmd
+        {
+            set { }
+            get
+            {
+                if (this.textBoxButtonFolderCmd == null)
+                {
+                    var cmd = new SimpleCommand();
+                    cmd.CanExecutePredicate = o =>
+                    {
+                        return true;
+                    };
+                    cmd.ExecuteAction = o =>
+                    {
+                        if (o is TextBox)
+                        {
+                            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                            var result = dialog.ShowDialog();
+                            if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                                ((TextBox)o).Text = dialog.SelectedPath;
+                            }
+                        }
+                    };
+                    this.textBoxButtonFolderCmd = cmd;
+                    return cmd;
+                }
+                else
+                {
+                    return textBoxButtonFolderCmd;
+                }
+            }
+        }
+
+        private ICommand textBoxButtonFileCmd;
+
+        public ICommand TextBoxButtonFileCmd
+        {
+            set { }
+            get
+            {
+                if (this.textBoxButtonFileCmd == null)
+                {
+                    var cmd = new SimpleCommand();
+                    cmd.CanExecutePredicate = o =>
+                    {
+                        return true;
+                    };
+                    cmd.ExecuteAction = o =>
+                    {
+                        if (o is TextBox)
+                        {
+                            var dialog = new OpenFileDialog();
+                            dialog.Filter = "Executables *.exe|*.exe|All Files *.*|*.*";
+                            dialog.Multiselect = false;
+                            dialog.CheckFileExists = true; dialog.CheckPathExists = true;
+                            dialog.Title = "Select Executable";
+                            var result = dialog.ShowDialog();
+                            if (result.Value)
+                            {
+                                FileInfo fInfo = new FileInfo(dialog.FileName);
+                                if (fInfo.Exists)
+                                {
+                                    ((TextBox)o).Text = fInfo.FullName;
+                                }
+                            }
+                        }
+                    };
+                    this.textBoxButtonFileCmd = cmd;
+                    return cmd;
+                }
+                else
+                {
+                    return textBoxButtonFileCmd;
+                }
+            }
+        }
+
+
+        private class SimpleCommand : ICommand
+        {
+            public Predicate<object> CanExecutePredicate { get; set; }
+            public Action<object> ExecuteAction { get; set; }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged
+            {
+                add { CommandManager.RequerySuggested += value; }
+                remove { CommandManager.RequerySuggested -= value; }
+            }
+
+            public void Execute(object parameter)
+            {
+                if (ExecuteAction != null)
+                {
+                    ExecuteAction(parameter);
+                }
+            }
         }
 
     }

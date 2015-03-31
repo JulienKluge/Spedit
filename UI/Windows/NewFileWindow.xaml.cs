@@ -1,9 +1,11 @@
 ﻿using MahApps.Metro.Controls;
 using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Xml;
 
 namespace Spedit.UI.Windows
@@ -67,26 +69,77 @@ namespace Spedit.UI.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog() { AddExtension = true, Filter = @"Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*", OverwritePrompt = true, Title = "New File" };
-            var result = sfd.ShowDialog(this);
-            if (result.Value)
-            {
-                if (!string.IsNullOrWhiteSpace(sfd.FileName))
-                {
-                    FileInfo fileInfo = new FileInfo(sfd.FileName);
-                    PathStr = fileInfo.DirectoryName;
-                    PathBox.Text = fileInfo.FullName;
-                }
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
             FileInfo destFile = new FileInfo(PathBox.Text);
             TemplateInfo templateInfo = TemplateDictionary[(string)TemplateListBox.SelectedItem];
             File.Copy(templateInfo.Path, destFile.FullName, true);
             Program.MainWindow.TryLoadSourceFile(destFile.FullName);
             this.Close();
+        }
+
+
+        private ICommand textBoxButtonFileCmd;
+
+        public ICommand TextBoxButtonFileCmd
+        {
+            set { }
+            get
+            {
+                if (this.textBoxButtonFileCmd == null)
+                {
+                    var cmd = new SimpleCommand();
+                    cmd.CanExecutePredicate = o =>
+                    {
+                        return true;
+                    };
+                    cmd.ExecuteAction = o =>
+                    {
+                        if (o is TextBox)
+                        {
+                            var dialog = new SaveFileDialog();
+                            dialog.AddExtension = true;
+                            dialog.Filter = "Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*";
+                            dialog.OverwritePrompt = true;
+                            dialog.Title = "New File";
+                            var result = dialog.ShowDialog();
+                            if (result.Value)
+                            {
+                                ((TextBox)o).Text = dialog.FileName;
+                            }
+                        }
+                    };
+                    this.textBoxButtonFileCmd = cmd;
+                    return cmd;
+                }
+                else
+                {
+                    return textBoxButtonFileCmd;
+                }
+            }
+        }
+
+        private class SimpleCommand : ICommand
+        {
+            public Predicate<object> CanExecutePredicate { get; set; }
+            public Action<object> ExecuteAction { get; set; }
+
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged
+            {
+                add { CommandManager.RequerySuggested += value; }
+                remove { CommandManager.RequerySuggested -= value; }
+            }
+
+            public void Execute(object parameter)
+            {
+                if (ExecuteAction != null)
+                {
+                    ExecuteAction(parameter);
+                }
+            }
         }
     }
 
