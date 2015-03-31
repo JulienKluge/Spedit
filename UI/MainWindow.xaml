@@ -16,14 +16,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <!--<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.Metro;component/Theme.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="BlendOverEffect" Duration="00:00:00.5" Storyboard.TargetName="BlendEffectPlane" Storyboard.TargetProperty="Opacity">
                         <DoubleAnimationUsingKeyFrames>
-                                <SplineDoubleKeyFrame Value="0.0" KeyTime="00:00:00.00" />
-                                <SplineDoubleKeyFrame Value="0.5" KeyTime="00:00:00.25" />
-                                <SplineDoubleKeyFrame Value="0.0" KeyTime="00:00:00.50" />
+                            <SplineDoubleKeyFrame Value="0.0" KeyTime="00:00:00.00" />
+                            <SplineDoubleKeyFrame Value="0.5" KeyTime="00:00:00.25" />
+                            <SplineDoubleKeyFrame Value="0.0" KeyTime="00:00:00.50" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                     <Storyboard x:Key="FadeFindReplaceGridIn" Duration="00:00:00.2" Storyboard.TargetName="FindReplaceGrid" Completed="FadeInCompleted_FindReplace">
@@ -191,21 +191,38 @@
                 </dock:LayoutRoot>
             </dock:DockingManager>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" Background="{StaticResource GrayBrush5}" />
-            <TextBox Name="CompileOutput" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap"
-                     Margin="0,5,0,0" Height="Auto" IsReadOnly="True" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" Width="350" />
-            <DataGrid Name="ErrorResultGrid" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,5,350,0" IsReadOnly="True"
-                      SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="ErrorResultGrid_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="File Name" Width="7*" Binding="{Binding file}" />
-                    <DataGridTextColumn Header="Line" Width="1*" Binding="{Binding line}" />
-                    <DataGridTextColumn Header="Type" Width="2*" Binding="{Binding type}" />
-                    <DataGridTextColumn Header="Details" Width="9*" Binding="{Binding details}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,0,0" Style="{StaticResource MetroFlatButton}" Click="CloseErrorResultGrid">
+                <Canvas Width="10" Height="10" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                    <Path Width="10" Height="10" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>
+                </Canvas>
+            </Button>
+            <Grid Grid.Row="1" Margin="0,5,30,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Name="CompileOutput" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" TextWrapping="Wrap"
+                         Margin="5,0,0,0" IsReadOnly="True" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" />
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="5" Background="LightGray" />
+                <DataGrid Name="ErrorResultGrid" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsReadOnly="True"
+                          SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="ErrorResultGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="File Name" Width="7*" Binding="{Binding file}" />
+                        <DataGridTextColumn Header="Line" Width="1*" Binding="{Binding line}" />
+                        <DataGridTextColumn Header="Type" Width="2*" Binding="{Binding type}" />
+                        <DataGridTextColumn Header="Details" Width="9*" Binding="{Binding details}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
-        <Grid Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="215" Width="500" IsHitTestVisible="False" Opacity="0">
+        <Grid Grid.Row="1" Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="225" Width="500" IsHitTestVisible="False" Opacity="0">
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{StaticResource BlackBrush}" Fill="{StaticResource AccentColorBrush2}" />
-            <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,5,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
+            <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,40,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
+            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,5,0" Style="{StaticResource MetroFlatButton}" Click="CloseFindReplaceGrid" IsTabStop="False" Background="#11FFFFFF">
+                <Canvas Width="10" Height="10" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                    <Path Width="10" Height="10" Stretch="Fill" Fill="{DynamicResource WhiteBrush}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>
+                </Canvas>
+            </Button>
             <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" Height="45" controls:TextBoxHelper.Watermark="Replace" VerticalScrollBarVisibility="Visible" KeyDown="ReplaceBoxKeyUp" />
             <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{StaticResource WhiteBrush}" Click="SearchButtonClicked" />
             <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{StaticResource WhiteBrush}" />
@@ -217,14 +234,13 @@
                     <ComboBoxItem Content="All Open Documents" />
                 </ComboBox.Items>
             </ComboBox>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,105,5,5" Content="Find (F3)" Width="150" Click="SearchButtonClicked" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,132.5,5,5" Content="Replace" Width="150" Click="ReplaceButtonClicked" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,159,5,5" Content="Replace All" Width="150" Click="ReplaceAllButtonClicked" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,186,5,5" Content="Count" Width="150" Click="CountButtonClicked" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{StaticResource MetroFlatButton}"  />
+            <controls:SplitButton Name="ReplaceButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,137,5,0" Width="150" Click="ReplaceButtonClicked" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{StaticResource MetroFlatButton}"  />
             <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{StaticResource WhiteBrush}" />
             <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{StaticResource WhiteBrush}" />
-            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,190,160,5" Text="" Width="Auto" FontSize="14" Foreground="{StaticResource WhiteBrush}" IsHitTestVisible="False" />
+            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,190,5,5" Text="" Width="Auto" FontSize="14" Foreground="{StaticResource WhiteBrush}" IsHitTestVisible="False" />
         </Grid>
-        <Rectangle x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource AccentColorBrush4}" />
+        <Rectangle Grid.Row="1" x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource AccentColorBrush4}" />
     </Grid>
 </controls:MetroWindow>

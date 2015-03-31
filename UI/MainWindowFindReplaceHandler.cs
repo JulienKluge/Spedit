@@ -57,17 +57,24 @@ namespace Spedit.UI
             FindBox.Focus();
         }
 
+        private void CloseFindReplaceGrid(object sender, RoutedEventArgs e)
+        {
+            ToggleSearchField();
+        }
         private void SearchButtonClicked(object sender, RoutedEventArgs e)
         {
             Search();
         }
         private void ReplaceButtonClicked(object sender, RoutedEventArgs e)
         {
-            Replace();
-        }
-        private void ReplaceAllButtonClicked(object sender, RoutedEventArgs e)
-        {
-            ReplaceAll();
+            if (ReplaceButton.SelectedIndex == 1)
+            {
+                ReplaceAll();
+            }
+            else
+            {
+                Replace();
+            }
         }
         private void CountButtonClicked(object sender, RoutedEventArgs e)
         {
