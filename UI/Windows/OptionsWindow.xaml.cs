@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.UI.Components;
+using Spedit.UI;
 using System.Windows;
 using System.Windows.Media;
 
@@ -20,11 +21,16 @@ namespace Spedit.UI.Windows
             AllowChanging = true;
         }
 
-        private void RestoreButton_Clicked(object sender, RoutedEventArgs e)
+        private async void RestoreButton_Clicked(object sender, RoutedEventArgs e)
         {
-            Program.OptionsObject = new OptionsControl();
-            Program.MainWindow.ShowMessageAsync("Restart Editor", "You have to restart the editor for the changes to have effect.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
-            this.Close();
+            var result = await this.ShowMessageAsync("Reset options", "Are you sure, you want to reset the options?", MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Affirmative)
+            {
+                Program.OptionsObject = new OptionsControl();
+                Program.MainWindow.OptionMenuEntry.IsEnabled = false;
+                await this.ShowMessageAsync("Restart Editor", "You have to restart the editor for the changes to have effect.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                this.Close();
+            }
         }
 
         private void HardwareAcc_Changed(object sender, RoutedEventArgs e)
@@ -57,6 +63,20 @@ namespace Spedit.UI.Windows
         {
             if (!AllowChanging) { return; }
             Program.OptionsObject.Program_CheckForUpdates = AutoUpdate.IsChecked.Value;
+        }
+
+        private void ShowToolbar_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            Program.OptionsObject.UI_ShowToolBar = ShowToolBar.IsChecked.Value;
+            if (Program.OptionsObject.UI_ShowToolBar)
+            {
+                Program.MainWindow.Win_ToolBar.Height = double.NaN;
+            }
+            else
+            {
+                Program.MainWindow.Win_ToolBar.Height = 0.0;
+            }
         }
 
         private void FontSize_Changed(object sender, RoutedEventArgs e)
@@ -143,6 +163,7 @@ namespace Spedit.UI.Windows
             {
                 OpenIncludesRecursive.IsEnabled = false;
             }
+            ShowToolBar.IsChecked = Program.OptionsObject.UI_ShowToolBar;
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollSpeed * 1000.0;

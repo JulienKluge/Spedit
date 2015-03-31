@@ -213,5 +213,35 @@ namespace Spedit.UI
             Program.GlobalUpdater = u;
             Program.GlobalUpdater.CheckForUpdatesAsynchronously();
         }
+
+        private void MenuButton_Compile(object sender, RoutedEventArgs e)
+        {
+            int selected = CompileButton.SelectedIndex;
+            if (selected == 1)
+            {
+                Compile_SPScripts(false);
+            }
+            else
+            {
+                Compile_SPScripts(true);
+            }
+        }
+
+        private void MenuButton_Action(object sender, RoutedEventArgs e)
+        {
+            int selected = CActionButton.SelectedIndex;
+            if (selected == 0)
+            {
+                Copy_Plugins(false);
+            }
+            else if (selected == 1)
+            {
+                FTPUpload_Plugins();
+            }
+            else if (selected == 2)
+            {
+                Server_Start();
+            }
+        }
     }
 }

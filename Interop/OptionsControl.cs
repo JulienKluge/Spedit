@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 1;
-        public int Version = 1;
+        public static int SVersion = 2;
+        public int Version = 2;
 
         public byte[] Program_CryptoKey = null;
 
@@ -24,6 +24,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Program_OpenIncludesRecursively = false;
 
         public bool UI_Animations = true;
+        public bool UI_ShowToolBar = true;
 
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
@@ -67,6 +68,12 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                     case 0:
                         {
                             this.Editor_NativeScrolling = false;
+                            this.UI_ShowToolBar = true;
+                            break;
+                        }
+                    case 1:
+                        {
+                            this.UI_ShowToolBar = true;
                             break;
                         }
                 }

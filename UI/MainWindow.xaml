@@ -43,21 +43,9 @@
                     <MenuItem Header="New" Click="Menu_New" InputGestureText="Ctrl+N" />
                     <MenuItem Header="Open" Click="Menu_Open" InputGestureText="Ctrl+O" />
                     <Separator />
-                    <MenuItem Header="Save" Click="Menu_Save" InputGestureText="Ctrl+S">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_Save.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Save All" Click="Menu_SaveAll" InputGestureText="Ctrl+Shift+S">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_SaveAll.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Save As" Click="Menu_SaveAs" InputGestureText="Ctrl+Alt+S">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_SaveAs.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <MenuItem Header="Save" Click="Menu_Save" InputGestureText="Ctrl+S" />
+                    <MenuItem Header="Save All" Click="Menu_SaveAll" InputGestureText="Ctrl+Shift+S" />
+                    <MenuItem Header="Save As" Click="Menu_SaveAs" InputGestureText="Ctrl+Alt+S" />
                     <Separator />
                     <MenuItem Header="Close" Click="Menu_Close" InputGestureText="Ctrl+W" />
                     <MenuItem Header="Close All" Click="Menu_CloseAll" InputGestureText="Ctrl+Shift+W" />
@@ -67,21 +55,9 @@
                     <MenuItem Header="Undo" Click="Menu_Undo" InputGestureText="Ctrl+Z" />
                     <MenuItem Header="Redo" Click="Menu_Redo" InputGestureText="Ctrl+Y" />
                     <Separator />
-                    <MenuItem Header="Cut" Click="Menu_Cut" InputGestureText="Ctrl+X">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_Cut.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Copy" Click="Menu_Copy" InputGestureText="Ctrl+C">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_Copy.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Paste" Click="Menu_Paste" InputGestureText="Ctrl+V">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_Paste.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <MenuItem Header="Cut" Click="Menu_Cut" InputGestureText="Ctrl+X" />
+                    <MenuItem Header="Copy" Click="Menu_Copy" InputGestureText="Ctrl+C" />
+                    <MenuItem Header="Paste" Click="Menu_Paste" InputGestureText="Ctrl+V" />
                     <Separator />
                     <MenuItem Header="Foldings">
                         <MenuItem Header="Expand All" InputGestureText="Ctrl+P" Click="Menu_ExpandAll" />
@@ -91,7 +67,7 @@
                     <Separator />
                     <MenuItem Header="Find &amp; Replace" Click="Menu_FindAndReplace" InputGestureText="Ctrl+F" />
                 </MenuItem>
-                
+
                 <MenuItem Header="Build">
                     <MenuItem Header="Compile All" Click="Menu_CompileAll" InputGestureText="F5" />
                     <MenuItem Header="Compile Current" Click="Menu_Compile" InputGestureText="F6" />
@@ -106,11 +82,7 @@
                 </MenuItem>
 
                 <MenuItem Header="Tools">
-                    <MenuItem Header="Options" Click="Menu_OpenOptions">
-                        <MenuItem.Icon>
-                            <Image Source="/Spedit;component/Res/Icons/Icon_Settings.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <MenuItem Name="OptionMenuEntry" Header="Options" Click="Menu_OpenOptions" />
                     <Separator />
                     <MenuItem Header="Sourcepawn API">
                         <MenuItem Header="Parsed from Include Directory" Click="Menu_OpenSPDef" />
@@ -131,7 +103,80 @@
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
     <Grid>
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ToolBarTray Name="Win_ToolBar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="0">
+                <ToolBar>
+                    <Button ToolTip="New" Height="26" Width="26" Click="Menu_New">
+                        <Canvas Width="14" Height="16" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="16" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 43,30L 50.75,30L 43,22.25L 43,30 Z M 52,34L 39,34L 39,21L 24,21L 24,45L 20,45L 20,17L 43.25,17L 56,29.75L 56,59L 34,59L 34,55L 52,55L 52,34 Z M 28,38L 33,38L 33,46L 41,46L 41,51L 33,51L 33,59L 28,59L 28,51L 20,51L 20,46L 28,46L 28,38 Z M 20,59L 20,52L 24,52L 24,55L 27,55L 27,59L 20,59 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Open" Height="26" Width="26" Click="Menu_Open">
+                        <Canvas Width="14" Height="16" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="16" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 20,17L 44,17L 56,29L 56,59L 20,59L 20,17 Z M 24,21L 24,55L 52,55L 52,34L 39,34L 39,21L 24,21 Z M 43,21L 43,30L 52,30L 43,21 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Save" Height="26" Width="26" Click="Menu_Save">
+                        <Canvas Width="14" Height="16" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="16" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 20,20L 50.25,20L 56,25.75L 56,56L 20,56L 20,20 Z M 52,27.25L 48.75,24L 48,24L 48,37L 28,37L 28,24L 24,24L 24,52L 52,52L 52,27.25 Z M 39,24L 39,34L 44,34L 44,24L 39,24 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Save All" Height="26" Width="26" Click="Menu_SaveAll">
+                        <Canvas Width="14" Height="16" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="16" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 48,39L 56,39L 56,49L 63.25,49L 52,60.25L 40.75,49L 48,49L 48,39 Z M 20,20L 50.25,20L 56,25.75L 56,38L 52,38L 52,27.25L 48.75,24L 48,24L 48,37L 28,37L 28,24L 24,24L 24,52L 42.25,52L 46.25,56L 20,56L 20,20 Z M 39,24L 39,34L 44,34L 44,24L 39,24 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Close" Height="26" Width="26" Click="Menu_Close">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Close All" Height="26" Width="26" Click="Menu_CloseAll">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 31.6667,19L 44.3333,19L 57,31.6667L 57,44.3333L 44.3333,57L 31.6667,57L 19,44.3333L 19,31.6667L 31.6667,19 Z M 26.4762,45.0454L 30.9546,49.5238L 38,42.4783L 45.0454,49.5238L 49.5237,45.0454L 42.4783,38L 49.5238,30.9546L 45.0454,26.4763L 38,33.5217L 30.9546,26.4762L 26.4762,30.9546L 33.5217,38L 26.4762,45.0454 Z "/>
+                        </Canvas>
+                    </Button>
+                </ToolBar>
+                <ToolBar>
+                    <Button ToolTip="Undo" Height="26" Width="26" Click="Menu_Undo">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 35.8724,37.6042L 39.0391,40.7708L 50.5182,51.8542L 40.2266,51.8542L 25.1849,37.6041L 40.2266,23.3542L 50.5182,23.3542L 39.0391,34.4375L 35.8724,37.6042 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Redo" Height="26" Width="26" Click="Menu_Redo">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 39.8307,37.6042L 36.6641,34.4375L 25.1849,23.3542L 35.4766,23.3542L 50.5182,37.6042L 35.4766,51.8542L 25.1849,51.8542L 36.6641,40.7708L 39.8307,37.6042 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Separator />
+                    <Button ToolTip="Cut" Height="26" Width="26" Click="Menu_Cut">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 19,19L 27,19L 27,24L 19,24L 19,19 Z M 30,19L 38,19L 38,24L 30,24L 30,19 Z M 41,19L 49,19L 49,24L 41,24L 41,19 Z M 52,19L 57,19L 57,27L 52,27L 52,19 Z M 52,30L 57,30L 57,38L 52,38L 52,30 Z M 52,41L 57,41L 57,49L 52,49L 52,41 Z M 27,52L 35,52L 35,57L 27,57L 27,52 Z M 38,52L 46,52L 46,57L 38,57L 38,52 Z M 49,52L 57,52L 57,57L 49,57L 49,52 Z M 19,27L 24,27L 24,35L 19,35L 19,27 Z M 19,38L 24,38L 24,46L 19,46L 19,38 Z M 19,49L 24,49L 24,57L 19,57L 19,49 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Copy" Height="26" Width="26" Click="Menu_Copy">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 19,51L 19,19L 51,19L 51,29L 29,29L 29,51L 19,51 Z M 30,30L 59,30L 59,59L 30,59L 30,30 Z M 33,33L 33,56L 56,56L 56,33L 33,33 Z "/>
+                        </Canvas>
+                    </Button>
+                    <Button ToolTip="Paste" Height="26" Width="26" Click="Menu_Paste">
+                        <Canvas Width="14" Height="14" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
+                            <Path Width="14" Height="14" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 19,50.6667L 19,19L 50.6667,19L 50.6668,28.5003L 28.5,28.5002L 28.5,50.6667L 19,50.6667 Z M 58.5835,58.5836L 53.0415,58.5833L 58.5833,53.0416L 58.5835,58.5836 Z M 58.5833,45.1249L 58.5833,51.4585L 51.4584,58.5833L 45.1249,58.5833L 58.5833,45.1249 Z M 58.5833,35.6251L 35.6251,58.5834L 30.0833,58.5834L 30.0833,57.7918L 57.7918,30.0834L 58.5835,30.0836L 58.5833,35.6251 Z M 58.5833,43.5418L 43.5418,58.5833L 37.2082,58.5833L 58.5833,37.2082L 58.5833,43.5418 Z M 56.2084,30.0833L 30.0833,56.2085L 30.0833,49.8749L 49.8749,30.0834L 56.2084,30.0833 Z M 48.2918,30.0834L 30.0833,48.2918L 30.0833,41.9582L 41.9582,30.0834L 48.2918,30.0834 Z M 40.3751,30.0833L 30.0833,40.3751L 30.0833,34.0416L 34.0415,30.0833L 40.3751,30.0833 Z "/>
+                        </Canvas>
+                    </Button>
+                </ToolBar>
+                <ToolBar>
+                    <controls:SplitButton Name="CompileButton" Width="125" Margin="0,0,5,0" Click="MenuButton_Compile" />
+                    <controls:SplitButton Name="CActionButton" Width="100" Click="MenuButton_Action" />
+                </ToolBar>
+            </ToolBarTray>
+        </Grid>
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />

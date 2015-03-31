@@ -3,6 +3,7 @@ using MahApps.Metro.Controls;
 using Spedit.UI.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -33,6 +34,13 @@ namespace Spedit.UI
         {
             InitializeComponent();
             FillConfigMenu();
+            CompileButton.ItemsSource = compileButtonDict;
+            CActionButton.ItemsSource = actionButtonDict;
+            ReplaceButton.ItemsSource = findReplaceButtonDict;
+            if (Program.OptionsObject.UI_ShowToolBar)
+            {
+                Win_ToolBar.Height = double.NaN;
+            }
             this.MetroDialogOptions.AnimateHide = this.MetroDialogOptions.AnimateShow = false;
             BlendOverEffect = (Storyboard)this.Resources["BlendOverEffect"];
             FadeFindReplaceGridIn = (Storyboard)this.Resources["FadeFindReplaceGridIn"];
@@ -238,6 +246,11 @@ namespace Spedit.UI
             }
         }
 
+        private void CloseErrorResultGrid(object sender, RoutedEventArgs e)
+        {
+            CompileOutputRow.Height = new GridLength(8.0);
+        }
+
         private int GetLineInteger(string lineStr)
         {
             int end = 0;
@@ -259,5 +272,9 @@ namespace Spedit.UI
             }
             return -1;
         }
+
+        private ObservableCollection<string> compileButtonDict = new ObservableCollection<string>() { "Compile All", "Compile Current" };
+        private ObservableCollection<string> actionButtonDict = new ObservableCollection<string>() { "Copy", "FTP Upload", "Start Server" };
+        private ObservableCollection<string> findReplaceButtonDict = new ObservableCollection<string>() { "Replace", "Replace All" };
     }
 }
