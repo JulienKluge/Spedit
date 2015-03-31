@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spedit", "Spedit.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LysisForSpedit", "Lysis\LysisForSpedit.csproj", "{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeditUpdater", "Deploy\SpeditUpdater\SpeditUpdater.csproj", "{402651FB-269B-4858-8D2A-6DF7E0B9A36E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8D94E5A-0CDC-4F01-8801-5770B3CA2B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402651FB-269B-4858-8D2A-6DF7E0B9A36E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402651FB-269B-4858-8D2A-6DF7E0B9A36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402651FB-269B-4858-8D2A-6DF7E0B9A36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402651FB-269B-4858-8D2A-6DF7E0B9A36E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
