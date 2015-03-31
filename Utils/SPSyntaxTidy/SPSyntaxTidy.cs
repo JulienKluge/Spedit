@@ -114,7 +114,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                         }
                         if (lastTokenIsName)
                         {
-                            lastTokenValid = lastToken.Value != "e";
+                            lastTokenValid = lastToken.Value != "e" && lastToken.Value != "return";
                         }
                         bool nextTokenValid = ((nextToken.Kind == SPTokenKind.Name) || IsTokenNumber(nextToken));
                         if (!nextTokenValid)
@@ -139,6 +139,11 @@ namespace Spedit.Utils.SPSyntaxTidy
                 }
                 if (token[i].Kind == SPTokenKind.Name)
                 {
+                    if (token[i].Value == "return")
+                    {
+                        outString.Append("return ");
+                        continue;
+                    }
                     if (token[i].Value == "if" || token[i].Value == "else" || token[i].Value == "for" || token[i].Value == "while")
                     {
                         LookForSingleIndentationSegment = true;
