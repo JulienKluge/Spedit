@@ -95,23 +95,6 @@ namespace Spedit.UI.Components
             LastShowedLine = currentLineIndex;
             int quotationCount = 0;
             bool MethodAC = false;
-            MatchCollection mc = multilineCommentRegex.Matches(editor.Text, 0); //it hurts me to do it here..but i have no other choice...
-            int mlcCount = mc.Count;
-            for (int i = 0; i < mlcCount; ++i)
-            {
-                if (caretOffset >= mc[i].Index)
-                {
-                    if (caretOffset <= (mc[i].Index + mc[i].Length))
-                    {
-                        HideISAC();
-                        return;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
             for (int i = 0; i < lineOffset; ++i)
             {
                 if (text[i] == '"')
@@ -137,6 +120,35 @@ namespace Spedit.UI.Components
                             }
                         }
                     }
+                }
+            }
+            for (int i = 0; i < text.Length; ++i)
+            {
+                if (text[i] == '#')
+                {
+                    HideISAC();
+                    return;
+                }
+                if (!char.IsWhiteSpace(text[i]))
+                {
+                    break;
+                }
+            }
+            MatchCollection mc = multilineCommentRegex.Matches(editor.Text, 0); //it hurts me to do it here..but i have no other choice...
+            int mlcCount = mc.Count;
+            for (int i = 0; i < mlcCount; ++i)
+            {
+                if (caretOffset >= mc[i].Index)
+                {
+                    if (caretOffset <= (mc[i].Index + mc[i].Length))
+                    {
+                        HideISAC();
+                        return;
+                    }
+                }
+                else
+                {
+                    break;
                 }
             }
             if (lineOffset > 0)
