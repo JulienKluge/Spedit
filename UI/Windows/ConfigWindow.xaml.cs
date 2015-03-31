@@ -25,6 +25,9 @@ namespace Spedit.UI.Windows
     /// </summary>
     public partial class ConfigWindow : MetroWindow
     {
+        private bool NeedsSMDefInvalidation = false;
+        private bool AllowChange = false;
+
         public ConfigWindow()
         {
             InitializeComponent();
@@ -46,6 +49,7 @@ namespace Spedit.UI.Windows
             {
                 return;
             }
+            AllowChange = true;
             Config c = Program.Configs[index];
             C_Name.Text = c.Name;
             C_SMDir.Text = c.SMDirectory;
@@ -62,6 +66,7 @@ namespace Spedit.UI.Windows
             C_FTPUser.Text = c.FTPUser;
             C_FTPPW.Password = c.FTPPassword;
             C_FTPDir.Text = c.FTPDir;
+            AllowChange = false;
         }
 
         private void NewButton_Clicked(object sender, RoutedEventArgs e)
@@ -103,6 +108,10 @@ namespace Spedit.UI.Windows
         private void C_SMDir_TextChanged(object sender, TextChangedEventArgs e)
         {
             Program.Configs[ConfigListBox.SelectedIndex].SMDirectory = C_SMDir.Text;
+            if (!AllowChange)
+            {
+                NeedsSMDefInvalidation = true;
+            }
         }
 
         private void C_CopyDir_TextChanged(object sender, TextChangedEventArgs e)
@@ -172,9 +181,12 @@ namespace Spedit.UI.Windows
 
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
-            for (int i = 0; i < Program.Configs.Length; ++i)
+            if (NeedsSMDefInvalidation)
             {
-                Program.Configs[i].InvalidateSMDef();
+                for (int i = 0; i < Program.Configs.Length; ++i)
+                {
+                    Program.Configs[i].InvalidateSMDef();
+                }
             }
             Program.MainWindow.FillConfigMenu();
             Program.MainWindow.ChangeConfig(Program.SelectedConfig);
