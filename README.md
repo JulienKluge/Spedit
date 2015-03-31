@@ -3,6 +3,7 @@
 
 [Thread in Alliedmodders](https://forums.alliedmods.net/showthread.php?t=259917)
 
+
 ##### List Of Features:
 * Compiling-Config System (fully customizeable)
 * Syntaxhighlighting (parsed from the include directory / fully customizeable)
@@ -24,7 +25,4 @@
 * Lysis Decompiler (Improved Version)
 * smx Dissassembler (Fixed)
 
-Few impressions:
 ![Screen of SPEdit](http://www.imageupload.co.uk/images/2015/03/15/SPEdit_Demo2.png)
-
-![SPEdit's dissassembler/decompiler](https://www.imageupload.co.uk/images/2015/03/26/SpeditLysis1.png)
