@@ -280,6 +280,7 @@ namespace Spedit.UI
 
         public bool ServerIsRunning = false;
         public Process ServerProcess;
+        public Thread ServerCheckThread;
 
         public void Server_Start()
         {
@@ -303,8 +304,8 @@ namespace Spedit.UI
                 ServerProcess.StartInfo.FileName = serverExec.FullName;
                 ServerProcess.StartInfo.WorkingDirectory = serverExec.DirectoryName;
                 ServerProcess.StartInfo.Arguments = c.ServerArgs;
-                Thread t = new Thread(new ThreadStart(ProcessCheckWorker));
-                t.Start();
+                ServerCheckThread = new Thread(new ThreadStart(ProcessCheckWorker));
+                ServerCheckThread.Start();
             }
             catch (Exception)
             {
@@ -336,7 +337,10 @@ namespace Spedit.UI
             ServerProcess.Dispose();
             Program.MainWindow.Dispatcher.Invoke(() =>
             {
-                DisableServerAnim.Begin();
+                if (Program.MainWindow.IsLoaded)
+                {
+                    DisableServerAnim.Begin();
+                }
             });
             ServerIsRunning = false;
         }

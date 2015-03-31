@@ -156,6 +156,10 @@ namespace Spedit.UI
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (ServerCheckThread != null)
+            {
+                ServerCheckThread.Abort(); //a join would not work, so we have to be..forcefully...
+            }
             List<string> lastOpenFiles = new List<string>();
             EditorElement[] editors = GetAllEditorElements();
             bool? SaveUnsaved = null;
