@@ -233,20 +233,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Res\Icons\Icon_Constant.png" />
-    <Resource Include="Res\Icons\Icon_Copy.png" />
-    <Resource Include="Res\Icons\Icon_Cut.png" />
-    <Resource Include="Res\Icons\Icon_Forward.png" />
-    <Resource Include="Res\Icons\Icon_Native.png" />
-    <Resource Include="Res\Icons\Icon_Paste.png" />
-    <Resource Include="Res\Icons\Icon_Save.png" />
-    <Resource Include="Res\Icons\Icon_SaveAll.png" />
-    <Resource Include="Res\Icons\Icon_SaveAs.png" />
-    <Resource Include="Res\Icons\Icon_Settings.png" />
-    <Resource Include="Res\Icons\Icon_Stock.png" />
-    <Resource Include="Res\Icons\Icon_Type.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Res\AboutImages\IconMonstr.png" />
   </ItemGroup>
   <ItemGroup>

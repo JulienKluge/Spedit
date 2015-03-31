@@ -13,7 +13,7 @@ namespace Spedit
 {
     public static class Program
     {
-        public const string ProgramInternalVersion = "1";
+        public const string ProgramInternalVersion = "2";
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
@@ -25,51 +25,102 @@ namespace Spedit
         [STAThread]
         public static void Main(string[] args)
         {
+            bool InSafe = false;
             bool mutexReserved;
             using (Mutex appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
             {
                 if (mutexReserved)
                 {
-                    SplashScreen splashScreen = new SplashScreen("Res/Icon256x.png");
-                    splashScreen.Show(false, true);
-                    Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    OptionsObject = OptionsControlIOObject.Load();
-                    for (int i = 0; i < args.Length; ++i)
-                    {
-                        var opt = OptionsObject;
-                        if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
-                        {
-                            OptionsObject.ReCreateCryptoKey();
-                            MessageBox.Show("All FTP passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
-                                "Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                    }
-                    Configs = ConfigLoader.Load();
-                    for (int i = 0; i < Configs.Length; ++i)
-                    {
-                        if (Configs[i].Name == OptionsObject.Program_SelectedConfig)
-                        {
-                            Program.SelectedConfig = i;
-                            break;
-                        }
-                    }
-                    if (!OptionsObject.Program_UseHardwareAcceleration)
-                    {
-                        RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
-                    }
-                    MainWindow = new MainWindow(splashScreen);
-                    PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
-                    pipeServer.Start();
-                    Application app = new Application();
 #if !DEBUG
-                    GlobalUpdater = new Updater();
-                    GlobalUpdater.CheckForUpdatesAsynchronously();
+                    try
+                    {
 #endif
-                    app.Run(MainWindow);
-                    OptionsControlIOObject.Save();
+                        SplashScreen splashScreen = new SplashScreen("Res/Icon256x.png");
+                        splashScreen.Show(false, true);
+                        Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                        OptionsObject = OptionsControlIOObject.Load();
+                        for (int i = 0; i < args.Length; ++i)
+                        {
+                            if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
+                            {
+                                var opt = OptionsObject;
+                                OptionsObject.ReCreateCryptoKey();
+                                MessageBox.Show("All FTP passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
+                                    "Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else if (args[i].ToLowerInvariant() == "-safe")
+                            {
+                                InSafe = true;
+                            }
+                        }
+                        Configs = ConfigLoader.Load();
+                        for (int i = 0; i < Configs.Length; ++i)
+                        {
+                            if (Configs[i].Name == OptionsObject.Program_SelectedConfig)
+                            {
+                                Program.SelectedConfig = i;
+                                break;
+                            }
+                        }
+                        if (!OptionsObject.Program_UseHardwareAcceleration)
+                        {
+                            RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+                        }
+                        MainWindow = new MainWindow(splashScreen);
+                        PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
+                        pipeServer.Start();
 #if !DEBUG
-                    GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
+                    }
+                    catch (Exception e)
+                    {
+                        string errorOut = "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
+                        File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", errorOut);
+                        MessageBox.Show("An error occured while loading." + Environment.NewLine + "A crash report was written in the editor-directory.",
+                            "Error while Loading",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        Environment.Exit(Environment.ExitCode);
+                    }
 #endif
+                        if (InSafe)
+                        {
+                            try
+                            {
+                                Application app = new Application();
+#if !DEBUG
+                                GlobalUpdater = new Updater();
+                                GlobalUpdater.CheckForUpdatesAsynchronously();
+#endif
+                                app.Run(MainWindow);
+                                OptionsControlIOObject.Save();
+#if !DEBUG
+                                GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
+#endif
+                            }
+                            catch (Exception e)
+                            {
+                                string errorOut = "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
+                                File.WriteAllText("CRASH_1_" + Environment.TickCount.ToString() + ".txt", errorOut);
+                                MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                                Environment.Exit(Environment.ExitCode);
+                            }
+                        }
+                        else
+                        {
+                            Application app = new Application();
+#if !DEBUG
+                            GlobalUpdater = new Updater();
+                            GlobalUpdater.CheckForUpdatesAsynchronously();
+#endif
+                            app.Run(MainWindow);
+                            OptionsControlIOObject.Save();
+#if !DEBUG
+                            GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
+#endif
+                        }
                 }
                 else
                 {
