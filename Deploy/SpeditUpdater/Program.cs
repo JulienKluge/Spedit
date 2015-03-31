@@ -36,14 +36,12 @@ namespace SpeditUpdater
             Application.DoEvents(); //execute Visual
             Thread t = new Thread(new ParameterizedThreadStart(Worker));
             t.Start(um);
-            Application.Run();
+            Application.Run(um);
         }
 
         private static void Worker(object arg)
         {
             UpdateMarquee um = (UpdateMarquee)arg;
-            Thread.Sleep(500); //just for safety reasons and give the user visual feedback
-
             string zipFile = Path.Combine(Environment.CurrentDirectory, "updateZipFile.zip");
 
             byte[] zipFileContent = SpeditUpdater.Properties.Resources.spedit1_0_2_0Update;
@@ -70,7 +68,12 @@ namespace SpeditUpdater
 
             zipInfo.Delete();
 
-            Environment.Exit(Environment.ExitCode);
+            um.Invoke((InvokeDel)(() =>
+            {
+                um.SetToReadyState();
+            }));
         }
+
+        public delegate void InvokeDel();
     }
 }

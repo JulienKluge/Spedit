@@ -18,5 +18,18 @@ namespace SpeditUpdater
             Bitmap bmp = SpeditUpdater.Properties.Resources.IconPng;
             pictureBox1.Image = (Image)bmp;
         }
+
+        public void SetToReadyState()
+        {
+            label1.Text = "SPEdit got updated!";
+            progressBar1.Visible = false;
+            button1.Visible = true;
+            this.UseWaitCursor = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
