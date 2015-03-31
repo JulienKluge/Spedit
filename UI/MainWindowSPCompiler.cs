@@ -68,12 +68,15 @@ namespace Spedit.UI
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
                     Regex errorFilterRegex = new Regex(@"^(?<file>.+?)\((?<line>[0-9]+(\s*--\s*[0-9]+)?)\)\s*:\s*(?<type>[a-zA-Z]+\s+([a-zA-Z]+\s+)?[0-9]+)\s*:(?<details>.+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+                    string destinationFileName = null;
+                    FileInfo fileInfo = null;
+                    string outFile = null;
                     for (int i = 0; i < compileCount; ++i)
                     {
                         string file = filesToCompile[i];
                         progressTask.SetMessage(file);
                         MainWindow.ProcessUITasks();
-                        FileInfo fileInfo = new FileInfo(file);
+                        fileInfo = new FileInfo(file);
                         stringOutput.AppendLine(fileInfo.Name);
                         if (fileInfo.Exists)
                         {
@@ -84,8 +87,8 @@ namespace Spedit.UI
                                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                                 process.StartInfo.CreateNoWindow = true;
                                 process.StartInfo.FileName = spCompInfo.FullName;
-                                string destinationFileName = ShortenScriptFileName(fileInfo.Name) + ".smx";
-                                string outFile = Path.Combine(fileInfo.DirectoryName, destinationFileName);
+                                destinationFileName = ShortenScriptFileName(fileInfo.Name) + ".smx";
+                                outFile = Path.Combine(fileInfo.DirectoryName, destinationFileName);
                                 if (File.Exists(outFile)) { File.Delete(outFile); }
                                 string errorFile = Environment.CurrentDirectory + @"\sourcepawn\errorfiles\error_" + Environment.TickCount.ToString() + "_" + file.GetHashCode().ToString("X") + "_" + i.ToString() + ".txt";
                                 if (File.Exists(errorFile)) { File.Delete(errorFile); }
@@ -134,13 +137,13 @@ namespace Spedit.UI
                                 {
                                     compiledFiles.Add(outFile);
                                 }
+                                string execResult_Post = ExecuteCommandLine(c.PostCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
+                                if (!string.IsNullOrWhiteSpace(execResult_Post))
+                                {
+                                    stringOutput.AppendLine(execResult_Post.Trim(new char[] { '\n', '\r' }));
+                                }
                                 stringOutput.AppendLine();
                                 progressTask.SetProgress(((double)(i + 1)) / ((double)compileCount));
-                                execResult = ExecuteCommandLine(c.PostCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
-                                if (!string.IsNullOrWhiteSpace(execResult))
-                                {
-                                    stringOutput.AppendLine(execResult.Trim(new char[] { '\n', '\r' }));
-                                }
                                 MainWindow.ProcessUITasks();
                             }
                         }
