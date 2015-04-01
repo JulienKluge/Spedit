@@ -35,7 +35,7 @@ namespace Spedit
                     try
                     {
 #endif
-                        SplashScreen splashScreen = new SplashScreen("Res/Icon256x.png");
+                        SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
                         splashScreen.Show(false, true);
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                         OptionsObject = OptionsControlIOObject.Load();
@@ -99,7 +99,13 @@ namespace Spedit
                             }
                             catch (Exception e)
                             {
-                                string errorOut = "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
+
+                                string errorOut = "SPEDIT MAIN" + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace + Environment.NewLine
+                                    + "OS: " + Environment.OSVersion.VersionString;
+                                if (e.InnerException != null)
+                                {
+                                    errorOut = errorOut + Environment.NewLine + "Inner Exception: " + e.InnerException.Message;
+                                }
                                 File.WriteAllText("CRASH_1_" + Environment.TickCount.ToString() + ".txt", errorOut);
                                 MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
                                     "Error",

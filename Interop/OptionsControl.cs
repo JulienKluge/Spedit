@@ -24,7 +24,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Program_OpenIncludesRecursively = false;
 
         public bool UI_Animations = true;
-        public bool UI_ShowToolBar = true;
+        public bool UI_ShowToolBar = false;
 
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
@@ -68,12 +68,12 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                     case 0:
                         {
                             this.Editor_NativeScrolling = false;
-                            this.UI_ShowToolBar = true;
+                            this.UI_ShowToolBar = false;
                             break;
                         }
                     case 1:
                         {
-                            this.UI_ShowToolBar = true;
+                            this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4
                             break;
                         }
                 }

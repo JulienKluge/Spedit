@@ -28,10 +28,10 @@
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,15,180,5" Text="License:" FontSize="16" FontWeight="Thin" FontStyle="Italic" IsHitTestVisible="False" />
         <Button Name="LicenseOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,130,0" Width="40" Height="40" Click="OpenLicenseFlyout" Style="{StaticResource MetroCircleButtonStyle}">
             <Button.Content>
-                <Image Source="/Spedit;component/Res/AboutImages/license.png" Width="20" Height="20" />
+                <Image Source="/Spedit;component/Resources/AboutImages/license.png" Width="20" Height="20" />
             </Button.Content>
         </Button>
-        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Spedit;component/Res/Icon256x.png" Width="256" Height="256" />
+        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Spedit;component/Resources/Icon256x.png" Width="256" Height="256" />
         <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,60,0,0" Height="5">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -66,7 +66,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/MahAppsMetro.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/MahAppsMetro.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150,5,0,0" Text="MahApps.Metro" FontSize="18" IsHitTestVisible="False" />
@@ -83,7 +83,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/SharpDevelop.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/SharpDevelop.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="190,5,0,0" Text="SharpDevelop" FontSize="18" IsHitTestVisible="False" />
@@ -100,7 +100,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/AvalonDock.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/AvalonDock.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="XCEED" FontSize="18" IsHitTestVisible="False" />
@@ -117,7 +117,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFEFEFE">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/sourcemod.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/sourcemod.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,5,0,0" Text="Sourcemod" FontSize="18" IsHitTestVisible="False" />
@@ -134,7 +134,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/IconMonstr.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/IconMonstr.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="220,5,0,0" Text="iconmonstr" FontSize="18" IsHitTestVisible="False" />
@@ -148,7 +148,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/smlib.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/smlib.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="180,5,0,0" Text="SMLib" FontSize="18" IsHitTestVisible="False" />
@@ -165,7 +165,7 @@
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CCFFFFFF">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="/Spedit;component/Res/AboutImages/alliedmodders.png" Stretch="Uniform" />
+                            <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/alliedmodders.png" Stretch="Uniform" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="120,5,0,0" Text="Lysis, smxdasm" FontSize="18" IsHitTestVisible="False" />

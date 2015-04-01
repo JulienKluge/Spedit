@@ -7,7 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              Title="Spedit" GlowBrush="{DynamicResource AccentColorBrush}" MinHeight="100" MinWidth="200" KeyDown="MainWindowEvent_KeyDown" Closing="MetroWindow_Closing"
-                      AllowDrop="True" Drop="MetroWindow_Drop">
+                      AllowDrop="True" Drop="MetroWindow_Drop" ShowIconOnTitleBar="False">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,7 +34,6 @@
                     </Storyboard>
                     <Storyboard x:Key="EnableServerAnim">
                         <DoubleAnimation Duration="00:00:00.5" To="5" Storyboard.TargetName="ServerProgressBar" Storyboard.TargetProperty="Height" />
-                        <!--<DoubleAnimation Duration="00:00:00.5" To="5" Storyboard.TargetName="ProgressGridRow" Storyboard.TargetProperty="Height" />-->
                         <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ServerProgressBar" Storyboard.TargetProperty="IsIndeterminate">
                             <BooleanKeyFrameCollection>
                                 <DiscreteBooleanKeyFrame KeyTime="00:00:00.25" Value="True" />
@@ -120,6 +119,9 @@
             </Menu>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
+    <controls:MetroWindow.Icon>
+        <BitmapImage UriSource="/Spedit;component/Resources/Icon.ico" />
+    </controls:MetroWindow.Icon>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

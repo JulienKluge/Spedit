@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -53,7 +53,8 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Res\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App\App.config" />
@@ -61,14 +62,14 @@
     <None Include="Deploy\FileAssociation.nsh" />
     <None Include="Deploy\SPEdit.nsi" />
     <None Include="packages.config" />
-    <None Include="Res\Misc\Templates\CSSCSGOTemplate.sp" />
-    <None Include="Res\Misc\Templates\EmptyScriptTemplate.sp" />
-    <None Include="Res\Misc\Templates\OldSyntaxCSSCSGOTemplate.sp" />
-    <None Include="Res\Misc\Templates\OldSyntaxScriptTemplate.sp" />
-    <None Include="Res\Misc\Templates\OldSyntaxTFTemplate.sp" />
-    <None Include="Res\Misc\Templates\ScriptTemplate.sp" />
-    <None Include="Res\Misc\Templates\SimpleScriptTemplate.sp" />
-    <None Include="Res\Misc\Templates\TFTemplate.sp" />
+    <None Include="Resources\Misc\Templates\CSSCSGOTemplate.sp" />
+    <None Include="Resources\Misc\Templates\EmptyScriptTemplate.sp" />
+    <None Include="Resources\Misc\Templates\OldSyntaxCSSCSGOTemplate.sp" />
+    <None Include="Resources\Misc\Templates\OldSyntaxScriptTemplate.sp" />
+    <None Include="Resources\Misc\Templates\OldSyntaxTFTemplate.sp" />
+    <None Include="Resources\Misc\Templates\ScriptTemplate.sp" />
+    <None Include="Resources\Misc\Templates\SimpleScriptTemplate.sp" />
+    <None Include="Resources\Misc\Templates\TFTemplate.sp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit">
@@ -85,6 +86,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -96,17 +98,8 @@
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>.\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
-      <HintPath>.\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Expression">
-      <HintPath>.\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.Themes.Expression.dll</HintPath>
-    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
       <HintPath>.\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
-      <HintPath>.\packages\AvalonDock.2.0.2000\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +110,11 @@
     <Compile Include="Interop\OptionsControl.cs" />
     <Compile Include="Interop\Updater\Updater.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SPCondenser\ConstantsCondenser.cs" />
     <Compile Include="SPCondenser\EnumCondenser.cs" />
     <Compile Include="SPCondenser\FunctionsCondenser.cs" />
@@ -205,16 +203,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Res\Icon.ico" />
+    <Resource Include="Resources\AboutImages\AvalonDock.png" />
+    <Resource Include="Resources\AboutImages\license.png" />
+    <Resource Include="Resources\AboutImages\MahAppsMetro.png" />
+    <Resource Include="Resources\AboutImages\SharpDevelop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Res\AboutImages\AvalonDock.png" />
-    <Resource Include="Res\AboutImages\license.png" />
-    <Resource Include="Res\AboutImages\MahAppsMetro.png" />
-    <Resource Include="Res\AboutImages\SharpDevelop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Res\Icon256x.png" />
+    <Resource Include="Resources\Icon.ico" />
+    <Resource Include="Resources\Icon256x.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -234,252 +230,259 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Res\AboutImages\IconMonstr.png" />
+    <Resource Include="Resources\AboutImages\IconMonstr.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Res\AboutImages\sourcemod.png" />
-    <Content Include="Deploy\GPLv3.txt" />
-    <Content Include="Deploy\icon.ico" />
-    <Resource Include="Res\AboutImages\smlib.png" />
-    <Resource Include="Res\AboutImages\alliedmodders.png" />
-    <Content Include="Res\Misc\Configurations\Configs.xml">
+    <Resource Include="Resources\AboutImages\sourcemod.png" />
+    <None Include="Deploy\GPLv3.txt" />
+    <None Include="Deploy\icon.ico" />
+    <Resource Include="Resources\AboutImages\smlib.png" />
+    <Resource Include="Resources\AboutImages\alliedmodders.png" />
+    <None Include="Resources\Misc\Configurations\Configs.xml">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\admin.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adminmenu.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_array.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_stack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\adt_trie.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\banning.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\basecomm.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\bitbuffer.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\clientprefs.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\clients.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\commandfilters.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\commandline.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\console.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\convars.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\core.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\cstrike.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\datapack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\dbi.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\entity.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\entity_prop_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\events.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\files.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\float.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\geoip.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\halflife.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\handles.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\helpers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\keyvalues.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\lang.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\logging.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\mapchooser.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\menus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\nextmap.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\profiler.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\protobuf.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\regex.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdkhooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_client.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_engine.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_entinput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_entoutput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_gamerules.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_hooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_sound.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_stringtables.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_tempents.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_tempents_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_trace.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sdktools_voice.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sorting.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\sourcemod.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\string.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\testing.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\textparse.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\tf2.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\tf2_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\timers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\topmenus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\usermessages.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\vector.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\version.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\include\version_auto.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven\spcomp.exe" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\admin.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adminmenu.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_array.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_stack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_trie.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\banning.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\basecomm.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\bitbuffer.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\clientprefs.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\clients.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\commandfilters.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\commandline.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\console.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\convars.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\core.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\cstrike.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\datapack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\dbi.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\entity.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\entity_prop_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\events.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\files.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\float.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\geoip.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\halflife.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\handles.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\helpers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\keyvalues.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\lang.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\logging.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\mapchooser.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\menus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\nextmap.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\profiler.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\protobuf.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\regex.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdkhooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_client.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_engine.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_entinput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_entoutput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_gamerules.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_hooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_sound.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_stringtables.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_tempents.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_tempents_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_trace.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_voice.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\arrays.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\clients.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\colors.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\concommands.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\convars.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\crypt.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\debug.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\dynarrays.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\edicts.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\effects.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\entities.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\files.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\game.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\general.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\math.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\menus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\server.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\sql.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\strings.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\teams.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\vehicles.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\weapons.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\world.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sorting.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sourcemod.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\string.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\testing.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\textparse.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\tf2.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\tf2_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\timers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\topmenus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\usermessages.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\vector.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\version.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\version_auto.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\spcomp.exe" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\admin.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\adminmenu.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_array.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_stack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\adt_trie.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\banning.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\basecomm.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\bitbuffer.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\clientprefs.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\clients.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\commandfilters.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\console.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\core.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\cstrike.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\datapack.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\dbi.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\entity.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\entity_prop_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\events.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\files.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\float.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\geoip.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\halflife.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\handles.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\helpers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\keyvalues.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\lang.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\logging.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\mapchooser.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\menus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\nextmap.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\profiler.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\protobuf.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\regex.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdkhooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_client.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_engine.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_entinput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_entoutput.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_functions.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_gamerules.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_hooks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_sound.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_stringtables.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_tempents.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_tempents_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_trace.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sdktools_voice.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sorting.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\sourcemod.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\string.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\textparse.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\tf2.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\tf2_stocks.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\timers.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\topmenus.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\usermessages.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\vector.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\version.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\include\version_auto.inc" />
-    <Content Include="Res\Misc\Configurations\sm_one_six\spcomp.exe" />
-    <Content Include="Res\Misc\Templates\ExtensionIncludeTemplate.inc" />
-    <Content Include="Res\Misc\Templates\IncludeTemplate.inc" />
-    <Content Include="Res\Misc\Templates\NativeIncludeTemplate.inc" />
-    <Content Include="Res\Misc\Templates\Templates.xml" />
+    </None>
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\admin.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\adminmenu.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\adt.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\adt_array.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\adt_stack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\adt_trie.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\banning.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\basecomm.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\bitbuffer.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\clientprefs.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\clients.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\commandfilters.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\commandline.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\console.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\convars.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\core.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\cstrike.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\datapack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\dbi.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\entity.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\entity_prop_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\events.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\files.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\float.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\geoip.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\halflife.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\handles.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\helpers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\keyvalues.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\lang.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\logging.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\mapchooser.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\menus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\nextmap.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\profiler.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\protobuf.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\regex.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdkhooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_client.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_engine.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_entinput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_entoutput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_gamerules.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_hooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_sound.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_stringtables.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_tempents.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_tempents_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_trace.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sdktools_voice.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sorting.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\sourcemod.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\spcomp.exe" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\string.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\testing.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\textparse.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\tf2.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\tf2_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\timers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\topmenus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\usermessages.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\vector.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\version.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\include\version_auto.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven\spcomp.exe" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\admin.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adminmenu.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_array.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_stack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\adt_trie.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\banning.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\basecomm.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\bitbuffer.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\clientprefs.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\clients.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\commandfilters.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\commandline.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\console.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\convars.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\core.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\cstrike.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\datapack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\dbi.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\entity.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\entity_prop_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\events.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\files.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\float.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\geoip.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\halflife.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\handles.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\helpers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\keyvalues.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\lang.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\logging.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\mapchooser.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\menus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\nextmap.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\profiler.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\protobuf.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\regex.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdkhooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_client.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_engine.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_entinput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_entoutput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_gamerules.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_hooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_sound.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_stringtables.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_tempents.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_tempents_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_trace.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sdktools_voice.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\arrays.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\clients.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\colors.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\concommands.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\convars.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\crypt.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\debug.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\dynarrays.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\edicts.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\effects.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\entities.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\files.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\game.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\general.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\math.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\menus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\server.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\sql.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\strings.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\teams.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\vehicles.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\weapons.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\smlib\world.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sorting.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\sourcemod.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\string.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\testing.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\textparse.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\tf2.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\tf2_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\timers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\topmenus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\usermessages.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\vector.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\version.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\include\version_auto.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_seven_smlib_zero_nine_seven\spcomp.exe" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\admin.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\adminmenu.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\adt.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\adt_array.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\adt_stack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\adt_trie.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\banning.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\basecomm.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\bitbuffer.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\clientprefs.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\clients.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\commandfilters.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\console.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\core.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\cstrike.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\datapack.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\dbi.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\entity.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\entity_prop_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\events.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\files.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\float.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\geoip.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\halflife.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\handles.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\helpers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\keyvalues.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\lang.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\logging.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\mapchooser.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\menus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\nextmap.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\profiler.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\protobuf.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\regex.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdkhooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_client.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_engine.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_entinput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_entoutput.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_functions.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_gamerules.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_hooks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_sound.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_stringtables.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_tempents.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_tempents_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_trace.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sdktools_voice.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sorting.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\sourcemod.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\string.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\textparse.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\tf2.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\tf2_stocks.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\timers.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\topmenus.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\usermessages.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\vector.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\version.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\include\version_auto.inc" />
+    <None Include="Resources\Misc\Configurations\sm_one_six\spcomp.exe" />
+    <None Include="Resources\Misc\Templates\ExtensionIncludeTemplate.inc" />
+    <None Include="Resources\Misc\Templates\IncludeTemplate.inc" />
+    <None Include="Resources\Misc\Templates\NativeIncludeTemplate.inc" />
+    <None Include="Resources\Misc\Templates\Templates.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Lysis\LysisForSpedit.csproj">
       <Project>{a8d94e5a-0cdc-4f01-8801-5770b3ca2b5b}</Project>
       <Name>LysisForSpedit</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -493,8 +496,8 @@ md ".\sourcepawn\configs"
 md ".\sourcepawn\temp"
 md ".\sourcepawn\scripts"
 md ".\sourcepawn\errorfiles"
-xcopy ".\..\..\Res\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
-xcopy ".\..\..\Res\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
+xcopy ".\..\..\Resources\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
+xcopy ".\..\..\Resources\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

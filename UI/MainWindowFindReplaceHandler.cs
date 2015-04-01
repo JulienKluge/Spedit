@@ -26,6 +26,12 @@ namespace Spedit.UI
                 {
                     FindReplaceGrid.Opacity = 0.0;
                 }
+                EditorElement ee = GetCurrentEditorElement();
+                if (ee == null)
+                {
+                    return;
+                }
+                ee.editor.Focus();
             }
             else
             {
