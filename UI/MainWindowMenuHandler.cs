@@ -123,6 +123,11 @@ namespace Spedit.UI
             Command_FlushFoldingState(true);
         }
 
+        private void Menu_JumpTo(object sender, RoutedEventArgs e)
+        {
+            Command_JumpTo();
+        }
+
         private void Menu_SelectAll(object sender, RoutedEventArgs e)
         {
             Command_SelectAll();

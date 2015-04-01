@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Xceed.Wpf.AvalonDock.Layout;
 using Spedit.Utils.SPSyntaxTidy;
 
@@ -33,6 +34,9 @@ namespace Spedit.UI.Components
         Timer regularyTimer;
         bool WantFoldingUpdate = false;
         bool SelectionIsHighlited = false;
+
+        Storyboard FadeJumpGridIn;
+        Storyboard FadeJumpGridOut;
 
         public string FullFilePath
         {
@@ -90,6 +94,11 @@ namespace Spedit.UI.Components
             bracketHighlightRenderer = new BracketHighlightRenderer(editor.TextArea.TextView);
             editor.TextArea.IndentationStrategy = new EditorIndetationStrategy();
 
+            FadeJumpGridIn = (Storyboard)this.Resources["FadeJumpGridIn"];
+            FadeJumpGridOut = (Storyboard)this.Resources["FadeJumpGridOut"];
+
+            this.KeyDown += EditorElement_KeyDown;
+
             editor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             editor.TextArea.SelectionChanged += TextArea_SelectionChanged;
             editor.TextArea.PreviewKeyDown += TextArea_PreviewKeyDown;
@@ -138,6 +147,76 @@ namespace Spedit.UI.Components
             regularyTimer.Start();
 
             CompileBox.IsChecked = (bool?)filePath.EndsWith(".sp");
+        }
+
+        private void EditorElement_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.G)
+            {
+                if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    ToggleJumpGrid();
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private bool JumpGridIsOpen = false;
+
+        public void ToggleJumpGrid()
+        {
+            if (JumpGridIsOpen)
+            {
+                FadeJumpGridOut.Begin();
+                JumpGridIsOpen = false;
+            }
+            else
+            {
+                FadeJumpGridIn.Begin();
+                JumpGridIsOpen = true;
+                JumpNumber.Focus();
+                JumpNumber.SelectAll();
+            }
+        }
+
+        private void JumpNumberKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                JumpToNumber(null, null);
+                e.Handled = true;
+            }
+        }
+
+        private void JumpToNumber(object sender, RoutedEventArgs e)
+        {
+            int num;
+            if (int.TryParse(JumpNumber.Text, out num))
+            {
+                if (LineJump.IsChecked.Value)
+                {
+                    num = Math.Max(1, Math.Min(num, editor.LineCount));
+                    var line = editor.Document.GetLineByNumber(num);
+                    if (line != null)
+                    {
+                        editor.ScrollToLine(num);
+                        editor.Select(line.Offset, line.Length);
+                        editor.CaretOffset = line.Offset;
+                    }
+                }
+                else
+                {
+                    num = Math.Max(0, Math.Min(num, editor.Text.Length));
+                    var line = editor.Document.GetLineByOffset(num);
+                    if (line != null)
+                    {
+                        editor.ScrollTo(line.LineNumber, 0);
+                        editor.CaretOffset = num;
+                    }
+                }
+            }
+            ToggleJumpGrid();
+            editor.Focus();
         }
 
         private void fileWatcher_Changed(object sender, FileSystemEventArgs e)

@@ -227,6 +227,15 @@ namespace Spedit.UI
             }
         }
 
+        private void Command_JumpTo()
+        {
+            EditorElement ee = GetCurrentEditorElement();
+            if (ee != null)
+            {
+                ee.ToggleJumpGrid();
+            }
+        }
+
         private void Command_SelectAll()
         {
             EditorElement ee = GetCurrentEditorElement();

@@ -35,6 +35,23 @@
                         <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="AutoCompleteBox" Storyboard.TargetProperty="Opacity" />
                         <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="MethodAutoCompleteBox" Storyboard.TargetProperty="Opacity" />
                     </Storyboard>
+
+                    <Storyboard x:Key="FadeJumpGridIn">
+                        <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="JumpGrid" Storyboard.TargetProperty="Opacity" />
+                        <BooleanAnimationUsingKeyFrames Duration="00:00:00.1" Storyboard.TargetName="JumpGrid" Storyboard.TargetProperty="IsHitTestVisible">
+                            <BooleanKeyFrameCollection>
+                                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True" />
+                            </BooleanKeyFrameCollection>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="FadeJumpGridOut">
+                        <DoubleAnimation Duration="00:00:00.1" To="0" Storyboard.TargetName="JumpGrid" Storyboard.TargetProperty="Opacity" />
+                        <BooleanAnimationUsingKeyFrames Duration="00:00:00.1" Storyboard.TargetName="JumpGrid" Storyboard.TargetProperty="IsHitTestVisible">
+                            <BooleanKeyFrameCollection>
+                                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False" />
+                            </BooleanKeyFrameCollection>
+                        </BooleanAnimationUsingKeyFrames>
+                    </Storyboard>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -84,5 +101,13 @@
                 </Grid>
             </Border>
         </Grid>
+        <Border Name="JumpGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="75" BorderThickness="1" BorderBrush="{StaticResource AccentColorBrush}" Background="White" IsHitTestVisible="False" Opacity="0">
+            <Grid>
+                <TextBox Name="JumpNumber" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="1" KeyDown="JumpNumberKeyDown" />
+                <RadioButton Name="LineJump" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Jump To Line" IsChecked="True" />
+                <RadioButton HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,50,0,0" Content="Jump To Offset" IsChecked="False" />
+                <Button Name="JumpNumberButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Margin="0,40,5,0" Content="Go" Click="JumpToNumber" />
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
