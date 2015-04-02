@@ -104,7 +104,7 @@ namespace Spedit.UI.Components
             editor.TextArea.PreviewKeyDown += TextArea_PreviewKeyDown;
             editor.PreviewMouseWheel += PrevMouseWheel;
             editor.MouseDown += editor_MouseDown;
-            //editor.TextArea.TextEntered += TextArea_TextEntered;
+            editor.TextArea.TextEntered += TextArea_TextEntered;
 
             FileInfo fInfo = new FileInfo(filePath);
             if (fInfo.Exists)
@@ -388,9 +388,9 @@ namespace Spedit.UI.Components
             bracketHighlightRenderer.SetHighlight(result);
         }
 
-        /*private void TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        private void TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
-            if (Program.OptionsObject.Ediotr_IndentLineAfterSemicolon)
+            /*if (Program.OptionsObject.Ediotr_IndentLineAfterSemicolon)
             {
                 if (e.Text == ";")
                 {
@@ -402,8 +402,12 @@ namespace Spedit.UI.Components
                         editor.Document.Replace(line, newLineStr);
                     }
                 }
+            }*/
+            if (e.Text == "}") //force indentate line so we can evaluate the indentation
+            {
+                editor.TextArea.IndentationStrategy.IndentLine(editor.Document, editor.Document.GetLineByOffset(editor.CaretOffset));
             }
-        }*/
+        }
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)
         {
