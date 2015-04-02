@@ -4,7 +4,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             Width="800" Height="600" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" GlowBrush="{DynamicResource AccentColorBrush}"
+             Width="800" Height="840" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" GlowBrush="{DynamicResource AccentColorBrush}"
                       Title="Configurations" ShowTitleBar="False" Closed="MetroWindow_Closed">
     <controls:MetroWindow.Resources>
         <ResourceDictionary>
@@ -51,10 +51,10 @@
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,495,0,0" Text="FTP User:" IsHitTestVisible="False" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,525,0,0" Text="FTP Password:" IsHitTestVisible="False" />
         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,555,0,0" Text="FTP Directory:" IsHitTestVisible="False" />
-        <TextBox Name="C_FTPHost" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="310,460,5,0" TextChanged="C_FTPHost_TextChanged" />
-        <TextBox Name="C_FTPUser" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="310,490,5,0" TextChanged="C_FTPUser_TextChanged" />
-        <PasswordBox Name="C_FTPPW" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="310,520,5,0" PasswordChanged="C_FTPPW_TextChanged" />
-        <TextBox Name="C_FTPDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="310,550,5,0" TextChanged="C_FTPDir_TextChanged" />
+        <TextBox Name="C_FTPHost" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,460,5,0" TextChanged="C_FTPHost_TextChanged" />
+        <TextBox Name="C_FTPUser" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,490,5,0" TextChanged="C_FTPUser_TextChanged" />
+        <PasswordBox Name="C_FTPPW" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,520,5,0" PasswordChanged="C_FTPPW_TextChanged" />
+        <TextBox Name="C_FTPDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,550,5,0" TextChanged="C_FTPDir_TextChanged" />
         <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,177,5,0" Text="Commandline Variables" Width="150" SelectedIndex="0">
             <ComboBoxItem Content="{}{editordir} - Directory of the SPEdit binary" />
             <ComboBoxItem Content="{}{scriptdir} - Directory of the Compiling script" />
@@ -64,5 +64,23 @@
             <ComboBoxItem Content="{}{pluginfile} - Full Directory and Name of the compiled script" />
             <ComboBoxItem Content="{}{pluginname} - File Name of the compiled script" />
         </ComboBox>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,600,0,0" Text="RCon Server Engine:" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,630,0,0" Text="RCon Server IP:" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,660,0,0" Text="RCon Server Port:" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,690,0,0" Text="RCon Password:" IsHitTestVisible="False" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,720,0,0" Text="RCon Commands:" IsHitTestVisible="False" />
+        <ComboBox Name="C_RConEngine" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,595,5,0" SelectionChanged="C_RConEngine_Changed">
+            <ComboBoxItem Content="Source Engine" IsSelected="True" />
+            <ComboBoxItem Content="Gold Source Engine" />
+        </ComboBox>
+        <TextBox Name="C_RConIP" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,625,5,0" TextChanged="C_RConIP_TextChanged" />
+        <TextBox Name="C_RConPort" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,655,5,0" TextChanged="C_RConPort_TextChanged" />
+        <PasswordBox Name="C_RConPW" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="330,685,5,0" PasswordChanged="C_RConPW_TextChanged" />
+        <ComboBox HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,715,5,0" Text="Rcon Commandline Variables" Width="150" SelectedIndex="0">
+            <ComboBoxItem Content="{}{plugins_reload} - Reloads all compiled plugins" />
+            <ComboBoxItem Content="{}{plugins_load} - Loads all compiled plugins" />
+            <ComboBoxItem Content="{}{plugins_unload} - Unloads all compiled plugins" />
+        </ComboBox>
+        <TextBox Name="C_RConCmds" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="210,745,5,0" Height="80" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" TextChanged="C_RConCmds_TextChanged" />
     </Grid>
 </controls:MetroWindow>

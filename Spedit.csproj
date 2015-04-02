@@ -75,12 +75,18 @@
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>.\packages\AvalonEdit.5.0.2\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.BZip2">
+      <HintPath>QueryMaster\Ionic.BZip2.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\packages\MahApps.Metro.1.0.0.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="QueryMaster">
+      <HintPath>QueryMaster\QueryMaster.dll</HintPath>
+    </Reference>
     <Reference Include="smxdasm">
       <HintPath>App\smxdasm.dll</HintPath>
     </Reference>
@@ -134,6 +140,7 @@
     <Compile Include="UI\Components\EditorFoldingStrategy.cs" />
     <Compile Include="UI\Components\EditorIndetation.cs" />
     <Compile Include="UI\Components\IntelliSenseController.cs" />
+    <Compile Include="UI\MainWindowServerQuery.cs" />
     <Compile Include="UI\MainWindowSPCompiler.cs" />
     <Compile Include="UI\MainWindowCommands.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">

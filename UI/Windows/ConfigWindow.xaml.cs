@@ -6,6 +6,7 @@ using Spedit.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,7 +50,7 @@ namespace Spedit.UI.Windows
             {
                 return;
             }
-            AllowChange = true;
+            AllowChange = false;
             Config c = Program.Configs[index];
             C_Name.Text = c.Name;
             C_SMDir.Text = c.SMDirectory;
@@ -66,7 +67,12 @@ namespace Spedit.UI.Windows
             C_FTPUser.Text = c.FTPUser;
             C_FTPPW.Password = c.FTPPassword;
             C_FTPDir.Text = c.FTPDir;
-            AllowChange = false;
+            C_RConEngine.SelectedIndex = (c.RConUseSourceEngine) ? 0 : 1;
+            C_RConIP.Text = c.RConIP;
+            C_RConPort.Text = c.RConPort.ToString();
+            C_RConPW.Password = c.RConPassword;
+            C_RConCmds.Text = c.RConCommands;
+            AllowChange = true;
         }
 
         private void NewButton_Clicked(object sender, RoutedEventArgs e)
@@ -100,6 +106,7 @@ namespace Spedit.UI.Windows
 
         private void C_Name_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             string Name = C_Name.Text;
             Program.Configs[ConfigListBox.SelectedIndex].Name = Name;
             ((ListBoxItem)ConfigListBox.SelectedItem).Content = Name;
@@ -107,76 +114,126 @@ namespace Spedit.UI.Windows
 
         private void C_SMDir_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].SMDirectory = C_SMDir.Text;
-            if (!AllowChange)
-            {
-                NeedsSMDefInvalidation = true;
-            }
+            NeedsSMDefInvalidation = true;
         }
 
         private void C_CopyDir_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].CopyDirectory = C_CopyDir.Text;
         }
 
         private void C_ServerFile_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].ServerFile = C_ServerFile.Text;
         }
 
         private void C_ServerArgs_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].ServerArgs = C_ServerArgs.Text;
         }
 
         private void C_PostBuildCmd_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].PostCmd = C_PostBuildCmd.Text;
         }
 
         private void C_PreBuildCmd_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].PreCmd = C_PreBuildCmd.Text;
         }
 
         private void C_OptimizationLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].OptimizeLevel = (int)C_OptimizationLevel.Value;
         }
 
         private void C_VerboseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int)C_VerboseLevel.Value;
         }
 
         private void C_AutoCopy_Changed(object sender, RoutedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].AutoCopy = C_AutoCopy.IsChecked.Value;
         }
 
         private void C_DeleteAfterCopy_Changed(object sender, RoutedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].DeleteAfterCopy = C_DeleteAfterCopy.IsChecked.Value;
         }
 
         private void C_FTPHost_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPHost = C_FTPHost.Text;
         }
 
         private void C_FTPUser_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPUser = C_FTPUser.Text;
         }
 
         private void C_FTPPW_TextChanged(object sender, RoutedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPPassword = C_FTPPW.Password;
         }
 
         private void C_FTPDir_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPDir = C_FTPDir.Text;
+        }
+
+        private void C_RConEngine_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChange) { return; }
+            if (ConfigListBox.SelectedIndex >= 0)
+            {
+                Program.Configs[ConfigListBox.SelectedIndex].RConUseSourceEngine = (C_RConEngine.SelectedIndex == 0);
+            }
+        }
+
+        private void C_RConIP_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].RConIP = C_RConIP.Text;
+        }
+
+        private void C_RConPort_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChange) { return; }
+            ushort newPort;
+            if (!ushort.TryParse(C_RConPort.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out newPort))
+            {
+                newPort = 27015;
+                C_RConPort.Text = "27015";
+            }
+            Program.Configs[ConfigListBox.SelectedIndex].RConPort = newPort;
+        }
+
+        private void C_RConPW_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].RConPassword = C_RConPW.Password;
+        }
+
+        private void C_RConCmds_TextChanged(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].RConCommands = C_RConCmds.Text;
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e)
@@ -211,10 +268,15 @@ namespace Spedit.UI.Windows
                     writer.WriteAttributeString("OptimizationLevel", c.OptimizeLevel.ToString());
                     writer.WriteAttributeString("VerboseLevel", c.VerboseLevel.ToString());
                     writer.WriteAttributeString("DeleteAfterCopy", (c.DeleteAfterCopy) ? "1" : "0");
-                    writer.WriteAttributeString("FTPHost", c.FTPHost.ToString());
-                    writer.WriteAttributeString("FTPUser", c.FTPUser.ToString());
-                    writer.WriteAttributeString("FTPPassword", ManagedAES.Encrypt(c.FTPPassword.ToString()));
-                    writer.WriteAttributeString("FTPDir", c.FTPDir.ToString());
+                    writer.WriteAttributeString("FTPHost", c.FTPHost);
+                    writer.WriteAttributeString("FTPUser", c.FTPUser);
+                    writer.WriteAttributeString("FTPPassword", ManagedAES.Encrypt(c.FTPPassword));
+                    writer.WriteAttributeString("FTPDir", c.FTPDir);
+                    writer.WriteAttributeString("RConSourceEngine", (c.RConUseSourceEngine) ? "1" : "0");
+                    writer.WriteAttributeString("RConIP", c.RConIP);
+                    writer.WriteAttributeString("RConPort", c.RConPort.ToString());
+                    writer.WriteAttributeString("RConPassword", ManagedAES.Encrypt(c.RConPassword));
+                    writer.WriteAttributeString("RConCommands", c.RConCommands);
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();

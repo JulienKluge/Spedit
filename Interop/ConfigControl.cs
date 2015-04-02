@@ -2,6 +2,7 @@
 using Spedit.Utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Xml;
@@ -71,6 +72,22 @@ namespace Spedit.Interop
                         string encryptedFTPPW = node.Attributes["FTPPassword"].Value;
                         string _FTPPW = ManagedAES.Decrypt(encryptedFTPPW);
                         string _FTPDir = node.Attributes["FTPDir"].Value;
+                        string _RConEngineSourceStr = node.Attributes["RConSourceEngine"].Value;
+                        bool _RConEngineTypeSource = false;
+                        if (!(_RConEngineSourceStr == "0" || string.IsNullOrWhiteSpace(_RConEngineSourceStr)))
+                        {
+                            _RConEngineTypeSource = true;
+                        }
+                        string _RConIP = node.Attributes["RConIP"].Value;
+                        string _RConPortStr = node.Attributes["RConPort"].Value;
+                        ushort _RConPort = 27015;
+                        if (!ushort.TryParse(_RConPortStr, NumberStyles.Any, CultureInfo.InvariantCulture, out _RConPort))
+                        {
+                            _RConPort = 27015;
+                        }
+                        string encryptedRConPassword = node.Attributes["RConPassword"].Value;
+                        string _RConPassword = ManagedAES.Decrypt(encryptedRConPassword);
+                        string _RConCommands = node.Attributes["RConCommands"].Value;
                         Config c = new Config()
                         {
                             Name = _Name,
@@ -92,6 +109,12 @@ namespace Spedit.Interop
                             FTPUser = _FTPUser,
                             FTPPassword = _FTPPW,
                             FTPDir = _FTPDir
+                            ,
+                            RConUseSourceEngine = _RConEngineTypeSource,
+                            RConIP = _RConIP,
+                            RConPort = _RConPort,
+                            RConPassword = _RConPassword,
+                            RConCommands = _RConCommands
                         };
                         if (IsStandardConfig)
                         {
@@ -143,6 +166,12 @@ namespace Spedit.Interop
         public string FTPUser = string.Empty;
         public string FTPPassword = string.Empty; //securestring? No! Because it's saved in plaintext and if you want to keep it a secret, you shouldn't automaticly uploade it anyways...
         public string FTPDir = string.Empty;
+
+        public bool RConUseSourceEngine = true;
+        public string RConIP = "127.0.0.1";
+        public ushort RConPort = 27015;
+        public string RConPassword = string.Empty;
+        public string RConCommands = string.Empty;
 
         private CondensedSourcepawnDefinition SMDef;
 

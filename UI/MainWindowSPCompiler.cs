@@ -16,6 +16,7 @@ namespace Spedit.UI
     public partial class MainWindow : MetroWindow
     {
         private List<string> compiledFiles = new List<string>();
+        private List<string> compiledFileNames = new List<string>();
 
         private bool InCompiling = false;
         private async void Compile_SPScripts(bool All = true)
@@ -24,6 +25,7 @@ namespace Spedit.UI
             Command_SaveAll();
             InCompiling = true;
             compiledFiles.Clear();
+            compiledFileNames.Clear();
             var c = Program.Configs[Program.SelectedConfig];
             FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
             if (spCompInfo.Exists)
@@ -137,6 +139,7 @@ namespace Spedit.UI
                                 if (File.Exists(outFile))
                                 {
                                     compiledFiles.Add(outFile);
+                                    compiledFileNames.Add(destinationFileName);
                                 }
                                 string execResult_Post = ExecuteCommandLine(c.PostCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
                                 if (!string.IsNullOrWhiteSpace(execResult_Post))

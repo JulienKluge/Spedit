@@ -93,6 +93,7 @@
                     <MenuItem Header="FTP Upload Plugins" Click="Menu_FTPUpload" InputGestureText="F8" />
                     <Separator/>
                     <MenuItem Header="Start Server" Click="Menu_StartServer" InputGestureText="F9" />
+                    <MenuItem Header="Send RCon Commands" Click="Menu_SendRCon" InputGestureText="F10" />
                 </MenuItem>
 
                 <MenuItem Name="ConfigMenu" Header="Configuration">

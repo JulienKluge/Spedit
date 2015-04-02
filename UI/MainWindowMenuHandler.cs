@@ -163,6 +163,11 @@ namespace Spedit.UI
             Server_Start();
         }
 
+        private void Menu_SendRCon(object sender, RoutedEventArgs e)
+        {
+            Server_Query();
+        }
+
         private void Menu_OpenWebsiteFromTag(object sender, RoutedEventArgs e)
         {
             string url = (string)((MenuItem)sender).Tag;
