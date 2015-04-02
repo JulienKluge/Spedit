@@ -11,6 +11,12 @@ namespace Spedit.UI
             {
                 return;
             }
+            if (e.SystemKey == Key.F10)
+            {
+                Server_Query();
+                e.Handled = true;
+                return;
+            }
             if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl))
             {
                 if (e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
@@ -53,7 +59,6 @@ namespace Spedit.UI
                     case Key.F7: { Copy_Plugins(); e.Handled = true; break; } //copy
                     case Key.F8: { FTPUpload_Plugins(); e.Handled = true; break; } //ftp upload
                     case Key.F9: { Server_Start(); e.Handled = true; break; }
-                    case Key.F10: { Server_Query(); e.Handled = true; break; }
                     case Key.Escape: { CompileOutputRow.Height = new GridLength(8.0); e.Handled = true; break; }
                 }
             }
