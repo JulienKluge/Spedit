@@ -91,6 +91,7 @@ namespace Spedit.UI.Components
             string ISFuncNameStr = string.Empty;
             string ISFuncDescriptionStr = string.Empty;
             bool ForceReSet = (currentLineIndex != LastShowedLine);
+            bool ForceISKeepsClosed = ForceReSet;
             int xPos = int.MaxValue;
             LastShowedLine = currentLineIndex;
             int quotationCount = 0;
@@ -264,6 +265,13 @@ namespace Spedit.UI.Components
                     }
                 }
                 #endregion
+            }
+            if (!ForwardShowAC)
+            {
+                if (ForceISKeepsClosed)
+                {
+                    ForwardShowIS = false;
+                }
             }
             if (ForwardShowAC | ForwardShowIS)
             {
