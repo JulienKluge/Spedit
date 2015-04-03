@@ -283,9 +283,12 @@ namespace Spedit.UI.Components
                                     verbatim = false;
                                 }
                             }
-                            else if (!inString && offset > 0 && document.GetCharAt(i - 1) == '@')
+                            else if (i > 0) //FIX CRASH ON SELECTING
                             {
-                                verbatim = true;
+                                if (!inString && offset > 0 && document.GetCharAt(i - 1) == '@')
+                                {
+                                    verbatim = true;
+                                }
                             }
                             inString = !inString;
                         }
