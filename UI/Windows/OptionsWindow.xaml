@@ -48,6 +48,7 @@
                         <CheckBox Name="WordWrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Content="Word Wrap" Checked="WordWrap_Changed" Unchecked="WordWrap_Changed" />
                         <CheckBox Name="NativeScrolling" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,55,0,0" Content="Native Scrolling (ignores Scroll Speed)" Checked="NScrolling_Changed" Unchecked="NScrolling_Changed" />
                         <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
+                        <CheckBox Name="LineReformatting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,95,0,0" Content="Reformatting Line after semicolon" Checked="LineReformat_Changed" Unchecked="LineReformat_Changed" />
                         <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
                         <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
                             <ComboBox.Resources>

@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 2;
-        public int Version = 2;
+        public static int SVersion = 3;
+        public int Version = 3;
 
         public byte[] Program_CryptoKey = null;
 
@@ -32,7 +32,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public double Editor_ScrollSpeed = 0.01;
         public bool Editor_NativeScrolling = false;
         public bool Editor_AgressiveIndentation = true;
-        //public bool Editor_IndentLineAfterSemicolon = true;
+        public bool Editor_ReformatLineAfterSemicolon = true;
 
         public string[] LastOpenFiles = new string[0];
 
@@ -69,11 +69,18 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                         {
                             this.Editor_NativeScrolling = false;
                             this.UI_ShowToolBar = false;
+                            this.Editor_ReformatLineAfterSemicolon = true;
                             break;
                         }
                     case 1:
                         {
                             this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4
+                            this.Editor_ReformatLineAfterSemicolon = true;
+                            break;
+                        }
+                    case 2:
+                        {
+                            this.Editor_ReformatLineAfterSemicolon = true;
                             break;
                         }
                 }
