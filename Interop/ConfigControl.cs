@@ -32,62 +32,62 @@ namespace Spedit.Interop
                     for (int i = 0; i < mainNode.ChildNodes.Count; ++i)
                     {
                         XmlNode node = mainNode.ChildNodes[i];
-                        string _Name = node.Attributes["Name"].Value;
-                        string _SMDirectory = node.Attributes["SMDirectory"].Value;
-                        string _Standard = node.Attributes["Standard"].Value;
+                        string _Name = ReadAttributeStringSafe(ref node, "Name", "UNKOWN CONFIG " + (i + 1).ToString());
+                        string _SMDirectory = ReadAttributeStringSafe(ref node, "SMDirectory", "");
+                        string _Standard = ReadAttributeStringSafe(ref node, "Standard", "0");
                         bool IsStandardConfig = false;
                         if (_Standard != "0" && !string.IsNullOrWhiteSpace(_Standard))
                         {
                             IsStandardConfig = true;
                         }
-                        string _AutoCopyStr = node.Attributes["AutoCopy"].Value;
+                        string _AutoCopyStr = ReadAttributeStringSafe(ref node, "AutoCopy", "0");
                         bool _AutoCopy = false;
                         if (_AutoCopyStr != "0" && !string.IsNullOrWhiteSpace(_AutoCopyStr))
                         {
                             _AutoCopy = true;
                         }
-                        string _CopyDirectory = node.Attributes["CopyDirectory"].Value;
-                        string _ServerFile = node.Attributes["ServerFile"].Value;
-                        string _ServerArgs = node.Attributes["ServerArgs"].Value;
-                        string _PostCmd = node.Attributes["PostCmd"].Value;
-                        string _PreCmd = node.Attributes["PreCmd"].Value;
+                        string _CopyDirectory = ReadAttributeStringSafe(ref node, "CopyDirectory", "");
+                        string _ServerFile = ReadAttributeStringSafe(ref node, "ServerFile", "");
+                        string _ServerArgs = ReadAttributeStringSafe(ref node, "ServerArgs", "");
+                        string _PostCmd = ReadAttributeStringSafe(ref node, "PostCmd", "");
+                        string _PreCmd = ReadAttributeStringSafe(ref node, "PreCmd", "");
                         int _OptimizationLevel = 2, _VerboseLevel = 1;
                         int subValue;
-                        if (int.TryParse(node.Attributes["OptimizationLevel"].Value, out subValue))
+                        if (int.TryParse(ReadAttributeStringSafe(ref node, "OptimizationLevel", "2"), out subValue))
                         {
                             _OptimizationLevel = subValue;
                         }
-                        if (int.TryParse(node.Attributes["VerboseLevel"].Value, out subValue))
+                        if (int.TryParse(ReadAttributeStringSafe(ref node, "VerboseLevel", "1"), out subValue))
                         {
                             _VerboseLevel = subValue;
                         }
                         bool _DeleteAfterCopy = false;
-                        string DeleteAfterCopyStr = node.Attributes["DeleteAfterCopy"].Value;
+                        string DeleteAfterCopyStr = ReadAttributeStringSafe(ref node, "DeleteAfterCopy", "0");
                         if (!(DeleteAfterCopyStr == "0" || string.IsNullOrWhiteSpace(DeleteAfterCopyStr)))
                         {
                             _DeleteAfterCopy = true;
                         }
-                        string _FTPHost = node.Attributes["FTPHost"].Value;
-                        string _FTPUser = node.Attributes["FTPUser"].Value;
-                        string encryptedFTPPW = node.Attributes["FTPPassword"].Value;
+                        string _FTPHost = ReadAttributeStringSafe(ref node, "FTPHost", "ftp://localhost/");
+                        string _FTPUser = ReadAttributeStringSafe(ref node, "FTPUser", "");
+                        string encryptedFTPPW = ReadAttributeStringSafe(ref node, "FTPPassword", "");
                         string _FTPPW = ManagedAES.Decrypt(encryptedFTPPW);
-                        string _FTPDir = node.Attributes["FTPDir"].Value;
-                        string _RConEngineSourceStr = node.Attributes["RConSourceEngine"].Value;
+                        string _FTPDir = ReadAttributeStringSafe(ref node, "FTPDir", "");
+                        string _RConEngineSourceStr = ReadAttributeStringSafe(ref node, "RConSourceEngine", "1");
                         bool _RConEngineTypeSource = false;
                         if (!(_RConEngineSourceStr == "0" || string.IsNullOrWhiteSpace(_RConEngineSourceStr)))
                         {
                             _RConEngineTypeSource = true;
                         }
-                        string _RConIP = node.Attributes["RConIP"].Value;
-                        string _RConPortStr = node.Attributes["RConPort"].Value;
+                        string _RConIP = ReadAttributeStringSafe(ref node, "RConIP", "127.0.0.1");
+                        string _RConPortStr = ReadAttributeStringSafe(ref node, "RConPort", "27015");
                         ushort _RConPort = 27015;
                         if (!ushort.TryParse(_RConPortStr, NumberStyles.Any, CultureInfo.InvariantCulture, out _RConPort))
                         {
                             _RConPort = 27015;
                         }
-                        string encryptedRConPassword = node.Attributes["RConPassword"].Value;
+                        string encryptedRConPassword = ReadAttributeStringSafe(ref node, "RConPassword", "");
                         string _RConPassword = ManagedAES.Decrypt(encryptedRConPassword);
-                        string _RConCommands = node.Attributes["RConCommands"].Value;
+                        string _RConCommands = ReadAttributeStringSafe(ref node, "RConCommands", "");
                         Config c = new Config()
                         {
                             Name = _Name,
@@ -138,6 +138,18 @@ namespace Spedit.Interop
                 Environment.Exit(Environment.ExitCode);
             }
             return configs.ToArray();
+        }
+
+        private static string ReadAttributeStringSafe(ref XmlNode node, string attributeName, string defaultValue = "")
+        {
+            for (int i = 0; i < node.Attributes.Count; ++i)
+            {
+                if (node.Attributes[i].Name == attributeName)
+                {
+                    return node.Attributes[i].Value;
+                }
+            }
+            return defaultValue;
         }
     }
 
