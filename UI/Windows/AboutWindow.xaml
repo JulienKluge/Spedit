@@ -32,7 +32,7 @@
             </Button.Content>
         </Button>
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Spedit;component/Resources/Icon256x.png" Width="256" Height="256" />
-        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,60,0,0" Height="5">
+        <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,60,0,0" Height="5" IsHitTestVisible="False">
             <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStopCollection>
