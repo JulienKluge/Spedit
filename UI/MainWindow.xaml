@@ -17,7 +17,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
-                <ResourceDictionary Source="/Xceed.Wpf.AvalonDock.Themes.Metro;component/Theme.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="BlendOverEffect" Duration="00:00:00.5" Storyboard.TargetName="BlendEffectPlane" Storyboard.TargetProperty="Opacity">
                         <DoubleAnimationUsingKeyFrames>
@@ -206,7 +205,10 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="#FFFFFFFF" Foreground="#FF000000">
+            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="White" Foreground="Black">
+                <dock:DockingManager.Theme>
+                    <dock:MetroTheme />
+                </dock:DockingManager.Theme>
                 <dock:LayoutRoot>
                     <dock:LayoutPanel>
                         <dock:LayoutDocumentPaneGroup>

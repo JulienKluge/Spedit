@@ -70,6 +70,7 @@ namespace Spedit.UI
                 }
             }
             sc.Close(TimeSpan.FromMilliseconds(500.0));
+            
         }
 
         public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true)
