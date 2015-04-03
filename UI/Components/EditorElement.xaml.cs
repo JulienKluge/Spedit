@@ -403,6 +403,11 @@ namespace Spedit.UI.Components
             if (e.Text == "}") //force indentate line so we can evaluate the indentation
             {
                 editor.TextArea.IndentationStrategy.IndentLine(editor.Document, editor.Document.GetLineByOffset(editor.CaretOffset));
+                foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
+            }
+            else if (e.Text == "{")
+            {
+                foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
             }
         }
 
