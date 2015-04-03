@@ -141,6 +141,8 @@ namespace Spedit.UI
             LayoutDocument layoutDocument = new LayoutDocument();
             layoutDocument.Title = name;
             layoutDocument.Closing += layoutDocument_Closing;
+            layoutDocument.IsSelectedChanged += layoutDocument_IsSelectedChanged;
+            layoutDocument.ToolTip = filePath;
             EditorElement editor = new EditorElement(filePath);
             editor.Parent = layoutDocument;
             layoutDocument.Content = editor;
@@ -149,10 +151,16 @@ namespace Spedit.UI
             DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
         }
 
+        private void layoutDocument_IsSelectedChanged(object sender, EventArgs e)
+        {
+            UpdateWindowTitle();
+        }
+
         private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ((EditorElement)((LayoutDocument)sender).Content).Close();
             e.Cancel = true;
+            UpdateWindowTitle();
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -259,6 +267,19 @@ namespace Spedit.UI
         private void CloseErrorResultGrid(object sender, RoutedEventArgs e)
         {
             CompileOutputRow.Height = new GridLength(8.0);
+        }
+
+        private void UpdateWindowTitle()
+        {
+            EditorElement ee = GetCurrentEditorElement();
+            if (ee == null)
+            {
+                this.Title = "SPEdit";
+            }
+            else
+            {
+                this.Title = ee.FullFilePath;
+            }
         }
 
         private int GetLineInteger(string lineStr)
