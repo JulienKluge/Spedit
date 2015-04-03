@@ -139,7 +139,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                 }
                 if (token[i].Kind == SPTokenKind.Name)
                 {
-                    if (token[i].Value == "return")
+                    if (token[i].Value == "return" && GetTokenSave(i + 1, token, length).Kind != SPTokenKind.Semicolon)
                     {
                         outString.Append("return ");
                         continue;
