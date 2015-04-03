@@ -196,6 +196,14 @@ namespace Spedit.Utils.SPSyntaxTidy
                         --SingleIndentationSegmentScope;
                         --indentationLevel;
                     }
+                    if (token[i].Value == "&") //addressof operator
+                    {
+                        if (GetTokenSave(i - 1, token, length).Kind == SPTokenKind.Name && GetTokenSave(i + 1, token, length).Kind == SPTokenKind.Name)
+                        {
+                            outString.Append(" &");
+                            continue;
+                        }
+                    }
                 }
                 outString.Append(token[i].Value);
             }
