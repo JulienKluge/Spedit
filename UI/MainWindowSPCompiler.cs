@@ -335,17 +335,19 @@ namespace Spedit.UI
             Program.MainWindow.Dispatcher.Invoke(() =>
             {
                 EnableServerAnim.Begin();
+                UpdateWindowTitle();
             });
             ServerProcess.WaitForExit();
             ServerProcess.Dispose();
+            ServerIsRunning = false;
             Program.MainWindow.Dispatcher.Invoke(() =>
             {
                 if (Program.MainWindow.IsLoaded)
                 {
                     DisableServerAnim.Begin();
+                    UpdateWindowTitle();
                 }
             });
-            ServerIsRunning = false;
         }
 
 

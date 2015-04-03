@@ -272,14 +272,20 @@ namespace Spedit.UI
         private void UpdateWindowTitle()
         {
             EditorElement ee = GetCurrentEditorElement();
+            string outString;
             if (ee == null)
             {
-                this.Title = "SPEdit";
+                outString = "SPEdit";
             }
             else
             {
-                this.Title = ee.FullFilePath;
+                outString = ee.FullFilePath + " - SPEdit";
             }
+            if (ServerIsRunning)
+            {
+                outString = outString + " (Server running)";
+            }
+            this.Title = outString;
         }
 
         private int GetLineInteger(string lineStr)
