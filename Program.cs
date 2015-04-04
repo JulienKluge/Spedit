@@ -73,8 +73,7 @@ namespace Spedit
                     }
                     catch (Exception e)
                     {
-                        string errorOut = "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace;
-                        File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", errorOut);
+                        File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT LOADING"));
                         MessageBox.Show("An error occured while loading." + Environment.NewLine + "A crash report was written in the editor-directory.",
                             "Error while Loading",
                             MessageBoxButton.OK,
@@ -91,6 +90,8 @@ namespace Spedit
                                 GlobalUpdater = new Updater();
                                 GlobalUpdater.CheckForUpdatesAsynchronously();
 #endif
+                                object o = null;
+                                o.ToString();
                                 app.Run(MainWindow);
                                 OptionsControlIOObject.Save();
 #if !DEBUG
@@ -99,14 +100,7 @@ namespace Spedit
                             }
                             catch (Exception e)
                             {
-
-                                string errorOut = "SPEDIT MAIN" + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "Stacktrace: " + e.StackTrace + Environment.NewLine
-                                    + "OS: " + Environment.OSVersion.VersionString;
-                                if (e.InnerException != null)
-                                {
-                                    errorOut = errorOut + Environment.NewLine + "Inner Exception: " + e.InnerException.Message;
-                                }
-                                File.WriteAllText("CRASH_1_" + Environment.TickCount.ToString() + ".txt", errorOut);
+                                File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
                                 MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
                                     "Error",
                                     MessageBoxButton.OK,
@@ -158,6 +152,50 @@ namespace Spedit
                     catch (Exception) { } //dont fuck the user up with irrelevant data
                 }
             }
+        }
+
+        private static string BuildExceptionString(Exception e, string SectionName)
+        {
+            StringBuilder outString = new StringBuilder();
+            outString.AppendLine("Section: " + SectionName);
+            outString.AppendLine(".NET Version: " + Environment.Version);
+            outString.AppendLine("OS: " + Environment.OSVersion.VersionString);
+            outString.AppendLine("64 bit OS: " + ((Environment.Is64BitOperatingSystem) ? "TRUE" : "FALSE"));
+            outString.AppendLine("64 bit mode: " + ((Environment.Is64BitProcess) ? "TRUE" : "FALSE"));
+            outString.AppendLine("Dir: " + Environment.CurrentDirectory);
+            outString.AppendLine("Working Set: " + (Environment.WorkingSet / 1024).ToString() + " kb");
+            outString.AppendLine("Installed UI Culture: " + System.Globalization.CultureInfo.InstalledUICulture ?? "null");
+            outString.AppendLine("Current UI Culture: " + System.Globalization.CultureInfo.CurrentUICulture ?? "null");
+            outString.AppendLine("Current Culture: " + System.Globalization.CultureInfo.CurrentCulture ?? "null");
+            outString.AppendLine();
+            Exception current = e;
+            int eNumber = 1;
+            for (; ; )
+            {
+                if (e == null)
+                {
+                    break;
+                }
+                outString.AppendLine("Exception " + eNumber.ToString());
+                outString.AppendLine("Message:");
+                outString.AppendLine(e.Message);
+                outString.AppendLine("Stacktrace:");
+                outString.AppendLine(e.StackTrace);
+                outString.AppendLine("Source:");
+                outString.AppendLine(e.Source ?? "null");
+                outString.AppendLine("HResult Code:");
+                outString.AppendLine(e.HResult.ToString());
+                outString.AppendLine("Helplink:");
+                outString.AppendLine(e.HelpLink ?? "null");
+                if (e.TargetSite != null)
+                {
+                    outString.AppendLine("Targetsite Name:");
+                    outString.AppendLine(e.TargetSite.Name ?? "null");
+                }
+                e = e.InnerException;
+                eNumber++;
+            }
+            return (eNumber - 1).ToString() + Environment.NewLine + outString.ToString();
         }
     }
 }
