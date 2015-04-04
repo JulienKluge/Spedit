@@ -29,8 +29,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
         public string Editor_FontFamily = "Consolas";
-        public double Editor_ScrollSpeed = 0.01;
-        public bool Editor_NativeScrolling = false;
+        //public double Editor_ScrollSpeed = 0.01;
+        public double Editor_ScrollLines = 4.0;
         public bool Editor_AgressiveIndentation = true;
         public bool Editor_ReformatLineAfterSemicolon = true;
 
@@ -67,20 +67,22 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                 {
                     case 0:
                         {
-                            this.Editor_NativeScrolling = false;
                             this.UI_ShowToolBar = false;
                             this.Editor_ReformatLineAfterSemicolon = true;
+                            this.Editor_ScrollLines = 4.0;
                             break;
                         }
                     case 1:
                         {
-                            this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4
+                            this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4 TO FALSE
                             this.Editor_ReformatLineAfterSemicolon = true;
+                            this.Editor_ScrollLines = 4.0;
                             break;
                         }
                     case 2:
                         {
                             this.Editor_ReformatLineAfterSemicolon = true;
+                            this.Editor_ScrollLines = 4.0;
                             break;
                         }
                 }

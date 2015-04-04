@@ -97,13 +97,7 @@ namespace Spedit.UI.Windows
         private void ScrollSpeed_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
-            Program.OptionsObject.Editor_ScrollSpeed = ScrollSpeed.Value / 1000.0;
-        }
-
-        private void NScrolling_Changed(object sender, RoutedEventArgs e)
-        {
-            if (!AllowChanging) { return; }
-            Program.OptionsObject.Editor_NativeScrolling = NativeScrolling.IsChecked.Value;
+            Program.OptionsObject.Editor_ScrollLines = ScrollSpeed.Value;
         }
 
         private void WordWrap_Changed(object sender, RoutedEventArgs e)
@@ -171,8 +165,7 @@ namespace Spedit.UI.Windows
             ShowToolBar.IsChecked = Program.OptionsObject.UI_ShowToolBar;
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
-            ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollSpeed * 1000.0;
-            NativeScrolling.IsChecked = Program.OptionsObject.Editor_NativeScrolling;
+            ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollLines;
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
             AgressiveIndentation.IsChecked = Program.OptionsObject.Editor_AgressiveIndentation;
             LineReformatting.IsChecked = Program.OptionsObject.Editor_ReformatLineAfterSemicolon;

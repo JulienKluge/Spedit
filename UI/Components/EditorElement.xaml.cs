@@ -38,6 +38,8 @@ namespace Spedit.UI.Components
         Storyboard FadeJumpGridIn;
         Storyboard FadeJumpGridOut;
 
+        double LineHeight = 0.0;
+
         public string FullFilePath
         {
             get { return _FullFilePath; }
@@ -127,7 +129,7 @@ namespace Spedit.UI.Components
 
             editor.FontFamily = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             editor.WordWrap = Program.OptionsObject.Editor_WordWrap;
-            UpdateFontSize(Program.OptionsObject.Editor_FontSize);
+            UpdateFontSize(Program.OptionsObject.Editor_FontSize, false);
 
             colorizeSelection = new ColorizeSelection();
             editor.TextArea.TextView.LineTransformers.Add(colorizeSelection);
@@ -326,12 +328,16 @@ namespace Spedit.UI.Components
             }
         }
 
-        public void UpdateFontSize(double size)
+        public void UpdateFontSize(double size, bool UpdateLineHeight = true)
         {
             if (size > 2 && size < 31)
             {
                 editor.FontSize = size;
                 StatusLine_FontSize.Text = size.ToString("n0") + " pt";
+            }
+            if (UpdateLineHeight)
+            {
+                LineHeight = editor.TextArea.TextView.DefaultLineHeight;
             }
         }
 
@@ -423,9 +429,14 @@ namespace Spedit.UI.Components
                 UpdateFontSize(editor.FontSize + Math.Sign(e.Delta));
                 e.Handled = true;
             }
-            else if (!Program.OptionsObject.Editor_NativeScrolling)
+            else
             {
-                editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
+                if (LineHeight == 0.0)
+                {
+                    LineHeight = editor.TextArea.TextView.DefaultLineHeight;
+                }
+                editor.ScrollToVerticalOffset(editor.VerticalOffset - (Math.Sign((double)e.Delta) * LineHeight * Program.OptionsObject.Editor_ScrollLines));
+                //editor.ScrollToVerticalOffset(editor.VerticalOffset - ((double)e.Delta * editor.FontSize * Program.OptionsObject.Editor_ScrollSpeed));
                 e.Handled = true;
             }
             HideISAC();
