@@ -5,6 +5,7 @@ using ICSharpCode.AvalonEdit.Rendering;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.IO;
+using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,6 +140,9 @@ namespace Spedit.UI.Components
 
             editor.Load(filePath);
             _NeedsSave = false;
+
+            var encoding = new UTF8Encoding(false);
+            editor.Encoding = encoding; //let them read in whatever encoding they want - but save in UTF8
 
             foldingManager = FoldingManager.Install(editor.TextArea);
             foldingStrategy = new SPFoldingStrategy();
