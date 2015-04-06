@@ -22,6 +22,8 @@ namespace Spedit.UI.Components
     /// </summary>
     public partial class DASMElement : UserControl
     {
+        double LineHeight = 0.0;
+
         private SmxFile file_;
         private StringBuilder detail_buffer_ = new StringBuilder();
 
@@ -33,6 +35,8 @@ namespace Spedit.UI.Components
         {
             InitializeComponent();
             LoadFile(fInfo);
+
+            detailbox_.PreviewMouseWheel += PrevMouseWheel;
 
             detailbox_.Options.EnableHyperlinks = false;
             detailbox_.Options.HighlightCurrentLine = true;
@@ -58,6 +62,16 @@ namespace Spedit.UI.Components
                 return;
             }
             renderFile();
+        }
+
+        private void PrevMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (LineHeight == 0.0)
+            {
+                LineHeight = detailbox_.TextArea.TextView.DefaultLineHeight;
+            }
+            detailbox_.ScrollToVerticalOffset(detailbox_.VerticalOffset - (Math.Sign((double)e.Delta) * LineHeight * Program.OptionsObject.Editor_ScrollLines));
+            e.Handled = true;
         }
 
         private void renderFile()
