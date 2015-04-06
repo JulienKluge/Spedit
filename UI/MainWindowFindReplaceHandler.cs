@@ -104,6 +104,13 @@ namespace Spedit.UI
                 Replace();
             }
         }
+        private void FindReplaceGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Escape)
+            {
+                ToggleSearchField();
+            }
+        }
 
         private void Search()
         {

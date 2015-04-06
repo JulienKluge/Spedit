@@ -242,7 +242,7 @@
                 </DataGrid>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="225" Width="500" IsHitTestVisible="False" Opacity="0">
+        <Grid Grid.Row="2" Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="225" Width="500" IsHitTestVisible="False" Opacity="0" KeyDown="FindReplaceGrid_KeyDown">
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{StaticResource BlackBrush}" Fill="{StaticResource AccentColorBrush2}" />
             <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,40,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
             <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,5,0" Style="{StaticResource MetroFlatButton}" Click="CloseFindReplaceGrid" IsTabStop="False" Background="#11FFFFFF">
