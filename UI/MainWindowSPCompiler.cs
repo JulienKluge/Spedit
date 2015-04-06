@@ -16,6 +16,7 @@ namespace Spedit.UI
     public partial class MainWindow : MetroWindow
     {
         private List<string> compiledFiles = new List<string>();
+        private List<string> nonUploadedFiles = new List<string>();
         private List<string> compiledFileNames = new List<string>();
 
         private bool InCompiling = false;
@@ -26,6 +27,7 @@ namespace Spedit.UI
             InCompiling = true;
             compiledFiles.Clear();
             compiledFileNames.Clear();
+            nonUploadedFiles.Clear();
             var c = Program.Configs[Program.SelectedConfig];
             FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
             if (spCompInfo.Exists)
@@ -139,6 +141,7 @@ namespace Spedit.UI
                                 if (File.Exists(outFile))
                                 {
                                     compiledFiles.Add(outFile);
+                                    nonUploadedFiles.Add(outFile);
                                     compiledFileNames.Add(destinationFileName);
                                 }
                                 string execResult_Post = ExecuteCommandLine(c.PostCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
@@ -177,6 +180,7 @@ namespace Spedit.UI
         {
             if (compiledFiles.Count > 0)
             {
+                nonUploadedFiles.Clear();
                 int copyCount = 0;
                 var c = Program.Configs[Program.SelectedConfig];
                 if (!string.IsNullOrWhiteSpace(c.CopyDirectory))
@@ -192,6 +196,7 @@ namespace Spedit.UI
                                 string destinationFileName = destFile.Name;
                                 string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
                                 File.Copy(compiledFiles[i], copyFileDestination, true);
+                                nonUploadedFiles.Add(copyFileDestination);
                                 stringOutput.AppendLine("Copied: " + compiledFiles[i]);
                                 ++copyCount;
                                 if (c.DeleteAfterCopy)
@@ -228,7 +233,7 @@ namespace Spedit.UI
 
         public void FTPUpload_Plugins()
         {
-            if (compiledFiles.Count <= 0)
+            if (nonUploadedFiles.Count <= 0)
             {
                 return;
             }
@@ -241,9 +246,9 @@ namespace Spedit.UI
             try
             {
                 FTP ftp = new FTP(c.FTPHost, c.FTPUser, c.FTPPassword);
-                for (int i = 0; i < compiledFiles.Count; ++i)
+                for (int i = 0; i < nonUploadedFiles.Count; ++i)
                 {
-                    FileInfo fileInfo = new FileInfo(compiledFiles[i]);
+                    FileInfo fileInfo = new FileInfo(nonUploadedFiles[i]);
                     if (fileInfo.Exists)
                     {
                         string uploadDir;
@@ -257,12 +262,12 @@ namespace Spedit.UI
                         }
                         try
                         {
-                            ftp.upload(uploadDir, compiledFiles[i]);
-                            stringOutput.AppendLine("Uploaded: " + compiledFiles[i]);
+                            ftp.upload(uploadDir, nonUploadedFiles[i]);
+                            stringOutput.AppendLine("Uploaded: " + nonUploadedFiles[i]);
                         }
                         catch (Exception e)
                         {
-                            stringOutput.AppendLine("Error while uploading file: " + compiledFiles[i]);
+                            stringOutput.AppendLine("Error while uploading file: " + nonUploadedFiles[i]);
                             stringOutput.AppendLine("Details: " + e.Message);
                         }
                     }
