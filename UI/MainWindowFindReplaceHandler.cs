@@ -46,6 +46,7 @@ namespace Spedit.UI
                 {
                     FindBox.Text = ee.editor.SelectedText;
                 }
+                FindBox.SelectAll();
                 if (Program.OptionsObject.UI_Animations)
                 {
                     FadeFindReplaceGridIn.Begin();
@@ -53,14 +54,9 @@ namespace Spedit.UI
                 else
                 {
                     FindReplaceGrid.Opacity = 1.0;
-                    FindBox.Focus();
                 }
+                FindBox.Focus();
             }
-        }
-
-        private void FadeInCompleted_FindReplace(object sender, EventArgs e)
-        {
-            FindBox.Focus();
         }
 
         private void CloseFindReplaceGrid(object sender, RoutedEventArgs e)
