@@ -127,6 +127,7 @@ namespace Spedit.UI.Components
             editor.Options.ConvertTabsToSpaces = false;
             editor.Options.EnableHyperlinks = false;
             editor.Options.HighlightCurrentLine = true;
+            editor.Options.AllowScrollBelowDocument = true;
             editor.TextArea.SelectionCornerRadius = 0.0;
 
             editor.FontFamily = new FontFamily(Program.OptionsObject.Editor_FontFamily);
@@ -139,7 +140,15 @@ namespace Spedit.UI.Components
 
             LoadAutoCompletes();
 
-            editor.Load(filePath);
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (StreamReader reader = FileReader.OpenStream(fs, Encoding.UTF8))
+                {
+                    string source = reader.ReadToEnd();
+                    source = ((source.Replace("\r\n", "\n")).Replace("\r", "\n")).Replace("\n", "\r\n"); //normalize line endings
+                    editor.Text = source;
+                }
+            }
             _NeedsSave = false;
 
             var encoding = new UTF8Encoding(false);
