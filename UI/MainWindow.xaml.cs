@@ -58,7 +58,7 @@ namespace Spedit.UI
             {
                 for (int i = 0; i < Program.OptionsObject.LastOpenFiles.Length; ++i)
                 {
-                    TryLoadSourceFile(Program.OptionsObject.LastOpenFiles[i], false);
+                    TryLoadSourceFile(Program.OptionsObject.LastOpenFiles[i], false, true, false);
                 }
             }
             string[] args = Environment.GetCommandLineArgs();
@@ -66,14 +66,13 @@ namespace Spedit.UI
             {
                 if (!args[i].EndsWith("exe"))
                 {
-                    TryLoadSourceFile(args[i], false);
+                    TryLoadSourceFile(args[i], false, true, (i == 0));
                 }
             }
             sc.Close(TimeSpan.FromMilliseconds(500.0));
-            
         }
 
-        public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true)
+        public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true, bool SelectMe = false)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             if (fileInfo.Exists)
@@ -93,7 +92,7 @@ namespace Spedit.UI
                             }
                         }
                     }
-                    AddEditorElement(finalPath, fileInfo.Name);
+                    AddEditorElement(finalPath, fileInfo.Name, SelectMe);
                     if (TryOpenIncludes && Program.OptionsObject.Program_OpenCustomIncludes)
                     {
                         using (var textReader = fileInfo.OpenText())
@@ -136,7 +135,7 @@ namespace Spedit.UI
             return false;
         }
 
-        public void AddEditorElement(string filePath, string name)
+        public void AddEditorElement(string filePath, string name, bool SelectMe)
         {
             LayoutDocument layoutDocument = new LayoutDocument();
             layoutDocument.Title = name;
@@ -148,12 +147,16 @@ namespace Spedit.UI
             layoutDocument.Content = editor;
             EditorsReferences.Add(editor);
             DockingPane.Children.Add(layoutDocument);
-            DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
+            if (SelectMe)
+            {
+                DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
+            }
         }
 
         private void layoutDocument_IsSelectedChanged(object sender, EventArgs e)
         {
             UpdateWindowTitle();
+            ((EditorElement)((LayoutDocument)sender).Content).editor.Focus();
         }
 
         private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -217,9 +220,11 @@ namespace Spedit.UI
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                this.Activate();
+                this.Focus();
                 for (int i = 0; i < files.Length; ++i)
                 {
-                    TryLoadSourceFile(files[i], (i == 0) ? true : false);
+                    TryLoadSourceFile(files[i], (i == 0), true, (i == 0));
                 }
             }
         }

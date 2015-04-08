@@ -55,7 +55,7 @@ namespace Spedit.UI
                 {
                     for (int i = 0; i < ofd.FileNames.Length; ++i)
                     {
-                        AnyFileLoaded |= TryLoadSourceFile(ofd.FileNames[i]);
+                        AnyFileLoaded |= TryLoadSourceFile(ofd.FileNames[i], (i == 0), true, (i == 0));
                     }
                     if (!AnyFileLoaded)
                     {

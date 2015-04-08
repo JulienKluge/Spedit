@@ -72,7 +72,7 @@ namespace Spedit.UI.Windows
             FileInfo destFile = new FileInfo(PathBox.Text);
             TemplateInfo templateInfo = TemplateDictionary[(string)TemplateListBox.SelectedItem];
             File.Copy(templateInfo.Path, destFile.FullName, true);
-            Program.MainWindow.TryLoadSourceFile(destFile.FullName);
+            Program.MainWindow.TryLoadSourceFile(destFile.FullName, true, true, true);
             this.Close();
         }
 

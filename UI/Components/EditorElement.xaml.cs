@@ -1,10 +1,12 @@
 ﻿using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
-using ICSharpCode.AvalonEdit.Indentation;
 using ICSharpCode.AvalonEdit.Rendering;
+using ICSharpCode.AvalonEdit.Utils;
 using MahApps.Metro.Controls.Dialogs;
+using Spedit.Utils.SPSyntaxTidy;
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using System.Timers;
 using System.Windows;
@@ -13,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Xceed.Wpf.AvalonDock.Layout;
-using Spedit.Utils.SPSyntaxTidy;
 
 namespace Spedit.UI.Components
 {
