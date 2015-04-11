@@ -140,7 +140,6 @@ namespace Spedit.UI
             LayoutDocument layoutDocument = new LayoutDocument();
             layoutDocument.Title = name;
             layoutDocument.Closing += layoutDocument_Closing;
-            layoutDocument.IsSelectedChanged += layoutDocument_IsSelectedChanged;
             layoutDocument.ToolTip = filePath;
             EditorElement editor = new EditorElement(filePath);
             editor.Parent = layoutDocument;
@@ -153,10 +152,14 @@ namespace Spedit.UI
             }
         }
 
-        private void layoutDocument_IsSelectedChanged(object sender, EventArgs e)
+        private void DockingManager_ActiveContentChanged(object sender, EventArgs e)
         {
             UpdateWindowTitle();
-            ((EditorElement)((LayoutDocument)sender).Content).editor.Focus();
+            EditorElement ee = GetCurrentEditorElement();
+            if (ee != null)
+            {
+                ee.editor.Focus();
+            }
         }
 
         private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
