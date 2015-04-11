@@ -90,8 +90,6 @@ namespace Spedit
                                 GlobalUpdater = new Updater();
                                 GlobalUpdater.CheckForUpdatesAsynchronously();
 #endif
-                                object o = null;
-                                o.ToString();
                                 app.Run(MainWindow);
                                 OptionsControlIOObject.Save();
 #if !DEBUG
