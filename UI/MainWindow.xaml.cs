@@ -78,7 +78,7 @@ namespace Spedit.UI
             if (fileInfo.Exists)
             {
                 string extension = fileInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
-                if (extension == "sp" || extension == "inc" || extension == "txt")
+                if (extension == "sp" || extension == "inc" || extension == "txt" || extension == "cfg" || extension == "ini")
                 {
                     string finalPath = fileInfo.FullName;
                     EditorElement[] editors = GetAllEditorElements();
