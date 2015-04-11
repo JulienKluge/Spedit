@@ -14,8 +14,22 @@ namespace Spedit.UI
 
         public void ToggleSearchField()
         {
+            EditorElement ee = GetCurrentEditorElement();
             if (IsSearchFieldOpen)
             {
+                if (ee != null)
+                {
+                    if (ee.IsKeyboardFocusWithin)
+                    {
+                        if (ee.editor.SelectionLength > 0)
+                        {
+                            FindBox.Text = ee.editor.SelectedText;
+                        }
+                        FindBox.SelectAll();
+                        FindBox.Focus();
+                        return;
+                    }
+                }
                 IsSearchFieldOpen = false;
                 FindReplaceGrid.IsHitTestVisible = false;
                 if (Program.OptionsObject.UI_Animations)
@@ -26,7 +40,6 @@ namespace Spedit.UI
                 {
                     FindReplaceGrid.Opacity = 0.0;
                 }
-                EditorElement ee = GetCurrentEditorElement();
                 if (ee == null)
                 {
                     return;
@@ -37,7 +50,6 @@ namespace Spedit.UI
             {
                 IsSearchFieldOpen = true;
                 FindReplaceGrid.IsHitTestVisible = true;
-                EditorElement ee = GetCurrentEditorElement();
                 if (ee == null)
                 {
                     return;
