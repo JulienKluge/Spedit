@@ -19,10 +19,13 @@ namespace Spedit.UI
             {
                 if (DockingPane.SelectedContent.Content != null)
                 {
-                    var possElement = DockingPane.SelectedContent.Content;
-                    if (possElement is EditorElement)
+                    var possElement = DockingManager.ActiveContent;
+                    if (possElement != null)
                     {
-                        outElement = (EditorElement)possElement;
+                        if (possElement is EditorElement)
+                        {
+                            outElement = (EditorElement)possElement;
+                        }
                     }
                 }
             }
