@@ -41,6 +41,7 @@
     <None Include="App.config" />
     <None Include="Res\spedit1.0.1.0Update.zip" />
     <None Include="Res\spedit1.0.2.0Update.zip" />
+    <None Include="Res\spedit1.0.3.0Update.zip" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 #if (DEBUG)
-[assembly: AssemblyVersion("1.02.*")]
+[assembly: AssemblyVersion("1.03.*")]
 #else
-[assembly: AssemblyVersion("1.0.2.0")]
+[assembly: AssemblyVersion("1.0.3.0")]
 #endif

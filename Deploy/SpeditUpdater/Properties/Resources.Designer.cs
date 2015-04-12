@@ -73,9 +73,9 @@ namespace SpeditUpdater.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] spedit1_0_2_0Update {
+        internal static byte[] spedit1_0_3_0Update {
             get {
-                object obj = ResourceManager.GetObject("spedit1_0_2_0Update", resourceCulture);
+                object obj = ResourceManager.GetObject("spedit1_0_3_0Update", resourceCulture);
                 return ((byte[])(obj));
             }
         }

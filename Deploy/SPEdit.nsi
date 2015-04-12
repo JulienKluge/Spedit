@@ -43,6 +43,8 @@ File Xceed.Wpf.AvalonDock.dll
 File Xceed.Wpf.AvalonDock.Themes.Metro.dll
 File smxdasm.dll
 File LysisForSpedit.dll
+File QueryMaster.dll
+File Ionic.BZip2.dll
 File GPLv3.txt
 
 IfFileExists $INSTDIR\options_0.dat OptionsExist OptionsDoesNotExist
@@ -118,8 +120,10 @@ Delete $INSTDIR\ICSharpCode.AvalonEdit.dll
 Delete $INSTDIR\System.Windows.Interactivity.dll
 Delete $INSTDIR\Xceed.Wpf.AvalonDock.dll
 Delete $INSTDIR\Xceed.Wpf.AvalonDock.Themes.Metro.dll
-Delete smxdasm.dll
-Delete LysisForSpedit.dll
+Delete $INSTDIR\smxdasm.dll
+Delete $INSTDIR\LysisForSpedit.dll
+Delete $INSTDIR\QueryMaster.dll
+Delete $INSTDIR\Ionic.BZip2.dll
 Delete $INSTDIR\GPLv3.txt
 Delete $INSTDIR\*.dat
 RMDir /r $INSTDIR\sourcepawn
