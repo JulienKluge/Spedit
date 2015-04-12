@@ -114,7 +114,11 @@
     <Compile Include="Interop\PipeInteropClient.cs" />
     <Compile Include="Interop\PipeInteropServer.cs" />
     <Compile Include="Interop\OptionsControl.cs" />
-    <Compile Include="Interop\Updater\Updater.cs" />
+    <Compile Include="Interop\Updater\UpdateCheck.cs" />
+    <Compile Include="Interop\Updater\UpdateInfo.cs" />
+    <Compile Include="Interop\Updater\UpdateWindow.xaml.cs">
+      <DependentUpon>UpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -172,6 +176,10 @@
     <Compile Include="Utils\SPSyntaxTidy\SPTokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Interop\Updater\UpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Components\ColorChangeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

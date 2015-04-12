@@ -70,6 +70,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.UI_ShowToolBar = false;
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
+                            this.Program_CheckForUpdates = true;
                             break;
                         }
                     case 1:
@@ -77,12 +78,14 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4 TO FALSE
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
+                            this.Program_CheckForUpdates = true;
                             break;
                         }
                     case 2:
                         {
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
+                            this.Program_CheckForUpdates = true;
                             break;
                         }
                 }

@@ -17,10 +17,10 @@ namespace Spedit
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
-        //public static CondensedSourcepawnDefinition spDefinition;
         public static Config[] Configs;
-        public static Updater GlobalUpdater;
         public static int SelectedConfig = 0;
+
+        public static UpdateInfo UpdateStatus;
 
         [STAThread]
         public static void Main(string[] args)
@@ -37,6 +37,7 @@ namespace Spedit
 #endif
                         SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
                         splashScreen.Show(false, true);
+                        UpdateStatus = new UpdateInfo();
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                         OptionsObject = OptionsControlIOObject.Load();
                         for (int i = 0; i < args.Length; ++i)
@@ -87,14 +88,13 @@ namespace Spedit
                             {
                                 Application app = new Application();
 #if !DEBUG
-                                GlobalUpdater = new Updater();
-                                GlobalUpdater.CheckForUpdatesAsynchronously();
+                                if (OptionsObject.Program_CheckForUpdates)
+                                {
+                                    UpdateCheck.Check(true);
+                                }
 #endif
                                 app.Run(MainWindow);
                                 OptionsControlIOObject.Save();
-#if !DEBUG
-                                GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
-#endif
                             }
                             catch (Exception e)
                             {
@@ -110,14 +110,13 @@ namespace Spedit
                         {
                             Application app = new Application();
 #if !DEBUG
-                            GlobalUpdater = new Updater();
-                            GlobalUpdater.CheckForUpdatesAsynchronously();
+                            if (OptionsObject.Program_CheckForUpdates)
+                            {
+                                UpdateCheck.Check(true);
+                            }
 #endif
                             app.Run(MainWindow);
                             OptionsControlIOObject.Save();
-#if !DEBUG
-                            GlobalUpdater.StopThreadAndCheckIfUpdateIsAvailable();
-#endif
                         }
                 }
                 else

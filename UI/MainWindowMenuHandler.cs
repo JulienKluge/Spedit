@@ -1,8 +1,11 @@
 ﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Spedit.Interop.Updater;
 using Spedit.UI.Components;
 using Spedit.UI.Windows;
+using System;
 using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -214,14 +217,36 @@ namespace Spedit.UI
 
         private void UpdateCheck_Click(object sender, RoutedEventArgs e)
         {
-            UpdateCheckItem.IsEnabled = false;
-            if (Program.GlobalUpdater != null)
+            UpdateCheck.Check(false);
+            var status = Program.UpdateStatus;
+            if (status.IsAvailable)
             {
-                Program.GlobalUpdater.Stop();
+                UpdateWindow uWindow = new UpdateWindow(status) { Owner = this };
+                uWindow.ShowDialog();
+                if (uWindow.Succeeded)
+                {
+                    Command_SaveAll();
+                    lock (Program.UpdateStatus)
+                    {
+                        Program.UpdateStatus.WriteAble = false;
+                        Program.UpdateStatus.IsAvailable = false;
+                    }
+                    this.Close();
+                }
             }
-            Updater u = new Updater() { OverrideOptions = true, UIFeedback = true };
-            Program.GlobalUpdater = u;
-            Program.GlobalUpdater.CheckForUpdatesAsynchronously();
+            else
+            {
+                if (status.GotException)
+                {
+                    this.ShowMessageAsync("Failed to check", "Error while checking for updates." + Environment.NewLine + "Details: " + status.ExceptionMessage
+                        , MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                }
+                else
+                {
+                    this.ShowMessageAsync("Version up to date", "Your program version " + Assembly.GetEntryAssembly().GetName().Version.ToString() + " is up to date."
+                        , MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                }
+            }
         }
 
         private void MenuButton_Compile(object sender, RoutedEventArgs e)

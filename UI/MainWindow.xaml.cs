@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Layout;
+using Spedit.Interop.Updater;
 
 namespace Spedit.UI
 {
@@ -50,7 +51,6 @@ namespace Spedit.UI
             FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
             EnableServerAnim = (Storyboard)this.Resources["EnableServerAnim"];
             DisableServerAnim = (Storyboard)this.Resources["DisableServerAnim"];
-            UpdateCheckItem.IsEnabled = !Program.OptionsObject.Program_CheckForUpdates; //they dont have to search it manually when it is already done..
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);
 #endif
@@ -216,6 +216,13 @@ namespace Spedit.UI
 				}
 			}
             Program.OptionsObject.LastOpenFiles = lastOpenFiles.ToArray();
+#if !DEBUG
+            if (Program.UpdateStatus.IsAvailable)
+            {
+                UpdateWindow updateWin = new UpdateWindow(Program.UpdateStatus) { Owner = this };
+                updateWin.ShowDialog();
+            }
+#endif
         }
 
         private void MetroWindow_Drop(object sender, DragEventArgs e)
