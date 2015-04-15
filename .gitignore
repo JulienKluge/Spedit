@@ -30,11 +30,6 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
-# Build Results of an ATL Project
-[Dd]ebugPS/
-[Rr]eleasePS/
-dlldata.c
-
 *_i.c
 *_p.c
 *_i.h
@@ -62,14 +57,6 @@ dlldata.c
 
 # Chutzpah Test files
 _Chutzpah*
-
-# Visual C++ cache files
-ipch/
-*.aps
-*.ncb
-*.opensdf
-*.sdf
-*.cachefile
 
 # Visual Studio profiler
 *.psess
@@ -107,9 +94,6 @@ AutoTest.Net/
 # Web workbench (sass)
 .sass-cache/
 
-# Installshield output folder
-[Ee]xpress/
-
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
 DocProject/Help/*.HxT
@@ -140,10 +124,6 @@ publish/
 # If using the old MSBuild-Integrated Package Restore, uncomment this:
 #!**/packages/repositories.config
 
-# Windows Azure Build Output
-csx/
-*.build.csdef
-
 # Windows Store app package directory
 AppPackages/
 
@@ -159,9 +139,6 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
-
-# RIA/Silverlight projects
-Generated_Code/
 
 # Backup & report files from converting an old project file
 # to a newer Visual Studio version. Backup files are not needed,
