@@ -162,11 +162,15 @@ namespace Spedit.UI
             }
         }
 
+        private void DockingManager_DocumentClosing(object sender, Xceed.Wpf.AvalonDock.DocumentClosingEventArgs e)
+        {
+            ((EditorElement)e.Document.Content).Close();
+            UpdateWindowTitle();
+        }
+
         private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ((EditorElement)((LayoutDocument)sender).Content).Close();
-            e.Cancel = true;
-            UpdateWindowTitle();
+            
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

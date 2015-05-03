@@ -205,7 +205,8 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="White" Foreground="Black" ActiveContentChanged="DockingManager_ActiveContentChanged">
+            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="White" Foreground="Black"
+                                 ActiveContentChanged="DockingManager_ActiveContentChanged" DocumentClosing="DockingManager_DocumentClosing">
                 <dock:DockingManager.Theme>
                     <dock:MetroTheme />
                 </dock:DockingManager.Theme>
@@ -217,8 +218,8 @@
                     </dock:LayoutPanel>
                 </dock:LayoutRoot>
             </dock:DockingManager>
-            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" Background="{StaticResource GrayBrush5}" />
-            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,0,0" Style="{StaticResource MetroFlatButton}" Click="CloseErrorResultGrid">
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" Background="{DynamicResource GrayBrush5}" />
+            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,0,0" Style="{DynamicResource MetroFlatButton}" Click="CloseErrorResultGrid">
                 <Canvas Width="10" Height="10" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
                     <Path Width="10" Height="10" Stretch="Fill" Fill="{DynamicResource BlackBrush}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>
                 </Canvas>
@@ -243,31 +244,31 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Name="FindReplaceGrid" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,35,22,0" Height="225" Width="500" IsHitTestVisible="False" Opacity="0" KeyDown="FindReplaceGrid_KeyDown">
-            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{StaticResource BlackBrush}" Fill="{StaticResource AccentColorBrush2}" />
+            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{DynamicResource BlackBrush}" Fill="{DynamicResource AccentColorBrush2}" />
             <TextBox Name="FindBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,5,40,5" Height="45" controls:TextBoxHelper.Watermark="Find" VerticalScrollBarVisibility="Visible" TextChanged="SearchBoxTextChanged" KeyDown="SearchBoxKeyUp" />
-            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,5,0" Style="{StaticResource MetroFlatButton}" Click="CloseFindReplaceGrid" IsTabStop="False" Background="#11FFFFFF">
+            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,5,0" Style="{DynamicResource MetroFlatButton}" Click="CloseFindReplaceGrid" IsTabStop="False" Background="#11FFFFFF">
                 <Canvas Width="10" Height="10" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">
                     <Path Width="10" Height="10" Stretch="Fill" Fill="{DynamicResource WhiteBrush}" Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "/>
                 </Canvas>
             </Button>
             <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" Height="45" controls:TextBoxHelper.Watermark="Replace" VerticalScrollBarVisibility="Visible" KeyDown="ReplaceBoxKeyUp" />
-            <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{StaticResource WhiteBrush}" Click="SearchButtonClicked" />
-            <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{StaticResource WhiteBrush}" />
-            <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{StaticResource WhiteBrush}" />
-            <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{StaticResource WhiteBrush}" />
+            <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{DynamicResource WhiteBrush}" Click="SearchButtonClicked" />
+            <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{DynamicResource WhiteBrush}" />
+            <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{DynamicResource WhiteBrush}" />
+            <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{DynamicResource WhiteBrush}" />
             <ComboBox Name="FindDestinies" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,105,0,0" Width="150">
                 <ComboBox.Items>
                     <ComboBoxItem IsSelected="True" Content="Current Document" />
                     <ComboBoxItem Content="All Open Documents" />
                 </ComboBox.Items>
             </ComboBox>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{StaticResource MetroFlatButton}"  />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
             <controls:SplitButton Name="ReplaceButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,137,5,0" Width="150" Click="ReplaceButtonClicked" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{StaticResource MetroFlatButton}"  />
-            <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{StaticResource WhiteBrush}" />
-            <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{StaticResource WhiteBrush}" />
-            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,190,5,5" Text="" Width="Auto" FontSize="14" Foreground="{StaticResource WhiteBrush}" IsHitTestVisible="False" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
+            <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{DynamicResource WhiteBrush}" />
+            <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{DynamicResource WhiteBrush}" />
+            <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,190,5,5" Text="" Width="Auto" FontSize="14" Foreground="{DynamicResource WhiteBrush}" IsHitTestVisible="False" />
         </Grid>
-        <Rectangle Grid.Row="2" x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{StaticResource AccentColorBrush4}" />
+        <Rectangle Grid.Row="2" x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{DynamicResource AccentColorBrush4}" />
     </Grid>
 </controls:MetroWindow>

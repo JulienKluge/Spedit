@@ -56,7 +56,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Background="White">
+    <Grid Background="{DynamicResource WhiteColorBrush}">
         <editor:TextEditor x:Name="editor" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,20" ShowLineNumbers="True" FontFamily="Consolas"
                            TextChanged="editor_TextChanged">
             <editor:TextEditor.ContextMenu>
