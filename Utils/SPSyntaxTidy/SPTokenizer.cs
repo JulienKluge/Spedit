@@ -51,7 +51,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                         continue;
                     }
                 }
-                if (c == '\'') //I sell that as a comment...kill me right?
+                if (c == '\'') //I sell that as a quote...kill me right?
                 {
                     int startIndex = i;
                     bool foundOccurence = false;
@@ -177,7 +177,23 @@ namespace Spedit.Utils.SPSyntaxTidy
                     token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = "=" });
                     continue;
                 }
-                if (c == '<' || c == '>' || c == '!' || c == '|' || c == '&' || c == '+' || c == '-' || c == '*' || c == '/')
+                if (c == '?' || c == '%')
+                {
+                    token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = c.ToString() });
+                    continue;
+                }
+                if (c == ':')
+                {
+                    if (i > 0)
+                    {
+                        if (buffer[i - 1] == ' ' || buffer[i - 1] == '\t')
+                        {
+                            token.Add(new SPToken() { Kind = SPTokenKind.Operator, Value = ":" });
+                            continue;
+                        }
+                    }
+                }
+                if (c == '<' || c == '>' || c == '!' || c == '|' || c == '&' || c == '+' || c == '-' || c == '*' || c == '/' || c == '^')
                 {
                     if ((i + 1) < length)
                     {
