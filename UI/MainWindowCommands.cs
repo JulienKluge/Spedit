@@ -67,6 +67,7 @@ namespace Spedit.UI
                     }
                 }
             }
+            this.Activate();
         }
 
         private void Command_Save()
