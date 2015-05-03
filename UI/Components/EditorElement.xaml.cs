@@ -333,7 +333,10 @@ namespace Spedit.UI.Components
                 {
                     fileWatcher.EnableRaisingEvents = false;
                 }
-                editor.Save(_FullFilePath);
+                using (FileStream fs = new FileStream(_FullFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    editor.Save((Stream)fs);
+                }
                 NeedsSave = false;
                 if (fileWatcher != null)
                 {
