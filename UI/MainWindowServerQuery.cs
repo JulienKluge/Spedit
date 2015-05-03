@@ -64,7 +64,7 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.AppendLine("sm plugins reload " + compiledFileNames[i]);
+                    replacement.Append("sm plugins reload " + compiledFileNames[i] + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_reload}", replacement.ToString());
@@ -75,7 +75,7 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.AppendLine("sm plugins load " + compiledFileNames[i]);
+                    replacement.Append("sm plugins load " + compiledFileNames[i] + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_load}", replacement.ToString());
@@ -86,7 +86,7 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.AppendLine("sm plugins unload " + compiledFileNames[i]);
+                    replacement.Append("sm plugins unload " + compiledFileNames[i] + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_unload}", replacement.ToString());
