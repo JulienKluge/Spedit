@@ -29,8 +29,18 @@ namespace Spedit.UI
             compiledFileNames.Clear();
             nonUploadedFiles.Clear();
             var c = Program.Configs[Program.SelectedConfig];
-            FileInfo spCompInfo = new FileInfo(Path.Combine(c.SMDirectory, "spcomp.exe"));
-            if (spCompInfo.Exists)
+            FileInfo spCompInfo = null;
+            bool SpCompFound = false;
+            foreach (string dir in c.SMDirectories)
+            {
+                spCompInfo = new FileInfo(Path.Combine(dir, "spcomp.exe"));
+                if (spCompInfo.Exists)
+                {
+                    SpCompFound = true;
+                    break;
+                }
+            }
+            if (SpCompFound)
             {
                 List<string> filesToCompile = new List<string>();
                 if (All)
@@ -97,7 +107,17 @@ namespace Spedit.UI
                                 if (File.Exists(outFile)) { File.Delete(outFile); }
                                 string errorFile = Environment.CurrentDirectory + @"\sourcepawn\errorfiles\error_" + Environment.TickCount.ToString() + "_" + file.GetHashCode().ToString("X") + "_" + i.ToString() + ".txt";
                                 if (File.Exists(errorFile)) { File.Delete(errorFile); }
-                                process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\" -i=\"" + c.SMDirectory + "\" -O=" + c.OptimizeLevel.ToString() + " -v=" + c.VerboseLevel.ToString();
+
+                                StringBuilder includeDirectories = new StringBuilder();
+                                foreach (string dir in c.SMDirectories)
+                                {
+                                    includeDirectories.Append(" -i=\"" + dir + "\"");
+                                }
+
+                                string includeStr = string.Empty;
+                                includeStr = includeDirectories.ToString();
+
+                                process.StartInfo.Arguments = "\"" + fileInfo.FullName + "\" -o=\"" + outFile + "\" -e=\"" + errorFile + "\"" + includeStr + " -O=" + c.OptimizeLevel.ToString() + " -v=" + c.VerboseLevel.ToString();
                                 progressTask.SetProgress((((double)(i + 1)) - 0.5d) / ((double)compileCount));
                                 string execResult = ExecuteCommandLine(c.PreCmd, fileInfo.DirectoryName, c.CopyDirectory, fileInfo.FullName, fileInfo.Name, outFile, destinationFileName);
                                 if (!string.IsNullOrWhiteSpace(execResult))

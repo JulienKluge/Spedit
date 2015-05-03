@@ -53,7 +53,9 @@ namespace Spedit.UI.Windows
             AllowChange = false;
             Config c = Program.Configs[index];
             C_Name.Text = c.Name;
-            C_SMDir.Text = c.SMDirectory;
+            StringBuilder SMDirOut = new StringBuilder();
+            foreach (string dir in c.SMDirectories) { SMDirOut.Append(dir.Trim() + ";"); }
+            C_SMDir.Text = SMDirOut.ToString();
             C_AutoCopy.IsChecked = c.AutoCopy;
             C_CopyDir.Text = c.CopyDirectory;
             C_ServerFile.Text = c.ServerFile;
@@ -115,7 +117,14 @@ namespace Spedit.UI.Windows
         private void C_SMDir_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!AllowChange) { return; }
-            Program.Configs[ConfigListBox.SelectedIndex].SMDirectory = C_SMDir.Text;
+            string[] SMDirs = C_SMDir.Text.Split(';');
+            List<string> dirs = new List<string>();
+            foreach (string dir in SMDirs)
+            {
+                string d = dir.Trim();
+                dirs.Add(d);
+            }
+            Program.Configs[ConfigListBox.SelectedIndex].SMDirectories = dirs.ToArray();
             NeedsSMDefInvalidation = true;
         }
 
@@ -257,7 +266,9 @@ namespace Spedit.UI.Windows
                     Config c = Program.Configs[i];
                     writer.WriteStartElement("Config");
                     writer.WriteAttributeString("Name", c.Name);
-                    writer.WriteAttributeString("SMDirectory", c.SMDirectory);
+                    StringBuilder SMDirOut = new StringBuilder();
+                    foreach (string dir in c.SMDirectories) { SMDirOut.Append(dir.Trim() + ";"); }
+                    writer.WriteAttributeString("SMDirectory", SMDirOut.ToString());
                     writer.WriteAttributeString("Standard", (c.Standard) ? "1" : "0");
                     writer.WriteAttributeString("CopyDirectory", c.CopyDirectory);
                     writer.WriteAttributeString("AutoCopy", (c.AutoCopy) ? "1" : "0");

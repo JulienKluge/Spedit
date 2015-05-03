@@ -8,25 +8,30 @@ namespace Spedit.SPCondenser
 {
     public static class SourcepawnCondenser
     {
-        public static CondensedSourcepawnDefinition Condense(string Path)
+        public static CondensedSourcepawnDefinition Condense(string[] Paths)
         {
             SourcepawnDefinitionCondeser csd = new SourcepawnDefinitionCondeser();
-            if (!Directory.Exists(Path))
-            {
-                return csd.FinalCondense();
-            }
             StringBuilder wholeSource = new StringBuilder();
-            string[] files = Directory.GetFiles(Path, "*.inc", SearchOption.AllDirectories);
-            for (int i = 0; i < files.Length; ++i)
+            for (int j = 0; j < Paths.Length; ++j)
             {
-                wholeSource.AppendLine(File.ReadAllText(files[i]));
+                if (Directory.Exists(Paths[j]))
+                {
+                    string[] files = Directory.GetFiles(Paths[j], "*.inc", SearchOption.AllDirectories);
+                    for (int i = 0; i < files.Length; ++i)
+                    {
+                        wholeSource.AppendLine(File.ReadAllText(files[i]));
+                    }
+                }
             }
-            string source = wholeSource.ToString();
-            FunctionsCondenser.Condense(source, ref csd);
-            Regex removeMultilineComments = new Regex(@"/\*.*?\*/", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
-            source = removeMultilineComments.Replace(source, string.Empty);
-            EnumCondenser.Condense(source, ref csd);
-            ConstantsCondenser.Condense(source, ref csd);
+            string source = wholeSource.ToString().Trim();
+            if (source.Length > 5) //lol..
+            {
+                FunctionsCondenser.Condense(source, ref csd);
+                Regex removeMultilineComments = new Regex(@"/\*.*?\*/", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
+                source = removeMultilineComments.Replace(source, string.Empty);
+                EnumCondenser.Condense(source, ref csd);
+                ConstantsCondenser.Condense(source, ref csd);
+            }
             return csd.FinalCondense();
         }
     }

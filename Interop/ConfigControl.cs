@@ -33,7 +33,17 @@ namespace Spedit.Interop
                     {
                         XmlNode node = mainNode.ChildNodes[i];
                         string _Name = ReadAttributeStringSafe(ref node, "Name", "UNKOWN CONFIG " + (i + 1).ToString());
-                        string _SMDirectory = ReadAttributeStringSafe(ref node, "SMDirectory", "");
+                        string _SMDirectoryStr = ReadAttributeStringSafe(ref node, "SMDirectory", "");
+                        string[] SMDirectoriesSplitted = _SMDirectoryStr.Split(';');
+                        List<string> SMDirs = new List<string>();
+                        foreach (string dir in SMDirectoriesSplitted)
+                        {
+                            string d = dir.Trim();
+                            if (Directory.Exists(d))
+                            {
+                                SMDirs.Add(d);
+                            }
+                        }
                         string _Standard = ReadAttributeStringSafe(ref node, "Standard", "0");
                         bool IsStandardConfig = false;
                         if (_Standard != "0" && !string.IsNullOrWhiteSpace(_Standard))
@@ -91,7 +101,7 @@ namespace Spedit.Interop
                         Config c = new Config()
                         {
                             Name = _Name,
-                            SMDirectory = _SMDirectory,
+                            SMDirectories = SMDirs.ToArray(),
                             Standard = IsStandardConfig
                             ,
                             AutoCopy = _AutoCopy,
@@ -161,7 +171,7 @@ namespace Spedit.Interop
 
         public bool AutoCopy = false;
 
-        public string SMDirectory = string.Empty;
+        public string[] SMDirectories = new string[0];
         public string CopyDirectory = string.Empty;
         public string ServerFile = string.Empty;
         public string ServerArgs = string.Empty;
@@ -209,7 +219,7 @@ namespace Spedit.Interop
             }
             try
             {
-                this.SMDef = SourcepawnCondenser.Condense(SMDirectory);
+                this.SMDef = SourcepawnCondenser.Condense(SMDirectories);
             }
             catch (Exception)
             {

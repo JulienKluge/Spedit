@@ -35,7 +35,8 @@
         <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="201,35,0,0">
             <Grid Margin="0,5,0,5">
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,00,0,0" Text="Name: " IsHitTestVisible="False" />
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Text="Scripting Directory: " IsHitTestVisible="False" />
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Text="Scripting Directories: " IsHitTestVisible="False" />
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,43,0,0" Text="(Delimit with ; )" IsHitTestVisible="False" Foreground="Gray" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,65,0,0" Text="Copy Directory: " IsHitTestVisible="False" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,95,0,0" Text="Server Executable: " IsHitTestVisible="False" />
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,0,0" Text="Server-Start Arguments: " IsHitTestVisible="False" />

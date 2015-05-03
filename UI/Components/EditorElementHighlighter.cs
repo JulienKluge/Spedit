@@ -243,6 +243,10 @@ namespace Spedit.UI.Components
             {
                 keywords = RegexKeywordsHelper.ConvertToAtomicRegexAbleStringArray(keywords);
             }
+            if (keywords.Length == 0)
+            {
+                return new Regex("SPEdit_Error"); //hehe 
+            }
             bool UseAtomicRegex = true;
             for (int j = 0; j < keywords.Length; ++j)
             {
