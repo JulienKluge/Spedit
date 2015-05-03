@@ -13,7 +13,7 @@ namespace Spedit
 {
     public static class Program
     {
-        public const string ProgramInternalVersion = "3";
+        public const string ProgramInternalVersion = "4";
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
@@ -82,11 +82,11 @@ namespace Spedit
                         Environment.Exit(Environment.ExitCode);
                     }
 #endif
+                        Application app = new Application();
                         if (InSafe)
                         {
                             try
                             {
-                                Application app = new Application();
 #if !DEBUG
                                 if (OptionsObject.Program_CheckForUpdates)
                                 {
@@ -108,7 +108,6 @@ namespace Spedit
                         }
                         else
                         {
-                            Application app = new Application();
 #if !DEBUG
                             if (OptionsObject.Program_CheckForUpdates)
                             {

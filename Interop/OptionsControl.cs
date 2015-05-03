@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 3;
-        public int Version = 3;
+        public static int SVersion = 4;
+        public int Version = 4;
 
         public byte[] Program_CryptoKey = null;
 
@@ -75,7 +75,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                         }
                     case 1:
                         {
-                            this.UI_ShowToolBar = true; //TODO: CHANGE ON RELEASE 4 TO FALSE
+                            this.UI_ShowToolBar = false;
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
@@ -86,6 +86,10 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
+                            break;
+                        }
+                    case 3:
+                        {
                             break;
                         }
                 }
