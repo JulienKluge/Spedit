@@ -934,11 +934,13 @@ namespace Lysis
                 dumpArray(address, var.dims[level].size);
                 return;
             }
-
-            Debug.Assert(false);
-
-            for (int i = 0; i < var.dims[i].size; i++)
+            int maxI = var.dims.Length;
+            for (int i = 0; i < maxI; i++)
             {
+                if (var.dims[i].size >= i)
+                {
+                    break;
+                }
                 int abase = address + i * 4;
                 int inner = file_.int32FromData(abase);
                 int final = abase + inner;

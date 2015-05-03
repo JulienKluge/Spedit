@@ -356,8 +356,12 @@ namespace Lysis
         private static LogicOperator ToLogicOp(DJumpCondition jcc)
         {
             NodeBlock trueTarget = BlockAnalysis.EffectiveTarget(jcc.trueTarget);
-            LConstant constant = (LConstant)trueTarget.lir.instructions[0];
-            bool targetIsTruthy = (constant.val == 1);
+            bool targetIsTruthy = false;
+            if (trueTarget.lir.instructions[0] is LConstant)
+            {
+                LConstant constant = (LConstant)trueTarget.lir.instructions[0];
+                targetIsTruthy = (constant.val == 1);
+            }
 
             // jump on true -> 1 == ||
             // jump on false -> 0 == &&

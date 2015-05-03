@@ -818,7 +818,14 @@ namespace SourcePawn
         }
         public override int int32FromData(int address)
         {
-            return BitConverter.ToInt32(data.bytes, address);
+            if ((address - 4) <= data.bytes.Length)
+            {
+                return BitConverter.ToInt32(data.bytes, address);
+            }
+            else
+            {
+                return 0;
+            }
         }
         public override float floatFromData(int address)
         {
