@@ -197,7 +197,7 @@
                 </ToolBar>
             </ToolBarTray>
         </Grid>
-        <Grid Grid.Row="1" Background="{StaticResource AccentColorBrush}">
+        <Grid Grid.Row="1" Background="{DynamicResource AccentColorBrush}">
             <controls:MetroProgressBar Name="ServerProgressBar" HorizontalAlignment="Stretch" IsIndeterminate="False" Height="0" MinHeight="0" Foreground="White" />
         </Grid>
         <Grid Grid.Row="2">

@@ -384,8 +384,6 @@ namespace Spedit.UI.Components
                 }
             }
             Program.MainWindow.EditorsReferences.Remove(this);
-            Parent.Close();
-            Program.MainWindow.DockingPane.Children.Remove(Parent);
             Parent = null; //to prevent a ring depency which disables the GC from work
 
         }

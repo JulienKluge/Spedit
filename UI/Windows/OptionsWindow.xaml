@@ -24,8 +24,8 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
-        <controls:MetroAnimatedSingleRowTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,15,0,0">
-            <controls:MetroTabItem Header="Program">
+        <controls:MetroAnimatedSingleRowTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,15,0,0" controls:TabControlHelper.IsUnderlined="True">
+            <controls:MetroTabItem Header=" Program ">
                 <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <Grid>
                         <CheckBox Name="HardwareAcc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Use Hardware Acceleration (if available)" Checked="HardwareAcc_Changed" Unchecked="HardwareAcc_Changed" />
@@ -37,7 +37,7 @@
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header="Editor">
+            <controls:MetroTabItem Header=" Editor ">
                 <ScrollViewer>
                     <Grid>
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Font Size:" IsHitTestVisible="False" />
