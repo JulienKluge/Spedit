@@ -335,7 +335,14 @@ namespace Spedit.UI.Components
                 }
                 using (FileStream fs = new FileStream(_FullFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    editor.Save((Stream)fs);
+                    try
+                    {
+                        editor.Save((Stream)fs);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(Program.MainWindow, "An error occured while saving." + Environment.NewLine + "(" + e.Message + ")", "save error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
                 NeedsSave = false;
                 if (fileWatcher != null)
