@@ -33,6 +33,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public double Editor_ScrollLines = 4.0;
         public bool Editor_AgressiveIndentation = true;
         public bool Editor_ReformatLineAfterSemicolon = true;
+        public bool Editor_ReplaceTabsToWhitespace = false;
 
         public string[] LastOpenFiles = new string[0];
 
@@ -71,6 +72,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
+                            this.Editor_ReplaceTabsToWhitespace = false;
                             break;
                         }
                     case 1:
@@ -79,6 +81,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
+                            this.Editor_ReplaceTabsToWhitespace = false;
                             break;
                         }
                     case 2:
@@ -86,10 +89,12 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ReformatLineAfterSemicolon = true;
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
+                            this.Editor_ReplaceTabsToWhitespace = false;
                             break;
                         }
                     case 3:
                         {
+                            this.Editor_ReplaceTabsToWhitespace = false;
                             break;
                         }
                 }

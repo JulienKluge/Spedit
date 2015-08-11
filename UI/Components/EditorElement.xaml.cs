@@ -129,6 +129,7 @@ namespace Spedit.UI.Components
             editor.Options.HighlightCurrentLine = true;
             editor.Options.AllowScrollBelowDocument = true;
             editor.TextArea.SelectionCornerRadius = 0.0;
+            editor.Options.ConvertTabsToSpaces = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 
             editor.FontFamily = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             editor.WordWrap = Program.OptionsObject.Editor_WordWrap;

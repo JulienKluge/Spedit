@@ -127,6 +127,21 @@ namespace Spedit.UI.Windows
             Program.OptionsObject.Editor_ReformatLineAfterSemicolon = LineReformatting.IsChecked.Value;
         }
 
+        private void TabToSpace_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!AllowChanging) { return; }
+            bool replaceTabs = TabToSpace.IsChecked.Value;
+            Program.OptionsObject.Editor_ReplaceTabsToWhitespace = replaceTabs;
+            EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
+            if (editors != null)
+            {
+                for (int i = 0; i < editors.Length; ++i)
+                {
+                    editors[i].editor.Options.ConvertTabsToSpaces = replaceTabs;
+                }
+            }
+        }
+
         private void FontFamily_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
@@ -169,6 +184,7 @@ namespace Spedit.UI.Windows
             WordWrap.IsChecked = Program.OptionsObject.Editor_WordWrap;
             AgressiveIndentation.IsChecked = Program.OptionsObject.Editor_AgressiveIndentation;
             LineReformatting.IsChecked = Program.OptionsObject.Editor_ReformatLineAfterSemicolon;
+            TabToSpace.IsChecked = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
             FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             LoadSH();
