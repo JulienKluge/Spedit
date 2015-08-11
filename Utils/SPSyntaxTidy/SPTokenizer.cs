@@ -46,10 +46,16 @@ namespace Spedit.Utils.SPSyntaxTidy
                             }
                         }
                     }
-                    if (foundOccurence)
+                    if (!foundOccurence)
                     {
-                        continue;
+                        token.Add(new SPToken() { Kind = SPTokenKind.Quote, Value = source.Substring(startIndex) });
+                        /* We are doing this, because the reformatter is often called while formating a single line.
+                         * When open quotes are there, we don't want them to be reformatted. So we tread them like
+                         * closed ones.
+                        */
+                        i = length; //skip whole loop
                     }
+                    continue;
                 }
                 if (c == '\'') //I sell that as a quote...kill me right?
                 {
@@ -97,7 +103,7 @@ namespace Spedit.Utils.SPSyntaxTidy
                             token.Add(new SPToken() { Kind = SPTokenKind.SingleLineComment, Value = source.Substring(startIndex, endIndex - startIndex + 1) });
                             continue;
                         }
-                        else if (buffer[i + 3] < length) //this have to be true because of the closing phrase '*/'
+                        else if ((i + 3) < length) //this have to be true because of the closing phrase '*/'
                         {
                             if (buffer[i + 1] == '*') //aaaaaand, multilinecomment...
                             {
