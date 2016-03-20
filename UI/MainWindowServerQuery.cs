@@ -64,7 +64,7 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.Append("sm plugins reload " + compiledFileNames[i] + ";");
+                    replacement.Append("sm plugins reload " + StripSMXPostFix(compiledFileNames[i]) + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_reload}", replacement.ToString());
@@ -75,7 +75,7 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.Append("sm plugins load " + compiledFileNames[i] + ";");
+                    replacement.Append("sm plugins load " + StripSMXPostFix(compiledFileNames[i]) + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_load}", replacement.ToString());
@@ -86,12 +86,21 @@ namespace Spedit.UI
                 replacement.AppendLine();
                 for (int i = 0; i < compiledFileNames.Count; ++i)
                 {
-                    replacement.Append("sm plugins unload " + compiledFileNames[i] + ";");
+                    replacement.Append("sm plugins unload " + StripSMXPostFix(compiledFileNames[i]) + ";");
                 }
                 replacement.AppendLine();
                 input = input.Replace("{plugins_unload}", replacement.ToString());
             }
             return input;
+        }
+
+        private string StripSMXPostFix(string fileName)
+        {
+            if (fileName.EndsWith(".smx"))
+            {
+                return fileName.Substring(0, fileName.Length - 4);
+            }
+            return fileName;
         }
     }
 }
