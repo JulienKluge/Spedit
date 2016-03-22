@@ -52,11 +52,10 @@ namespace Spedit.Interop
                 {
                     if (_window.IsLoaded)
                     {
-                        if (_window.WindowState == System.Windows.WindowState.Minimized)
+                        if (_window.TryLoadSourceFile(files[i]) && _window.WindowState == System.Windows.WindowState.Minimized)
                         {
                             _window.WindowState = System.Windows.WindowState.Normal;
                         }
-                        _window.TryLoadSourceFile(files[i]);
                     }
                 });
             }
