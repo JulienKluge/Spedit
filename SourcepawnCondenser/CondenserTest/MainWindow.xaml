@@ -1,0 +1,23 @@
+﻿<Window x:Class="CondenserTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CondenserTest"
+        mc:Ignorable="d"
+         Title="MainWindow" Height="500" Width="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBox Name="textBox" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True" TextChanged="textBox_TextChanged" Margin="0,0,0,25" SelectionChanged="CaretPositionChangedEvent" />
+        <Label Name="CaretLabel" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="0 / 0" />
+        <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <StackPanel Name="tokenStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" />
+        </ScrollViewer>
+        <TreeView Name="termTree" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,25,0,0" />
+        <CheckBox Name="ExpandBox" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Content="Always Expand" IsChecked="False" />
+    </Grid>
+</Window>
