@@ -100,7 +100,7 @@ namespace Spedit.UI.Components
                 });
                 rs.Rules.Add(new HighlightingRule() //context keywords
                 {
-                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "stock", "normal", "native", "public", "static", "const", "methodmap", "enum", "forward", "function", "struct", "property", "get", "set", "typeset", "typedef" }),
+                    Regex = RegexKeywordsHelper.GetRegexFromKeywords(new string[] { "stock", "normal", "native", "public", "static", "const", "methodmap", "enum", "forward", "function", "struct", "property", "get", "set", "typeset", "typedef", "this" }),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_ContextKeywords) }
                 });
                 rs.Rules.Add(new HighlightingRule() //value types
