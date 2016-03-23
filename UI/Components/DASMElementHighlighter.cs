@@ -56,35 +56,35 @@ namespace Spedit.UI.Components
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Numbers) }
                 });
                 var def = Program.Configs[Program.SelectedConfig].GetSMDef();
-                if (def.Types.Length > 0)
+                if (def.TypeStrings.Length > 0)
                 {
                     rs.Rules.Add(new HighlightingRule() //Types
                     {
-                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.Types, true),
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.TypeStrings, true),
                         Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Colors.Gray) }
                     });
                 }
-                if (def.Constants.Length > 0)
+                if (def.ConstantsStrings.Length > 0)
                 {
                     rs.Rules.Add(new HighlightingRule() //constants
                     {
-                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.Constants, true),
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.ConstantsStrings, true),
                         Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Colors.Gray) }
                     });
                 }
-                if (def.FunctionNames.Length > 0)
+                if (def.FunctionStrings.Length > 0)
                 {
                     rs.Rules.Add(new HighlightingRule() //Functions
                     {
-                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.FunctionNames, true),
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.FunctionStrings, true),
                         Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Colors.Gray) }
                     });
                 }
-                if (def.MethodNames.Length > 0)
+                if (def.MethodsStrings.Length > 0)
                 {
                     rs.Rules.Add(new HighlightingRule() //Methods
                     {
-                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.MethodNames, true),
+                        Regex = RegexKeywordsHelper.GetRegexFromKeywords(def.MethodsStrings, true),
                         Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Colors.Gray) }
                     });
                 }

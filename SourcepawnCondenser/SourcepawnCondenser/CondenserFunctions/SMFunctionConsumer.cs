@@ -211,6 +211,7 @@ namespace SourcepawnCondenser
 				Index = t[startPosition].Index,
 				Length = (parameterDeclIndexEnd - t[startPosition].Index) + 1,
 				Name = functionName,
+				FullName = TrimFullname(source.Substring(t[startPosition].Index, (parameterDeclIndexEnd - t[startPosition].Index) + 1)),
 				ReturnType = functionReturnType,
 				CommentString = Condenser.TrimComments(functionCommentString),
 				Parameters = functionParameters.ToArray() });

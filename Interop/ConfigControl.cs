@@ -1,4 +1,5 @@
-﻿using Spedit.SPCondenser;
+﻿using SourcepawnCondenser;
+using SourcepawnCondenser.SourcemodDefinition;
 using Spedit.Utils;
 using System;
 using System.Collections.Generic;
@@ -195,9 +196,9 @@ namespace Spedit.Interop
         public string RConPassword = string.Empty;
         public string RConCommands = string.Empty;
 
-        private CondensedSourcepawnDefinition SMDef;
+        private SMDefinition SMDef;
 
-        public CondensedSourcepawnDefinition GetSMDef()
+        public SMDefinition GetSMDef()
         {
             if (SMDef == null)
             {
@@ -219,11 +220,13 @@ namespace Spedit.Interop
             }
             try
             {
-                this.SMDef = SourcepawnCondenser.Condense(SMDirectories);
+				SMDefinition def = new SMDefinition();
+				def.AppendFiles(SMDirectories);
+				SMDef = def;
             }
             catch (Exception)
             {
-                this.SMDef = new CondensedSourcepawnDefinition(); //this could be dangerous...
+                this.SMDef = new SMDefinition(); //this could be dangerous...
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿using MahApps.Metro.Controls;
-using Spedit.SPCondenser;
+using SourcepawnCondenser.SourcemodDefinition;
 using System;
 using System.Collections.Generic;
 using System.Timers;
@@ -14,7 +14,7 @@ namespace Spedit.UI.Windows
     /// </summary>
     public partial class SPDefinitionWindow : MetroWindow
     {
-        CondensedSourcepawnDefinition def;
+        SMDefinition def;
 
         SPDefEntry[] defArray;
         ListViewItem[] items;
@@ -22,7 +22,7 @@ namespace Spedit.UI.Windows
 
         public SPDefinitionWindow()
         {
-            InitializeComponent();
+            /*InitializeComponent();
             def = Program.Configs[Program.SelectedConfig].GetSMDef();
             if (def == null)
             {
@@ -45,17 +45,17 @@ namespace Spedit.UI.Windows
                 items[i] = new ListViewItem() { Content = defArray[i].Name, Tag = defArray[i].Entry };
                 SPBox.Items.Add(items[i]);
             }
-            searchTimer.Elapsed += searchTimer_Elapsed;
+            searchTimer.Elapsed += searchTimer_Elapsed;*/
         }
 
         void searchTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            DoSearch();
+            //DoSearch();
         }
 
         private void SPFunctionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            object obj = SPBox.SelectedItem;
+            /*object obj = SPBox.SelectedItem;
             if (obj == null) { return; }
             ListViewItem item = (ListViewItem)obj;
             object TagValue = item.Tag;
@@ -79,19 +79,19 @@ namespace Spedit.UI.Windows
             }
             SPNameBlock.Text = (string)item.Content;
             SPFullNameBlock.Text = string.Empty;
-            SPCommentBox.Text = string.Empty;
+            SPCommentBox.Text = string.Empty;*/
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SPProgress.IsIndeterminate = true;
-            searchTimer.Stop();
-            searchTimer.Start();
+            //SPProgress.IsIndeterminate = true;
+            //searchTimer.Stop();
+            //searchTimer.Start();
         }
 
         private void DoSearch()
         {
-            this.Dispatcher.Invoke(() =>
+            /*this.Dispatcher.Invoke(() =>
                 {
                     int itemCount = defArray.Length;
                     string searchString = SPSearchBox.Text.ToLowerInvariant();
@@ -114,18 +114,18 @@ namespace Spedit.UI.Windows
                         SPSearchBox.Background = Brushes.LightYellow;
                     }
                     SPProgress.IsIndeterminate = false;
-                });
+                });*/
         }
 
         private class SPDefEntry
         {
-            public string Name;
+            /*public string Name;
             public object Entry;
 
             public static explicit operator SPDefEntry(SPFunction func)
             {
                 return new SPDefEntry() { Name = func.Name, Entry = func };
-            }
+            }*/
         }
     }
 }

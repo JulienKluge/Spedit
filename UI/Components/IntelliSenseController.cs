@@ -1,7 +1,7 @@
 ﻿using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Rendering;
-using Spedit.SPCondenser;
+using SourcepawnCondenser.SourcemodDefinition;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -35,7 +35,7 @@ namespace Spedit.UI.Components
         private int LastShowedLine = -1;
 
         private string[] funcNames;
-        private SPFunction[] funcs;
+        private SMFunction[] funcs;
         private ACNode[] acEntrys;
         private ISNode[] isEntrys;
         //private string[] methodNames;
@@ -58,10 +58,10 @@ namespace Spedit.UI.Components
                 HideISAC();
             }
             var def = Program.Configs[Program.SelectedConfig].GetSMDef();
-            funcNames = def.FunctionNames;
-            funcs = def.Functions;
-            acEntrys = def.ACNodes;
-            isEntrys = def.ISNodes;
+            funcNames = def.FunctionStrings;
+			funcs = def.Functions.ToArray();
+            acEntrys = def.ProduceACNodes();
+            isEntrys = def.ProduceISNodes();
             AutoCompleteBox.Items.Clear();
             MethodAutoCompleteBox.Items.Clear();
             for (int i = 0; i < acEntrys.Length; ++i)
@@ -183,7 +183,7 @@ namespace Spedit.UI.Components
                                             xPos = ISMatches[j].Groups["name"].Index + ISMatches[j].Groups["name"].Length;
                                             ForwardShowIS = true;
                                             ISFuncNameStr = funcs[k].FullName;
-                                            ISFuncDescriptionStr = funcs[k].Comment;
+                                            ISFuncDescriptionStr = funcs[k].CommentString;
                                             ForceReSet = true;
                                             break;
                                         }

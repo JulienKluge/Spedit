@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Spedit</RootNamespace>
     <AssemblyName>Spedit</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -56,6 +56,7 @@
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="App\App.config" />
     <None Include="Deploy\DotNetChecker.nsh" />
     <None Include="Deploy\FileAssociation.nsh" />
@@ -124,10 +125,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SPCondenser\ConstantsCondenser.cs" />
-    <Compile Include="SPCondenser\EnumCondenser.cs" />
-    <Compile Include="SPCondenser\FunctionsCondenser.cs" />
-    <Compile Include="SPCondenser\SourcepawnCondenser.cs" />
     <Compile Include="UI\Components\ColorChangeControl.xaml.cs">
       <DependentUpon>ColorChangeControl.xaml</DependentUpon>
     </Compile>
@@ -490,6 +487,10 @@
     <ProjectReference Include="Lysis\LysisForSpedit.csproj">
       <Project>{a8d94e5a-0cdc-4f01-8801-5770b3ca2b5b}</Project>
       <Name>LysisForSpedit</Name>
+    </ProjectReference>
+    <ProjectReference Include="SourcepawnCondenser\SourcepawnCondenser\SourcepawnCondenser.csproj">
+      <Project>{b4e00f2d-dd73-42c7-a0ca-ba92b2a05850}</Project>
+      <Name>SourcepawnCondenser</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
