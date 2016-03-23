@@ -145,15 +145,46 @@ namespace SourcepawnCondenser
             {
                 line = (lines[i].Trim()).TrimStart('/', '*', ' ', '\t');
                 if (!string.IsNullOrWhiteSpace(line))
-                {
-                    if (line.StartsWith("@"))
-                    {
-                        outString.Append("  ");
-                    }
-                    outString.AppendLine(line);
+				{
+					if (i > 0) { outString.AppendLine(); }
+					if (line.StartsWith("@param"))
+					{
+						outString.Append(FormatParamLineString(line));
+					}
+					else
+					{
+						outString.Append(line);
+					}
                 }
             }
             return outString.ToString();
         }
+		public static string TrimFullname(string name)
+		{
+			StringBuilder outString = new StringBuilder();
+			string[] lines = name.Split('\r', '\n');
+			for (int i = 0; i < lines.Length; ++i)
+			{
+				if (!string.IsNullOrWhiteSpace(lines[i]))
+				{
+					if (i > 0)
+					{
+						outString.Append(" ");
+					}
+					outString.Append(lines[i].Trim(' ', '\t'));
+				}
+			}
+			return outString.ToString();
+		}
+
+		private static string FormatParamLineString(string line)
+		{
+			string[] split = line.Replace('\t', ' ').Split(new char[] { ' ' }, 3);
+			if (split.Length > 2)
+			{
+				return ("@param " + split[1]).PadRight(24, ' ') + " " + split[2].Trim(' ', '\t');
+			}
+			return line;
+		}
 	}
 }
