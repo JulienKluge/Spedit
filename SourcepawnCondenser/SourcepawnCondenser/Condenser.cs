@@ -15,8 +15,7 @@ namespace SourcepawnCondenser
 		int length = 0;
 		SMDefinition def = null;
 		string source = string.Empty;
-
-
+		
 		string FileName = string.Empty;
 
 		public Condenser(string sourceCode, string fileName)
@@ -26,6 +25,10 @@ namespace SourcepawnCondenser
 			length = t.Length;
 			def = new SMDefinition();
 			source = sourceCode;
+			if (fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase))
+			{
+				fileName = fileName.Substring(0, fileName.Length - 4);
+			}
 			FileName = fileName;
 		}
 

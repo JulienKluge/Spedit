@@ -64,7 +64,8 @@ namespace SourcepawnCondenser
 				{
 					return -1;
 				}
-				def.Enums.Add(new SMEnum() { Index = startIndex, Length = (t[endTokenIndex].Index - startIndex) + 1, Entries = entries.ToArray(), Name = enumName });
+				def.Enums.Add(new SMEnum() { Index = startIndex, Length = (t[endTokenIndex].Index - startIndex) + 1, File = FileName,
+					Entries = entries.ToArray(), Name = enumName });
 				return endTokenIndex;
 			}
 			return -1;

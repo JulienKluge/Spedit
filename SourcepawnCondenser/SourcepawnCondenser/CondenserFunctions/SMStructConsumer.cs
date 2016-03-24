@@ -49,7 +49,7 @@ namespace SourcepawnCondenser
 				{
 					return -1;
 				}
-				def.Structs.Add(new SMStruct() { Index = startIndex, Length = (t[endTokenIndex].Index - startIndex) + 1, Name = structName });
+				def.Structs.Add(new SMStruct() { Index = startIndex, Length = (t[endTokenIndex].Index - startIndex) + 1, File = FileName, Name = structName });
 				return endTokenIndex;
 			}
 			return -1;

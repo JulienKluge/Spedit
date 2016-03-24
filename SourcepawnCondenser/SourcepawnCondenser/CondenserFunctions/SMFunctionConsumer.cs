@@ -209,6 +209,7 @@ namespace SourcepawnCondenser
 			def.Functions.Add(new SMFunction() {
 				FunctionKind = kind,
 				Index = t[startPosition].Index,
+				File = FileName,
 				Length = (parameterDeclIndexEnd - t[startPosition].Index) + 1,
 				Name = functionName,
 				FullName = TrimFullname(source.Substring(t[startPosition].Index, (parameterDeclIndexEnd - t[startPosition].Index) + 1)),

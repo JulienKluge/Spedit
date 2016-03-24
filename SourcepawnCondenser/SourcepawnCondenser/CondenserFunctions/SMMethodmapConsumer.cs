@@ -209,7 +209,7 @@ namespace SourcepawnCondenser
                             {
                                 methods.Add(new SMMethodmapMethod() { Index = mStartIndex, Name = methodName, ReturnType = methodReturnValue, MethodKind = functionIndicators.ToArray(),
                                     Parameters = parameters.ToArray(), FullName = TrimFullname(source.Substring(mStartIndex, (mEndIndex - mStartIndex) + 1)),
-									Length = (mEndIndex - mStartIndex) +1, CommentString = Condenser.TrimComments(functionCommentString) });
+									Length = (mEndIndex - mStartIndex) +1, CommentString = Condenser.TrimComments(functionCommentString), MethodmapName = methodMapName, File = FileName });
                             }
                         }
                     }
@@ -217,7 +217,8 @@ namespace SourcepawnCondenser
                 }
                 if (enteredBlock && braceIndex == 0)
                 {
-                    var mm = new SMMethodmap() { Index = startIndex, Length = t[lastIndex].Index - startIndex + 1, Name = methodMapName, Type = methodMapType, InheritedType = inheriteType };
+                    var mm = new SMMethodmap() { Index = startIndex, Length = t[lastIndex].Index - startIndex + 1, Name = methodMapName, File = FileName,
+						Type = methodMapType, InheritedType = inheriteType };
                     mm.Methods.AddRange(methods);
                     def.Methodmaps.Add(mm);
                 }
