@@ -22,6 +22,8 @@
         <ListBox Name="SPBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="0,30,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
         <TextBlock Name="SPNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,15,0,0" FontSize="20" Foreground="{StaticResource AccentColorBrush}" IsHitTestVisible="False" />
         <TextBlock Name="SPFullNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,45,0,0" FontSize="18" IsHitTestVisible="False" />
-        <TextBox Name="SPCommentBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="305,80,5,5" IsReadOnly="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" />
+        <TextBlock Name="SPFileBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,75,0,0" FontSize="16" IsHitTestVisible="False" Foreground="Gray" />
+        <TextBlock Name="SPTypeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,105,0,0" FontSize="16" IsHitTestVisible="False" Foreground="Gray" />
+        <TextBox Name="SPCommentBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="305,135,5,5" IsReadOnly="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" />
     </Grid>
 </controls:MetroWindow>

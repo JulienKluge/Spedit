@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using SourcepawnCondenser.SourcemodDefinition;
-using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Timers;
 using System.Windows;
@@ -22,7 +22,7 @@ namespace Spedit.UI.Windows
 
         public SPDefinitionWindow()
         {
-            /*InitializeComponent();
+            InitializeComponent();
             def = Program.Configs[Program.SelectedConfig].GetSMDef();
             if (def == null)
             {
@@ -31,12 +31,27 @@ namespace Spedit.UI.Windows
                 return;
             }
             List<SPDefEntry> defList = new List<SPDefEntry>();
-            for (int i = 0; i < def.Functions.Length; ++i) { defList.Add((SPDefEntry)def.Functions[i]); }
-            for (int i = 0; i < def.Constants.Length; ++i) { defList.Add(new SPDefEntry() { Name = def.Constants[i], Entry = "Constant" }); }
-            for (int i = 0; i < def.Types.Length; ++i) { defList.Add(new SPDefEntry() { Name = def.Types[i], Entry = "Type" }); }
-            for (int i = 0; i < def.MethodNames.Length; ++i) { defList.Add(new SPDefEntry() { Name = def.MethodNames[i], Entry = "Method" }); }
-            for (int i = 0; i < def.Properties.Length; ++i) { defList.Add(new SPDefEntry() { Name = def.Properties[i], Entry = "Property" }); }
-            defList.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+            for (int i = 0; i < def.Functions.Count; ++i) { defList.Add((SPDefEntry)def.Functions[i]); }
+            for (int i = 0; i < def.Constants.Count; ++i) { defList.Add((SPDefEntry)def.Constants[i]); }
+			for (int i = 0; i < def.Enums.Count; ++i) { defList.Add((SPDefEntry)def.Enums[i]); }
+			for (int i = 0; i < def.Defines.Count; ++i) { defList.Add((SPDefEntry)def.Defines[i]); }
+			for (int i = 0; i < def.Structs.Count; ++i) { defList.Add((SPDefEntry)def.Structs[i]); }
+			for (int i = 0; i < def.Methodmaps.Count; ++i) { defList.Add((SPDefEntry)def.Methodmaps[i]); }
+			foreach (var mm in def.Methodmaps)
+			{
+				for (int i = 0; i < mm.Methods.Count; ++i)
+				{
+					defList.Add((SPDefEntry)mm.Methods[i]);
+				}
+			}
+			foreach (var e in defList)
+			{
+				if (string.IsNullOrWhiteSpace(e.Name))
+				{
+					e.Name = "--no name--";
+				}
+			}
+			defList.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
             defArray = defList.ToArray();
             int defArrayLength = defArray.Length;
             items = new ListViewItem[defArrayLength];
@@ -45,53 +60,133 @@ namespace Spedit.UI.Windows
                 items[i] = new ListViewItem() { Content = defArray[i].Name, Tag = defArray[i].Entry };
                 SPBox.Items.Add(items[i]);
             }
-            searchTimer.Elapsed += searchTimer_Elapsed;*/
+            searchTimer.Elapsed += searchTimer_Elapsed;
         }
 
         void searchTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //DoSearch();
+            DoSearch();
+			searchTimer.Stop();
         }
 
         private void SPFunctionsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*object obj = SPBox.SelectedItem;
+            object obj = SPBox.SelectedItem;
             if (obj == null) { return; }
             ListViewItem item = (ListViewItem)obj;
             object TagValue = item.Tag;
             if (TagValue != null)
             {
-                if (TagValue is SPFunction)
+                if (TagValue is SMFunction)
                 {
-                    SPFunction func = (SPFunction)TagValue;
-                    SPNameBlock.Text = func.Name;
-                    SPFullNameBlock.Text = func.FullName;
-                    SPCommentBox.Text = func.Comment;
+                    var sm = (SMFunction)TagValue;
+                    SPNameBlock.Text = sm.Name;
+                    SPFullNameBlock.Text = sm.FullName;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Function";
+					SPCommentBox.Text = sm.CommentString;
                     return;
-                }
-                else if (TagValue is string)
+				}
+				else if (TagValue is SMConstant)
+				{
+					var sm = (SMConstant)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = string.Empty;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Constant";
+					SPCommentBox.Text = string.Empty;
+					return;
+				}
+				else if (TagValue is SMEnum)
+				{
+					var sm = (SMEnum)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = string.Empty;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Enum " + sm.Entries.Length.ToString() + " entries";
+					StringBuilder outString = new StringBuilder();
+					for (int i = 0; i < sm.Entries.Length; ++i)
+					{
+						outString.Append((i.ToString() + ".").PadRight(5, ' '));
+						outString.AppendLine(sm.Entries[i]);
+					}
+					SPCommentBox.Text = outString.ToString();
+					return;
+				}
+				else if (TagValue is SMStruct)
+				{
+					var sm = (SMConstant)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = string.Empty;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Struct";
+					SPCommentBox.Text = string.Empty;
+					return;
+				}
+				else if (TagValue is SMDefine)
+				{
+					var sm = (SMDefine)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = string.Empty;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Definition";
+					SPCommentBox.Text = string.Empty;
+					return;
+				}
+				else if (TagValue is SMMethodmap)
+				{
+					var sm = (SMMethodmap)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = "Type: " + sm.Type + " - Inherited from: " + sm.InheritedType;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Methodmap " + sm.Methods.Count.ToString() + " methods - " + sm.Fields.Count.ToString() + " fields";
+					StringBuilder outString = new StringBuilder();
+					outString.AppendLine("Methods:");
+					foreach (var m in sm.Methods)
+					{
+						outString.AppendLine(m.FullName);
+					}
+					outString.AppendLine();
+					outString.AppendLine("Fields: not yet implemented...");
+					SPCommentBox.Text = outString.ToString();
+					return;
+				}
+				else if (TagValue is SMMethodmapMethod)
+				{
+					var sm = (SMMethodmapMethod)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = sm.FullName;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Method";
+					SPCommentBox.Text = sm.CommentString;
+					return;
+				}
+				else if (TagValue is string)
                 {
                     SPNameBlock.Text = (string)item.Content;
                     SPFullNameBlock.Text = (string)TagValue;
-                    SPCommentBox.Text = string.Empty;
+					SPFileBlock.Text = string.Empty;
+					SPCommentBox.Text = string.Empty;
                     return;
                 }
             }
             SPNameBlock.Text = (string)item.Content;
             SPFullNameBlock.Text = string.Empty;
-            SPCommentBox.Text = string.Empty;*/
+			SPFileBlock.Text = string.Empty;
+			SPTypeBlock.Text = string.Empty;
+			SPCommentBox.Text = string.Empty;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //SPProgress.IsIndeterminate = true;
-            //searchTimer.Stop();
-            //searchTimer.Start();
+            SPProgress.IsIndeterminate = true;
+            searchTimer.Stop();
+            searchTimer.Start();
         }
 
         private void DoSearch()
         {
-            /*this.Dispatcher.Invoke(() =>
+            this.Dispatcher.Invoke(() =>
                 {
                     int itemCount = defArray.Length;
                     string searchString = SPSearchBox.Text.ToLowerInvariant();
@@ -114,18 +209,42 @@ namespace Spedit.UI.Windows
                         SPSearchBox.Background = Brushes.LightYellow;
                     }
                     SPProgress.IsIndeterminate = false;
-                });*/
+                });
         }
 
         private class SPDefEntry
         {
-            /*public string Name;
+            public string Name;
             public object Entry;
 
-            public static explicit operator SPDefEntry(SPFunction func)
-            {
-                return new SPDefEntry() { Name = func.Name, Entry = func };
-            }*/
-        }
+			public static explicit operator SPDefEntry(SMFunction func)
+			{
+				return new SPDefEntry() { Name = func.Name, Entry = func };
+			}
+			public static explicit operator SPDefEntry(SMConstant sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMDefine sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMEnum sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMStruct sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMMethodmap sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMMethodmapMethod sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+		}
     }
 }
