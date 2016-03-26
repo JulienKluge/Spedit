@@ -122,6 +122,32 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			return nodes.ToArray();
 		}
 
+		public void MergeDefinitions(SMDefinition def)
+		{
+			Functions.AddRange(def.Functions);
+			Enums.AddRange(def.Enums);
+			Structs.AddRange(def.Structs);
+			Defines.AddRange(def.Defines);
+			Constants.AddRange(def.Constants);
+			Methodmaps.AddRange(def.Methodmaps);
+		}
+
+		public SMDefinition ProduceTemporaryExpandedDefinition(SMDefinition[] definitions)
+		{
+			SMDefinition def = new SMDefinition();
+			def.MergeDefinitions(this);
+			for (int i = 0; i < definitions.Length; ++i)
+			{
+				if (definitions[i] != null)
+				{
+					def.MergeDefinitions(definitions[i]);
+				}
+			}
+			def.Sort();
+			def.ProduceStringArrays();
+			return def;
+		}
+
 		private class SMFunctionComparer : IEqualityComparer<SMFunction>
 		{
 			public bool Equals(SMFunction left, SMFunction right)
@@ -204,6 +230,11 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			}
 			return nodeList;
 		}
+
+		public override string ToString()
+		{
+			return this.Name;
+		}
 	}
 
 	public class ISNode
@@ -220,6 +251,11 @@ namespace SourcepawnCondenser.SourcemodDefinition
 				nodeList.Add(new ISNode() { Name = strings[i], IsExecuteable = Executable });
 			}
 			return nodeList;
+		}
+
+		public override string ToString()
+		{
+			return this.Name;
 		}
 	}
 }

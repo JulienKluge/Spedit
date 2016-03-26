@@ -70,7 +70,8 @@ namespace Spedit.UI
                 }
             }
             sc.Close(TimeSpan.FromMilliseconds(500.0));
-        }
+			StartBackgroundParserThread();
+		}
 
         public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true, bool SelectMe = false)
         {
@@ -178,6 +179,14 @@ namespace Spedit.UI
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+			if (backgroundParserThread != null)
+			{
+				backgroundParserThread.Abort();
+			}
+			if (parseDistributorTimer != null)
+			{
+				parseDistributorTimer.Stop();
+			}
             if (ServerCheckThread != null)
             {
                 ServerCheckThread.Abort(); //a join would not work, so we have to be..forcefully...

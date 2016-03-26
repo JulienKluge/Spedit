@@ -24,7 +24,8 @@ namespace Spedit.UI.Components
         Regex ISFindRegex = new Regex(@"\b(?<name>[a-zA-Z_][a-zA-Z0-9_]+)\(", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
         Regex multilineCommentRegex = new Regex(@"/\*.*?\*/", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
 
-        private bool ISAC_Open = false;
+		public ulong LastSMDefUpdateUID = 0;
+        public bool ISAC_Open = false;
         private bool AC_Open = false;
         private bool IS_Open = false;
 
@@ -53,26 +54,51 @@ namespace Spedit.UI.Components
                 FadeACOut.Completed += FadeACOut_Completed;
                 AnimationsLoaded = true;
             }
-            if (ISAC_Open)
-            {
-                HideISAC();
-            }
-            var def = Program.Configs[Program.SelectedConfig].GetSMDef();
+			SMDefinition def;
+			if (ISAC_Open)
+			{
+				HideISAC();
+			}
+			def = Program.Configs[Program.SelectedConfig].GetSMDef();
             funcNames = def.FunctionStrings;
 			funcs = def.Functions.ToArray();
             acEntrys = def.ProduceACNodes();
             isEntrys = def.ProduceISNodes();
-            AutoCompleteBox.Items.Clear();
-            MethodAutoCompleteBox.Items.Clear();
-            for (int i = 0; i < acEntrys.Length; ++i)
+            //AutoCompleteBox.Items.Clear();
+            //MethodAutoCompleteBox.Items.Clear();
+			AutoCompleteBox.ItemsSource = acEntrys;
+			MethodAutoCompleteBox.ItemsSource = isEntrys;
+            /*for (int i = 0; i < acEntrys.Length; ++i)
             {
                 AutoCompleteBox.Items.Add(acEntrys[i].Name);
             }
             for (int i = 0; i < isEntrys.Length; ++i)
             {
                 MethodAutoCompleteBox.Items.Add(isEntrys[i].Name);
-            }
+            }*/
         }
+
+		public void InterruptLoadAutoCompletes(string[] FunctionStrings, SMFunction[] FunctionArray, ACNode[] acNodes, ISNode[] isNodes)
+		{
+			this.Dispatcher.Invoke(() => {
+				funcNames = FunctionStrings;
+				funcs = FunctionArray;
+				acEntrys = acNodes;
+				isEntrys = isNodes;
+				//AutoCompleteBox.Items.Clear();
+				//MethodAutoCompleteBox.Items.Clear();
+				AutoCompleteBox.ItemsSource = acEntrys;
+				MethodAutoCompleteBox.ItemsSource = isEntrys;
+				/*for (int i = 0; i < acEntrys.Length; ++i)
+				{
+					AutoCompleteBox.Items.Add(acEntrys[i].Name);
+				}
+				for (int i = 0; i < isEntrys.Length; ++i)
+				{
+					MethodAutoCompleteBox.Items.Add(isEntrys[i].Name);
+				}*/
+			});
+		}
 
         private void EvaluateIntelliSense()
         {
@@ -317,7 +343,7 @@ namespace Spedit.UI.Components
                             string replaceString;
                             if (AC_IsFuncC)
                             {
-                                replaceString = (string)AutoCompleteBox.SelectedItem;
+                                replaceString = ((ACNode)AutoCompleteBox.SelectedItem).Name;
                                 if (acEntrys[AutoCompleteBox.SelectedIndex].IsExecuteable)
                                 {
                                     replaceString = replaceString + "(";
@@ -325,7 +351,7 @@ namespace Spedit.UI.Components
                             }
                             else
                             {
-                                replaceString = (string)MethodAutoCompleteBox.SelectedItem;
+                                replaceString = ((ISNode)MethodAutoCompleteBox.SelectedItem).Name;
                                 if (isEntrys[MethodAutoCompleteBox.SelectedIndex].IsExecuteable)
                                 {
                                     replaceString = replaceString + "(";
