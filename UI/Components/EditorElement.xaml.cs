@@ -126,6 +126,7 @@ namespace Spedit.UI.Components
             _FullFilePath = filePath;
             editor.Options.ConvertTabsToSpaces = false;
             editor.Options.EnableHyperlinks = false;
+			editor.Options.EnableEmailHyperlinks = false;
             editor.Options.HighlightCurrentLine = true;
             editor.Options.AllowScrollBelowDocument = true;
             editor.TextArea.SelectionCornerRadius = 0.0;
