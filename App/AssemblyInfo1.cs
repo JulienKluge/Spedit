@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 #if (DEBUG)
 [assembly: AssemblyVersion("1.05.*")]
 #else
-[assembly: AssemblyVersion("1.0.3.2")]
+[assembly: AssemblyVersion("1.1.0.0")]
 #endif
