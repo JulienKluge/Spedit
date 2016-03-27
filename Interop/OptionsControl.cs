@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 4;
-        public int Version = 4;
+        public static int SVersion = 5;
+        public int Version = 5;
 
         public byte[] Program_CryptoKey = null;
 
@@ -22,6 +22,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool Program_OpenCustomIncludes = false;
         public bool Program_OpenIncludesRecursively = false;
+
+		public bool Program_DynamicISAC = true;
 
         public bool UI_Animations = true;
         public bool UI_ShowToolBar = false;
@@ -73,7 +75,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
-                            break;
+							this.Program_DynamicISAC = true;
+							break;
                         }
                     case 1:
                         {
@@ -82,7 +85,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
-                            break;
+							this.Program_DynamicISAC = true;
+							break;
                         }
                     case 2:
                         {
@@ -90,13 +94,20 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Editor_ScrollLines = 4.0;
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
-                            break;
+							this.Program_DynamicISAC = true;
+							break;
                         }
                     case 3:
                         {
                             this.Editor_ReplaceTabsToWhitespace = false;
-                            break;
+							this.Program_DynamicISAC = true;
+							break;
                         }
+					case 4:
+						{
+							this.Program_DynamicISAC = true;
+							break;
+						}
                 }
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars
