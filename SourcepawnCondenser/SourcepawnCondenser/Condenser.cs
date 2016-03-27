@@ -160,7 +160,7 @@ namespace SourcepawnCondenser
 					}
                 }
             }
-            return outString.ToString();
+            return outString.ToString().Trim();
         }
 		public static string TrimFullname(string name)
 		{
