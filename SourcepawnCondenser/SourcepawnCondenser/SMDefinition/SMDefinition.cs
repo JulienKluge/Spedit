@@ -20,7 +20,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		//public string[] StructStrings = new string[0]; NOT NEEDED
 		//public string[] DefinesStrings = new string[0]; NOT NEEDED
 		public string[] ConstantsStrings = new string[0]; //ATTENTION: THIS IS NOT THE LIST OF ALL CONSTANTS - IT INCLUDES MUCH MORE
-		//public string[] MethodmapsStrings = new string[0]; NOT NEEDED
+		public string[] MethodmapsStrings = new string[0];
 		public string[] MethodsStrings = new string[0];
 		public string[] TypeStrings = new string[0];
 
@@ -71,14 +71,17 @@ namespace SourcepawnCondenser.SourcemodDefinition
 				FunctionStrings[i] = Functions[i].Name;
 			}
 			List<string> methodNames = new List<string>();
+			List<string> methodmapNames = new List<string>();
 			foreach (var mm in Methodmaps)
 			{
+				methodmapNames.Add(mm.Name);
 				foreach (var m in mm.Methods)
 				{
 					methodNames.Add(m.Name);
 				}
 			}
 			MethodsStrings = methodNames.ToArray();
+			MethodmapsStrings = methodmapNames.ToArray();
 			List<string> constantNames = new List<string>();
 			foreach (var i in Constants)
 			{
@@ -107,11 +110,12 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		{
 			List<ACNode> nodes = new List<ACNode>();
 			nodes.Capacity = Enums.Count + Structs.Count + Constants.Count + Functions.Count;
-			nodes.AddRange(ACNode.ConvertFromStringArray(FunctionStrings, true));
-			nodes.AddRange(ACNode.ConvertFromStringArray(TypeStrings, false));
-			nodes.AddRange(ACNode.ConvertFromStringArray(ConstantsStrings, false));
-			nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList();
-			nodes.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+			nodes.AddRange(ACNode.ConvertFromStringArray(FunctionStrings, true, "▲ "));
+			nodes.AddRange(ACNode.ConvertFromStringArray(TypeStrings, false, "♦ "));
+			nodes.AddRange(ACNode.ConvertFromStringArray(ConstantsStrings, false, "• "));
+			nodes.AddRange(ACNode.ConvertFromStringArray(MethodmapsStrings, false, "↨ "));
+			//nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList(); Methodmaps and Functions can and will the same.
+			nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
 			return nodes.ToArray();
 		}
 		public ISNode[] ProduceISNodes()
@@ -200,10 +204,10 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		public class ACNodeEqualityComparer : IEqualityComparer<ACNode>
 		{
 			public bool Equals(ACNode nodeA, ACNode nodeB)
-			{ return nodeA.Name == nodeB.Name; }
+			{ return nodeA.EntryName == nodeB.EntryName; }
 
 			public int GetHashCode(ACNode node)
-			{ return node.Name.GetHashCode(); }
+			{ return node.EntryName.GetHashCode(); }
 		}
 		public class ISNodeEqualityComparer : IEqualityComparer<ISNode>
 		{
@@ -218,15 +222,16 @@ namespace SourcepawnCondenser.SourcemodDefinition
 	public class ACNode
 	{
 		public string Name;
+		public string EntryName;
 		public bool IsExecuteable;
 
-		public static List<ACNode> ConvertFromStringArray(string[] strings, bool Executable)
+		public static List<ACNode> ConvertFromStringArray(string[] strings, bool Executable, string prefix = "")
 		{
 			List<ACNode> nodeList = new List<ACNode>();
 			int length = strings.Length;
 			for (int i = 0; i < length; ++i)
 			{
-				nodeList.Add(new ACNode() { Name = strings[i], IsExecuteable = Executable });
+				nodeList.Add(new ACNode() { Name = prefix + strings[i], EntryName = strings[i], IsExecuteable = Executable });
 			}
 			return nodeList;
 		}

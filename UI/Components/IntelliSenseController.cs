@@ -275,9 +275,9 @@ namespace Spedit.UI.Components
                             {
                                 for (int i = 0; i < acEntrys.Length; ++i)
                                 {
-                                    if (acEntrys[i].Name.StartsWith(testString, StringComparison.InvariantCultureIgnoreCase))
+                                    if (acEntrys[i].EntryName.StartsWith(testString, StringComparison.InvariantCultureIgnoreCase))
                                     {
-                                        if (testString != acEntrys[i].Name)
+                                        if (testString != acEntrys[i].EntryName)
                                         {
                                             ForwardShowAC = true;
                                             AutoCompleteBox.SelectedIndex = i;
@@ -343,7 +343,7 @@ namespace Spedit.UI.Components
                             string replaceString;
                             if (AC_IsFuncC)
                             {
-                                replaceString = ((ACNode)AutoCompleteBox.SelectedItem).Name;
+                                replaceString = ((ACNode)AutoCompleteBox.SelectedItem).EntryName;
                                 if (acEntrys[AutoCompleteBox.SelectedIndex].IsExecuteable)
                                 {
                                     replaceString = replaceString + "(";
