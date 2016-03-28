@@ -79,7 +79,13 @@ namespace Spedit.UI.Windows
             }
         }
 
-        private void FontSize_Changed(object sender, RoutedEventArgs e)
+		private void DynamicISAC_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			Program.OptionsObject.Program_DynamicISAC = DynamicISAC.IsChecked.Value;
+		}
+
+		private void FontSize_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
             double size = FontSizeD.Value;
@@ -178,6 +184,7 @@ namespace Spedit.UI.Windows
                 OpenIncludesRecursive.IsEnabled = false;
             }
             ShowToolBar.IsChecked = Program.OptionsObject.UI_ShowToolBar;
+			DynamicISAC.IsChecked = Program.OptionsObject.Program_DynamicISAC;
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollLines;
