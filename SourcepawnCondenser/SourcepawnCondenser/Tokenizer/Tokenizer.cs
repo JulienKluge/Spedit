@@ -246,6 +246,18 @@ namespace SourcepawnCondenser.Tokenizer
 									token.Add(new Token(identString, TokenKind.Property, startIndex));
 									break;
 								}
+							case "typeset":
+							case "funcenum":
+								{
+									token.Add(new Token(identString, TokenKind.TypeSet, startIndex));
+									break;
+								}
+							case "typedef":
+							case "functag":
+								{
+									token.Add(new Token(identString, TokenKind.TypeDef, startIndex));
+									break;
+								}
 							default:
 								{
 									token.Add(new Token(identString, TokenKind.Identifier, startIndex));

@@ -43,6 +43,7 @@
     <Compile Include="CondenserFunctions\SMPPDirectiveConsumer.cs" />
     <Compile Include="CondenserFunctions\SMConstantConsumer.cs" />
     <Compile Include="CondenserFunctions\SMMethodmapConsumer.cs" />
+    <Compile Include="CondenserFunctions\SMTypedefConsumer.cs" />
     <Compile Include="CondenserFunctions\SMStructConsumer.cs" />
     <Compile Include="CondenserFunctions\SMEnumConsumer.cs" />
     <Compile Include="CondenserFunctions\SMFunctionConsumer.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="SMDefinition\SMDefine.cs" />
     <Compile Include="SMDefinition\SMConstant.cs" />
     <Compile Include="SMDefinition\SMMethodmap.cs" />
+    <Compile Include="SMDefinition\SMTypedef.cs" />
     <Compile Include="SMDefinition\SMStruct.cs" />
     <Compile Include="SMDefinition\SMEnum.cs" />
     <Compile Include="SMDefinition\SMFunction.cs" />

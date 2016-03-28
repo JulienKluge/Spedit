@@ -14,6 +14,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		public List<SMDefine> Defines = new List<SMDefine>();
 		public List<SMConstant> Constants = new List<SMConstant>();
 		public List<SMMethodmap> Methodmaps = new List<SMMethodmap>();
+		public List<SMTypedef> Typedefs = new List<SMTypedef>();
 
 		public string[] FunctionStrings = new string[0];
 		//public string[] EnumStrings = new string[0]; NOT NEEDED
@@ -22,6 +23,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		public string[] ConstantsStrings = new string[0]; //ATTENTION: THIS IS NOT THE LIST OF ALL CONSTANTS - IT INCLUDES MUCH MORE
 		public string[] MethodmapsStrings = new string[0];
 		public string[] MethodsStrings = new string[0];
+		public string[] FieldStrings = new string[0];
 		public string[] TypeStrings = new string[0];
 
 		public void Sort()
@@ -56,6 +58,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 						Defines.AddRange(subDefinition.Defines);
 						Constants.AddRange(subDefinition.Constants);
 						Methodmaps.AddRange(subDefinition.Methodmaps);
+						Typedefs.AddRange(subDefinition.Typedefs);
 					}
 				}
 			}
@@ -71,6 +74,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 				FunctionStrings[i] = Functions[i].Name;
 			}
 			List<string> methodNames = new List<string>();
+			List<string> fieldNames = new List<string>();
 			List<string> methodmapNames = new List<string>();
 			foreach (var mm in Methodmaps)
 			{
@@ -79,22 +83,18 @@ namespace SourcepawnCondenser.SourcemodDefinition
 				{
 					methodNames.Add(m.Name);
 				}
+				foreach (var f in mm.Fields)
+				{
+					fieldNames.Add(f.Name);
+				}
 			}
 			MethodsStrings = methodNames.ToArray();
+			FieldStrings = fieldNames.ToArray();
 			MethodmapsStrings = methodmapNames.ToArray();
 			List<string> constantNames = new List<string>();
-			foreach (var i in Constants)
-			{
-				constantNames.Add(i.Name);
-			}
-			foreach (var e in Enums)
-			{
-				constantNames.AddRange(e.Entries);
-			}
-			foreach (var i in Defines)
-			{
-				constantNames.Add(i.Name);
-			}
+			foreach (var i in Constants) { constantNames.Add(i.Name); }
+			foreach (var e in Enums) { constantNames.AddRange(e.Entries); }
+			foreach (var i in Defines) { constantNames.Add(i.Name); }
 			constantNames.Sort((a, b) => string.Compare(a, b));
 			ConstantsStrings = constantNames.ToArray();
 			List<string> typeNames = new List<string>();
@@ -102,6 +102,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			foreach (var i in Enums) { typeNames.Add(i.Name); }
 			foreach (var i in Structs) { typeNames.Add(i.Name); }
 			foreach (var i in Methodmaps) { typeNames.Add(i.Name); }
+			foreach (var i in Typedefs) { typeNames.Add(i.Name); }
 			typeNames.Sort((a, b) => string.Compare(a, b));
 			TypeStrings = typeNames.ToArray();
 		}

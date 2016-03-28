@@ -37,6 +37,7 @@ namespace Spedit.UI.Windows
 			for (int i = 0; i < def.Defines.Count; ++i) { defList.Add((SPDefEntry)def.Defines[i]); }
 			for (int i = 0; i < def.Structs.Count; ++i) { defList.Add((SPDefEntry)def.Structs[i]); }
 			for (int i = 0; i < def.Methodmaps.Count; ++i) { defList.Add((SPDefEntry)def.Methodmaps[i]); }
+			for (int i = 0; i < def.Typedefs.Count; ++i) { defList.Add((SPDefEntry)def.Typedefs[i]); }
 			foreach (var mm in def.Methodmaps)
 			{
 				for (int i = 0; i < mm.Methods.Count; ++i)
@@ -179,6 +180,16 @@ namespace Spedit.UI.Windows
 					SPCommentBox.Text = string.Empty;
 					return;
 				}
+				else if (TagValue is SMTypedef)
+				{
+					var sm = (SMTypedef)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = string.Empty;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Typedef/Typeset";
+					SPCommentBox.Text = sm.FullName;
+					return;
+				}
 				else if (TagValue is string)
                 {
                     SPNameBlock.Text = (string)item.Content;
@@ -264,6 +275,10 @@ namespace Spedit.UI.Windows
 				return new SPDefEntry() { Name = sm.Name, Entry = sm };
 			}
 			public static explicit operator SPDefEntry(SMMethodmapField sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMTypedef sm)
 			{
 				return new SPDefEntry() { Name = sm.Name, Entry = sm };
 			}

@@ -91,6 +91,24 @@ namespace SourcepawnCondenser
 						continue;
 					}
 				}
+				if (ct.Kind == TokenKind.TypeSet)
+				{
+					int newIndex = ConsumeSMTypeset();
+					if (newIndex != -1)
+					{
+						position = newIndex + 1;
+						continue;
+					}
+				}
+				if (ct.Kind == TokenKind.TypeDef)
+				{
+					int newIndex = ConsumeSMTypedef();
+					if (newIndex != -1)
+					{
+						position = newIndex + 1;
+						continue;
+					}
+				}
 
 				++position;
 			}
