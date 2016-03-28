@@ -45,6 +45,7 @@ File smxdasm.dll
 File LysisForSpedit.dll
 File QueryMaster.dll
 File Ionic.BZip2.dll
+File SourcepawnCondenser.dll
 File GPLv3.txt
 
 IfFileExists $INSTDIR\options_0.dat OptionsExist OptionsDoesNotExist
