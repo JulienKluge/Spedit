@@ -115,15 +115,17 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			nodes.AddRange(ACNode.ConvertFromStringArray(TypeStrings, false, "♦ "));
 			nodes.AddRange(ACNode.ConvertFromStringArray(ConstantsStrings, false, "• "));
 			nodes.AddRange(ACNode.ConvertFromStringArray(MethodmapsStrings, false, "↨ "));
-			//nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList(); Methodmaps and Functions can and will the same.
+			//nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList(); Methodmaps and Functions can and will be the same.
 			nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
 			return nodes.ToArray();
 		}
 		public ISNode[] ProduceISNodes()
 		{
-			List<ISNode> nodes = ISNode.ConvertFromStringArray(MethodsStrings, true);
+			List<ISNode> nodes = new List<ISNode>();
+			nodes.AddRange(ISNode.ConvertFromStringArray(MethodsStrings, true, "▲ "));
+			nodes.AddRange(ISNode.ConvertFromStringArray(FieldStrings, true, "• "));
 			nodes = nodes.Distinct(new ISNodeEqualityComparer()).ToList();
-			nodes.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+			nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
 			return nodes.ToArray();
 		}
 
@@ -202,21 +204,21 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			{ return sm.Name.GetHashCode(); }
 		}
 
-		public class ACNodeEqualityComparer : IEqualityComparer<ACNode>
+		/*public class ACNodeEqualityComparer : IEqualityComparer<ACNode>
 		{
 			public bool Equals(ACNode nodeA, ACNode nodeB)
 			{ return nodeA.EntryName == nodeB.EntryName; }
 
 			public int GetHashCode(ACNode node)
 			{ return node.EntryName.GetHashCode(); }
-		}
+		}*/
 		public class ISNodeEqualityComparer : IEqualityComparer<ISNode>
 		{
 			public bool Equals(ISNode nodeA, ISNode nodeB)
-			{ return nodeA.Name == nodeB.Name; }
+			{ return nodeA.EntryName == nodeB.EntryName; }
 
 			public int GetHashCode(ISNode node)
-			{ return node.Name.GetHashCode(); }
+			{ return node.EntryName.GetHashCode(); }
 		}
 	}
 
@@ -246,15 +248,16 @@ namespace SourcepawnCondenser.SourcemodDefinition
 	public class ISNode
 	{
 		public string Name;
+		public string EntryName;
 		public bool IsExecuteable = false;
 
-		public static List<ISNode> ConvertFromStringArray(string[] strings, bool Executable)
+		public static List<ISNode> ConvertFromStringArray(string[] strings, bool Executable, string prefix = "")
 		{
 			List<ISNode> nodeList = new List<ISNode>();
 			int length = strings.Length;
 			for (int i = 0; i < length; ++i)
 			{
-				nodeList.Add(new ISNode() { Name = strings[i], IsExecuteable = Executable });
+				nodeList.Add(new ISNode() { Name = prefix + strings[i], EntryName = strings[i], IsExecuteable = Executable });
 			}
 			return nodeList;
 		}
