@@ -37,6 +37,7 @@ namespace Spedit.UI
 				ee = GetAllEditorElements();
 				ce = GetCurrentEditorElement();
 			});
+			if (ee == null || ce == null) { return; } //this can happen!
 			foreach (var e in ee)
 			{
 				if (e.LastSMDefUpdateUID < currentSMDefUID) //wants an update of the SMDefintion
