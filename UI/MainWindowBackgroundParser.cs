@@ -67,18 +67,24 @@ namespace Spedit.UI
 				{
 					Thread.Sleep(5000);
 					var ee = GetAllEditorElements();
-					SMDefinition[] definitions = new SMDefinition[ee.Length];
-					for (int i = 0; i < ee.Length; ++i)
+					if (ee != null)
 					{
-						FileInfo fInfo = new FileInfo(ee[i].FullFilePath);
-						var condenser = new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name);
-						definitions[i] = ((new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name)).Condense());
+						SMDefinition[] definitions = new SMDefinition[ee.Length];
+						for (int i = 0; i < ee.Length; ++i)
+						{
+							FileInfo fInfo = new FileInfo(ee[i].FullFilePath);
+							if (fInfo.Extension.Trim('.').ToLowerInvariant() == "inc")
+							{
+								var condenser = new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name);
+								definitions[i] = ((new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name)).Condense());
+							}
+						}
+						currentSMDef = (Program.Configs[Program.SelectedConfig].GetSMDef()).ProduceTemporaryExpandedDefinition(definitions);
+						currentSMFunctions = currentSMDef.Functions.ToArray();
+						currentACNodes = currentSMDef.ProduceACNodes();
+						currentISNodes = currentSMDef.ProduceISNodes();
+						++currentSMDefUID;
 					}
-					currentSMDef = (Program.Configs[Program.SelectedConfig].GetSMDef()).ProduceTemporaryExpandedDefinition(definitions);
-					currentSMFunctions = currentSMDef.Functions.ToArray();
-					currentACNodes = currentSMDef.ProduceACNodes();
-					currentISNodes = currentSMDef.ProduceISNodes();
-					++currentSMDefUID;
 				}
 				Thread.Sleep(5000);
 			}
