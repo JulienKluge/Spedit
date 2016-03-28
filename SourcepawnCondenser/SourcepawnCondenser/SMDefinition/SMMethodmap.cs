@@ -23,7 +23,8 @@ namespace SourcepawnCondenser.SourcemodDefinition
 
 		public string Name = string.Empty;
 		public string MethodmapName = string.Empty;
-		public string Type = string.Empty;
+		public string FullName = string.Empty;
+		//public string Type = string.Empty; not needed yet
 	}
 
 	public class SMMethodmapMethod

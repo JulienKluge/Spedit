@@ -43,6 +43,10 @@ namespace Spedit.UI.Windows
 				{
 					defList.Add((SPDefEntry)mm.Methods[i]);
 				}
+				for (int i = 0; i < mm.Fields.Count; ++i)
+				{
+					defList.Add((SPDefEntry)mm.Fields[i]);
+				}
 			}
 			foreach (var e in defList)
 			{
@@ -147,7 +151,11 @@ namespace Spedit.UI.Windows
 						outString.AppendLine(m.FullName);
 					}
 					outString.AppendLine();
-					outString.AppendLine("Fields: not yet implemented...");
+					outString.AppendLine("Fields:");
+					foreach (var f in sm.Fields)
+					{
+						outString.AppendLine(f.FullName);
+					}
 					SPCommentBox.Text = outString.ToString();
 					return;
 				}
@@ -157,8 +165,18 @@ namespace Spedit.UI.Windows
 					SPNameBlock.Text = sm.Name;
 					SPFullNameBlock.Text = sm.FullName;
 					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
-					SPTypeBlock.Text = "Method";
+					SPTypeBlock.Text = "Method from " + sm.MethodmapName;
 					SPCommentBox.Text = sm.CommentString;
+					return;
+				}
+				else if (TagValue is SMMethodmapField)
+				{
+					var sm = (SMMethodmapField)TagValue;
+					SPNameBlock.Text = sm.Name;
+					SPFullNameBlock.Text = sm.FullName;
+					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
+					SPTypeBlock.Text = "Property from " + sm.MethodmapName;
+					SPCommentBox.Text = string.Empty;
 					return;
 				}
 				else if (TagValue is string)
@@ -242,6 +260,10 @@ namespace Spedit.UI.Windows
 				return new SPDefEntry() { Name = sm.Name, Entry = sm };
 			}
 			public static explicit operator SPDefEntry(SMMethodmapMethod sm)
+			{
+				return new SPDefEntry() { Name = sm.Name, Entry = sm };
+			}
+			public static explicit operator SPDefEntry(SMMethodmapField sm)
 			{
 				return new SPDefEntry() { Name = sm.Name, Entry = sm };
 			}

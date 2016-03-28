@@ -170,7 +170,7 @@ namespace CondenserTest
                     TreeViewItem subSubItem = new TreeViewItem() { Header = m.Fields[j].Name, Background = (j % 2 == 0) ? Brushes.LightGray : Brushes.White };
                     subSubItem.Items.Add(new TreeViewItem() { Header = "Index: " + m.Fields[j].Index.ToString() });
                     subSubItem.Items.Add(new TreeViewItem() { Header = "Length: " + m.Fields[j].Length.ToString(), Background = Brushes.LightGray });
-                    subSubItem.Items.Add(new TreeViewItem() { Header = "Type: " + m.Fields[j].Type });
+                    //subSubItem.Items.Add(new TreeViewItem() { Header = "Type: " + m.Fields[j].Type });
                     subItem.Items.Add(subSubItem);
                 }
                 item.Items.Add(subItem);

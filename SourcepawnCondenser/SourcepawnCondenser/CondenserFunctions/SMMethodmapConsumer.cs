@@ -19,6 +19,7 @@ namespace SourcepawnCondenser
                 string methodMapName = string.Empty;
                 string methodMapType = string.Empty;
                 List<SMMethodmapMethod> methods = new List<SMMethodmapMethod>();
+				List<SMMethodmapField> fields = new List<SMMethodmapField>();
                 if (t[iteratePosition].Kind == TokenKind.Identifier)
                 {
                     if (t[iteratePosition + 1].Kind == TokenKind.Identifier)
@@ -212,15 +213,93 @@ namespace SourcepawnCondenser
 									Length = (mEndIndex - mStartIndex) +1, CommentString = Condenser.TrimComments(functionCommentString), MethodmapName = methodMapName, File = FileName });
                             }
                         }
+						else if (t[iteratePosition].Kind == TokenKind.Property)
+						{
+							int fStartIndex = t[iteratePosition].Index;
+							int fEndIndex = fStartIndex;
+							if ((iteratePosition - 1) >= 0)
+							{
+								if (t[iteratePosition - 1].Kind == TokenKind.FunctionIndicator)
+								{
+									fStartIndex = t[iteratePosition - 1].Index;
+								}
+							}
+							string fieldName = string.Empty;
+							bool InPureSemicolonSearch = false;
+							int fBracketIndex = 0;
+							for (int j = iteratePosition; j < length; ++j)
+							{
+								if (t[j].Kind == TokenKind.Identifier && !InPureSemicolonSearch)
+								{
+									fieldName = t[j].Value;
+									continue;
+								}
+								if (t[j].Kind == TokenKind.Assignment)
+								{
+									InPureSemicolonSearch = true;
+									continue;
+								}
+								if (t[j].Kind == TokenKind.Semicolon)
+								{
+									if (fStartIndex == fEndIndex && fBracketIndex == 0)
+									{
+										iteratePosition = j;
+										fEndIndex = t[j].Index;
+										break;
+									}
+								}
+								if (t[j].Kind == TokenKind.BraceOpen)
+								{
+									if (!InPureSemicolonSearch)
+									{
+										InPureSemicolonSearch = true;
+										fEndIndex = t[j].Index - 1;
+									}
+									++fBracketIndex;
+								}
+								else if (t[j].Kind == TokenKind.BraceClose)
+								{
+									--fBracketIndex;
+									if (fBracketIndex == 0)
+									{
+										if ((j + 1) < length)
+										{
+											if (t[j + 1].Kind == TokenKind.Semicolon)
+											{
+												iteratePosition = j + 1;
+											}
+											else
+											{
+												iteratePosition = j;
+											}
+										}
+										break;
+									}
+								}
+							}
+							if (fStartIndex < fEndIndex)
+							{
+								fields.Add(new SMMethodmapField()
+								{
+									Index = fStartIndex,
+									Length = fEndIndex - fStartIndex + 1,
+									Name = fieldName,
+									File = FileName,
+									MethodmapName = methodMapName,
+									FullName = source.Substring(fStartIndex, fEndIndex - fStartIndex + 1)
+								});
+							}
+						}
                     }
-                    //TODO: ADD FIELDS AND METHOD PARSING
                 }
                 if (enteredBlock && braceIndex == 0)
                 {
                     var mm = new SMMethodmap() { Index = startIndex, Length = t[lastIndex].Index - startIndex + 1, Name = methodMapName, File = FileName,
 						Type = methodMapType, InheritedType = inheriteType };
                     mm.Methods.AddRange(methods);
+					mm.Fields.AddRange(fields);
                     def.Methodmaps.Add(mm);
+					position = lastIndex;
                 }
             }
 			return -1;
