@@ -10,6 +10,8 @@
 #include <cstrike>
 //#include <sdkhooks>
 
+#pragma newdecls required
+
 EngineVersion g_Game;
 
 public Plugin myinfo = 
