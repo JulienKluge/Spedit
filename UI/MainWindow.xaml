@@ -4,7 +4,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:stheme="clr-namespace:Spedit.UI.STheme"
              mc:Ignorable="d" 
              Title="Spedit" GlowBrush="{DynamicResource AccentColorBrush}" MinHeight="100" MinWidth="200" KeyDown="MainWindowEvent_KeyDown" Closing="MetroWindow_Closing"
                       AllowDrop="True" Drop="MetroWindow_Drop" ShowIconOnTitleBar="False" TitleCaps="False">
@@ -14,8 +15,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="BlendOverEffect" Duration="00:00:00.5" Storyboard.TargetName="BlendEffectPlane" Storyboard.TargetProperty="Opacity">
@@ -205,10 +206,10 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="White" Foreground="Black"
+            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}"
                                  ActiveContentChanged="DockingManager_ActiveContentChanged" DocumentClosing="DockingManager_DocumentClosing">
                 <dock:DockingManager.Theme>
-                    <dock:MetroTheme />
+                    <stheme:SMetroTheme />
                 </dock:DockingManager.Theme>
                 <dock:LayoutRoot>
                     <dock:LayoutPanel>
@@ -252,10 +253,10 @@
                 </Canvas>
             </Button>
             <TextBox Name="ReplaceBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5,55,5,5" Height="45" controls:TextBoxHelper.Watermark="Replace" VerticalScrollBarVisibility="Visible" KeyDown="ReplaceBoxKeyUp" />
-            <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{DynamicResource WhiteBrush}" Click="SearchButtonClicked" />
-            <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{DynamicResource WhiteBrush}" />
-            <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{DynamicResource WhiteBrush}" />
-            <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{DynamicResource WhiteBrush}" />
+            <RadioButton Name="NSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,5,5" Content="Normal Search" IsChecked="True" Foreground="{DynamicResource BlackBrush}" Click="SearchButtonClicked" />
+            <RadioButton Name="WSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,125,5,5" Content="Match Whole Words" Foreground="{DynamicResource BlackBrush}" />
+            <RadioButton Name="ASearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,145,5,5" Content="Advanced Search (\r, \n, \t)" Foreground="{DynamicResource BlackBrush}" />
+            <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{DynamicResource BlackBrush}" />
             <ComboBox Name="FindDestinies" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,105,0,0" Width="150">
                 <ComboBox.Items>
                     <ComboBoxItem IsSelected="True" Content="Current Document" />
@@ -265,8 +266,8 @@
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
             <controls:SplitButton Name="ReplaceButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,137,5,0" Width="150" Click="ReplaceButtonClicked" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
-            <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{DynamicResource WhiteBrush}" />
-            <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{DynamicResource WhiteBrush}" />
+            <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{DynamicResource BlackBrush}" />
+            <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{DynamicResource BlackBrush}" />
             <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,190,5,5" Text="" Width="Auto" FontSize="14" Foreground="{DynamicResource WhiteBrush}" IsHitTestVisible="False" />
         </Grid>
         <Rectangle Grid.Row="2" x:Name="BlendEffectPlane" IsHitTestVisible="False" Opacity="0" Fill="{DynamicResource AccentColorBrush4}" />

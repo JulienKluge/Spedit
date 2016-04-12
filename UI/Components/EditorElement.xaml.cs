@@ -132,6 +132,15 @@ namespace Spedit.UI.Components
             editor.TextArea.SelectionCornerRadius = 0.0;
             editor.Options.ConvertTabsToSpaces = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 
+			Brush currentLineBackground = new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
+			Brush currentLinePenBrush = new SolidColorBrush(Color.FromArgb(0x30, 0xFF, 0xFF, 0xFF));
+			currentLinePenBrush.Freeze();
+			Pen currentLinePen = new Pen(currentLinePenBrush, 1.0);
+			currentLineBackground.Freeze();
+			currentLinePen.Freeze();
+			editor.TextArea.TextView.CurrentLineBackground = currentLineBackground;
+			editor.TextArea.TextView.CurrentLineBorder = currentLinePen;
+
             editor.FontFamily = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             editor.WordWrap = Program.OptionsObject.Editor_WordWrap;
             UpdateFontSize(Program.OptionsObject.Editor_FontSize, false);

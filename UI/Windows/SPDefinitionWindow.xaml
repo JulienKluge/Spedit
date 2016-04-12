@@ -11,14 +11,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </controls:MetroWindow.Resources>
     <Grid>
         <TextBox Name="SPSearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" controls:TextBoxHelper.Watermark="Search" TextChanged="TextBox_TextChanged" />
-        <controls:MetroProgressBar Name="SPProgress" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="0,26,0,0" IsIndeterminate="False" IsHitTestVisible="False" Height="4" />
+        <controls:MetroProgressBar Name="SPProgress" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="0,26,0,0" IsIndeterminate="False" IsHitTestVisible="False" Height="4" Foreground="{DynamicResource AccentColorBrush}" Background="{DynamicResource WhiteColorBrush}" />
         <ListBox Name="SPBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="0,30,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
         <TextBlock Name="SPNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,15,0,0" FontSize="20" Foreground="{StaticResource AccentColorBrush}" IsHitTestVisible="False" />
         <TextBlock Name="SPFullNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,45,0,0" FontSize="18" IsHitTestVisible="False" />

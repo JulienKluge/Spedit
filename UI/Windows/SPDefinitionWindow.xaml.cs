@@ -23,6 +23,7 @@ namespace Spedit.UI.Windows
         public SPDefinitionWindow()
         {
             InitializeComponent();
+			errorSearchBoxBrush.Freeze();
             def = Program.Configs[Program.SelectedConfig].GetSMDef();
             if (def == null)
             {
@@ -213,6 +214,7 @@ namespace Spedit.UI.Windows
             searchTimer.Start();
         }
 
+		Brush errorSearchBoxBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x50, 0x30, 0));
         private void DoSearch()
         {
             this.Dispatcher.Invoke(() =>
@@ -231,11 +233,11 @@ namespace Spedit.UI.Windows
                     }
                     if (foundOccurence)
                     {
-                        SPSearchBox.Background = Brushes.White;
+                        SPSearchBox.Background = Brushes.Transparent;
                     }
                     else
                     {
-                        SPSearchBox.Background = Brushes.LightYellow;
+                        SPSearchBox.Background = errorSearchBoxBrush;
                     }
                     SPProgress.IsIndeterminate = false;
                 });

@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 5;
-        public int Version = 5;
+        public static int SVersion = 6;
+        public int Version = 6;
 
         public byte[] Program_CryptoKey = null;
 
@@ -31,7 +31,6 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Editor_WordWrap = false;
         public double Editor_FontSize = 16.0;
         public string Editor_FontFamily = "Consolas";
-        //public double Editor_ScrollSpeed = 0.01;
         public double Editor_ScrollLines = 4.0;
         public bool Editor_AgressiveIndentation = true;
         public bool Editor_ReformatLineAfterSemicolon = true;
@@ -44,18 +43,18 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x00, 0x80, 0x00);
         public SerializeableColor SH_CommentsMarker = new SerializeableColor(0xFF, 0xD0, 0x20, 0x20);
         public SerializeableColor SH_Strings = new SerializeableColor(0xFF, 0xC8, 0x00, 0x00);
-        public SerializeableColor SH_PreProcessor = new SerializeableColor(0xFF, 0x00, 0x00, 0xD0);
+        public SerializeableColor SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
         public SerializeableColor SH_Types = new SerializeableColor(0xFF, 0x28, 0x90, 0xB0);
         public SerializeableColor SH_TypesValues = new SerializeableColor(0xFF, 0x00, 0x55, 0xC0);
-        public SerializeableColor SH_Keywords = new SerializeableColor(0xFF, 0x00, 0x00, 0xFF);
-        public SerializeableColor SH_ContextKeywords = new SerializeableColor(0xFF, 0x00, 0x00, 0xFF);
+        public SerializeableColor SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+        public SerializeableColor SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
         public SerializeableColor SH_Chars = new SerializeableColor(0xFF, 0xC8, 0x00, 0x40);
         public SerializeableColor SH_UnkownFunctions = new SerializeableColor(0xFF, 0x00, 0x40, 0xE8);
         public SerializeableColor SH_Numbers = new SerializeableColor(0xFF, 0x00, 0x8B, 0x8B);
-        public SerializeableColor SH_SpecialCharacters = new SerializeableColor(0xFF, 0x50, 0x50, 0x50);
+        public SerializeableColor SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
         public SerializeableColor SH_Deprecated = new SerializeableColor(0xFF, 0xFF, 0x00, 0x00);
-        public SerializeableColor SH_Constants = new SerializeableColor(0xFF, 0x80, 0x00, 0xFF);
-        public SerializeableColor SH_Functions = new SerializeableColor(0xFF, 0x00, 0x00, 0xFF);
+        public SerializeableColor SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+        public SerializeableColor SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
         public SerializeableColor SH_Methods = new SerializeableColor(0xFF, 0x44, 0x6A, 0xCC);
 
         public void FillNullToDefaults()
@@ -76,6 +75,12 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							break;
                         }
                     case 1:
@@ -86,6 +91,12 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							break;
                         }
                     case 2:
@@ -95,17 +106,45 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							break;
                         }
                     case 3:
                         {
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							break;
                         }
 					case 4:
 						{
 							this.Program_DynamicISAC = true;
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							break;
+						}
+					case 5:
+						{
+							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
+							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
+							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
+							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
+							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							break;
 						}
                 }
