@@ -41,6 +41,7 @@ namespace Spedit.UI
             CompileButton.ItemsSource = compileButtonDict;
             CActionButton.ItemsSource = actionButtonDict;
             ReplaceButton.ItemsSource = findReplaceButtonDict;
+			ReplaceButton.SelectedIndex = 0;
             if (Program.OptionsObject.UI_ShowToolBar)
             {
                 Win_ToolBar.Height = double.NaN;
