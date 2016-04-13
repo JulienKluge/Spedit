@@ -33,11 +33,15 @@ namespace Spedit.UI
                         string[] cmds = ReplaceRconCMDVaraibles(c.RConCommands).Split('\n');
                         for (int i = 0; i < cmds.Length; ++i)
                         {
-                            string command = (cmds[i].Trim(new char[] { '\r' })).Trim();
-                            if (!string.IsNullOrWhiteSpace(command))
-                            {
-                                stringOutput.AppendLine(rcon.SendCommand(command));
-                            }
+							Task t = Task.Run(() =>
+							{
+								string command = (cmds[i].Trim(new char[] { '\r' })).Trim();
+								if (!string.IsNullOrWhiteSpace(command))
+								{
+									stringOutput.AppendLine(rcon.SendCommand(command));
+								}
+							});
+							t.Wait();
                         }
                     }
                 }
