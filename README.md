@@ -26,4 +26,4 @@
 * smx Dissassembler (Fixed)
 * RCon Querying
 
-![Screen of SPEdit](http://www.imageupload.co.uk/images/2015/03/15/SPEdit_Demo2.png)
+![Screen of SPEdit](http://i.imgur.com/kx9riAE.png)
