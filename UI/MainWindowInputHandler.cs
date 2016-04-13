@@ -35,7 +35,7 @@ namespace Spedit.UI
                         case Key.P: { Command_FlushFoldingState(true); e.Handled = true; break; }
                     }
                 }
-                else
+                else if (!e.KeyboardDevice.IsKeyDown(Key.RightAlt))
                 {
                     switch (e.Key)
                     {
