@@ -13,7 +13,7 @@ namespace Spedit
 {
     public static class Program
     {
-        public const string ProgramInternalVersion = "6";
+        public const string ProgramInternalVersion = "7";
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
