@@ -28,16 +28,19 @@ namespace SourcepawnCondenser.SourcemodDefinition
 
 		public void Sort()
 		{
-			Functions = Functions.Distinct(new SMFunctionComparer()).ToList();
-			Functions.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
-			//Enums = Enums.Distinct(new SMEnumComparer()).ToList(); //enums can have the same name but not be the same...
-			Enums.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
-			Structs = Structs.Distinct(new SMStructComparer()).ToList();
-			Structs.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
-			Defines = Defines.Distinct(new SMDefineComparer()).ToList();
-			Defines.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
-			Constants = Constants.Distinct(new SMConstantComparer()).ToList();
-			Constants.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+			try {
+				Functions = Functions.Distinct(new SMFunctionComparer()).ToList();
+				Functions.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+				//Enums = Enums.Distinct(new SMEnumComparer()).ToList(); //enums can have the same name but not be the same...
+				Enums.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+				Structs = Structs.Distinct(new SMStructComparer()).ToList();
+				Structs.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+				Defines = Defines.Distinct(new SMDefineComparer()).ToList();
+				Defines.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+				Constants = Constants.Distinct(new SMConstantComparer()).ToList();
+				Constants.Sort((a, b) => { return string.Compare(a.Name, b.Name); });
+			}
+			catch(Exception) { } //racing condition on save when the thread closes first or not..
 		}
 
 		public void AppendFiles(string[] paths)
