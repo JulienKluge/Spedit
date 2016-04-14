@@ -41,7 +41,9 @@ namespace Spedit.UI
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
             FillConfigMenu();
             CompileButton.ItemsSource = compileButtonDict;
+			CompileButton.SelectedIndex = 0;
             CActionButton.ItemsSource = actionButtonDict;
+			CActionButton.SelectedIndex = 0;
             ReplaceButton.ItemsSource = findReplaceButtonDict;
 			ReplaceButton.SelectedIndex = 0;
             if (Program.OptionsObject.UI_ShowToolBar)
