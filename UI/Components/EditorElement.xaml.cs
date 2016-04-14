@@ -180,7 +180,7 @@ namespace Spedit.UI.Components
         {
             if (e.Key == Key.G)
             {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) && (!Keyboard.IsKeyDown(Key.RightAlt)))
                 {
                     ToggleJumpGrid();
                     e.Handled = true;
