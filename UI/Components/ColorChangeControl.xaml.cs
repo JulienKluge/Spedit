@@ -27,11 +27,7 @@ namespace Spedit.UI.Components
         public void SetContent(string SHName, Color c)
         {
             ColorName.Text = SHName;
-            BrushRect.Fill = new SolidColorBrush(c);
-            RSlider.Value = (double)c.R;
-            GSlider.Value = (double)c.G;
-            BSlider.Value = (double)c.B;
-            RaiseEventAllowed = true;
+			UpdateColor(c);
         }
 
         public Color GetColor()
@@ -41,13 +37,45 @@ namespace Spedit.UI.Components
 
         private void SliderValue_Changed(object sender, RoutedEventArgs e)
         {
-            if (RaiseEventAllowed)
-            {
-                Color c = Color.FromArgb(0xFF, (byte)((int)RSlider.Value), (byte)((int)GSlider.Value), (byte)((int)BSlider.Value));
-                BrushRect.Fill = new SolidColorBrush(c);
-                RoutedEventArgs raiseEvent = new RoutedEventArgs(ColorChangeControl.ColorChangedEvent);
-                this.RaiseEvent(raiseEvent);
-            }
+			if (!RaiseEventAllowed) { return; }
+            Color c = Color.FromArgb(0xFF, (byte)((int)RSlider.Value), (byte)((int)GSlider.Value), (byte)((int)BSlider.Value));
+			UpdateColor(c, true, false);
+            RoutedEventArgs raiseEvent = new RoutedEventArgs(ColorChangeControl.ColorChangedEvent);
+            this.RaiseEvent(raiseEvent);
         }
-    }
+
+		private void UpdateColor(Color c, bool UpdateTextBox = true, bool UpdateSlider = true)
+		{
+			RaiseEventAllowed = false;
+			BrushRect.Background = new SolidColorBrush(c);
+			BrushRect.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, (byte)(0xFF - c.R), (byte)(0xFF - c.G), (byte)(0xFF - c.B)));
+			if (UpdateTextBox)
+			{
+				BrushRect.Text = ((c.R << 16) | (c.G << 8) | (c.B)).ToString("X").PadLeft(6,'0');
+			}
+			if (UpdateSlider)
+			{
+				RSlider.Value = (double)c.R;
+				GSlider.Value = (double)c.G;
+				BSlider.Value = (double)c.B;
+			}
+			RoutedEventArgs raiseEvent = new RoutedEventArgs(ColorChangeControl.ColorChangedEvent);
+			this.RaiseEvent(raiseEvent);
+			RaiseEventAllowed = true;
+		}
+
+		private void BrushRect_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			if (!RaiseEventAllowed) { return; }
+			int cVal = 0; int result = 0;
+			string parseString = BrushRect.Text.Trim();
+			if (parseString.StartsWith("0x", System.StringComparison.InvariantCultureIgnoreCase) && parseString.Length > 2)
+			{
+				parseString = parseString.Substring(2);
+			}
+			if (int.TryParse(parseString, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture, out result))
+			{ cVal = result; }
+			UpdateColor(Color.FromArgb(0xFF, (byte)((cVal >> 16) & 0xFF), (byte)((cVal >> 8) & 0xFF), (byte)(cVal & 0xFF)), false, true);
+		}
+	}
 }
