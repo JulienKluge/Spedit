@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 6;
-        public int Version = 6;
+        public static int SVersion = 7;
+        public int Version = 7;
 
         public byte[] Program_CryptoKey = null;
 
@@ -24,6 +24,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Program_OpenIncludesRecursively = false;
 
 		public bool Program_DynamicISAC = true;
+
+		public string Program_AccentColor = "Red";
+		public string Program_Theme = "BaseDark";
 
         public bool UI_Animations = true;
         public bool UI_ShowToolBar = false;
@@ -75,6 +78,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
@@ -91,6 +96,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
@@ -106,6 +113,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                             this.Program_CheckForUpdates = true;
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
@@ -118,6 +127,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                         {
                             this.Editor_ReplaceTabsToWhitespace = false;
 							this.Program_DynamicISAC = true;
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
@@ -129,6 +140,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					case 4:
 						{
 							this.Program_DynamicISAC = true;
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
@@ -139,12 +152,20 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 						}
 					case 5:
 						{
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							SH_PreProcessor = new SerializeableColor(0xFF, 0x18, 0x18, 0xFF);
 							SH_Keywords = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
 							SH_ContextKeywords = new SerializeableColor(0xFF, 0x46, 0x46, 0xFF);
 							SH_SpecialCharacters = new SerializeableColor(0xFF, 0xA0, 0xA0, 0xA0);
 							SH_Constants = new SerializeableColor(0xFF, 0x84, 0x20, 0xFF);
 							SH_Functions = new SerializeableColor(0xFF, 0x40, 0x40, 0xFF);
+							break;
+						}
+					case 6:
+						{
+							this.Program_AccentColor = "Red";
+							this.Program_Theme = "BaseDark";
 							break;
 						}
                 }

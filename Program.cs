@@ -93,6 +93,7 @@ namespace Spedit
                                     UpdateCheck.Check(true);
                                 }
 #endif
+								app.Startup += App_Startup;
                                 app.Run(MainWindow);
                                 OptionsControlIOObject.Save();
                             }
@@ -150,7 +151,16 @@ namespace Spedit
             }
         }
 
-        private static string BuildExceptionString(Exception e, string SectionName)
+		private static void App_Startup(object sender, StartupEventArgs e)
+		{
+			
+			Tuple<MahApps.Metro.AppTheme, MahApps.Metro.Accent> appStyle = MahApps.Metro.ThemeManager.DetectAppStyle(Application.Current);
+			MahApps.Metro.ThemeManager.ChangeAppStyle(Application.Current,
+									MahApps.Metro.ThemeManager.GetAccent("Green"),
+									MahApps.Metro.ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
+		}
+
+		private static string BuildExceptionString(Exception e, string SectionName)
         {
             StringBuilder outString = new StringBuilder();
             outString.AppendLine("Section: " + SectionName);

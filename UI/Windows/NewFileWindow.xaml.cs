@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
+using MahApps.Metro;
 
 namespace Spedit.UI.Windows
 {
@@ -20,7 +21,9 @@ namespace Spedit.UI.Windows
         public NewFileWindow()
         {
             InitializeComponent();
-            ParseTemplateFile();
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			ParseTemplateFile();
             TemplateListBox.SelectedIndex = 0;
         }
 

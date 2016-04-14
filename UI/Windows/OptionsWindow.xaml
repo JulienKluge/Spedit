@@ -35,6 +35,9 @@
                         <CheckBox Name="AutoUpdate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,105,0,0" Content="Search automatically for Updates" Checked="AutoUpdate_Changed" Unchecked="AutoUpdate_Changed" />
                         <CheckBox Name="ShowToolBar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,130,0,0" Content="Show Toolbar" Checked="ShowToolbar_Changed" Unchecked="ShowToolbar_Changed" />
                         <CheckBox Name="DynamicISAC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,155,0,0" Content="Dynamic Autocompletition/Intellisense" Checked="DynamicISAC_Changed" Unchecked="DynamicISAC_Changed" />
+                        <CheckBox Name="DarkTheme" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Content="Dark Theme" Checked="DarkTheme_Changed" Unchecked="DarkTheme_Changed" />
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,205,0,0" Content="Theme Color:" />
+                        <ComboBox Name="AccentColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,205,0,0" Width="200" SelectionChanged="AccentColor_Changed" />
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>

@@ -14,7 +14,7 @@ namespace Spedit.UI.Components
     public class BracketHighlightRenderer : IBackgroundRenderer
     {
         BracketSearchResult result;
-        Brush backgroundBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x55, 0x55, 0x55));
+        Brush backgroundBrush = new SolidColorBrush(Color.FromArgb(0x40, 0x88, 0x88, 0x88));
         TextView textView;
 
         public void SetHighlight(BracketSearchResult result)

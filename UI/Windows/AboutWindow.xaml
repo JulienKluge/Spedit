@@ -44,7 +44,7 @@
         </Rectangle>
         <ScrollViewer Margin="0,65,0,0">
             <StackPanel Name="ContentStackPanel">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" Background="#CC0F0F0F" IsHitTestVisible="False">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" IsHitTestVisible="False">
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="325,15,0,15">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Bara (Tester, Proposer, Contributor, Updateserver owner)" FontWeight="Bold" />
@@ -62,7 +62,7 @@
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Text="Proposer: &#013;Powerlord; Wliu; barel31; asherkin; BAILANDO; Arkarr; turtsmcgurts; Tank Missile&#013;Wilczek; Miu; StealthGus; WhiteThunder" />
                     </StackPanel>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/MahAppsMetro.png" Stretch="Uniform" />
@@ -79,7 +79,7 @@
                         <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="HyperlinkRequestNavigate">MahApps GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/SharpDevelop.png" Stretch="Uniform" />
@@ -96,7 +96,7 @@
                         <Hyperlink NavigateUri="https://github.com/icsharpcode/SharpDevelop/" RequestNavigate="HyperlinkRequestNavigate">SharpDevelop GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/AvalonDock.png" Stretch="Uniform" />
@@ -113,7 +113,7 @@
                         <Hyperlink NavigateUri="https://github.com/chandramouleswaran/AvalonDock" RequestNavigate="HyperlinkRequestNavigate">AvalonDock GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/sourcemod.png" Stretch="Uniform" />
@@ -130,7 +130,7 @@
                         <Hyperlink NavigateUri="https://github.com/alliedmodders/sourcemod" RequestNavigate="HyperlinkRequestNavigate">Soucemod GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/IconMonstr.png" Stretch="Uniform" />
@@ -144,7 +144,7 @@
                         <Hyperlink NavigateUri="http://iconmonstr.com/" RequestNavigate="HyperlinkRequestNavigate">iconmonstr Website</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/smlib.png" Stretch="Uniform" />
@@ -161,7 +161,7 @@
                         <Hyperlink NavigateUri="https://github.com/bcserv/smlib" RequestNavigate="HyperlinkRequestNavigate">SMLib GitHub Repository</Hyperlink>
                     </TextBlock>
                 </Grid>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2" Background="#CC0F0F0F">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="150" Margin="0,2,0,2">
                     <Rectangle HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="150" Width="300" IsHitTestVisible="False">
                         <Rectangle.Fill>
                             <ImageBrush ImageSource="/Spedit;component/Resources/AboutImages/alliedmodders.png" Stretch="Uniform" />

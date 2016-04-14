@@ -9,7 +9,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
                 <ResourceDictionary>
                     <Storyboard x:Key="FadeISACIn">
                         <DoubleAnimation Duration="00:00:00.1" To="1" Storyboard.TargetName="ISAC_Grid" Storyboard.TargetProperty="Opacity" />
@@ -83,14 +82,14 @@
                 <ColumnDefinition Name="ISenseColumn" Width="0" />
             </Grid.ColumnDefinitions>
             <Grid VerticalAlignment="Top" Name="ISenseGrid" Grid.Column="1" Width="Auto" Height="Auto">
-                <Border BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="Auto">
+                <Border BorderBrush="{DynamicResource BlackColorBrush}" BorderThickness="1" Height="Auto">
                     <Grid Height="Auto" Background="{DynamicResource WhiteColorBrush}">
-                        <TextBlock Name="IS_FuncName" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,2,0" Width="Auto" FontSize="15" Foreground="{StaticResource AccentColorBrush}" />
+                        <TextBlock Name="IS_FuncName" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,2,0" Width="Auto" FontSize="15" />
                         <TextBlock Name="IS_FuncDescription" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Margin="5,20,2,2" FontFamily="Consolas" FontSize="13" Foreground="{DynamicResource BlackColorBrush}" />
                     </Grid>
                 </Border>
             </Grid>
-            <Border Name="ACBorder" Grid.Column="0" Background="{DynamicResource WhiteColorBrush}" VerticalAlignment="Top" BorderBrush="{StaticResource AccentColorBrush}" BorderThickness="1" Height="0">
+            <Border Name="ACBorder" Grid.Column="0" Background="{DynamicResource WhiteColorBrush}" VerticalAlignment="Top" BorderBrush="{DynamicResource BlackColorBrush}" BorderThickness="1" Height="0">
                 <Grid>
                     <ListBox Name="AutoCompleteBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="0" Width="0"
                          Height="175" Background="Transparent" Opacity="1" Foreground="{DynamicResource BlackColorBrush}"
@@ -101,7 +100,7 @@
                 </Grid>
             </Border>
         </Grid>
-        <Border Name="JumpGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="75" BorderThickness="1" BorderBrush="{StaticResource AccentColorBrush}" Background="{DynamicResource WhiteColorBrush}" IsHitTestVisible="False" Opacity="0">
+        <Border Name="JumpGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="75" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Background="{DynamicResource WhiteColorBrush}" IsHitTestVisible="False" Opacity="0">
             <Grid>
                 <TextBox Name="JumpNumber" HorizontalAlignment="Stretch" VerticalAlignment="Top" Text="1" KeyDown="JumpNumberKeyDown" Foreground="{DynamicResource BlackColorBrush}" />
                 <RadioButton Name="LineJump" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,30,0,0" Content="Jump To Line" IsChecked="True" Foreground="{DynamicResource BlackColorBrush}" />

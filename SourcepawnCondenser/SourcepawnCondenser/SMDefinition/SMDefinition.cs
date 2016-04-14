@@ -113,48 +113,61 @@ namespace SourcepawnCondenser.SourcemodDefinition
 		public ACNode[] ProduceACNodes()
 		{
 			List<ACNode> nodes = new List<ACNode>();
-			nodes.Capacity = Enums.Count + Structs.Count + Constants.Count + Functions.Count;
-			nodes.AddRange(ACNode.ConvertFromStringArray(FunctionStrings, true, "▲ "));
-			nodes.AddRange(ACNode.ConvertFromStringArray(TypeStrings, false, "♦ "));
-			nodes.AddRange(ACNode.ConvertFromStringArray(ConstantsStrings, false, "• "));
-			nodes.AddRange(ACNode.ConvertFromStringArray(MethodmapsStrings, false, "↨ "));
-			//nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList(); Methodmaps and Functions can and will be the same.
-			nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
+			try
+			{
+				nodes.Capacity = Enums.Count + Structs.Count + Constants.Count + Functions.Count;
+				nodes.AddRange(ACNode.ConvertFromStringArray(FunctionStrings, true, "▲ "));
+				nodes.AddRange(ACNode.ConvertFromStringArray(TypeStrings, false, "♦ "));
+				nodes.AddRange(ACNode.ConvertFromStringArray(ConstantsStrings, false, "• "));
+				nodes.AddRange(ACNode.ConvertFromStringArray(MethodmapsStrings, false, "↨ "));
+				//nodes = nodes.Distinct(new ACNodeEqualityComparer()).ToList(); Methodmaps and Functions can and will be the same.
+				nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
+			} catch (Exception) { }
 			return nodes.ToArray();
 		}
 		public ISNode[] ProduceISNodes()
 		{
 			List<ISNode> nodes = new List<ISNode>();
-			nodes.AddRange(ISNode.ConvertFromStringArray(MethodsStrings, true, "▲ "));
-			nodes.AddRange(ISNode.ConvertFromStringArray(FieldStrings, true, "• "));
-			nodes = nodes.Distinct(new ISNodeEqualityComparer()).ToList();
-			nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
+			try
+			{
+				nodes.AddRange(ISNode.ConvertFromStringArray(MethodsStrings, true, "▲ "));
+				nodes.AddRange(ISNode.ConvertFromStringArray(FieldStrings, true, "• "));
+				nodes = nodes.Distinct(new ISNodeEqualityComparer()).ToList();
+				nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
+			} catch (Exception) { }
 			return nodes.ToArray();
 		}
 
 		public void MergeDefinitions(SMDefinition def)
 		{
-			Functions.AddRange(def.Functions);
-			Enums.AddRange(def.Enums);
-			Structs.AddRange(def.Structs);
-			Defines.AddRange(def.Defines);
-			Constants.AddRange(def.Constants);
-			Methodmaps.AddRange(def.Methodmaps);
+			try
+			{
+				Functions.AddRange(def.Functions);
+				Enums.AddRange(def.Enums);
+				Structs.AddRange(def.Structs);
+				Defines.AddRange(def.Defines);
+				Constants.AddRange(def.Constants);
+				Methodmaps.AddRange(def.Methodmaps);
+			}
+			catch (Exception) { }
 		}
 
 		public SMDefinition ProduceTemporaryExpandedDefinition(SMDefinition[] definitions)
 		{
 			SMDefinition def = new SMDefinition();
-			def.MergeDefinitions(this);
-			for (int i = 0; i < definitions.Length; ++i)
+			try
 			{
-				if (definitions[i] != null)
+				def.MergeDefinitions(this);
+				for (int i = 0; i < definitions.Length; ++i)
 				{
-					def.MergeDefinitions(definitions[i]);
+					if (definitions[i] != null)
+					{
+						def.MergeDefinitions(definitions[i]);
+					}
 				}
-			}
-			def.Sort();
-			def.ProduceStringArrays();
+				def.Sort();
+				def.ProduceStringArrays();
+			} catch (Exception) { }
 			return def;
 		}
 

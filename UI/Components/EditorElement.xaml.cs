@@ -2,11 +2,11 @@
 using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Rendering;
 using ICSharpCode.AvalonEdit.Utils;
+using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.Utils.SPSyntaxTidy;
 using System;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
 using System.Timers;
 using System.Windows;
@@ -93,8 +93,8 @@ namespace Spedit.UI.Components
         public EditorElement(string filePath)
         {
             InitializeComponent();
-
-            bracketSearcher = new SPBracketSearcher();
+			
+			bracketSearcher = new SPBracketSearcher();
             bracketHighlightRenderer = new BracketHighlightRenderer(editor.TextArea.TextView);
             editor.TextArea.IndentationStrategy = new EditorIndetationStrategy();
 
@@ -132,8 +132,8 @@ namespace Spedit.UI.Components
             editor.TextArea.SelectionCornerRadius = 0.0;
             editor.Options.ConvertTabsToSpaces = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 
-			Brush currentLineBackground = new SolidColorBrush(Color.FromArgb(0xFF, 0x20, 0x20, 0x20));
-			Brush currentLinePenBrush = new SolidColorBrush(Color.FromArgb(0x30, 0xFF, 0xFF, 0xFF));
+			Brush currentLineBackground = new SolidColorBrush(Color.FromArgb(0x20, 0x88, 0x88, 0x88));
+			Brush currentLinePenBrush = new SolidColorBrush(Color.FromArgb(0x30, 0x88, 0x88, 0x88));
 			currentLinePenBrush.Freeze();
 			Pen currentLinePen = new Pen(currentLinePenBrush, 1.0);
 			currentLineBackground.Freeze();

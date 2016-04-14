@@ -1017,9 +1017,13 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type avalonDockControls:LayoutDocumentFloatingWindowControl}">
                     <Grid>
-                        <Border x:Name="WindowBorder" 
+                        <!--<Border x:Name="WindowBorder" 
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1">-->
+                        <Border x:Name="WindowBorder" 
+                                Background="#FF888888"
+                                BorderBrush="Black"
                                 BorderThickness="1">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -1035,7 +1039,9 @@
 
                                 <Border x:Name="Header"
                                         Padding="2,0,2,0"
-                                        Grid.Column="1">
+                                        Grid.Column="1"
+                                        Background="#FF666666"
+                                        TextElement.Foreground="#FFFFFFFF">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -1112,20 +1118,20 @@
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Padding" Value="3" TargetName="WindowBorder"/>
                         </Trigger>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Model.RootDocument.IsActive}" Value="True">
+                        <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Model.RootDocument.IsActive}" Value="True">
                             <Setter 
                                 TargetName="bd"
                                 Property="Background"
-								Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor3}" />
+								Value="{DynamicResource AccentColorBrush}" />
                             <Setter 
                                 TargetName="Header"
                                 Property="Background"
-								Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor3}" />
+								Value="{DynamicResource AccentColorBrush}" />
                             <Setter 
                                 TargetName="Header"
                                 Property="TextElement.Foreground"
-								Value="{DynamicResource AvalonDock_ThemeMetro_BaseColor1}" />
-                        </DataTrigger>
+								Value="{DynamicResource BlackColorBrush}" />
+                        </DataTrigger>-->
 
                         <Trigger Property="IsMouseOver" SourceName="ContextMenuDropdownButton" Value="True">
                             <Setter Property="Source" TargetName="PART_ImgPinMenu" Value="/Xceed.Wpf.AvalonDock.Themes.Metro;component/Images/PinMenu_Black.png"/>

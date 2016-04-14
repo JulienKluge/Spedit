@@ -6,6 +6,7 @@ using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MahApps.Metro;
 
 namespace Spedit.UI.Windows
 {
@@ -23,6 +24,8 @@ namespace Spedit.UI.Windows
         public SPDefinitionWindow()
         {
             InitializeComponent();
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
 			errorSearchBoxBrush.Freeze();
             def = Program.Configs[Program.SelectedConfig].GetSMDef();
             if (def == null)
@@ -214,7 +217,7 @@ namespace Spedit.UI.Windows
             searchTimer.Start();
         }
 
-		Brush errorSearchBoxBrush = new SolidColorBrush(Color.FromArgb(0xFF, 0x50, 0x30, 0));
+		Brush errorSearchBoxBrush = new SolidColorBrush(Color.FromArgb(0x50, 0xA0, 0x30, 0));
         private void DoSearch()
         {
             this.Dispatcher.Invoke(() =>

@@ -2,7 +2,10 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Controls;
 using System.Windows.Navigation;
+using MahApps.Metro;
 
 namespace Spedit.UI.Windows
 {
@@ -14,7 +17,23 @@ namespace Spedit.UI.Windows
         public AboutWindow()
         {
             InitializeComponent();
-            TitleBox.Text = "SPEdit (" + Assembly.GetEntryAssembly().GetName().Version.ToString() + ") - a lightweight sourcepawn editor";
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			Brush gridBrush = null;
+			if (Program.OptionsObject.Program_Theme == "BaseDark")
+			{ gridBrush = new SolidColorBrush(Color.FromArgb(0x80, 0x50, 0x50, 0x50)); }
+			else
+			{ gridBrush = new SolidColorBrush(Color.FromArgb(0x80, 0xAF, 0xAF, 0xAF)); }
+			gridBrush.Freeze();
+			foreach (var c in ContentStackPanel.Children)
+			{
+				if (c is Grid)
+				{
+					Grid g = (Grid)c;
+					g.Background = gridBrush;
+				}
+			}
+			TitleBox.Text = "SPEdit (" + Assembly.GetEntryAssembly().GetName().Version.ToString() + ") - a lightweight sourcepawn editor";
             LicenseField.Text = LicenseString;
         }
 

@@ -32,7 +32,9 @@ namespace Spedit.UI.Windows
         public ConfigWindow()
         {
             InitializeComponent();
-            for (int i = 0; i < Program.Configs.Length; ++i)
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			for (int i = 0; i < Program.Configs.Length; ++i)
             {
                 ConfigListBox.Items.Add(new ListBoxItem() { Content = Program.Configs[i].Name });
             }

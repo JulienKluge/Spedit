@@ -19,25 +19,26 @@
 
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor1" 
-                     Color="Black"/>
+                     Color="{DynamicResource BlackColor}"/>
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor2" 
-                     Color="White"/>
+                     Color="{DynamicResource WhiteColor}"/>
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor3" 
-                     Color="#FFBE1707"/>
+                     Color="{DynamicResource AccentColor}"/> 
+    <!--ItemLine-->
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor4" 
-                     Color="#AA3333"/>
+                     Color="{DynamicResource AccentColor2}"/> <!--MouseOver ItemLine-->
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor5" 
-                     Color="#F0F0F0"/>
+                     Color="{DynamicResource BlackColor}"/> <!--Item Foreground-->
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor6" 
-                     Color="#8C8E94"/>
+                     Color="{DynamicResource WhiteColor}"/>
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor7" 
-                     Color="#333333"/>
+                     Color="{DynamicResource Gray1}"/>
 <!--
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor10"
                      Color="#FF333333"/>
@@ -55,9 +56,9 @@
                      Color="#FF333333"/>-->
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor31"
-                     Color="#FF252525"/>
+                     Color="{DynamicResource WhiteColor}"/>
 
     <SolidColorBrush x:Key="AvalonDock_ThemeMetro_BaseColor33"
-                     Color="#FF252525"/>
+                     Color="{DynamicResource WhiteColor}"/>
 
 </ResourceDictionary>

@@ -4,6 +4,7 @@ using Spedit.UI.Components;
 using Spedit.UI;
 using System.Windows;
 using System.Windows.Media;
+using MahApps.Metro;
 
 namespace Spedit.UI.Windows
 {
@@ -12,12 +13,16 @@ namespace Spedit.UI.Windows
     /// </summary>
     public partial class OptionsWindow : MetroWindow
     {
+		string[] AvailableAccents = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber",
+			"Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         bool RestartTextIsShown = false;
         bool AllowChanging = false;
         public OptionsWindow()
         {
             InitializeComponent();
-            LoadSettings();
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			LoadSettings();
             AllowChanging = true;
         }
 
@@ -83,6 +88,26 @@ namespace Spedit.UI.Windows
 		{
 			if (!AllowChanging) { return; }
 			Program.OptionsObject.Program_DynamicISAC = DynamicISAC.IsChecked.Value;
+		}
+
+		private void DarkTheme_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			if (DarkTheme.IsChecked.Value)
+			{ Program.OptionsObject.Program_Theme = "BaseDark"; }
+			else
+			{ Program.OptionsObject.Program_Theme = "BaseLight"; }
+			ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme));
+			ThemeManager.ChangeAppStyle(Program.MainWindow, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme));
+			ToggleRestartText(true);
+		}
+
+		private void AccentColor_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			Program.OptionsObject.Program_AccentColor = (string)AccentColor.SelectedItem;
+			ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme));
+			ThemeManager.ChangeAppStyle(Program.MainWindow, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme));
 		}
 
 		private void FontSize_Changed(object sender, RoutedEventArgs e)
@@ -174,6 +199,10 @@ namespace Spedit.UI.Windows
 
         private void LoadSettings()
         {
+			for (int i = 0; i < AvailableAccents.Length; ++i)
+			{
+				AccentColor.Items.Add(AvailableAccents[i]);
+			}
             HardwareAcc.IsChecked = Program.OptionsObject.Program_UseHardwareAcceleration;
             UIAnimation.IsChecked = Program.OptionsObject.UI_Animations;
             OpenIncludes.IsChecked = Program.OptionsObject.Program_OpenCustomIncludes;
@@ -185,6 +214,15 @@ namespace Spedit.UI.Windows
             }
             ShowToolBar.IsChecked = Program.OptionsObject.UI_ShowToolBar;
 			DynamicISAC.IsChecked = Program.OptionsObject.Program_DynamicISAC;
+			DarkTheme.IsChecked = (Program.OptionsObject.Program_Theme == "BaseDark");
+			for (int i = 0; i < AvailableAccents.Length; ++i)
+			{
+				if (AvailableAccents[i] == Program.OptionsObject.Program_AccentColor)
+				{
+					AccentColor.SelectedIndex = i;
+					break;
+				}
+			}
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
             ScrollSpeed.Value = Program.OptionsObject.Editor_ScrollLines;
@@ -197,13 +235,13 @@ namespace Spedit.UI.Windows
             LoadSH();
         }
 
-        private void ToggleRestartText()
+        private void ToggleRestartText(bool FullEffect = false)
         {
             if (AllowChanging)
             {
                 if (!RestartTextIsShown)
                 {
-                    StatusTextBlock.Content = "Restart editor to take effect...";
+                    StatusTextBlock.Content = (FullEffect) ? "Restart editor to take full effect..." : "Restart editor to take effect...";
                     RestartTextIsShown = true;
                 }
             }
