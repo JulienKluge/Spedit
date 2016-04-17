@@ -82,14 +82,14 @@
                 <ColumnDefinition Name="ISenseColumn" Width="0" />
             </Grid.ColumnDefinitions>
             <Grid VerticalAlignment="Top" Name="ISenseGrid" Grid.Column="1" Width="Auto" Height="Auto">
-                <Border BorderBrush="{DynamicResource BlackColorBrush}" BorderThickness="1" Height="Auto">
+                <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Height="Auto">
                     <Grid Height="Auto" Background="{DynamicResource WhiteColorBrush}">
                         <TextBlock Name="IS_FuncName" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="2,0,2,0" Width="Auto" FontSize="15" Foreground="{DynamicResource AccentColorBrush}" />
                         <TextBlock Name="IS_FuncDescription" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Margin="5,20,2,2" FontFamily="Consolas" FontSize="13" Foreground="{DynamicResource BlackColorBrush}" />
                     </Grid>
                 </Border>
             </Grid>
-            <Border Name="ACBorder" Grid.Column="0" Background="{DynamicResource WhiteColorBrush}" VerticalAlignment="Top" BorderBrush="{DynamicResource BlackColorBrush}" BorderThickness="1" Height="0">
+            <Border Name="ACBorder" Grid.Column="0" Background="{DynamicResource WhiteColorBrush}" VerticalAlignment="Top" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Height="0">
                 <Grid>
                     <ListBox Name="AutoCompleteBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Column="0" Width="0"
                          Height="175" Background="Transparent" Opacity="1" Foreground="{DynamicResource BlackColorBrush}"
