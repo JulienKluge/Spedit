@@ -48,7 +48,8 @@ namespace Spedit.UI.Components
 		{
 			RaiseEventAllowed = false;
 			BrushRect.Background = new SolidColorBrush(c);
-			BrushRect.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, (byte)(0xFF - c.R), (byte)(0xFF - c.G), (byte)(0xFF - c.B)));
+			double colorChannelMean = (double)(c.R + c.G + c.B) / 3.0;
+			BrushRect.Foreground = new SolidColorBrush((colorChannelMean > 128.0) ? Colors.Black : Colors.White);
 			if (UpdateTextBox)
 			{
 				BrushRect.Text = ((c.R << 16) | (c.G << 8) | (c.B)).ToString("X").PadLeft(6,'0');
