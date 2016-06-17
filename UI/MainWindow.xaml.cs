@@ -179,7 +179,7 @@ namespace Spedit.UI
 
         private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
+			e.Cancel = true;
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -405,6 +405,7 @@ namespace Spedit.UI.Components
                 }
             }
             Program.MainWindow.EditorsReferences.Remove(this);
+			Program.MainWindow.DockingPane.Children.Remove(this.Parent);
             Parent = null; //to prevent a ring depency which disables the GC from work
 
         }
