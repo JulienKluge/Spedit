@@ -234,6 +234,14 @@ namespace Spedit.Utils.SPSyntaxTidy
 
         public static bool IsTokenNumber(SPToken token)
         {
+			if (token == null)
+			{
+				return false;
+			}
+			if (token.Kind == SPTokenKind.Invalid)
+			{
+				return false;
+			}
             if (token.Value.Length == 1)
             {
                 if (token.Value[0] >= '0' && token.Value[0] <= '9')
