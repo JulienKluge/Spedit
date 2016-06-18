@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net;
+using System.Text;
 
 namespace Spedit.Utils
 {
@@ -17,7 +18,25 @@ namespace Spedit.Utils
         //thanks to: http://www.codeproject.com/Tips/443588/Simple-Csharp-FTP-Class
         public void upload(string remoteFile, string localFile)
         {
-            ftpRequest = (FtpWebRequest)FtpWebRequest.Create(host + "/" + remoteFile);
+			StringBuilder requestUri = new StringBuilder(host);
+			if (host[host.Length - 1] == '/')
+			{
+				if (remoteFile[0] == '/')
+				{ requestUri.Append(remoteFile.Substring(1)); }
+				else
+				{ requestUri.Append(remoteFile); }
+			}
+			else
+			{
+				if (remoteFile[0] == '/')
+				{ requestUri.Append(remoteFile); }
+				else
+				{
+					requestUri.Append("/");
+					requestUri.Append(remoteFile);
+				}
+			}
+            ftpRequest = (FtpWebRequest)FtpWebRequest.Create(requestUri.ToString());
             ftpRequest.Credentials = new NetworkCredential(user, pass);
             ftpRequest.UseBinary = true;
             ftpRequest.UsePassive = true;

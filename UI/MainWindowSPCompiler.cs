@@ -280,14 +280,14 @@ namespace Spedit.UI
                         {
                             uploadDir = c.FTPDir.TrimEnd(new char[] { '/' }) + "/" + fileInfo.Name;
                         }
-                        try
-                        {
-                            ftp.upload(uploadDir, nonUploadedFiles[i]);
-                            stringOutput.AppendLine("Uploaded: " + nonUploadedFiles[i]);
-                        }
-                        catch (Exception e)
-                        {
-                            stringOutput.AppendLine("Error while uploading file: " + nonUploadedFiles[i]);
+						try
+						{
+							ftp.upload(uploadDir, nonUploadedFiles[i]);
+							stringOutput.AppendLine("Uploaded: " + nonUploadedFiles[i]);
+						}
+						catch (Exception e)
+						{
+							stringOutput.AppendLine($"Error while uploading file: {nonUploadedFiles[i]} to {uploadDir}");
                             stringOutput.AppendLine("Details: " + e.Message);
                         }
                     }
