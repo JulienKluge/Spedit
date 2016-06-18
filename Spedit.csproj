@@ -631,8 +631,8 @@ md ".\sourcepawn\configs"
 md ".\sourcepawn\temp"
 md ".\sourcepawn\scripts"
 md ".\sourcepawn\errorfiles"
-xcopy ".\..\..\Resources\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
-xcopy ".\..\..\Resources\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
+C:\Windows\system32\xcopy ".\..\..\Resources\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
+C:\Windows\system32\xcopy ".\..\..\Resources\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
