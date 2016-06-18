@@ -173,7 +173,14 @@ namespace Spedit.UI.Windows
             }
         }
 
-        private void FontFamily_Changed(object sender, RoutedEventArgs e)
+		private void AutoCloseBrackets_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			Program.OptionsObject.Editor_AutoCloseBrackets = AutoCloseBrackets.IsChecked.Value;
+		}
+
+
+		private void FontFamily_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
             FontFamily family = (FontFamily)FontFamilyCB.SelectedItem;
@@ -230,7 +237,8 @@ namespace Spedit.UI.Windows
             AgressiveIndentation.IsChecked = Program.OptionsObject.Editor_AgressiveIndentation;
             LineReformatting.IsChecked = Program.OptionsObject.Editor_ReformatLineAfterSemicolon;
             TabToSpace.IsChecked = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
-            FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
+			AutoCloseBrackets.IsChecked = Program.OptionsObject.Editor_AutoCloseBrackets;
+			FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             LoadSH();
         }

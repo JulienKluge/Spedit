@@ -446,10 +446,28 @@ namespace Spedit.UI.Components
                 foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
             }
             else if (e.Text == "{")
-            {
-                foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
+			{
+				if (Program.OptionsObject.Editor_AutoCloseBrackets)
+				{
+					editor.Document.Insert(editor.CaretOffset, "}");
+					editor.CaretOffset -= 1;
+				}
+				foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
             }
-        }
+			else if (Program.OptionsObject.Editor_AutoCloseBrackets)
+			{
+				if (e.Text == "(")
+				{
+					editor.Document.Insert(editor.CaretOffset, ")");
+					editor.CaretOffset -= 1;
+				}
+				else if (e.Text == "[")
+				{
+					editor.Document.Insert(editor.CaretOffset, "]");
+					editor.CaretOffset -= 1;
+				}
+			}
+		}
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)
         {

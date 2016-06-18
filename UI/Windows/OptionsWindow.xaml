@@ -53,6 +53,7 @@
                         <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,55,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
                         <CheckBox Name="LineReformatting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Content="Reformatting Line after semicolon" Checked="LineReformat_Changed" Unchecked="LineReformat_Changed" />
                         <CheckBox Name="TabToSpace" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,95,0,0" Content="Replace tabs with spaces" Checked="TabToSpace_Changed" Unchecked="TabToSpace_Changed" />
+                        <CheckBox Name="AutoCloseBrackets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,115,0,0" Content="Auto close Brackets [,{,(" Checked="AutoCloseBrackets_Changed" Unchecked="AutoCloseBrackets_Changed" />
                         <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
                         <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
                             <ComboBox.Resources>
