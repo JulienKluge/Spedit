@@ -48,7 +48,7 @@
 			// label1
 			// 
 			resources.ApplyResources(this.label1, "label1");
-			this.label1.ForeColor = System.Drawing.Color.Red;
+			this.label1.ForeColor = System.Drawing.Color.Black;
 			this.label1.Name = "label1";
 			this.label1.UseWaitCursor = true;
 			// 
@@ -61,7 +61,7 @@
 			// 
 			// button1
 			// 
-			this.button1.ForeColor = System.Drawing.Color.Red;
+			this.button1.ForeColor = System.Drawing.Color.Black;
 			resources.ApplyResources(this.button1, "button1");
 			this.button1.Name = "button1";
 			this.button1.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.progressBar1);
