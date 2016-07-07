@@ -124,7 +124,7 @@ namespace Spedit.UI.Windows
 				}
 				else if (TagValue is SMStruct)
 				{
-					var sm = (SMConstant)TagValue;
+					var sm = (SMStruct)TagValue;
 					SPNameBlock.Text = sm.Name;
 					SPFullNameBlock.Text = string.Empty;
 					SPFileBlock.Text = sm.File + ".inc" + " (pos: " + sm.Index.ToString() + " - len: " + sm.Length.ToString() + ")";
