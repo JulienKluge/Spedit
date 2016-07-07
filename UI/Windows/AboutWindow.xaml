@@ -48,7 +48,7 @@
                     <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="325,15,0,15">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Bara (Tester, Proposer, Contributor, Updateserver owner)" FontWeight="Bold" />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- mev (Proposer, Contributor, Color-Sheme-Designer" FontWeight="Bold" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- mev (Proposer, Contributor, Color-Sheme-Designer)" FontWeight="Bold" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILOPAN (Proposer, Help)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- necavi (Tester, Proposer, Contributor)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- WildCard65 (Tester, Proposer)" />
