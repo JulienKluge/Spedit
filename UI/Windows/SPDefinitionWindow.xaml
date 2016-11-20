@@ -19,7 +19,7 @@
     <Grid>
         <TextBox Name="SPSearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" controls:TextBoxHelper.Watermark="Search" TextChanged="TextBox_TextChanged" />
         <controls:MetroProgressBar Name="SPProgress" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="0,26,0,0" IsIndeterminate="False" IsHitTestVisible="False" Height="4" Foreground="{DynamicResource AccentColorBrush}" Background="{DynamicResource WhiteColorBrush}" />
-        <ListBox Name="SPBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="0,30,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
+        <ListBox Name="SPBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="300" Margin="1,30,0,5" SelectionChanged="SPFunctionsListBox_SelectionChanged" />
         <TextBlock Name="SPNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,15,0,0" FontSize="20" Foreground="{DynamicResource AccentColorBrush}" IsHitTestVisible="False" />
         <TextBlock Name="SPFullNameBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,45,0,0" FontSize="18" IsHitTestVisible="False" />
         <TextBlock Name="SPFileBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="305,75,0,0" FontSize="16" IsHitTestVisible="False" Foreground="Gray" />
