@@ -5,6 +5,7 @@ namespace Spedit.UI
 {
     public partial class MainWindow
     {
+		//some key bindings are handled in EditorElement.xaml.cs because the editor will fetch some keys before they can be handled here.
         private void MainWindowEvent_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.IsDown)

@@ -421,6 +421,40 @@ namespace Spedit.UI.Components
 			}
 		}
 
+		public void MoveLine(bool down)
+		{
+			var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+			if (down)
+			{
+				if (line.NextLine == null)
+				{
+					editor.Document.Insert(line.Offset, Environment.NewLine);
+				}
+				else
+				{
+					string lineText = editor.Document.GetText(line.NextLine.Offset, line.NextLine.Length);
+					editor.Document.Remove(line.NextLine.Offset, line.NextLine.TotalLength);
+					editor.Document.Insert(line.Offset, lineText + Environment.NewLine);
+				}
+			}
+			else
+			{
+				if (line.PreviousLine == null)
+				{
+					editor.Document.Insert(line.Offset + line.Length, Environment.NewLine);
+				}
+				else
+				{
+					int insertOffset = line.PreviousLine.Offset;
+					int relativeCaretOffset = editor.CaretOffset - line.Offset;
+					string lineText = editor.Document.GetText(line.Offset, line.Length);
+					editor.Document.Remove(line.Offset, line.TotalLength);
+					editor.Document.Insert(insertOffset, lineText + Environment.NewLine);
+					editor.CaretOffset = insertOffset + relativeCaretOffset;
+				}
+			}
+		}
+
         public async void Close(bool ForcedToSave = false, bool CheckSavings = true)
         {
             regularyTimer.Stop();
@@ -576,19 +610,35 @@ namespace Spedit.UI.Components
         private void TextArea_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = ISAC_EvaluateKeyDownEvent(e.Key);
-			if (!e.Handled)
+			if (!e.Handled) //one could ask why some key-bindings are handled here. Its because spedit sends handled flags for ups&downs and they are therefore not able to processed by the central code.
 			{
-				if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) && e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
+				if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl))
 				{
-					if (e.Key == Key.Down)
+					if (e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
 					{
-						DuplicateLine(true);
-						e.Handled = true;
+						if (e.Key == Key.Down)
+						{
+							DuplicateLine(true);
+							e.Handled = true;
+						}
+						else if (e.Key == Key.Up)
+						{
+							DuplicateLine(false);
+							e.Handled = true;
+						}
 					}
-					else if (e.Key == Key.Up)
+					else
 					{
-						DuplicateLine(false);
-						e.Handled = true;
+						if (e.Key == Key.Down)
+						{
+							MoveLine(true);
+							e.Handled = true;
+						}
+						else if (e.Key == Key.Up)
+						{
+							MoveLine(false);
+							e.Handled = true;
+						}
 					}
 				}
 			}
