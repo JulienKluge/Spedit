@@ -129,7 +129,10 @@ namespace Spedit.UI.Components
 			editor.Options.EnableEmailHyperlinks = false;
             editor.Options.HighlightCurrentLine = true;
             editor.Options.AllowScrollBelowDocument = true;
-            editor.TextArea.SelectionCornerRadius = 0.0;
+			editor.Options.ShowSpaces = Program.OptionsObject.Editor_ShowSpaces;
+			editor.Options.ShowTabs = Program.OptionsObject.Editor_ShowTabs;
+			editor.Options.IndentationSize = Program.OptionsObject.Editor_IndentationSize;
+			editor.TextArea.SelectionCornerRadius = 0.0;
             editor.Options.ConvertTabsToSpaces = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 
 			Brush currentLineBackground = new SolidColorBrush(Color.FromArgb(0x20, 0x88, 0x88, 0x88));

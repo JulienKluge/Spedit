@@ -185,6 +185,33 @@ namespace Spedit.UI.Windows
 			Program.OptionsObject.Editor_AutoCloseStringChars = AutoCloseStringChars.IsChecked.Value;
 		}
 
+		private void ShowSpaces_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			bool showSpacesValue = Program.OptionsObject.Editor_ShowSpaces = ShowSpaces.IsChecked.Value;
+			EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].editor.Options.ShowSpaces = showSpacesValue;
+				}
+			}
+		}
+
+		private void ShowTabs_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			bool showTabsValue = Program.OptionsObject.Editor_ShowTabs = ShowTabs.IsChecked.Value;
+			EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].editor.Options.ShowTabs = showTabsValue;
+				}
+			}
+		}
 
 		private void FontFamily_Changed(object sender, RoutedEventArgs e)
         {
@@ -203,7 +230,22 @@ namespace Spedit.UI.Windows
 			}
         }
 
-        private void HighlightDeprecateds_Changed(object sender, RoutedEventArgs e)
+		private void IndentationSize_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			int indentationSizeValue = Program.OptionsObject.Editor_IndentationSize = (int)System.Math.Round(IndentationSize.Value);
+			EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
+			if (editors != null)
+			{
+				for (int i = 0; i < editors.Length; ++i)
+				{
+					editors[i].editor.Options.IndentationSize = indentationSizeValue;
+				}
+			}
+		}
+
+
+		private void HighlightDeprecateds_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
             Program.OptionsObject.SH_HighlightDeprecateds = HighlightDeprecateds.IsChecked.Value;
@@ -245,8 +287,11 @@ namespace Spedit.UI.Windows
             TabToSpace.IsChecked = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 			AutoCloseBrackets.IsChecked = Program.OptionsObject.Editor_AutoCloseBrackets;
 			AutoCloseStringChars.IsChecked = Program.OptionsObject.Editor_AutoCloseStringChars;
+			ShowSpaces.IsChecked = Program.OptionsObject.Editor_ShowSpaces;
+			ShowTabs.IsChecked = Program.OptionsObject.Editor_ShowTabs;
 			FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
+			IndentationSize.Value = (double)Program.OptionsObject.Editor_IndentationSize;
             LoadSH();
         }
 

@@ -55,6 +55,12 @@
                         <CheckBox Name="TabToSpace" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,95,0,0" Content="Replace tabs with spaces" Checked="TabToSpace_Changed" Unchecked="TabToSpace_Changed" />
                         <CheckBox Name="AutoCloseBrackets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,115,0,0" Content="Auto close Brackets [], {}, ()" Checked="AutoCloseBrackets_Changed" Unchecked="AutoCloseBrackets_Changed" />
                         <CheckBox Name="AutoCloseStringChars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,135,0,0" Content="Auto close Strings, Chars &quot;&quot;, ''" Checked="AutoCloseStringChars_Changed" Unchecked="AutoCloseStringChars_Changed" />
+                        <CheckBox Name="ShowSpaces" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,155,0,0" Content="Show Spaces" Checked="ShowSpaces_Changed" Unchecked="ShowSpaces_Changed" />
+                        <CheckBox Name="ShowTabs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,175,0,0" Content="Show Tabs" Checked="ShowTabs_Changed" Unchecked="ShowTabs_Changed" />
+                        
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,160,0,0" Text="Indentation Size:" IsHitTestVisible="False" />
+                        <Slider Name="IndentationSize" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Width="280" Minimum="1" Maximum="10" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="IndentationSize_Changed" />
+                        
                         <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
                         <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
                             <ComboBox.Resources>
@@ -77,33 +83,35 @@
                                 <Binding Source="{StaticResource myFonts}" />
                             </ComboBox.ItemsSource>
                         </ComboBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,140,0,0" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,230,0,0">
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
 
-                        <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,155,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
+                            <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Comments" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,180,0,0" Height="105" Width="300" ColorChanged="Comments_Changed" />
-                        <components:ColorChangeControl x:Name="SH_CommentMarkers" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,180,5,0" Height="105" Width="300" ColorChanged="CommentMarker_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Comments" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,40,0,0" Height="105" Width="300" ColorChanged="Comments_Changed" />
+                            <components:ColorChangeControl x:Name="SH_CommentMarkers" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,40,5,0" Height="105" Width="300" ColorChanged="CommentMarker_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_PreProcessor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,290,0,0" Height="105" Width="300" ColorChanged="PreProcessor_Changed" />
-                        <components:ColorChangeControl x:Name="SH_Strings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,290,5,0" Height="105" Width="300" ColorChanged="String_Changed" />
+                            <components:ColorChangeControl x:Name="SH_PreProcessor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0" Height="105" Width="300" ColorChanged="PreProcessor_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Strings" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,150,5,0" Height="105" Width="300" ColorChanged="String_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Types" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,400,0,0" Height="105" Width="300" ColorChanged="Types_Changed" />
-                        <components:ColorChangeControl x:Name="SH_TypesValues" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,400,5,0" Height="105" Width="300" ColorChanged="TypeValues_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Types" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,260,0,0" Height="105" Width="300" ColorChanged="Types_Changed" />
+                            <components:ColorChangeControl x:Name="SH_TypesValues" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,260,5,0" Height="105" Width="300" ColorChanged="TypeValues_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Keywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,510,0,0" Height="105" Width="300" ColorChanged="Keywords_Changed" />
-                        <components:ColorChangeControl x:Name="SH_ContextKeywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,510,5,0" Height="105" Width="300" ColorChanged="ContextKeywords_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Keywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,370,0,0" Height="105" Width="300" ColorChanged="Keywords_Changed" />
+                            <components:ColorChangeControl x:Name="SH_ContextKeywords" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,370,5,0" Height="105" Width="300" ColorChanged="ContextKeywords_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Chars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,620,0,0" Height="105" Width="300" ColorChanged="Chars_Changed" />
-                        <components:ColorChangeControl x:Name="SH_UnknownFunctions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,620,5,0" Height="105" Width="300" ColorChanged="UFunctions_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Chars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,480,0,0" Height="105" Width="300" ColorChanged="Chars_Changed" />
+                            <components:ColorChangeControl x:Name="SH_UnknownFunctions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,480,5,0" Height="105" Width="300" ColorChanged="UFunctions_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Numbers" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,730,0,0" Height="105" Width="300" ColorChanged="Numbers_Changed" />
-                        <components:ColorChangeControl x:Name="SH_SpecialCharacters" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,730,5,0" Height="105" Width="300" ColorChanged="SpecialCharacters_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Numbers" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,580,0,0" Height="105" Width="300" ColorChanged="Numbers_Changed" />
+                            <components:ColorChangeControl x:Name="SH_SpecialCharacters" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,580,5,0" Height="105" Width="300" ColorChanged="SpecialCharacters_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Deprecated" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,840,0,0" Height="105" Width="300" ColorChanged="Deprecated_Changed" />
-                        <components:ColorChangeControl x:Name="SH_Constants" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,840,5,0" Height="105" Width="300" ColorChanged="Constants_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Deprecated" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,680,0,0" Height="105" Width="300" ColorChanged="Deprecated_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Constants" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,680,5,0" Height="105" Width="300" ColorChanged="Constants_Changed" />
 
-                        <components:ColorChangeControl x:Name="SH_Functions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,950,0,0" Height="105" Width="300" ColorChanged="Functions_Changed" />
-                        <components:ColorChangeControl x:Name="SH_Methods" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,950,5,0" Height="105" Width="300" ColorChanged="Methods_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Functions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,780,0,0" Height="105" Width="300" ColorChanged="Functions_Changed" />
+                            <components:ColorChangeControl x:Name="SH_Methods" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="335,780,5,0" Height="105" Width="300" ColorChanged="Methods_Changed" />
+                        </Grid>
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>

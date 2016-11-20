@@ -40,6 +40,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Editor_ReplaceTabsToWhitespace = false;
 		public bool Editor_AutoCloseBrackets = true;
 		public bool Editor_AutoCloseStringChars = true;
+		public bool Editor_ShowSpaces = false;
+		public bool Editor_ShowTabs = false;
+		public int Editor_IndentationSize = 4;
 
 		public string[] LastOpenFiles = new string[0];
 
@@ -85,6 +88,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
                         }
                     case 1:
@@ -100,6 +106,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
                         }
                     case 2:
@@ -114,6 +123,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
                         }
                     case 3:
@@ -125,6 +137,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
                         }
 					case 4:
@@ -135,6 +150,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
 						}
 					case 5:
@@ -144,6 +162,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
 						}
 					case 6:
@@ -153,17 +174,26 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
 						}
 					case 7:
 						{
 							Editor_AutoCloseBrackets = true;
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
 						}
 					case 8:
 						{
 							Editor_AutoCloseStringChars = true;
+							Editor_ShowSpaces = false;
+							Editor_ShowTabs = false;
+							Editor_IndentationSize = 4;
 							break;
 						}
                 }
