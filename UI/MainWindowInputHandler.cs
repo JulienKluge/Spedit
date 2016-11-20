@@ -24,8 +24,8 @@ namespace Spedit.UI
                     switch (e.Key)
                     {
                         case Key.S: { Command_SaveAs(); e.Handled = true; break; }
-                    }
-                }
+					}
+				}
                 else if (e.KeyboardDevice.IsKeyDown(Key.LeftShift))
                 {
                     switch (e.Key)
@@ -48,7 +48,7 @@ namespace Spedit.UI
                         case Key.P: { Command_FlushFoldingState(false); e.Handled = true; break; }
 						case Key.D7: //i hate key mapping...
 						case Key.OemQuestion: { Command_ToggleCommentLine(); break; }
-                    }
+					}
                 }
             }
             else

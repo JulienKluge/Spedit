@@ -410,6 +410,17 @@ namespace Spedit.UI.Components
 			}
 		}
 
+		public void DuplicateLine(bool down)
+		{
+			var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+			string lineText = editor.Document.GetText(line.Offset, line.Length);
+			editor.Document.Insert(line.Offset, lineText + Environment.NewLine);
+			if (down)
+			{
+				editor.CaretOffset -= (line.Length + 1);
+			}
+		}
+
         public async void Close(bool ForcedToSave = false, bool CheckSavings = true)
         {
             regularyTimer.Stop();
@@ -565,6 +576,22 @@ namespace Spedit.UI.Components
         private void TextArea_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = ISAC_EvaluateKeyDownEvent(e.Key);
+			if (!e.Handled)
+			{
+				if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) && e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
+				{
+					if (e.Key == Key.Down)
+					{
+						DuplicateLine(true);
+						e.Handled = true;
+					}
+					else if (e.Key == Key.Up)
+					{
+						DuplicateLine(false);
+						e.Handled = true;
+					}
+				}
+			}
         }
 
         private void HandleContextMenuCommand(object sender, RoutedEventArgs e)
