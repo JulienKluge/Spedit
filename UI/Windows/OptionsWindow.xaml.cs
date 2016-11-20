@@ -179,6 +179,12 @@ namespace Spedit.UI.Windows
 			Program.OptionsObject.Editor_AutoCloseBrackets = AutoCloseBrackets.IsChecked.Value;
 		}
 
+		private void AutoCloseStringChars_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			Program.OptionsObject.Editor_AutoCloseStringChars = AutoCloseStringChars.IsChecked.Value;
+		}
+
 
 		private void FontFamily_Changed(object sender, RoutedEventArgs e)
         {
@@ -238,6 +244,7 @@ namespace Spedit.UI.Windows
             LineReformatting.IsChecked = Program.OptionsObject.Editor_ReformatLineAfterSemicolon;
             TabToSpace.IsChecked = Program.OptionsObject.Editor_ReplaceTabsToWhitespace;
 			AutoCloseBrackets.IsChecked = Program.OptionsObject.Editor_AutoCloseBrackets;
+			AutoCloseStringChars.IsChecked = Program.OptionsObject.Editor_AutoCloseStringChars;
 			FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             LoadSH();

@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
     [Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 8;
-        public int Version = 8;
+        public static int SVersion = 9;
+        public int Version = 9;
 
         public byte[] Program_CryptoKey = null;
 
@@ -39,8 +39,9 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
         public bool Editor_ReformatLineAfterSemicolon = true;
         public bool Editor_ReplaceTabsToWhitespace = false;
 		public bool Editor_AutoCloseBrackets = true;
+		public bool Editor_AutoCloseStringChars = true;
 
-        public string[] LastOpenFiles = new string[0];
+		public string[] LastOpenFiles = new string[0];
 
         public bool SH_HighlightDeprecateds = true;
 
@@ -83,6 +84,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
                         }
                     case 1:
@@ -97,6 +99,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
                         }
                     case 2:
@@ -110,6 +113,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
                         }
                     case 3:
@@ -120,6 +124,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
                         }
 					case 4:
@@ -129,6 +134,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
 						}
 					case 5:
@@ -137,6 +143,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
 						}
 					case 6:
@@ -145,11 +152,18 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 							this.Program_Theme = "BaseDark";
 							NormalizeSHColors();
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
 							break;
 						}
 					case 7:
 						{
 							Editor_AutoCloseBrackets = true;
+							Editor_AutoCloseStringChars = true;
+							break;
+						}
+					case 8:
+						{
+							Editor_AutoCloseStringChars = true;
 							break;
 						}
                 }

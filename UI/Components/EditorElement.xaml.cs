@@ -467,6 +467,35 @@ namespace Spedit.UI.Components
 					editor.CaretOffset -= 1;
 				}
 			}
+			if (Program.OptionsObject.Editor_AutoCloseStringChars)
+			{
+				if (e.Text == "\"")
+				{
+					var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+					string lineText = editor.Document.GetText(line.Offset, editor.CaretOffset - line.Offset);
+					if (lineText.Length > 0)
+					{
+						if (lineText[Math.Max(lineText.Length - 2, 0)] != '\\')
+						{
+							editor.Document.Insert(editor.CaretOffset, "\"");
+							editor.CaretOffset -= 1;
+						}
+					}
+				}
+				else if (e.Text == "'")
+				{
+					var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+					string lineText = editor.Document.GetText(line.Offset, editor.CaretOffset - line.Offset);
+					if (lineText.Length > 0)
+					{
+						if (lineText[Math.Max(lineText.Length - 2, 0)] != '\\')
+						{
+							editor.Document.Insert(editor.CaretOffset, "'");
+							editor.CaretOffset -= 1;
+						}
+					}
+				}
+			}
 		}
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)
