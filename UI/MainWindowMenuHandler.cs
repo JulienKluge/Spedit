@@ -131,7 +131,13 @@ namespace Spedit.UI
             Command_JumpTo();
         }
 
-        private void Menu_SelectAll(object sender, RoutedEventArgs e)
+		private void Menu_ToggleCommentLine(object sender, RoutedEventArgs e)
+		{
+			Command_ToggleCommentLine();
+		}
+
+
+		private void Menu_SelectAll(object sender, RoutedEventArgs e)
         {
             Command_SelectAll();
         }

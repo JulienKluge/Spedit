@@ -376,6 +376,40 @@ namespace Spedit.UI.Components
             }
         }
 
+		public void ToggleCommentOnLine()
+		{
+			var line = editor.Document.GetLineByOffset(editor.CaretOffset);
+			string lineText = editor.Document.GetText(line.Offset, line.Length);
+			int leadinggWhiteSpaces = 0;
+			for (int i = 0; i < lineText.Length; ++i)
+			{
+				if (char.IsWhiteSpace(lineText[i]))
+				{
+					leadinggWhiteSpaces++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			lineText = lineText.Trim();
+			if (lineText.Length > 1)
+			{
+				if (lineText[0] == '/' && lineText[1] == '/')
+				{
+					editor.Document.Remove(line.Offset + leadinggWhiteSpaces, 2);
+				}
+				else
+				{
+					editor.Document.Insert(line.Offset + leadinggWhiteSpaces, "//");
+				}
+			}
+			else
+			{
+				editor.Document.Insert(line.Offset + leadinggWhiteSpaces, "//");
+			}
+		}
+
         public async void Close(bool ForcedToSave = false, bool CheckSavings = true)
         {
             regularyTimer.Stop();

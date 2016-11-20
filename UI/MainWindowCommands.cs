@@ -249,6 +249,15 @@ namespace Spedit.UI
             }
         }
 
+		private void Command_ToggleCommentLine()
+		{
+			EditorElement ee = GetCurrentEditorElement();
+			if (ee != null)
+			{
+				ee.ToggleCommentOnLine();
+			}
+		}
+
         private void Command_TidyCode(bool All)
         {
             EditorElement[] editors;

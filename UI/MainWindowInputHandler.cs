@@ -46,6 +46,8 @@ namespace Spedit.UI
                         case Key.W: { Command_Close(); e.Handled = true; break; }
                         case Key.R: { Command_TidyCode(false); e.Handled = true; break; }
                         case Key.P: { Command_FlushFoldingState(false); e.Handled = true; break; }
+						case Key.D7: //i hate key mapping...
+						case Key.OemQuestion: { Command_ToggleCommentLine(); break; }
                     }
                 }
             }
