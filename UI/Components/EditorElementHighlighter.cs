@@ -115,7 +115,7 @@ namespace Spedit.UI.Components
                 });
                 rs.Rules.Add(new HighlightingRule() //numbers
                 {
-                    Regex = new Regex(@"\b0[xX][0-9a-fA-F]+|([+-]?\b[0-9]+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
+                    Regex = new Regex(@"\b0[xX][0-9a-fA-F]+|\b0[bB][01]+|([+-]?\b[0-9]+(\.[0-9]+)?|\.[0-9]+)([eE][+-]?[0-9]+)?", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     Color = new HighlightingColor() { Foreground = new SimpleHighlightingBrush(Program.OptionsObject.SH_Numbers) }
                 });
                 rs.Rules.Add(new HighlightingRule() //special characters
