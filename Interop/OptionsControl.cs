@@ -73,130 +73,41 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
             }
             if (OptionsControl.SVersion > this.Version)
             {
-                switch (this.Version)
-                {
-                    case 0:
-                        {
-                            this.UI_ShowToolBar = false;
-                            this.Editor_ReformatLineAfterSemicolon = true;
-                            this.Editor_ScrollLines = 4.0;
-                            this.Program_CheckForUpdates = true;
-                            this.Editor_ReplaceTabsToWhitespace = false;
-							this.Program_DynamicISAC = true;
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-                        }
-                    case 1:
-                        {
-                            this.UI_ShowToolBar = false;
-                            this.Editor_ReformatLineAfterSemicolon = true;
-                            this.Editor_ScrollLines = 4.0;
-                            this.Program_CheckForUpdates = true;
-                            this.Editor_ReplaceTabsToWhitespace = false;
-							this.Program_DynamicISAC = true;
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-                        }
-                    case 2:
-                        {
-                            this.Editor_ReformatLineAfterSemicolon = true;
-                            this.Editor_ScrollLines = 4.0;
-                            this.Program_CheckForUpdates = true;
-                            this.Editor_ReplaceTabsToWhitespace = false;
-							this.Program_DynamicISAC = true;
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-                        }
-                    case 3:
-                        {
-                            this.Editor_ReplaceTabsToWhitespace = false;
-							this.Program_DynamicISAC = true;
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-                        }
-					case 4:
-						{
-							this.Program_DynamicISAC = true;
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-						}
-					case 5:
-						{
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-						}
-					case 6:
-						{
-							this.Program_AccentColor = "Red";
-							this.Program_Theme = "BaseDark";
-							NormalizeSHColors();
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-						}
-					case 7:
-						{
-							Editor_AutoCloseBrackets = true;
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-						}
-					case 8:
-						{
-							Editor_AutoCloseStringChars = true;
-							Editor_ShowSpaces = false;
-							Editor_ShowTabs = false;
-							Editor_IndentationSize = 4;
-							break;
-						}
-                }
+				if (Version < 2)
+				{
+					this.UI_ShowToolBar = false;
+				}
+				if (Version < 3)
+				{
+					this.Editor_ReformatLineAfterSemicolon = true;
+					this.Editor_ScrollLines = 4.0;
+					this.Program_CheckForUpdates = true;
+				}
+				if (Version < 4)
+				{
+					this.Editor_ReplaceTabsToWhitespace = false;
+				}
+				if (Version < 5)
+				{
+					this.Program_DynamicISAC = true;
+				}
+				if (Version < 7)
+				{
+					this.Program_AccentColor = "Red";
+					this.Program_Theme = "BaseDark";
+					NormalizeSHColors();
+				}
+				if (Version < 8)
+				{
+					Editor_AutoCloseBrackets = true;
+				}
+				if (Version < 9)
+				{
+					Editor_AutoCloseStringChars = true;
+					Editor_ShowSpaces = false;
+					Editor_ShowTabs = false;
+					Editor_IndentationSize = 4;
+				}
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars
             }
