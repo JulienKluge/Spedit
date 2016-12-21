@@ -28,6 +28,22 @@ namespace Spedit.UI
 				findReplaceButtonDict = new ObservableCollection<string>() { Program.Translations.Replace, Program.Translations.ReplaceAll };
 				((MenuItem)ConfigMenu.Items[ConfigMenu.Items.Count - 1]).Header = Program.Translations.EditConfig;
 			}
+			MenuI_File.Header = Program.Translations.FileStr;
+			MenuI_New.Header = Program.Translations.New;
+			MenuI_Open.Header = Program.Translations.Open;
+			MenuI_Save.Header = Program.Translations.Save;
+			MenuI_SaveAll.Header = Program.Translations.SaveAll;
+			MenuI_SaveAs.Header = Program.Translations.SaveAs;
+			MenuI_Close.Header = Program.Translations.Close;
+			MenuI_CloseAll.Header = Program.Translations.CloseAll;
+
+			MenuI_Build.Header = Program.Translations.Build;
+			MenuI_CompileAll.Header = Program.Translations.CompileAll;
+			MenuI_Compile.Header = Program.Translations.CompileCurr;
+			MenuI_CopyPlugin.Header = Program.Translations.CopyPlugin;
+			MenuI_FTPUpload.Header = Program.Translations.FTPUp;
+			MenuI_StartServer.Header = Program.Translations.StartServer;
+			MenuI_SendRCon.Header = Program.Translations.SendRCon;
 		}
 	}
 }

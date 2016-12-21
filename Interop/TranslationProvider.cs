@@ -59,6 +59,17 @@ namespace Spedit.Interop
 		public string ErrorUploadFile;
 		public string ErrorUpload;
 		public string Done;
+		public string FileStr;
+		public string New;
+		public string Open;
+		public string Save;
+		public string SaveAll;
+		public string SaveAs;
+		public string Close;
+		public string CloseAll;
+		public string Build;
+		public string CopyPlugin;
+		public string SendRCon;
 
 		public void LoadLanguage(string lang)
 		{
@@ -185,6 +196,28 @@ namespace Spedit.Interop
 								ErrorUpload = nv;
 							else if (nn == "done")
 								Done = nv;
+							else if (nn == "file")
+								FileStr = nv;
+							else if (nn == "new")
+								New = nv;
+							else if (nn == "open")
+								Open = nv;
+							else if (nn == "save")
+								Save = nv;
+							else if (nn == "saveall")
+								SaveAll = nv;
+							else if (nn == "saveas")
+								SaveAs = nv;
+							else if (nn == "close")
+								Close = nv;
+							else if (nn == "closeall")
+								CloseAll = nv;
+							else if (nn == "build")
+								Build = nv;
+							else if (nn == "copyplugin")
+								CopyPlugin = nv;
+							else if (nn == "sendrcon")
+								SendRCon = nv;
 						}
 					}
 				}
@@ -207,7 +240,7 @@ namespace Spedit.Interop
 			Saving = "Saving";
 			SavingUFiles = "Save all unsaved files?";
 			CompileAll = "Compile all";
-			CompileCurr = "Copmile current";
+			CompileCurr = "Compile current";
 			Copy = "Copy";
 			FTPUp = "FTP Upload";
 			StartServer = "Start server";
@@ -245,6 +278,17 @@ namespace Spedit.Interop
 			ErrorUploadFile = "Error while uploading file: {0} to {1}";
 			ErrorUpload = "Error while uploading files";
 			Done = "Done";
+			FileStr = "File";
+			New = "New";
+			Open = "Open";
+			Save = "Save";
+			SaveAll = "Save all";
+			SaveAs = "Save as";
+			Close = "Close";
+			CloseAll = "Close all";
+			Build = "Build";
+			CopyPlugin = "Copy Plugins";
+			SendRCon = "Senc RCon commands";
 		}
 	}
 }

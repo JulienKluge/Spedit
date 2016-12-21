@@ -55,16 +55,16 @@
     <controls:MetroWindow.LeftWindowCommands>
         <controls:WindowCommands>
             <Menu>
-                <MenuItem Header="File" SubmenuOpened="FileMenu_Open">
-                    <MenuItem Header="New" Click="Menu_New" InputGestureText="Ctrl+N" />
-                    <MenuItem Header="Open" Click="Menu_Open" InputGestureText="Ctrl+O" />
+                <MenuItem Name="MenuI_File" Header="File" SubmenuOpened="FileMenu_Open">
+                    <MenuItem Name="MenuI_New" Header="New" Click="Menu_New" InputGestureText="Ctrl+N" />
+                    <MenuItem Name="MenuI_Open" Header="Open" Click="Menu_Open" InputGestureText="Ctrl+O" />
                     <Separator />
-                    <MenuItem Header="Save" Click="Menu_Save" InputGestureText="Ctrl+S" />
-                    <MenuItem Header="Save All" Click="Menu_SaveAll" InputGestureText="Ctrl+Shift+S" />
-                    <MenuItem Header="Save As" Click="Menu_SaveAs" InputGestureText="Ctrl+Alt+S" />
+                    <MenuItem Name="MenuI_Save" Header="Save" Click="Menu_Save" InputGestureText="Ctrl+S" />
+                    <MenuItem Name="MenuI_SaveAll" Header="Save All" Click="Menu_SaveAll" InputGestureText="Ctrl+Shift+S" />
+                    <MenuItem Name="MenuI_SaveAs" Header="Save As" Click="Menu_SaveAs" InputGestureText="Ctrl+Alt+S" />
                     <Separator />
-                    <MenuItem Header="Close" Click="Menu_Close" InputGestureText="Ctrl+W" />
-                    <MenuItem Header="Close All" Click="Menu_CloseAll" InputGestureText="Ctrl+Shift+W" />
+                    <MenuItem Name="MenuI_Close" Header="Close" Click="Menu_Close" InputGestureText="Ctrl+W" />
+                    <MenuItem Name="MenuI_CloseAll" Header="Close All" Click="Menu_CloseAll" InputGestureText="Ctrl+Shift+W" />
                 </MenuItem>
 
                 <MenuItem Header="Edit" SubmenuOpened="EditMenu_Open">
@@ -86,15 +86,15 @@
                     <MenuItem Header="Find &amp; Replace" Click="Menu_FindAndReplace" InputGestureText="Ctrl+F" />
                 </MenuItem>
 
-                <MenuItem Header="Build">
-                    <MenuItem Header="Compile All" Click="Menu_CompileAll" InputGestureText="F5" />
-                    <MenuItem Header="Compile Current" Click="Menu_Compile" InputGestureText="F6" />
+                <MenuItem Name="MenuI_Build" Header="Build">
+                    <MenuItem Name="MenuI_CompileAll" Header="Compile All" Click="Menu_CompileAll" InputGestureText="F5" />
+                    <MenuItem Name="MenuI_Compile" Header="Compile Current" Click="Menu_Compile" InputGestureText="F6" />
                     <Separator/>
-                    <MenuItem Header="Copy Plugins" Click="Menu_CopyPlugin" InputGestureText="F7" />
-                    <MenuItem Header="FTP Upload Plugins" Click="Menu_FTPUpload" InputGestureText="F8" />
+                    <MenuItem Name="MenuI_CopyPlugin" Header="Copy Plugins" Click="Menu_CopyPlugin" InputGestureText="F7" />
+                    <MenuItem Name="MenuI_FTPUpload" Header="FTP Upload Plugins" Click="Menu_FTPUpload" InputGestureText="F8" />
                     <Separator/>
-                    <MenuItem Header="Start Server" Click="Menu_StartServer" InputGestureText="F9" />
-                    <MenuItem Header="Send RCon Commands" Click="Menu_SendRCon" InputGestureText="F10" />
+                    <MenuItem Name="MenuI_StartServer" Header="Start Server" Click="Menu_StartServer" InputGestureText="F9" />
+                    <MenuItem Name="MenuI_SendRCon" Header="Send RCon Commands" Click="Menu_SendRCon" InputGestureText="F10" />
                 </MenuItem>
 
                 <MenuItem Name="ConfigMenu" Header="Configuration">
