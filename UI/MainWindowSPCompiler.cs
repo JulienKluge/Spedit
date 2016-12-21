@@ -79,7 +79,7 @@ namespace Spedit.UI
                 if (compileCount > 0)
                 {
                     ErrorResultGrid.Items.Clear();
-                    var progressTask = await this.ShowProgressAsync("Compiling", "", false, this.MetroDialogOptions);
+                    var progressTask = await this.ShowProgressAsync(Program.Translations.Compiling, "", false, this.MetroDialogOptions);
                     progressTask.SetProgress(0.0);
                     StringBuilder stringOutput = new StringBuilder();
                     Regex errorFilterRegex = new Regex(@"^(?<file>.+?)\((?<line>[0-9]+(\s*--\s*[0-9]+)?)\)\s*:\s*(?<type>[a-zA-Z]+\s+([a-zA-Z]+\s+)?[0-9]+)\s*:(?<details>.+)", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
@@ -137,7 +137,7 @@ namespace Spedit.UI
                                 if (!InCompiling) //cannot await in catch
                                 {
                                     await progressTask.CloseAsync();
-                                    await this.ShowMessageAsync("The 'spcomp.exe' compiler did not started correctly", "Error", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                                    await this.ShowMessageAsync(Program.Translations.SPCompNotStarted, Program.Translations.Error, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                                     return;
                                 }
                                 if (File.Exists(errorFile))
@@ -157,7 +157,7 @@ namespace Spedit.UI
                                     }
                                     File.Delete(errorFile);
                                 }
-                                stringOutput.AppendLine("Done");
+                                stringOutput.AppendLine(Program.Translations.Done);
                                 if (File.Exists(outFile))
                                 {
                                     compiledFiles.Add(outFile);
@@ -191,7 +191,7 @@ namespace Spedit.UI
             }
             else
             {
-                await this.ShowMessageAsync("The 'spcomp.exe' compiler could not be found.", "Error", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                await this.ShowMessageAsync(Program.Translations.SPCompNotFound, Program.Translations.Error, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
             }
             InCompiling = false;
         }
@@ -217,23 +217,23 @@ namespace Spedit.UI
                                 string copyFileDestination = Path.Combine(c.CopyDirectory, destinationFileName);
                                 File.Copy(compiledFiles[i], copyFileDestination, true);
                                 nonUploadedFiles.Add(copyFileDestination);
-                                stringOutput.AppendLine("Copied: " + compiledFiles[i]);
+                                stringOutput.AppendLine($"{Program.Translations.Copied}: " + compiledFiles[i]);
                                 ++copyCount;
                                 if (c.DeleteAfterCopy)
                                 {
                                     File.Delete(compiledFiles[i]);
-                                    stringOutput.AppendLine("Deleted: " + compiledFiles[i]);
+                                    stringOutput.AppendLine($"{Program.Translations.Deleted}: " + compiledFiles[i]);
                                 }
                             }
                         }
                         catch (Exception)
                         {
-                            stringOutput.AppendLine("Failed to copy: " + compiledFiles[i]);
+                            stringOutput.AppendLine($"{Program.Translations.FailCopy}: " + compiledFiles[i]);
                         }
                     }
                     if (copyCount == 0)
                     {
-                        stringOutput.AppendLine("No files copied.");
+                        stringOutput.AppendLine(Program.Translations.NoFilesCopy);
                     }
                     if (OvertakeOutString)
                     {
@@ -283,22 +283,22 @@ namespace Spedit.UI
 						try
 						{
 							ftp.upload(uploadDir, nonUploadedFiles[i]);
-							stringOutput.AppendLine("Uploaded: " + nonUploadedFiles[i]);
+							stringOutput.AppendLine($"{Program.Translations.Uploaded}: " + nonUploadedFiles[i]);
 						}
 						catch (Exception e)
 						{
-							stringOutput.AppendLine($"Error while uploading file: {nonUploadedFiles[i]} to {uploadDir}");
-                            stringOutput.AppendLine("Details: " + e.Message);
+							stringOutput.AppendLine(string.Format(Program.Translations.ErrorUploadFile, nonUploadedFiles[i], uploadDir));
+                            stringOutput.AppendLine($"{Program.Translations.Details}: " + e.Message);
                         }
                     }
                 }
             }
             catch (Exception e)
             {
-                stringOutput.AppendLine("Error while uploading files");
-                stringOutput.AppendLine("Details: " + e.Message);
+                stringOutput.AppendLine(Program.Translations.ErrorUpload);
+                stringOutput.AppendLine($"{Program.Translations.Details}: " + e.Message);
             }
-            stringOutput.AppendLine("Done");
+            stringOutput.AppendLine(Program.Translations.Done);
             CompileOutput.Text = stringOutput.ToString();
             if (CompileOutputRow.Height.Value < 11.0)
             {

@@ -47,6 +47,18 @@ namespace Spedit.Interop
 		public string VersUpToDate;
 		public string VersionYour;
 		public string Details;
+		public string Compiling;
+		public string Error;
+		public string SPCompNotStarted;
+		public string SPCompNotFound;
+		public string Copied;
+		public string Deleted;
+		public string FailCopy;
+		public string NoFilesCopy;
+		public string Uploaded;
+		public string ErrorUploadFile;
+		public string ErrorUpload;
+		public string Done;
 
 		public void LoadLanguage(string lang)
 		{
@@ -149,6 +161,30 @@ namespace Spedit.Interop
 								VersionYour = nv;
 							else if (nn == "details")
 								Details = nv;
+							else if (nn == "compiling")
+								Compiling = nv;
+							else if (nn == "error")
+								Error = nv;
+							else if (nn == "spcompnotstarted")
+								SPCompNotStarted = nv;
+							else if (nn == "spcompnotfound")
+								SPCompNotFound = nv;
+							else if (nn == "copied")
+								Copied = nv;
+							else if (nn == "deleted")
+								Deleted = nv;
+							else if (nn == "failcopy")
+								FailCopy = nv;
+							else if (nn == "nofilescopy")
+								NoFilesCopy = nv;
+							else if (nn == "uploaded")
+								Uploaded = nv;
+							else if (nn == "erroruploadfile")
+								ErrorUploadFile = nv;
+							else if (nn == "errorupload")
+								ErrorUpload = nv;
+							else if (nn == "done")
+								Done = nv;
 						}
 					}
 				}
@@ -197,6 +233,18 @@ namespace Spedit.Interop
 			VersUpToDate = "Version up to date";
 			VersionYour = "Your program version {0} is up to date.";
 			Details = "Details";
-	}
+			Compiling = "Compiling";
+			Error = "Error";
+			SPCompNotStarted = "The spcomp.exe compiler did not started correctly.";
+			SPCompNotFound = "The spcomp.exe compiler could not be found.";
+			Copied = "Copied";
+			Deleted = "Deleted";
+			FailCopy = "Failed to copy";
+			NoFilesCopy = "No files copied";
+			Uploaded = "Uploaded";
+			ErrorUploadFile = "Error while uploading file: {0} to {1}";
+			ErrorUpload = "Error while uploading files";
+			Done = "Done";
+		}
 	}
 }

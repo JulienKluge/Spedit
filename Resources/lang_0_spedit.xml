@@ -27,6 +27,22 @@
 		<emptypatt>Leerer Suchausdruck</emptypatt>
 		<novalidregex>Kein valider Regex-Ausdruck</novalidregex>
 		<failedcheck>Fehler bei der Suche</failedcheck> <!--in sense of searching for updates-->
+		<errorupdate>Fehler bei der Suche nach Updates.</errorupdate>
+		<versuptodate>Aktuelle Version</versuptodate>
+		<versionyour>Die Programversion {0} ist aktuell.</versionyour>
+		<details>Details</details>
+		<compiling>Kompillieren</compiling>
+		<error>Fehler</error>
+		<spcompnotstarted>The spcomp.exe compiler did not started correctly.</spcompnotstarted>
+		<spcompnotfound>The spcomp.exe compiler could not be found.</spcompnotfound>
+		<copied>Kopiert</copied>
+		<deleted>Gelöscht</deleted>
+		<failcopy>Fehlgeschlagene Kopierung</failcopy>
+		<nofilescopy>Keine Dateien kopiert</nofilescopy>
+		<uploaded>Hochgeladen</uploaded>
+		<erroruploadfile>Fehler beim Hochladen von: {0} zu {1}</erroruploadfile>
+		<errorupload>Fehler beim Hochladen von Dateien</errorupload>
+		<done>fertig</done>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -56,5 +72,21 @@
 		<emptypatt>Empty search pattern</emptypatt>
 		<novalidregex>No valid regex pattern</novalidregex>
 		<failedcheck>Failed to check</failedcheck> <!--in sense of searching for updates-->
+		<errorupdate>Error while checking for updates.</errorupdate>
+		<versuptodate>Version up to date</versuptodate>
+		<versionyour>Your program version {0} is up to date.</versionyour>
+		<details>Details</details>
+		<compiling>Compiling</compiling>
+		<error>Error</error>
+		<spcompnotstarted>The spcomp.exe compiler did not started correctly.</spcompnotstarted>
+		<spcompnotfound>The spcomp.exe compiler could not be found.</spcompnotfound>
+		<copied>Copied</copied>
+		<deleted>Deleted</deleted>
+		<failcopy>Failed to copy</failcopy>
+		<nofilescopy>No files copied</nofilescopy>
+		<uploaded>Uploaded</uploaded>
+		<erroruploadfile>Error while uploading file: {0} to {1}</erroruploadfile>
+		<errorupload>Error while uploading files</errorupload>
+		<done>done</done>
 	</ru>
 </translations>
