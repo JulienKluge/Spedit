@@ -35,6 +35,13 @@ namespace Spedit.Interop
 		public string ChDecomp;
 		public string Decompiling;
 		public string EditConfig;
+		public string FoundInOff;
+		public string FoundNothing;
+		public string ReplacedOff;
+		public string ReplacedOcc;
+		public string OccFound;
+		public string EmptyPatt;
+		public string NoValidRegex;
 
 		public void LoadLanguage(string lang)
 		{
@@ -47,10 +54,8 @@ namespace Spedit.Interop
 			IsDefault = string.IsNullOrEmpty(lang) || lang.ToLowerInvariant() == "en";
 			if (File.Exists("lang_0_spedit.xml"))
 			{
-#if !DEBUG
 				try
 				{
-#endif
 					XmlDocument document = new XmlDocument();
 					document.Load("lang_0_spedit.xml");
 					if (document.ChildNodes.Count < 1)
@@ -117,9 +122,20 @@ namespace Spedit.Interop
 								ChDecomp = nv;
 							else if (nn == "editconfig")
 								EditConfig = nv;
+							else if (nn == "foundinoff")
+								FoundInOff = nv;
+							else if (nn == "foundnothing")
+								FoundNothing = nv;
+							else if (nn == "replacedoff")
+								ReplacedOff = nv;
+							else if (nn == "replacedocc")
+								ReplacedOcc = nv;
+							else if (nn == "emptypatt")
+								EmptyPatt = nv;
+							else if (nn == "novalidregex")
+								NoValidRegex = nv;
 						}
 					}
-#if !DEBUG
 				}
 				catch (Exception e)
 				{
@@ -128,7 +144,6 @@ namespace Spedit.Interop
 						, MessageBoxButton.OK
 						, MessageBoxImage.Warning);
 				}
-#endif
 			}
 			AvailableLanguages = languageList.ToArray();
 			AvailableLanguageIDs = languageIDList.ToArray();
@@ -155,6 +170,13 @@ namespace Spedit.Interop
 			ChDecomp = "Select plugin to decompile";
 			Decompiling = "Decompiling";
 			EditConfig = "Edit Configurations";
+			FoundInOff = "Found in offset {0} with length {1}";
+			FoundNothing = "Found nothing";
+			ReplacedOff = "Replaced in offset";
+			ReplacedOcc = "Replaced {0} occurences in {1} documents";
+			OccFound = "occurences found";
+			EmptyPatt = "Empty search pattern";
+			NoValidRegex = "No valid regex pattern";
 		}
 	}
 }

@@ -19,6 +19,10 @@
 		<chdecomp>Selektiere eine Datei zum dekompillieren</chdecomp>
 		<decompiling>Dekompillieren</decompiling>
 		<editconfig>Konfigurationen bearbeiten</editconfig>
+		<foundinoff>Gefunden mit Offset {0} und Länge {1}</foundinoff>
+		<foundnothing>Found Nothing</foundnothing>
+		<replacedoff>Ersetzt am Offset</replacedoff>
+		<replacedocc>{0} Vorkommen ersetzt in {1} Dokumenten</replacedocc>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -40,5 +44,9 @@
 		<chdecomp>Select plugin to decompile</chdecomp>
 		<decompiling>Decompiling</decompiling>
 		<editconfig>Edit Configurations</editconfig>
+		<foundinoff>Found in offset {0} with length {1}</foundinoff>
+		<foundnothing>Found Nothing</foundnothing>
+		<replacedoff>Replaced in offset</replacedoff>
+		<replacedocc>Replaced {0} occurences in {1} documents</replacedocc>
 	</ru>
 </translations>
