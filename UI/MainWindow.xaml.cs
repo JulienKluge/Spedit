@@ -56,6 +56,7 @@ namespace Spedit.UI
             FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
             EnableServerAnim = (Storyboard)this.Resources["EnableServerAnim"];
             DisableServerAnim = (Storyboard)this.Resources["DisableServerAnim"];
+			Language_Translate(true);
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);
 #endif
@@ -210,7 +211,7 @@ namespace Spedit.UI
 						{
 							if (SaveUnsaved == null)
 							{
-								var result = MessageBox.Show(this, "Save all unsaved files?", "Saving", MessageBoxButton.YesNo, MessageBoxImage.Question);
+								var result = MessageBox.Show(this, Program.Translations.SavingUFiles, Program.Translations.Saving, MessageBoxButton.YesNo, MessageBoxImage.Question);
 								if (result == MessageBoxResult.Yes)
 								{
 									SaveUnsaved = true;
@@ -319,7 +320,7 @@ namespace Spedit.UI
             }
             if (ServerIsRunning)
             {
-                outString = outString + " (Server running)";
+                outString = $"{outString} ({Program.Translations.ServerRunning})";
             }
             this.Title = outString;
         }
@@ -346,8 +347,8 @@ namespace Spedit.UI
             return -1;
         }
 
-        private ObservableCollection<string> compileButtonDict = new ObservableCollection<string>() { "Compile All", "Compile Current" };
-        private ObservableCollection<string> actionButtonDict = new ObservableCollection<string>() { "Copy", "FTP Upload", "Start Server" };
-        private ObservableCollection<string> findReplaceButtonDict = new ObservableCollection<string>() { "Replace", "Replace All" };
+        private ObservableCollection<string> compileButtonDict = new ObservableCollection<string>() { Program.Translations.CompileAll, Program.Translations.CompileCurr };
+        private ObservableCollection<string> actionButtonDict = new ObservableCollection<string>() { Program.Translations.Copy, Program.Translations.FTPUp, Program.Translations.StartServer };
+        private ObservableCollection<string> findReplaceButtonDict = new ObservableCollection<string>() { Program.Translations.Replace, Program.Translations.ReplaceAll };
     }
 }

@@ -18,7 +18,7 @@ namespace Spedit.UI
                 ConfigMenu.Items.Add(item);
             }
             ConfigMenu.Items.Add(new Separator());
-            MenuItem editItem = new MenuItem() { Header = "Edit Configurations" };
+            MenuItem editItem = new MenuItem() { Header = Program.Translations.EditConfig };
             editItem.Click += editItem_Click;
             ConfigMenu.Items.Add(editItem);
         }
