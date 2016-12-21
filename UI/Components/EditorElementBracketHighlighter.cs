@@ -52,7 +52,8 @@ namespace Spedit.UI.Components
             BackgroundGeometryBuilder builder = new BackgroundGeometryBuilder();
 
             builder.CornerRadius = 1;
-            builder.AlignToMiddleOfPixels = true;
+			builder.AlignToWholePixels = true;
+			builder.BorderThickness = 0.0;
 
             builder.AddSegment(textView, new TextSegment() { StartOffset = result.OpeningBracketOffset, Length = result.OpeningBracketLength });
             builder.CloseFigure();
