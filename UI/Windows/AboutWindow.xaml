@@ -51,6 +51,7 @@
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- mev (Proposer, Contributor, Color-Sheme-Designer)" FontWeight="Bold" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- BAILOPAN (Proposer, Help)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- necavi (Tester, Proposer, Contributor)" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- psychonic (Contributor)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- WildCard65 (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- ClassicSpeed (ClassicGuzzi) (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- TnTSCS  (Tester, Proposer)" />
