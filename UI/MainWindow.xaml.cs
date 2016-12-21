@@ -154,7 +154,7 @@ namespace Spedit.UI
             DockingPane.Children.Add(layoutDocument);
             if (SelectMe)
             {
-                DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
+				layoutDocument.IsSelected = true;
             }
         }
 

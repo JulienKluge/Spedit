@@ -46,16 +46,18 @@ namespace Spedit.Interop
             pipeServer.Read(byteBuffer, 0, length);
             string data = Encoding.UTF8.GetString(byteBuffer);
             string[] files = data.Split('|');
+			bool SelectIt = true;
             for (int i = 0; i < files.Length; ++i)
             {
                 _window.Dispatcher.Invoke(() =>
                 {
                     if (_window.IsLoaded)
                     {
-                        if (_window.TryLoadSourceFile(files[i]) && _window.WindowState == System.Windows.WindowState.Minimized)
+                        if (_window.TryLoadSourceFile(files[i], SelectIt) && _window.WindowState == System.Windows.WindowState.Minimized)
                         {
                             _window.WindowState = System.Windows.WindowState.Normal;
-                        }
+							SelectIt = false;
+						}
                     }
                 });
             }
