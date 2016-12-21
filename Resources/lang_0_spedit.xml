@@ -1,0 +1,44 @@
+﻿<translations>
+	<de>
+		<language>Deutsch</language>
+		<serverrunning>Server läuft</serverrunning>
+		<saving>Speichern</saving>
+		<saveufiles>Ungespeicherte Dateien speichern?</saveufiles>
+		<compileall>Alles kompillieren</compileall>
+		<compilecurr>Kompillieren</compilecurr>
+		<copy>Kopieren</copy>
+		<ftpup>Auf FTP hochladen</ftpup>
+		<startserver>Server starten</startserver>
+		<replace>Ersetzen</replace>
+		<replaceall>Alles ersetzen</replaceall>
+		<opennewfile>Neue datei öffnen</opennewfile>
+		<nofilopened>Keine dateien geöffnet</nofilopened>
+		<nofileopenedcap>Keine der selektierten Dateien konnte geöffnet werden.</nofileopenedcap>
+		<savefileas>Speichern unter</savefileas>
+		<savefollow>Folgende dateien speichern</savefollow>
+		<chdecomp>Selektiere eine Datei zum dekompillieren</chdecomp>
+		<decompiling>Dekompillieren</decompiling>
+		<editconfig>Konfigurationen bearbeiten</editconfig>
+	</de>
+	<ru>
+		<language>русский</language>
+		<serverrunning>Server running</serverrunning>
+		<saving>Saving</saving>
+		<saveufiles>Save all unsaved files?</saveufiles>
+		<compileall>Compile All</compileall>
+		<compilecurr>Compile current</compilecurr>
+		<copy>Copy</copy>
+		<ftpup>FTP Upload</ftpup>
+		<startserver>Start Server</startserver>
+		<replace>Replace</replace>
+		<replaceall>Replace All</replaceall>
+		<opennewfile>Open new File</opennewfile>
+		<nofilopened>No Files Openend.</nofilopened>
+		<nofileopenedcap>None of the selected files could be opened.</nofileopenedcap>
+		<savefileas>Save file as</savefileas>
+		<savefollow>Save following files</savefollow>
+		<chdecomp>Select plugin to decompile</chdecomp>
+		<decompiling>Decompiling</decompiling>
+		<editconfig>Edit Configurations</editconfig>
+	</ru>
+</translations>

@@ -128,6 +128,7 @@
     <Compile Include="Interop\PipeInteropClient.cs" />
     <Compile Include="Interop\PipeInteropServer.cs" />
     <Compile Include="Interop\OptionsControl.cs" />
+    <Compile Include="Interop\TranslationProvider.cs" />
     <Compile Include="Interop\Updater\UpdateCheck.cs" />
     <Compile Include="Interop\Updater\UpdateInfo.cs" />
     <Compile Include="Interop\Updater\UpdateWindow.xaml.cs">
@@ -165,6 +166,7 @@
     <Compile Include="UI\MainWindowInputHandler.cs" />
     <Compile Include="UI\MainWindowMenuHandler.cs" />
     <Compile Include="UI\MainWindowConfigHandler.cs" />
+    <Compile Include="UI\MainWindowTranslations.cs" />
     <Compile Include="UI\STheme\SMetroTheme.cs" />
     <Compile Include="UI\Windows\ConfigWindow.xaml.cs">
       <DependentUpon>ConfigWindow.xaml</DependentUpon>
@@ -641,7 +643,8 @@ md ".\sourcepawn\temp"
 md ".\sourcepawn\scripts"
 md ".\sourcepawn\errorfiles"
 C:\Windows\system32\xcopy ".\..\..\Resources\Misc\Templates\*.*" ".\sourcepawn\templates\*.*" /e /y /q
-C:\Windows\system32\xcopy ".\..\..\Resources\Misc\Configurations" ".\sourcepawn\configs" /e /y /q</PostBuildEvent>
+C:\Windows\system32\xcopy ".\..\..\Resources\Misc\Configurations" ".\sourcepawn\configs" /e /y /q
+copy ".\..\..\Resources\lang_0_spedit.xml" ".\lang_0_spedit.xml" /y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

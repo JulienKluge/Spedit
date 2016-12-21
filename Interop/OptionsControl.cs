@@ -48,6 +48,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool SH_HighlightDeprecateds = true;
 
+		public string Language = "";
+
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x57, 0xA6, 0x49);
         public SerializeableColor SH_CommentsMarker = new SerializeableColor(0xFF, 0xFF, 0x20, 0x20);
         public SerializeableColor SH_Strings = new SerializeableColor(0xFF, 0xF4, 0x6B, 0x6C);
@@ -107,6 +109,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Editor_ShowSpaces = false;
 					Editor_ShowTabs = false;
 					Editor_IndentationSize = 4;
+					Language = "";
 				}
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars

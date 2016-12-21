@@ -252,7 +252,24 @@ namespace Spedit.UI.Windows
             ToggleRestartText();
         }
 
-        private void LoadSettings()
+		private void LanguageBox_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			string selectedString = (string)LanguageBox.SelectedItem;
+			for (int i = 0; i < Program.Translations.AvailableLanguages.Length; ++i)
+			{
+				if (Program.Translations.AvailableLanguages[i] == selectedString)
+				{
+					Program.Translations.LoadLanguage(Program.Translations.AvailableLanguageIDs[i]);
+					Program.OptionsObject.Language = Program.Translations.AvailableLanguageIDs[i];
+					Program.MainWindow.Language_Translate();
+					break;
+				}
+			}
+			ToggleRestartText();
+		}
+
+		private void LoadSettings()
         {
 			for (int i = 0; i < AvailableAccents.Length; ++i)
 			{
@@ -276,6 +293,14 @@ namespace Spedit.UI.Windows
 				{
 					AccentColor.SelectedIndex = i;
 					break;
+				}
+			}
+			for (int i = 0; i < Program.Translations.AvailableLanguages.Length; ++i)
+			{
+				LanguageBox.Items.Add(Program.Translations.AvailableLanguages[i]);
+				if (Program.OptionsObject.Language == Program.Translations.AvailableLanguageIDs[i])
+				{
+					LanguageBox.SelectedIndex = i;
 				}
 			}
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;

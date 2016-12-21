@@ -17,6 +17,7 @@ namespace Spedit
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
+		public static TranslationProvider Translations;
         public static Config[] Configs;
         public static int SelectedConfig = 0;
 
@@ -40,7 +41,9 @@ namespace Spedit
                         UpdateStatus = new UpdateInfo();
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                         OptionsObject = OptionsControlIOObject.Load();
-                        for (int i = 0; i < args.Length; ++i)
+						Translations = new TranslationProvider();
+						Translations.LoadLanguage(OptionsObject.Language);
+						for (int i = 0; i < args.Length; ++i)
                         {
                             if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
                             {
