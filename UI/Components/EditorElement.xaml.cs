@@ -458,7 +458,7 @@ namespace Spedit.UI.Components
 			}
 		}
 
-        public async void Close(bool ForcedToSave = false, bool CheckSavings = true)
+        public void Close(bool ForcedToSave = false, bool CheckSavings = true)
         {
             regularyTimer.Stop();
             regularyTimer.Close();
@@ -478,8 +478,9 @@ namespace Spedit.UI.Components
                     }
                     else
                     {
-                        var Result = await Program.MainWindow.ShowMessageAsync("Saving File '" + Parent.Title.Trim(new char[] { '*' }) + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
-                        if (Result == MessageDialogResult.Affirmative)
+                        var Result = Program.MainWindow.ShowMessageAsync("Saving File '" + Parent.Title.Trim(new char[] { '*' }) + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
+						Result.Wait();
+						if (Result.Result == MessageDialogResult.Affirmative)
                         {
                             Save();
                         }
@@ -487,9 +488,15 @@ namespace Spedit.UI.Components
                 }
             }
             Program.MainWindow.EditorsReferences.Remove(this);
-			Program.MainWindow.DockingPane.Children.Remove(this.Parent);
-            Parent = null; //to prevent a ring depency which disables the GC from work
-
+			var childs = Program.MainWindow.DockingPaneGroup.Children;
+			foreach (var c in childs)
+			{
+				if (c is LayoutDocumentPane)
+				{
+					((LayoutDocumentPane)c).Children.Remove(this.Parent);
+				}
+			}
+			Parent = null; //to prevent a ring depency which disables the GC from work
         }
 
         private void editor_TextChanged(object sender, EventArgs e)

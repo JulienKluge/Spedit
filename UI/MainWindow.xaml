@@ -214,7 +214,7 @@
                 </dock:DockingManager.Theme>
                 <dock:LayoutRoot>
                     <dock:LayoutPanel>
-                        <dock:LayoutDocumentPaneGroup>
+                        <dock:LayoutDocumentPaneGroup x:Name="DockingPaneGroup">
                             <dock:LayoutDocumentPane x:Name="DockingPane" />
                         </dock:LayoutDocumentPaneGroup>
                     </dock:LayoutPanel>
