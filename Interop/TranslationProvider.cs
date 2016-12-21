@@ -42,6 +42,11 @@ namespace Spedit.Interop
 		public string OccFound;
 		public string EmptyPatt;
 		public string NoValidRegex;
+		public string FailedCheck;
+		public string ErrorUpdate;
+		public string VersUpToDate;
+		public string VersionYour;
+		public string Details;
 
 		public void LoadLanguage(string lang)
 		{
@@ -134,6 +139,16 @@ namespace Spedit.Interop
 								EmptyPatt = nv;
 							else if (nn == "novalidregex")
 								NoValidRegex = nv;
+							else if (nn == "failedcheck")
+								FailedCheck = nv;
+							else if (nn == "errorupdate")
+								ErrorUpdate = nv;
+							else if (nn == "versuptodate")
+								VersUpToDate = nv;
+							else if (nn == "versionyour")
+								VersionYour = nv;
+							else if (nn == "details")
+								Details = nv;
 						}
 					}
 				}
@@ -177,6 +192,11 @@ namespace Spedit.Interop
 			OccFound = "occurences found";
 			EmptyPatt = "Empty search pattern";
 			NoValidRegex = "No valid regex pattern";
-		}
+			FailedCheck = "Failed to check";
+			ErrorUpdate = "Error while checking for updates.";
+			VersUpToDate = "Version up to date";
+			VersionYour = "Your program version {0} is up to date.";
+			Details = "Details";
+	}
 	}
 }

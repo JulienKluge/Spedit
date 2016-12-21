@@ -23,6 +23,10 @@
 		<foundnothing>Found Nothing</foundnothing>
 		<replacedoff>Ersetzt am Offset</replacedoff>
 		<replacedocc>{0} Vorkommen ersetzt in {1} Dokumenten</replacedocc>
+		<occfound>occurences found</occfound>
+		<emptypatt>Leerer Suchausdruck</emptypatt>
+		<novalidregex>Kein valider Regex-Ausdruck</novalidregex>
+		<failedcheck>Fehler bei der Suche</failedcheck> <!--in sense of searching for updates-->
 	</de>
 	<ru>
 		<language>русский</language>
@@ -48,5 +52,9 @@
 		<foundnothing>Found Nothing</foundnothing>
 		<replacedoff>Replaced in offset</replacedoff>
 		<replacedocc>Replaced {0} occurences in {1} documents</replacedocc>
+		<occfound>occurences found</occfound>
+		<emptypatt>Empty search pattern</emptypatt>
+		<novalidregex>No valid regex pattern</novalidregex>
+		<failedcheck>Failed to check</failedcheck> <!--in sense of searching for updates-->
 	</ru>
 </translations>
