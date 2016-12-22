@@ -79,6 +79,19 @@
 		<reportbuggit>Ein Bug auf GitHub melden</reportbuggit>
 		<checkupdates>Nach Updates suchen</checkupdates>
 		<about>Über</about>
+		<filename>Dateiname</filename>
+		<line>Zeile</line>
+		<type>Typ</type>
+		<normalsearch>Normale Suche</normalsearch>
+		<matchwhowords>Wörtersuche</matchwhowords>
+		<advancsearch>Erweiterte Suche</advancsearch>
+		<regexsearch>Regex-Suche</regexsearch>
+		<currdoc>Momentanes Dokument</currdoc>
+		<alldoc>Alle offenen Dokumente</alldoc>
+		<find>Finden</find>
+		<count>Zählen</count>
+		<casesen>Groß/Kleinschreibung</casesen>
+		<multilineregex>Mehrzeilen Regex</multilineregex>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -160,5 +173,18 @@
 		<reportbuggit>Report bug on GitHub</reportbuggit>
 		<checkupdates>Check for updates</checkupdates>
 		<about>About</about>
+		<filename>File Name</filename>
+		<line>Line</line>
+		<type>Type</type>
+		<normalsearch>Normal search</normalsearch>
+		<matchwhowords>Match whole words</matchwhowords>
+		<advancsearch>Advanced search</advancsearch>
+		<regexsearch>Regex search</regexsearch>
+		<currdoc>Current document</currdoc>
+		<alldoc>All open documents</alldoc>
+		<find>Find</find>
+		<count>Count</count>
+		<casesen>Case sensitive</casesen>
+		<multilineregex>Multiline regex</multilineregex>
 	</ru>
 </translations>

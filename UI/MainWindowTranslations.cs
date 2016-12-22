@@ -73,6 +73,23 @@ namespace Spedit.UI
 			MenuI_ReportBugGit.Header = Program.Translations.ReportBugGit;
 			UpdateCheckItem.Header = Program.Translations.CheckUpdates;
 			MenuI_About.Header = Program.Translations.About;
+
+			MenuC_FileName.Header = Program.Translations.FileName;
+			MenuC_Line.Header = Program.Translations.Line;
+			MenuC_Type.Header = Program.Translations.TypeStr;
+			MenuC_Details.Header = Program.Translations.Details;
+
+			NSearch_RButton.Content = Program.Translations.NormalSearch;
+			WSearch_RButton.Content = Program.Translations.MatchWholeWords;
+			ASearch_RButton.Content = $"{Program.Translations.AdvancSearch} (\\r, \\n, \\t, ...)";
+			RSearch_RButton.Content = Program.Translations.RegexSearch;
+			MenuFR_CurrDoc.Content = Program.Translations.CurrDoc;
+			MenuFR_AllDoc.Content = Program.Translations.AllDoc;
+
+			Find_Button.Content = $"{Program.Translations.Find} (F3)";
+			Count_Button.Content = Program.Translations.Count;
+			CCBox.Content = Program.Translations.CaseSen;
+			MLRBox.Content = Program.Translations.MultilineRegex;
 		}
 	}
 }

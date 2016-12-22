@@ -237,10 +237,10 @@
                 <DataGrid Name="ErrorResultGrid" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsReadOnly="True"
                           SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="ErrorResultGrid_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="File Name" Width="7*" Binding="{Binding file}" />
-                        <DataGridTextColumn Header="Line" Width="1*" Binding="{Binding line}" />
-                        <DataGridTextColumn Header="Type" Width="2*" Binding="{Binding type}" />
-                        <DataGridTextColumn Header="Details" Width="9*" Binding="{Binding details}" />
+                        <DataGridTextColumn x:Name="MenuC_FileName" Header="File Name" Width="7*" Binding="{Binding file}" />
+                        <DataGridTextColumn x:Name="MenuC_Line" Header="Line" Width="1*" Binding="{Binding line}" />
+                        <DataGridTextColumn x:Name="MenuC_Type" Header="Type" Width="2*" Binding="{Binding type}" />
+                        <DataGridTextColumn x:Name="MenuC_Details" Header="Details" Width="9*" Binding="{Binding details}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -260,13 +260,13 @@
             <RadioButton Name="RSearch_RButton" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,5,5" Content="Regex Search" Foreground="{DynamicResource BlackBrush}" />
             <ComboBox Name="FindDestinies" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,105,0,0" Width="150">
                 <ComboBox.Items>
-                    <ComboBoxItem IsSelected="True" Content="Current Document" />
-                    <ComboBoxItem Content="All Open Documents" />
+                    <ComboBoxItem x:Name="MenuFR_CurrDoc" IsSelected="True" Content="Current Document" />
+                    <ComboBoxItem x:Name="MenuFR_AllDoc" Content="All Open Documents" />
                 </ComboBox.Items>
             </ComboBox>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
+            <Button Name="Find_Button" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,105,5,0" Content="Find (F3)" Width="150" Click="SearchButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
             <controls:SplitButton Name="ReplaceButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,137,5,0" Width="150" Click="ReplaceButtonClicked" />
-            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
+            <Button Name="Count_Button" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,166,5,0" Content="Count" Width="150" Click="CountButtonClicked" Style="{DynamicResource MetroFlatButton}"  />
             <CheckBox Name="CCBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,135,0,0" Content="Case Sensitive" Foreground="{DynamicResource BlackBrush}" />
             <CheckBox Name="MLRBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,160,0,0" Content="Multiline Regex" Foreground="{DynamicResource BlackBrush}" />
             <TextBlock Name="FindResultBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5,190,5,5" Text="" Width="Auto" FontSize="14" Foreground="{DynamicResource WhiteBrush}" IsHitTestVisible="False" />

@@ -95,6 +95,19 @@ namespace Spedit.Interop
 		public string ReportBugGit;
 		public string CheckUpdates;
 		public string About;
+		public string FileName;
+		public string Line;
+		public string TypeStr;
+		public string NormalSearch;
+		public string MatchWholeWords;
+		public string AdvancSearch;
+		public string RegexSearch;
+		public string CurrDoc;
+		public string AllDoc;
+		public string Find;
+		public string Count;
+		public string CaseSen;
+		public string MultilineRegex;
 
 		public void LoadLanguage(string lang)
 		{
@@ -294,6 +307,32 @@ namespace Spedit.Interop
 								CheckUpdates = nv;
 							else if (nn == "about")
 								About = nv;
+							else if (nn == "filename")
+								FileName = nv;
+							else if (nn == "line")
+								Line = nv;
+							else if (nn == "type")
+								TypeStr = nv;
+							else if (nn == "normalsearch")
+								NormalSearch = nv;
+							else if (nn == "matchwhowords")
+								MatchWholeWords = nv;
+							else if (nn == "advancsearch")
+								AdvancSearch = nv;
+							else if (nn == "regexsearch")
+								RegexSearch = nv;
+							else if (nn == "currdoc")
+								CurrDoc = nv;
+							else if (nn == "alldoc")
+								AllDoc = nv;
+							else if (nn == "find")
+								Find = nv;
+							else if (nn == "count")
+								Count = nv;
+							else if (nn == "casesen")
+								CaseSen = nv;
+							else if (nn == "multilineregex")
+								MultilineRegex = nv;
 						}
 					}
 				}
@@ -390,6 +429,19 @@ namespace Spedit.Interop
 			ReportBugGit = "Report bug on GitHub";
 			CheckUpdates = "Check for updates";
 			About = "About";
+			FileName = "File Name";
+			Line = "Line";
+			TypeStr = "Type";
+			NormalSearch = "Normal search";
+			MatchWholeWords = "Match whole words";
+			AdvancSearch = "Advanced search";
+			RegexSearch = "Regex search";
+			CurrDoc = "Current document";
+			AllDoc = "All open documents";
+			Find = "Find";
+			Count = "Count";
+			CaseSen = "Case sensitive";
+			MultilineRegex = "Multiline Regex";
 		}
 	}
 }
