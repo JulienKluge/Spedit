@@ -133,6 +133,10 @@ namespace Spedit.Interop
 		public string MethodFrom;
 		public string PropertyFrom;
 		public string Search;
+		public string Delete, Name, ScriptDir, DelimiedWi, CopyDir, ServerExe, serverStartArgs, PreBuildCom, PostBuildCom, OptimizeLvl, VerboseLvl, AutoCopy, DeleteOldSMX;
+		public string FTPHost, FTPUser, FTPPw, FTPDir, ComEditorDir, ComScriptDir, ComCopyDir, ComScriptFile, ComScriptName, ComPluginFile, ComPluginName, RConEngine;
+		public string RConIP, RconPort, RconPw, RconCom, ComPluginsReload, ComPluginsLoad, ComPluginsUnload, NewConfig, CannotDelConf, YCannotDelConf, SelectExe, CMDLineCom, RConCMDLineCom;
+
 
 		public void LoadLanguage(string lang)
 		{
@@ -408,6 +412,83 @@ namespace Spedit.Interop
 								PropertyFrom = nv;
 							else if (nn == "search")
 								Search = nv;
+
+							else if (nn == "delete")
+								Delete = nv;
+							else if (nn == "name")
+								Name = nv;
+							else if (nn == "scriptdir")
+								ScriptDir = nv;
+							else if (nn == "delimitedwi")
+								DelimiedWi = nv;
+							else if (nn == "copydir")
+								CopyDir = nv;
+							else if (nn == "serverexe")
+								ServerExe = nv;
+							else if (nn == "serverstartargs")
+								serverStartArgs = nv;
+							else if (nn == "prebuildcom")
+								PreBuildCom = nv;
+							else if (nn == "postbuildcom")
+								PostBuildCom = nv;
+							else if (nn == "optimizelvl")
+								OptimizeLvl = nv;
+							else if (nn == "verboselvl")
+								VerboseLvl = nv;
+							else if (nn == "autocopy")
+								AutoCopy = nv;
+							else if (nn == "deleteoldsmx")
+								DeleteOldSMX = nv;
+							else if (nn == "ftphost")
+								FTPHost = nv;
+							else if (nn == "ftpuser")
+								FTPUser = nv;
+							else if (nn == "ftppw")
+								FTPPw = nv;
+							else if (nn == "ftpdir")
+								FTPDir = nv;
+							else if (nn == "comeditordir")
+								ComEditorDir = nv;
+							else if (nn == "comscriptdir")
+								ComScriptDir = nv;
+							else if (nn == "comcopydir")
+								ComCopyDir = nv;
+							else if (nn == "comscriptfile")
+								ComScriptFile = nv;
+							else if (nn == "comscriptname")
+								ComScriptName = nv;
+							else if (nn == "compluginfile")
+								ComPluginFile = nv;
+							else if (nn == "compluginname")
+								ComPluginName = nv;
+							else if (nn == "rconengine")
+								RConEngine = nv;
+							else if (nn == "rconip")
+								RConIP = nv;
+							else if (nn == "rconport")
+								RconPort = nv;
+							else if (nn == "rconpw")
+								RconPw = nv;
+							else if (nn == "rconcom")
+								RconCom = nv;
+							else if (nn == "compluginsreload")
+								ComPluginsReload = nv;
+							else if (nn == "compluginsloas")
+								ComPluginsLoad = nv;
+							else if (nn == "compluginsunload")
+								ComPluginsUnload = nv;
+							else if (nn == "newconfig")
+								NewConfig = nv;
+							else if (nn == "cannotdelconf")
+								CannotDelConf = nv;
+							else if (nn == "ycannotdelconf")
+								YCannotDelConf = nv;
+							else if (nn == "selectexe")
+								SelectExe = nv;
+							else if (nn == "cmdlinecom")
+								CMDLineCom = nv;
+							else if (nn == "rconcmdlinecom")
+								RConCMDLineCom = nv;
 						}
 					}
 				}
@@ -542,6 +623,44 @@ namespace Spedit.Interop
 			MethodFrom = "Method from";
 			PropertyFrom = "Property from";
 			Search = "search";
+			Delete = "Delete";
+			Name = "Name";
+			ScriptDir = "Scripting directories";
+			DelimiedWi = "delimit with";
+			CopyDir = "Copy directory";
+			ServerExe = "Server executable";
+			serverStartArgs = "Server-start arguments";
+			PreBuildCom = "Pre-Build commandline";
+			PostBuildCom = "Post-Build commandline";
+			OptimizeLvl = "Optimization level";
+			VerboseLvl = "Verbose level";
+			AutoCopy = "Auto copy after compile";
+			DeleteOldSMX = "Delete old .smx after copy";
+			FTPHost = "FTP host";
+			FTPUser = "FTP user";
+			FTPPw = "FTP password";
+			FTPDir = "FTP directory";
+			ComEditorDir = "Directory of the SPEdit binary";
+			ComScriptDir = "Directory of the Compiling script";
+			ComCopyDir = "Directory where the smx should be copied";
+			ComScriptFile = "Full Directory and Name of the script";
+			ComScriptName = "File Name of the script";
+			ComPluginFile = "Full Directory and Name of the compiled script";
+			ComPluginName = "File Name of the compiled script";
+			RConEngine = "RCon server engine";
+			RConIP = "RCon server IP";
+			RconPort = "RCon server port";
+			RconPw = "RCon server password";
+			RconCom = "RCon Server commands";
+			ComPluginsReload = "Reloads all compiled plugins";
+			ComPluginsLoad = "Loads all compiled plugins";
+			ComPluginsUnload = "Unloads all compiled plugins";
+			NewConfig = "New config";
+			CannotDelConf = "Cannot delete config";
+			YCannotDelConf = "You cannot delete this config.";
+			SelectExe = "Select executable";
+			CMDLineCom = "Commandline variables";
+			RConCMDLineCom = "Rcon commandline variables";
 		}
 	}
 }

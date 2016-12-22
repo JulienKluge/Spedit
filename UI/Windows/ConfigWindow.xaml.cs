@@ -32,6 +32,7 @@ namespace Spedit.UI.Windows
         public ConfigWindow()
         {
             InitializeComponent();
+			Language_Translate();
 			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
 			for (int i = 0; i < Program.Configs.Length; ++i)
@@ -85,7 +86,7 @@ namespace Spedit.UI.Windows
             List<Config> configList = new List<Config>(Program.Configs);
             configList.Add(c);
             Program.Configs = configList.ToArray();
-            ConfigListBox.Items.Add(new ListBoxItem() { Content = "New Config" });
+            ConfigListBox.Items.Add(new ListBoxItem() { Content = Program.Translations.NewConfig });
         }
 
         private void DeleteButton_Clicked(object sender, RoutedEventArgs e)
@@ -94,7 +95,7 @@ namespace Spedit.UI.Windows
             Config c = Program.Configs[index];
             if (c.Standard)
             {
-                this.ShowMessageAsync("Cannot delete config", "You cannot delete this config!", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                this.ShowMessageAsync(Program.Translations.CannotDelConf, Program.Translations.YCannotDelConf, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                 return;
             }
             List<Config> configList = new List<Config>(Program.Configs);
@@ -298,7 +299,50 @@ namespace Spedit.UI.Windows
             File.WriteAllText("sourcepawn\\configs\\Configs.xml", outString.ToString());
         }
 
-        private ICommand textBoxButtonFolderCmd;
+		private void Language_Translate()
+		{
+			if (Program.Translations.IsDefault)
+			{
+				return;
+			}
+			NewButton.Content = Program.Translations.New;
+			DeleteButton.Content = Program.Translations.Delete;
+			NameBlock.Text = Program.Translations.Name;
+			ScriptingDirBlock.Text = Program.Translations.ScriptDir;
+			DelimitWiBlock.Text = $"({Program.Translations.DelimiedWi} ; )";
+			CopyDirBlock.Text = Program.Translations.CopyDir;
+			ServerExeBlock.Text = Program.Translations.ServerExe;
+			ServerStartArgBlock.Text = Program.Translations.serverStartArgs;
+			PreBuildBlock.Text = Program.Translations.PreBuildCom;
+			PostBuildBlock.Text = Program.Translations.PostBuildCom;
+			OptimizeBlock.Text = Program.Translations.OptimizeLvl;
+			VerboseBlock.Text = Program.Translations.VerboseLvl;
+			C_AutoCopy.Content = Program.Translations.AutoCopy;
+			C_DeleteAfterCopy.Content = Program.Translations.DeleteOldSMX;
+			FTPHostBlock.Text = Program.Translations.FTPHost;
+			FTPUserBlock.Text = Program.Translations.FTPUser;
+			FTPPWBlock.Text = Program.Translations.FTPPw;
+			FTPDirBlock.Text = Program.Translations.FTPDir;
+			CMD_ItemC.Text = Program.Translations.CMDLineCom;
+			ItemC_EditorDir.Content = "{editordir} - " + Program.Translations.ComEditorDir;
+			ItemC_ScriptDir.Content = "{scriptdir} - " + Program.Translations.ComScriptDir;
+			ItemC_CopyDir.Content = "{copydir} - " + Program.Translations.ComCopyDir;
+			ItemC_ScriptFile.Content = "{scriptfile} - " + Program.Translations.ComScriptFile;
+			ItemC_ScriptName.Content = "{scriptname} - " + Program.Translations.ComScriptName;
+			ItemC_PluginFile.Content = "{pluginfile} - " + Program.Translations.ComPluginFile;
+			ItemC_PluginName.Content = "{pluginname} - " + Program.Translations.ComPluginName;
+			RConEngineBlock.Text = Program.Translations.RConEngine;
+			RConIPBlock.Text = Program.Translations.RConIP;
+			RConPortBlock.Text = Program.Translations.RconPort;
+			RConPWBlock.Text = Program.Translations.RconPw;
+			RConComBlock.Text = Program.Translations.RconCom;
+			Rcon_MenuC.Text = Program.Translations.RConCMDLineCom;
+			MenuC_PluginsReload.Content = "{plugins_reload} - " + Program.Translations.ComPluginsReload;
+			MenuC_PluginsLoad.Content = "{plugins_load} - " + Program.Translations.ComPluginsLoad;
+			MenuC_PluginsUnload.Content = "{plugins_unload} - " + Program.Translations.ComPluginsUnload;
+		}
+
+		private ICommand textBoxButtonFolderCmd;
 
         public ICommand TextBoxButtonFolderCmd
         {
@@ -356,7 +400,7 @@ namespace Spedit.UI.Windows
                             dialog.Filter = "Executables *.exe|*.exe|All Files *.*|*.*";
                             dialog.Multiselect = false;
                             dialog.CheckFileExists = true; dialog.CheckPathExists = true;
-                            dialog.Title = "Select Executable";
+                            dialog.Title = Program.Translations.SelectExe;
                             var result = dialog.ShowDialog();
                             if (result.Value)
                             {

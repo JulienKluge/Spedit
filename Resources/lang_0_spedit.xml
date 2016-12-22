@@ -117,6 +117,45 @@
 		<methodfrom>Method von</methodfrom> <!--do not translate 'Method'-->
 		<propertyfrom>Property von</propertyfrom> <!--do not translate 'property'-->
 		<search>Suche</search>
+
+		<delete>Löschen</delete>
+		<name>Name</name>
+		<scriptdir>Scripting Pfad</scriptdir>
+		<delimitedwi>trennen mit</delimitedwi>
+		<copydir>Kopier-Pfad</copydir>
+		<serverexe>Server Pfad</serverexe>
+		<serverstartargs>Serverstart Parameter</serverstartargs>
+		<prebuildcom>Pre-Build Befehle</prebuildcom>
+		<postbuildcom>Post-Build Befehle</postbuildcom>
+		<optimizelvl>Optimierungslevel</optimizelvl>
+		<verboselvl>Verbose-Level</verboselvl>
+		<autocopy>Automatisches Kopieren nach Kompillierung</autocopy>
+		<deleteoldsmx>Alte .smx nach Kompillierung löschen</deleteoldsmx>
+		<ftphost>FTP Host</ftphost>
+		<ftpuser>FTP Benutzer</ftpuser>
+		<ftppw>FTP Passwort</ftppw>
+		<ftpdir>FTP Pfad</ftpdir>
+		<comeditordir>Pfad zur SPEdit-Binary</comeditordir>
+		<comscriptdir>Pfad zum kompillierenden Script</comscriptdir>
+		<comcopydir>Kopierpfad für die smx</comcopydir>
+		<comscriptfile>Voller Pfad und Name zum Script</comscriptfile>
+		<comscriptname>Dateiname des Scripts</comscriptname>
+		<compluginfile>Voller Pfad und Name des kompillierten Script</compluginfile>
+		<compluginname>Dateiname des kompillierten Script</compluginname>
+		<rconengine>RCon Server Engine</rconengine>
+		<rconip>RCon Server IP</rconip>
+		<rconport>RCon Server Port</rconport>
+		<rconpw>RCon Server Passwort</rconpw>
+		<rconcom>RCon Server Befehle</rconcom>
+		<compluginsreload>Alle kompillierten Plugins neu laden</compluginsreload>
+		<compluginsloas>Alle kompillierten Plugins laden</compluginsloas>
+		<compluginsunload>Alle kompillierten Plugins neu entladen</compluginsunload>
+		<newconfig>Neu Konfiguration</newconfig>
+		<cannotdelconf>Kann Konfiguration nicht löschen</cannotdelconf>
+		<ycannotdelconf>Du kannst diese Konfiguration nicht löschen.</ycannotdelconf>
+		<selectexe>Ausführbare Datei aussuchen</selectexe>
+		<cmdlinecom>Befehlsvariablen</cmdlinecom>
+		<rconcmdlinecom>Rcon Befehlsvariablen</rconcmdlinecom>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -236,5 +275,44 @@
 		<methodfrom>Method from</methodfrom> <!--do not translate 'Method'-->
 		<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'-->
 		<search>search</search>
+
+		<delete>Delete</delete>
+		<name>Name</name>
+		<scriptdir>Scripting directories</scriptdir>
+		<delimitedwi>Delimit with</delimitedwi>
+		<copydir>Copy directory</copydir>
+		<serverexe>Server executable</serverexe>
+		<serverstartargs>Server-start arguments</serverstartargs>
+		<prebuildcom>Pre-Build commandline</prebuildcom>
+		<postbuildcom>Post-Build commandline</postbuildcom>
+		<optimizelvl>Optimization level</optimizelvl>
+		<verboselvl>Verbose level</verboselvl>
+		<autocopy>Auto copy after compile</autocopy>
+		<deleteoldsmx>Delete old .smx after copy</deleteoldsmx>
+		<ftphost>FTP host</ftphost>
+		<ftpuser>FTP user</ftpuser>
+		<ftppw>FTP password</ftppw>
+		<ftpdir>FTP directory</ftpdir>
+		<comeditordir>Directory of the SPEdit binary</comeditordir>
+		<comscriptdir>Directory of the Compiling script</comscriptdir>
+		<comcopydir>Directory where the smx should be copied</comcopydir>
+		<comscriptfile>Full Directory and Name of the script</comscriptfile>
+		<comscriptname>File Name of the script</comscriptname>
+		<compluginfile>Full Directory and Name of the compiled script</compluginfile>
+		<compluginname>File Name of the compiled script</compluginname>
+		<rconengine>RCon Server Engine</rconengine>
+		<rconip>RCon Server IP</rconip>
+		<rconport>RCon Server port</rconport>
+		<rconpw>RCon Server password</rconpw>
+		<rconcom>RCon Server commands</rconcom>
+		<compluginsreload>Reloads all compiled plugins</compluginsreload>
+		<compluginsloas>Loads all compiled plugins</compluginsloas>
+		<compluginsunload>Unloads all compiled plugins</compluginsunload>
+		<newconfig>New config</newconfig>
+		<cannotdelconf>Cannot delete config</cannotdelconf>
+		<ycannotdelconf>You cannot delete this config!</ycannotdelconf>
+		<selectexe>Select Executable</selectexe>
+		<cmdlinecom>Commandline variables</cmdlinecom>
+		<rconcmdlinecom>Rcon commandline variables</rconcmdlinecom>
 	</ru>
 </translations>
