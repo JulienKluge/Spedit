@@ -108,6 +108,8 @@
 		<writtenby>geschrieben von: {0}</writtenby>
 		<license>Lizens:</license>
 		<peopleinv>Menschen involviert:</peopleinv>
+		<preview>Vorschau</preview>
+		<newfile>Neue Datei</newfile>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -218,5 +220,7 @@
 		<writtenby>written by: {0}</writtenby>
 		<license>License</license>
 		<peopleinv>People involved</peopleinv>
+		<preview>Preview</preview>
+		<newfile>New file</newfile>
 	</ru>
 </translations>

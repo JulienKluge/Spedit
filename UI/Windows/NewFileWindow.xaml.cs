@@ -21,6 +21,7 @@ namespace Spedit.UI.Windows
         public NewFileWindow()
         {
             InitializeComponent();
+			Language_Translate();
 			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
 			ParseTemplateFile();
@@ -79,6 +80,15 @@ namespace Spedit.UI.Windows
             this.Close();
         }
 
+		private void Language_Translate()
+		{
+			if (Program.Translations.IsDefault)
+			{
+				return;
+			}
+			PreviewBlock.Text = $"{Program.Translations.Preview}:";
+			SaveButton.Content = Program.Translations.Save;
+		}
 
         private ICommand textBoxButtonFileCmd;
 
@@ -102,7 +112,7 @@ namespace Spedit.UI.Windows
                             dialog.AddExtension = true;
                             dialog.Filter = "Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*";
                             dialog.OverwritePrompt = true;
-                            dialog.Title = "New File";
+                            dialog.Title = Program.Translations.NewFile;
                             var result = dialog.ShowDialog();
                             if (result.Value)
                             {

@@ -124,6 +124,8 @@ namespace Spedit.Interop
 		public string WrittenBy;
 		public string License;
 		public string PeopleInv;
+		public string Preview;
+		public string NewFile;
 
 		public void LoadLanguage(string lang)
 		{
@@ -381,6 +383,10 @@ namespace Spedit.Interop
 								License = nv;
 							else if (nn == "peopleinv")
 								PeopleInv = nv;
+							else if (nn == "preview")
+								Preview = nv;
+							else if (nn == "newfile")
+								NewFile = nv;
 						}
 					}
 				}
@@ -506,6 +512,8 @@ namespace Spedit.Interop
 			WrittenBy = "written by: {0}";
 			License = "License";
 			PeopleInv = "People involved";
-	}
+			Preview = "Preview";
+			NewFile = "New file";
+		}
 	}
 }
