@@ -54,6 +54,19 @@
 		<build>Build</build>
 		<copyplugin>Plugins kopieren</copyplugin>
 		<sendrcon>RCon Kommandos schicken</sendrcon>
+		<config>Konfiguration</config>
+		<edit>Bearbeiten</edit>
+		<undo>Rückgängig</undo>
+		<redo>Wiederholen</redo>
+		<cut>Ausschneiden</cut>
+		<paste>Einfügen</paste>
+		<folding>Code-Faltung</folding>
+		<expandall>Alle aufdecken</expandall>
+		<collapseall>Alle verstecken</collapseall>
+		<jumpto></jumpto>
+		<togglcomment></togglcomment>
+		<selectall></selectall>
+		<findreplace></findreplace>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -110,5 +123,18 @@
 		<build>Build</build>
 		<copyplugin>Copy plugins</copyplugin>
 		<sendrcon>Send RCon Commands</sendrcon>
+		<config>Configuration</config>
+		<edit>Edit</edit>
+		<undo>Undo</undo>
+		<redo>Redo</redo>
+		<cut>Cut</cut>
+		<paste>Paste</paste>
+		<folding>Foldings</folding>
+		<expandall></expandall>
+		<collapseall></collapseall>
+		<jumpto></jumpto>
+		<togglcomment></togglcomment>
+		<selectall></selectall>
+		<findreplace></findreplace>
 	</ru>
 </translations>

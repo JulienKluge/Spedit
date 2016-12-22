@@ -79,8 +79,8 @@ namespace Spedit.UI
             }
             else
             {
-                ((MenuItem)menu.Items[0]).IsEnabled = ee.editor.CanUndo;
-                ((MenuItem)menu.Items[1]).IsEnabled = ee.editor.CanRedo;
+                MenuI_Undo.IsEnabled = ee.editor.CanUndo;
+                MenuI_Redo.IsEnabled = ee.editor.CanRedo;
                 for (int i = 2; i < menu.Items.Count; ++i)
                 {
                     if (menu.Items[i] is MenuItem)

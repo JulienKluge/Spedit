@@ -70,6 +70,19 @@ namespace Spedit.Interop
 		public string Build;
 		public string CopyPlugin;
 		public string SendRCon;
+		public string Config;
+		public string Edit;
+		public string Undo;
+		public string Redo;
+		public string Cut;
+		public string Paste;
+		public string Folding;
+		public string ExpandAll;
+		public string CollapseAll;
+		public string JumpTo;
+		public string TogglComment;
+		public string SelectAll;
+		public string FindReplace;
 
 		public void LoadLanguage(string lang)
 		{
@@ -112,6 +125,7 @@ namespace Spedit.Interop
 						{
 							string nn = node.Name.ToLowerInvariant();
 							string nv = node.InnerText;
+							//and now: brace yourself and tuckle your seatbells:
 							if (nn == "language")
 								Language = nv;
 							else if (nn == "serverrunning")
@@ -218,6 +232,32 @@ namespace Spedit.Interop
 								CopyPlugin = nv;
 							else if (nn == "sendrcon")
 								SendRCon = nv;
+							else if (nn == "config")
+								Config = nv;
+							else if (nn == "edit")
+								Edit = nv;
+							else if (nn == "undo")
+								Undo = nv;
+							else if (nn == "redo")
+								Redo = nv;
+							else if (nn == "cut")
+								Cut = nv;
+							else if (nn == "paste")
+								Paste = nv;
+							else if (nn == "folding")
+								Folding = nv;
+							else if (nn == "expandall")
+								ExpandAll = nv;
+							else if (nn == "collapseall")
+								CollapseAll = nv;
+							else if (nn == "jumpto")
+								JumpTo = nv;
+							else if (nn == "togglcomment")
+								TogglComment = nv;
+							else if (nn == "selectall")
+								SelectAll = nv;
+							else if (nn == "findreplace")
+								FindReplace = nv;
 						}
 					}
 				}
@@ -289,6 +329,19 @@ namespace Spedit.Interop
 			Build = "Build";
 			CopyPlugin = "Copy Plugins";
 			SendRCon = "Senc RCon commands";
+			Config = "Configuration";
+			Edit = "Edit";
+			Undo = "Undo";
+			Redo = "Redo";
+			Cut = "Cut";
+			Paste = "Paste";
+			Folding = "Foldings";
+			ExpandAll = "Expand all";
+			CollapseAll = "Collapse all";
+			JumpTo = "Jump to";
+			TogglComment = "Toggle comment";
+			SelectAll = "Select all";
+			FindReplace = "Find & Replace";
 		}
 	}
 }

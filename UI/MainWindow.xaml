@@ -67,23 +67,23 @@
                     <MenuItem Name="MenuI_CloseAll" Header="Close All" Click="Menu_CloseAll" InputGestureText="Ctrl+Shift+W" />
                 </MenuItem>
 
-                <MenuItem Header="Edit" SubmenuOpened="EditMenu_Open">
-                    <MenuItem Header="Undo" Click="Menu_Undo" InputGestureText="Ctrl+Z" />
-                    <MenuItem Header="Redo" Click="Menu_Redo" InputGestureText="Ctrl+Y" />
+                <MenuItem Name="MenuI_Edit" Header="Edit" SubmenuOpened="EditMenu_Open">
+                    <MenuItem Name="MenuI_Undo" Header="Undo" Click="Menu_Undo" InputGestureText="Ctrl+Z" />
+                    <MenuItem Name="MenuI_Redo" Header="Redo" Click="Menu_Redo" InputGestureText="Ctrl+Y" />
                     <Separator />
-                    <MenuItem Header="Cut" Click="Menu_Cut" InputGestureText="Ctrl+X" />
-                    <MenuItem Header="Copy" Click="Menu_Copy" InputGestureText="Ctrl+C" />
-                    <MenuItem Header="Paste" Click="Menu_Paste" InputGestureText="Ctrl+V" />
+                    <MenuItem Name="MenuI_Cut" Header="Cut" Click="Menu_Cut" InputGestureText="Ctrl+X" />
+                    <MenuItem Name="MenuI_Copy" Header="Copy" Click="Menu_Copy" InputGestureText="Ctrl+C" />
+                    <MenuItem Name="MenuI_Paste" Header="Paste" Click="Menu_Paste" InputGestureText="Ctrl+V" />
                     <Separator />
-                    <MenuItem Header="Foldings">
-                        <MenuItem Header="Expand All" InputGestureText="Ctrl+P" Click="Menu_ExpandAll" />
-                        <MenuItem Header="Collapse All" InputGestureText="Ctrl+Shift+P" Click="Menu_CollapseAll" />
+                    <MenuItem Name="MenuI_Folding" Header="Foldings">
+                        <MenuItem Name="MenuI_ExpandAll" Header="Expand All" InputGestureText="Ctrl+P" Click="Menu_ExpandAll" />
+                        <MenuItem Name="MenuI_CollapseAll" Header="Collapse All" InputGestureText="Ctrl+Shift+P" Click="Menu_CollapseAll" />
                     </MenuItem>
-                    <MenuItem Header="Jump To" Click="Menu_JumpTo" InputGestureText="Ctrl+G" />
-                    <MenuItem Header="Toggle comment (//)" Click="Menu_ToggleCommentLine" InputGestureText="Ctrl+/" />
-                    <MenuItem Header="Select All" Click="Menu_SelectAll" InputGestureText="Ctrl+A" />
+                    <MenuItem Name="MenuI_JumpTo" Header="Jump To" Click="Menu_JumpTo" InputGestureText="Ctrl+G" />
+                    <MenuItem Name="MenuI_ToggleComment" Header="Toggle comment (//)" Click="Menu_ToggleCommentLine" InputGestureText="Ctrl+/" />
+                    <MenuItem Name="MenuI_SelectAll" Header="Select All" Click="Menu_SelectAll" InputGestureText="Ctrl+A" />
                     <Separator />
-                    <MenuItem Header="Find &amp; Replace" Click="Menu_FindAndReplace" InputGestureText="Ctrl+F" />
+                    <MenuItem Name="MenuI_FindReplace" Header="Find &amp; Replace" Click="Menu_FindAndReplace" InputGestureText="Ctrl+F" />
                 </MenuItem>
 
                 <MenuItem Name="MenuI_Build" Header="Build">
