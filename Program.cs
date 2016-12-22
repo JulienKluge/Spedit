@@ -42,7 +42,7 @@ namespace Spedit
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                         OptionsObject = OptionsControlIOObject.Load();
 						Translations = new TranslationProvider();
-						Translations.LoadLanguage(OptionsObject.Language);
+						Translations.LoadLanguage(OptionsObject.Language, true);
 						for (int i = 0; i < args.Length; ++i)
                         {
                             if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey

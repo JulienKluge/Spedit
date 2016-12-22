@@ -141,7 +141,7 @@ namespace Spedit.Interop
 		public string ShowSpaces, ShowTabs, IndentationSize, FontFamily, SyntaxHigh, HighDeprecat;
 
 
-		public void LoadLanguage(string lang)
+		public void LoadLanguage(string lang, bool Initial = false)
 		{
 			FillToEnglishDefaults();
 			List<string> languageList = new List<string>();
@@ -149,7 +149,7 @@ namespace Spedit.Interop
 			languageList.Add("English");
 			languageIDList.Add("");
 			lang = lang.Trim().ToLowerInvariant();
-			IsDefault = string.IsNullOrEmpty(lang) || lang.ToLowerInvariant() == "en";
+			IsDefault = (string.IsNullOrEmpty(lang) || lang.ToLowerInvariant() == "en") && Initial;
 			if (File.Exists("lang_0_spedit.xml"))
 			{
 				try
