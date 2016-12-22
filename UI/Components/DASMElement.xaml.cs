@@ -58,7 +58,7 @@ namespace Spedit.UI.Components
             }
             catch (Exception e)
             {
-                detailbox_.Text = "Error while loading and processing the file." + Environment.NewLine + Environment.NewLine + "Details: " + e.Message;
+                detailbox_.Text = Program.Translations.ErrorFileLoadProc + Environment.NewLine + Environment.NewLine + $"{Program.Translations.Details}: " + e.Message;
                 return;
             }
             renderFile();
@@ -280,7 +280,7 @@ namespace Spedit.UI.Components
             }
             catch (Exception e)
             {
-                addDetailLine("Could not disassemble method {0}: {1}", name, e.Message);
+                addDetailLine(Program.Translations.NotDissMethod, name, e.Message);
                 endDetailUpdate();
                 return;
             }

@@ -92,6 +92,18 @@
 		<count>Zählen</count>
 		<casesen>Groß/Kleinschreibung</casesen>
 		<multilineregex>Mehrzeilen Regex</multilineregex>
+		<errorfileloadproc>Fehler beim Laden unf verarbeiten der Datei.</errorfileloadproc>
+		<notdissmethod>Die Methode {0} konnte nicht disassembled werden: {1}</notdissmethod>
+		<dfilechanged>{0} hat sich geändert.</dfilechanged>
+		<filechanged>Datei geändert</filechanged>
+		<filetryreload>Soll die Datei neu geladen werden?</filetryreload>
+		<dsaveerror>Es ist ein Fehler beim speichern aufgetreten.</dsaveerror>
+		<saveerror>Speicherfehlerr</saveerror>
+		<savingfile>Speichere Datei</savingfile>
+		<ptabb>pt</ptabb> <!--point abbreviation-->
+		<colabb>Sp</colabb> <!--Coloum abbreviation-->
+		<lnabb>Zl</lnabb> <!--Line abbreviation-->
+		<lenabb>Lng</lenabb> <!--Length abbreviation-->
 	</de>
 	<ru>
 		<language>русский</language>
@@ -186,5 +198,17 @@
 		<count>Count</count>
 		<casesen>Case sensitive</casesen>
 		<multilineregex>Multiline regex</multilineregex>
+		<errorfileloadproc>Error while loading and processing the file.</errorfileloadproc>
+		<notdissmethod>Could not disassemble method {0}: {1}</notdissmethod>
+		<dfilechanged>{0} has changed.</dfilechanged>
+		<filechanged>File changed</filechanged>
+		<filetryreload>Try reloading file?</filetryreload>
+		<dsaveerror>An error occured while saving.</dsaveerror>
+		<saveerror>Save error</saveerror>
+		<savingfile>Saving file</savingfile>
+		<ptabb>pt</ptabb> <!--point abbreviation-->
+		<colabb>Col</colabb> <!--Coloum abbreviation-->
+		<lnabb>Ln</lnabb> <!--Line abbreviation-->
+		<lenabb>Len</lenabb> <!--Length abbreviation-->
 	</ru>
 </translations>

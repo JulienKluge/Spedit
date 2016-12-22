@@ -257,7 +257,8 @@ namespace Spedit.UI.Components
                 bool ReloadFile = false;
                 if (_NeedsSave)
                 {
-                    var result = MessageBox.Show(_FullFilePath + " has changed." + Environment.NewLine + "Try reloading file?", "File Changed", MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
+                    var result = MessageBox.Show(string.Format(Program.Translations.DFileChanged, _FullFilePath) + Environment.NewLine + Program.Translations.FileTryReload,
+						Program.Translations.FileChanged, MessageBoxButton.YesNo, MessageBoxImage.Asterisk);
                     ReloadFile = (result == MessageBoxResult.Yes);
                 }
                 else //when the user didnt changed anything, we just reload the file since we are intelligent...
@@ -356,7 +357,8 @@ namespace Spedit.UI.Components
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(Program.MainWindow, "An error occured while saving." + Environment.NewLine + "(" + e.Message + ")", "save error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Program.MainWindow, Program.Translations.DSaveError + Environment.NewLine + "(" + e.Message + ")", Program.Translations.SaveError,
+						MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 NeedsSave = false;
                 if (fileWatcher != null)
@@ -371,7 +373,7 @@ namespace Spedit.UI.Components
             if (size > 2 && size < 31)
             {
                 editor.FontSize = size;
-                StatusLine_FontSize.Text = size.ToString("n0") + " pt";
+                StatusLine_FontSize.Text = size.ToString("n0") + $" {Program.Translations.PtAbb}";
             }
             if (UpdateLineHeight)
             {
@@ -478,7 +480,7 @@ namespace Spedit.UI.Components
                     }
                     else
                     {
-                        var Result = Program.MainWindow.ShowMessageAsync("Saving File '" + Parent.Title.Trim(new char[] { '*' }) + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
+                        var Result = Program.MainWindow.ShowMessageAsync($"{Program.Translations.SavingFile} '" + Parent.Title.Trim(new char[] { '*' }) + "'", "", MessageDialogStyle.AffirmativeAndNegative, Program.MainWindow.MetroDialogOptions);
 						Result.Wait();
 						if (Result.Result == MessageDialogResult.Affirmative)
                         {
@@ -507,8 +509,8 @@ namespace Spedit.UI.Components
 
         private void Caret_PositionChanged(object sender, EventArgs e)
         {
-            StatusLine_Coloumn.Text = "Col " + editor.TextArea.Caret.Column.ToString();
-            StatusLine_Line.Text = "Ln " + editor.TextArea.Caret.Line.ToString();
+            StatusLine_Coloumn.Text = $"{Program.Translations.ColAbb} {editor.TextArea.Caret.Column}";
+            StatusLine_Line.Text = $"{Program.Translations.LnAbb} {editor.TextArea.Caret.Line}";
             EvaluateIntelliSense();
             var result = bracketSearcher.SearchBracket(editor.Document, editor.CaretOffset);
             bracketHighlightRenderer.SetHighlight(result);
@@ -589,7 +591,7 @@ namespace Spedit.UI.Components
 
         private void TextArea_SelectionChanged(object sender, EventArgs e)
         {
-            StatusLine_SelectionLength.Text = "Len " + editor.SelectionLength.ToString();
+            StatusLine_SelectionLength.Text = $"{Program.Translations.LenAbb} {editor.SelectionLength}";
         }
 
         private void PrevMouseWheel(object sender, MouseWheelEventArgs e)

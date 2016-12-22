@@ -108,6 +108,18 @@ namespace Spedit.Interop
 		public string Count;
 		public string CaseSen;
 		public string MultilineRegex;
+		public string ErrorFileLoadProc;
+		public string NotDissMethod;
+		public string DFileChanged;
+		public string FileChanged;
+		public string FileTryReload;
+		public string DSaveError;
+		public string SaveError;
+		public string SavingFile;
+		public string PtAbb;
+		public string ColAbb;
+		public string LnAbb;
+		public string LenAbb;
 
 		public void LoadLanguage(string lang)
 		{
@@ -333,6 +345,30 @@ namespace Spedit.Interop
 								CaseSen = nv;
 							else if (nn == "multilineregex")
 								MultilineRegex = nv;
+							else if (nn == "errorfileloadproc")
+								ErrorFileLoadProc = nv;
+							else if (nn == "notdissmethod")
+								NotDissMethod = nv;
+							else if (nn == "dfilechanged")
+								DFileChanged = nv;
+							else if (nn == "filechanged")
+								FileChanged = nv;
+							else if (nn == "filetryreload")
+								FileTryReload = nv;
+							else if (nn == "dsaveerror")
+								DSaveError = nv;
+							else if (nn == "saveerror")
+								SaveError = nv;
+							else if (nn == "savingfile")
+								SavingFile = nv;
+							else if (nn == "colabb")
+								ColAbb = nv;
+							else if (nn == "lnabb")
+								LnAbb = nv;
+							else if (nn == "lenabb")
+								LenAbb = nv;
+							else if (nn == "ptabb")
+								PtAbb = nv;
 						}
 					}
 				}
@@ -442,6 +478,18 @@ namespace Spedit.Interop
 			Count = "Count";
 			CaseSen = "Case sensitive";
 			MultilineRegex = "Multiline Regex";
+			ErrorFileLoadProc = "Error while loading and processing the file.";
+			NotDissMethod = "Could not disassemble method {0}: {1}";
+			DFileChanged = "{0} has changed.";
+			FileChanged = "File changed";
+			FileTryReload = "Try reloading file?";
+			DSaveError = "An error occured while saving.";
+			SaveError = "Save error";
+			SavingFile = "Saving file";
+			PtAbb = "pt";
+			ColAbb = "Col";
+			LnAbb = "Ln";
+			LenAbb = "Len";
 		}
 	}
 }
