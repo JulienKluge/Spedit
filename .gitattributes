@@ -16,5 +16,6 @@
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
 
-# Language override for include files
-*.sp linguist-language=SourcePawn
+# Language override for sourcemod files
+*.sp linguist-vendored=false
+*.inc linguist-vendored=false
