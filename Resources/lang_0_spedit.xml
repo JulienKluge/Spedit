@@ -110,6 +110,13 @@
 		<peopleinv>Menschen involviert:</peopleinv>
 		<preview>Vorschau</preview>
 		<newfile>Neue Datei</newfile>
+		<configwrongpars>Die Konfiguration konnte keine Sourcemod Definition erparsen.</configwrongpars>
+		<noname>kein Name</noname>
+		<poslen>pos: {0} - lng: {1}</poslen>
+		<inheritedfr>geerbt von</inheritedfr>
+		<methodfrom>Method von</methodfrom> <!--do not translate 'Method'-->
+		<propertyfrom>Property von</propertyfrom> <!--do not translate 'property'-->
+		<search>Suche</search>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -222,5 +229,12 @@
 		<peopleinv>People involved</peopleinv>
 		<preview>Preview</preview>
 		<newfile>New file</newfile>
+		<configwrongpars>The config was not able to parse a sourcepawn definiton.</configwrongpars>
+		<noname>no name</noname>
+		<poslen>pos: {0} - len: {1}</poslen>
+		<inheritedfr>inherited from</inheritedfr>
+		<methodfrom>Method from</methodfrom> <!--do not translate 'Method'-->
+		<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'-->
+		<search>search</search>
 	</ru>
 </translations>

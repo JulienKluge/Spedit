@@ -126,6 +126,13 @@ namespace Spedit.Interop
 		public string PeopleInv;
 		public string Preview;
 		public string NewFile;
+		public string ConfigWrongPars;
+		public string NoName;
+		public string PosLen;
+		public string InheritedFrom;
+		public string MethodFrom;
+		public string PropertyFrom;
+		public string Search;
 
 		public void LoadLanguage(string lang)
 		{
@@ -387,6 +394,20 @@ namespace Spedit.Interop
 								Preview = nv;
 							else if (nn == "newfile")
 								NewFile = nv;
+							else if (nn == "configwrongpars")
+								ConfigWrongPars = nv;
+							else if (nn == "noname")
+								NoName = nv;
+							else if (nn == "poslen")
+								PosLen = nv;
+							else if (nn == "inheritedfr")
+								InheritedFrom = nv;
+							else if (nn == "methodfrom")
+								MethodFrom = nv;
+							else if (nn == "propertyfrom")
+								PropertyFrom = nv;
+							else if (nn == "search")
+								Search = nv;
 						}
 					}
 				}
@@ -514,6 +535,13 @@ namespace Spedit.Interop
 			PeopleInv = "People involved";
 			Preview = "Preview";
 			NewFile = "New file";
+			ConfigWrongPars = "The config was not able to parse a sourcepawn definiton.";
+			NoName = "no name";
+			PosLen = "(pos: {0} - len: {1})";
+			InheritedFrom = "inherited from";
+			MethodFrom = "Method from";
+			PropertyFrom = "Property from";
+			Search = "search";
 		}
 	}
 }
