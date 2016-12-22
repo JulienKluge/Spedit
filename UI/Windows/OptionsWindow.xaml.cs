@@ -20,6 +20,7 @@ namespace Spedit.UI.Windows
         public OptionsWindow()
         {
             InitializeComponent();
+			Language_Translate();
 			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
 			LoadSettings();
@@ -28,13 +29,13 @@ namespace Spedit.UI.Windows
 
         private async void RestoreButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var result = await this.ShowMessageAsync("Reset options", "Are you sure, you want to reset the options?", MessageDialogStyle.AffirmativeAndNegative);
+            var result = await this.ShowMessageAsync(Program.Translations.ResetOptions, Program.Translations.ResetOptQues, MessageDialogStyle.AffirmativeAndNegative);
             if (result == MessageDialogResult.Affirmative)
             {
                 Program.OptionsObject = new OptionsControl();
 				Program.OptionsObject.ReCreateCryptoKey();
                 Program.MainWindow.OptionMenuEntry.IsEnabled = false;
-                await this.ShowMessageAsync("Restart Editor", "You have to restart the editor for the changes to have effect.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                await this.ShowMessageAsync(Program.Translations.RestartEditor, Program.Translations.YRestartEditor, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                 this.Close();
             }
         }
@@ -267,7 +268,8 @@ namespace Spedit.UI.Windows
 					break;
 				}
 			}
-			ToggleRestartText();
+			Language_Translate();
+			ToggleRestartText(true);
 		}
 
 		private void LoadSettings()
@@ -315,7 +317,7 @@ namespace Spedit.UI.Windows
 			AutoCloseStringChars.IsChecked = Program.OptionsObject.Editor_AutoCloseStringChars;
 			ShowSpaces.IsChecked = Program.OptionsObject.Editor_ShowSpaces;
 			ShowTabs.IsChecked = Program.OptionsObject.Editor_ShowTabs;
-			FontFamilyTB.Text = "Font(" + Program.OptionsObject.Editor_FontFamily + "):";
+			FontFamilyTB.Text = $"{Program.Translations.FontFamily} ({Program.OptionsObject.Editor_FontFamily}):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
 			IndentationSize.Value = (double)Program.OptionsObject.Editor_IndentationSize;
             LoadSH();
@@ -327,10 +329,44 @@ namespace Spedit.UI.Windows
             {
                 if (!RestartTextIsShown)
                 {
-                    StatusTextBlock.Content = (FullEffect) ? "Restart editor to take full effect..." : "Restart editor to take effect...";
+                    StatusTextBlock.Content = (FullEffect) ? Program.Translations.RestartEdiFullEff : Program.Translations.RestartEdiEff;
                     RestartTextIsShown = true;
                 }
             }
         }
+
+		private void Language_Translate()
+		{
+			if (Program.Translations.IsDefault)
+			{
+				return;
+			}
+			ResetButton.Content = Program.Translations.ResetOptions;
+			ProgramHeader.Header = $" {Program.Translations.Program} ";
+			HardwareAcc.Content = Program.Translations.HardwareAcc;
+			UIAnimation.Content = Program.Translations.UIAnim;
+			OpenIncludes.Content = Program.Translations.OpenInc;
+			OpenIncludesRecursive.Content = Program.Translations.OpenIncRec;
+			AutoUpdate.Content = Program.Translations.AutoUpdate;
+			ShowToolBar.Content = Program.Translations.ShowToolbar;
+			DynamicISAC.Content = Program.Translations.DynamicISAC;
+			DarkTheme.Content = Program.Translations.DarkTheme;
+			ThemeColorLabel.Content = Program.Translations.ThemeColor;
+			LanguageLabel.Content = Program.Translations.LanguageStr;
+			EditorHeader.Header = $" {Program.Translations.Editor} ";
+			FontSizeBlock.Text = Program.Translations.FontSize;
+			ScrollSpeedBlock.Text = Program.Translations.ScrollSpeed;
+			WordWrap.Content = Program.Translations.WordWrap;
+			AgressiveIndentation.Content = Program.Translations.AggIndentation;
+			LineReformatting.Content = Program.Translations.ReformatAfterSem;
+			TabToSpace.Content = Program.Translations.TabsToSpace;
+			AutoCloseBrackets.Content = $"{Program.Translations.AutoCloseBrack} (), [], {{}}";
+			AutoCloseStringChars.Content = $"{Program.Translations.AutoCloseStrChr} \"\", ''";
+			ShowSpaces.Content = Program.Translations.ShowSpaces;
+			ShowTabs.Content = Program.Translations.ShowTabs;
+			IndentationSizeBlock.Text = Program.Translations.IndentationSize;
+			SyntaxHighBlock.Text = Program.Translations.SyntaxHigh;
+			HighlightDeprecateds.Content = Program.Translations.HighDeprecat;
+		}
     }
 }

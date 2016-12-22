@@ -19,13 +19,13 @@
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Content="Reset all Settings to default" Click="RestoreButton_Clicked" />
+            <Button Name="ResetButton" Content="Reset options" Click="RestoreButton_Clicked" />
             <Label Name="StatusTextBlock" Foreground="LightGray" FontSize="15" />
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Grid>
         <controls:MetroAnimatedSingleRowTabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,15,0,0" controls:TabControlHelper.IsUnderlined="True">
-            <controls:MetroTabItem Header=" Program ">
+            <controls:MetroTabItem Name="ProgramHeader" Header=" Program ">
                 <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <Grid>
                         <CheckBox Name="HardwareAcc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Use Hardware Acceleration (if available)" Checked="HardwareAcc_Changed" Unchecked="HardwareAcc_Changed" />
@@ -36,20 +36,20 @@
                         <CheckBox Name="ShowToolBar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,130,0,0" Content="Show Toolbar" Checked="ShowToolbar_Changed" Unchecked="ShowToolbar_Changed" />
                         <CheckBox Name="DynamicISAC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,155,0,0" Content="Dynamic Autocompletition/Intellisense" Checked="DynamicISAC_Changed" Unchecked="DynamicISAC_Changed" />
                         <CheckBox Name="DarkTheme" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Content="Dark Theme" Checked="DarkTheme_Changed" Unchecked="DarkTheme_Changed" />
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,205,0,0" Content="Theme Color:" />
-                        <ComboBox Name="AccentColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,205,0,0" Width="200" SelectionChanged="AccentColor_Changed" />
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,235,0,0" Content="Language:" />
-                        <ComboBox Name="LanguageBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,235,0,0" Width="200" SelectionChanged="LanguageBox_Changed" />
+                        <Label Name="ThemeColorLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,205,0,0" Content="Theme Color:" />
+                        <ComboBox Name="AccentColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,205,0,0" Width="200" SelectionChanged="AccentColor_Changed" />
+                        <Label Name="LanguageLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,235,0,0" Content="Language:" />
+                        <ComboBox Name="LanguageBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,235,0,0" Width="200" SelectionChanged="LanguageBox_Changed" />
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>
-            <controls:MetroTabItem Header=" Editor ">
+            <controls:MetroTabItem Name="EditorHeader" Header=" Editor ">
                 <ScrollViewer>
                     <Grid>
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Font Size:" IsHitTestVisible="False" />
+                        <TextBlock Name="FontSizeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Text="Font Size:" IsHitTestVisible="False" />
                         <Slider Name="FontSizeD" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,25,0,0" Width="280" Minimum="5" Maximum="30" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="FontSize_Changed" />
 
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,5,0,0" Text="Scroll Speed:" IsHitTestVisible="False" />
+                        <TextBlock Name="ScrollSpeedBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,5,0,0" Text="Scroll Speed:" IsHitTestVisible="False" />
                         <Slider Name="ScrollSpeed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,25,0,0" Width="280" Minimum="1" Maximum="20" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="ScrollSpeed_Changed" />
                         <CheckBox Name="WordWrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Content="Word Wrap" Checked="WordWrap_Changed" Unchecked="WordWrap_Changed" />
                         <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,55,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
@@ -60,7 +60,7 @@
                         <CheckBox Name="ShowSpaces" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,155,0,0" Content="Show Spaces" Checked="ShowSpaces_Changed" Unchecked="ShowSpaces_Changed" />
                         <CheckBox Name="ShowTabs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,175,0,0" Content="Show Tabs" Checked="ShowTabs_Changed" Unchecked="ShowTabs_Changed" />
                         
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,160,0,0" Text="Indentation Size:" IsHitTestVisible="False" />
+                        <TextBlock Name="IndentationSizeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,160,0,0" Text="Indentation Size:" IsHitTestVisible="False" />
                         <Slider Name="IndentationSize" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Width="280" Minimum="1" Maximum="10" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="IndentationSize_Changed" />
                         
                         <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
@@ -86,7 +86,7 @@
                             </ComboBox.ItemsSource>
                         </ComboBox>
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,230,0,0">
-                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
+                            <TextBlock Name="SyntaxHighBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
 
                             <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
 

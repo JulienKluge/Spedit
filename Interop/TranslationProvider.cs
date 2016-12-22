@@ -136,6 +136,9 @@ namespace Spedit.Interop
 		public string Delete, Name, ScriptDir, DelimiedWi, CopyDir, ServerExe, serverStartArgs, PreBuildCom, PostBuildCom, OptimizeLvl, VerboseLvl, AutoCopy, DeleteOldSMX;
 		public string FTPHost, FTPUser, FTPPw, FTPDir, ComEditorDir, ComScriptDir, ComCopyDir, ComScriptFile, ComScriptName, ComPluginFile, ComPluginName, RConEngine;
 		public string RConIP, RconPort, RconPw, RconCom, ComPluginsReload, ComPluginsLoad, ComPluginsUnload, NewConfig, CannotDelConf, YCannotDelConf, SelectExe, CMDLineCom, RConCMDLineCom;
+		public string ResetOptions, ResetOptQues, RestartEditor, YRestartEditor, RestartEdiFullEff, RestartEdiEff, Program, HardwareAcc, UIAnim, OpenInc, OpenIncRec, AutoUpdate, ShowToolbar;
+		public string DynamicISAC, DarkTheme, ThemeColor, LanguageStr, Editor, FontSize, ScrollSpeed, WordWrap, AggIndentation, ReformatAfterSem, TabsToSpace, AutoCloseBrack, AutoCloseStrChr;
+		public string ShowSpaces, ShowTabs, IndentationSize, FontFamily, SyntaxHigh, HighDeprecat;
 
 
 		public void LoadLanguage(string lang)
@@ -412,7 +415,6 @@ namespace Spedit.Interop
 								PropertyFrom = nv;
 							else if (nn == "search")
 								Search = nv;
-
 							else if (nn == "delete")
 								Delete = nv;
 							else if (nn == "name")
@@ -489,6 +491,74 @@ namespace Spedit.Interop
 								CMDLineCom = nv;
 							else if (nn == "rconcmdlinecom")
 								RConCMDLineCom = nv;
+							else if (nn == "resetoptions")
+								ResetOptions = nv;
+							else if (nn == "resetoptques")
+								ResetOptQues = nv;
+							else if (nn == "restarteditor")
+								RestartEditor = nv;
+							else if (nn == "yrestarteditor")
+								YRestartEditor = nv;
+							else if (nn == "restartedifulleff")
+								RestartEdiFullEff = nv;
+							else if (nn == "restartedieff")
+								RestartEdiEff = nv;
+							else if (nn == "program")
+								Program = nv;
+							else if (nn == "hardwareacc")
+								HardwareAcc = nv;
+							else if (nn == "uianim")
+								UIAnim = nv;
+							else if (nn == "openinc")
+								OpenInc = nv;
+							else if (nn == "openincrec")
+								OpenIncRec = nv;
+							else if (nn == "autoupdate")
+								AutoUpdate = nv;
+							else if (nn == "showtoolbar")
+								ShowToolbar = nv;
+							else if (nn == "dynamicisac")
+								DynamicISAC = nv;
+							else if (nn == "darktheme")
+								DarkTheme = nv;
+							else if (nn == "themecolor")
+								ThemeColor = nv;
+							else if (nn == "languagestr")
+								LanguageStr = nv;
+							else if (nn == "editor")
+								Editor = nv;
+							else if (nn == "fontsize")
+								FontSize = nv;
+							else if (nn == "scrollspeed")
+								ScrollSpeed = nv;
+							else if (nn == "wordwrap")
+								WordWrap = nv;
+							else if (nn == "aggindentation")
+								AggIndentation = nv;
+							else if (nn == "reformataftersem")
+								ReformatAfterSem = nv;
+							else if (nn == "tabstospace")
+								TabsToSpace = nv;
+							else if (nn == "autoclosebrack")
+								AutoCloseBrack = nv;
+							else if (nn == "autoclosestrchr")
+								AutoCloseStrChr = nv;
+							else if (nn == "showsapaces")
+								ShowSpaces = nv;
+							else if (nn == "showtabs")
+								ShowTabs = nv;
+							else if (nn == "indentationsize")
+								IndentationSize = nv;
+							else if (nn == "fontfamily")
+								FontFamily = nv;
+							else if (nn == "syntaxhigh")
+								SyntaxHigh = nv;
+							else if (nn == "highdeprecat")
+								HighDeprecat = nv;
+							else
+							{
+								throw new Exception($"{nn} is not a known language-phrase");
+							}
 						}
 					}
 				}
@@ -661,6 +731,38 @@ namespace Spedit.Interop
 			SelectExe = "Select executable";
 			CMDLineCom = "Commandline variables";
 			RConCMDLineCom = "Rcon commandline variables";
+			ResetOptions = "Reset options";
+			ResetOptQues = "Are you sure, you want to reset the options?";
+			RestartEditor = "Restart Editor";
+			YRestartEditor = "You have to restart the editor for the changes to have effect.";
+			RestartEdiFullEff = "Restart editor to take full effect...";
+			RestartEdiEff = "Restart editor to take effect...";
+			Program = "Program";
+			HardwareAcc = "Use hardware acceleration (if available)";
+			UIAnim = "UI animations";
+			OpenInc = "Auto open includes";
+			OpenIncRec = "Open Includes Recursivly";
+			AutoUpdate = "Search automatically for updates";
+			ShowToolbar = "Show toolbar";
+			DynamicISAC = "Dynamic Autocompletition/Intellisense";
+			DarkTheme = "Dark theme";
+			ThemeColor = "Theme Color";
+			LanguageStr = "Language";
+			Editor = "Editor";
+			FontSize = "Font size";
+			ScrollSpeed = "Scroll speed";
+			WordWrap = "Word wrap";
+			AggIndentation = "Agressive Indentation";
+			ReformatAfterSem = "Reformatting line after semicolon";
+			TabsToSpace = "Replace tabs with spaces";
+			AutoCloseBrack = "Auto close brackets";
+			AutoCloseStrChr = "Auto close Strings, Chars";
+			ShowSpaces = "Show spaces";
+			ShowTabs = "Show tabs";
+			IndentationSize = "Indentation size";
+			FontFamily = "Font";
+			SyntaxHigh = "Syntaxhighlighting";
+			HighDeprecat = "Highlight deprecated (<1.7) syntax";
 		}
 	}
 }

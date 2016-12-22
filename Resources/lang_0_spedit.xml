@@ -117,7 +117,6 @@
 		<methodfrom>Method von</methodfrom> <!--do not translate 'Method'-->
 		<propertyfrom>Property von</propertyfrom> <!--do not translate 'property'-->
 		<search>Suche</search>
-
 		<delete>Löschen</delete>
 		<name>Name</name>
 		<scriptdir>Scripting Pfad</scriptdir>
@@ -156,6 +155,39 @@
 		<selectexe>Ausführbare Datei aussuchen</selectexe>
 		<cmdlinecom>Befehlsvariablen</cmdlinecom>
 		<rconcmdlinecom>Rcon Befehlsvariablen</rconcmdlinecom>
+
+		<resetoptions>Optionen zurücksetzen</resetoptions>
+		<resetoptques>Bist du dir sicher die Optionen zurückzusetzen?</resetoptques>
+		<restarteditor>Editor neustarten</restarteditor>
+		<yrestarteditor>Du musst den Editor neu starten damit die Änderungen aktiv werden.</yrestarteditor>
+		<restartedifulleff>Starte den Editor neu damit alle Änderungen aktiv werden...</restartedifulleff>
+		<restartedieff>Starte den Editor neu damit die Änderungen aktiv werden...</restartedieff>
+		<program>Programm</program>
+		<hardwareacc>Benutze Hardwarebeschleunigung (wenn verfügbar)</hardwareacc>
+		<uianim>UI Animationen</uianim>
+		<openinc>Automatisches öffnen von Includes</openinc>
+		<openincrec>Includes rekursiv öffnen</openincrec>
+		<autoupdate>Automatisch nach Updates suchen</autoupdate>
+		<showtoolbar>Werkzeugleiste zeigen</showtoolbar>
+		<dynamicisac>Dynamische Autovervollst./Intellisense</dynamicisac>
+		<darktheme>Dunkle Umgebung</darktheme>
+		<themecolor>Umgebungsfarbe</themecolor>
+		<languagestr>Sprache</languagestr>
+		<editor>Editor</editor>
+		<fontsize>Schriftgröße</fontsize>
+		<scrollspeed>Scrollgeschwindigkeit</scrollspeed>
+		<wordwrap>Wortumbruch</wordwrap>
+		<aggindentation>Agressive Einrückung</aggindentation>
+		<reformataftersem>Zeile neuformatieren nach Semikolon</reformataftersem>
+		<tabstospace>Tabs mit Leerzeichen ersetzen</tabstospace>
+		<autoclosebrack>Automatisch Klammern schließen</autoclosebrack>
+		<autoclosestrchr>Automatisch Strings, Chars schließen</autoclosestrchr>
+		<showsapaces>Leerzeichen anzeigen</showsapaces>
+		<showtabs>Tabs anzeigen</showtabs>
+		<indentationsize>Einrückungsgröße</indentationsize>
+		<fontfamily>Schriftart</fontfamily>
+		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
+		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -275,7 +307,6 @@
 		<methodfrom>Method from</methodfrom> <!--do not translate 'Method'-->
 		<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'-->
 		<search>search</search>
-
 		<delete>Delete</delete>
 		<name>Name</name>
 		<scriptdir>Scripting directories</scriptdir>
@@ -314,5 +345,38 @@
 		<selectexe>Select Executable</selectexe>
 		<cmdlinecom>Commandline variables</cmdlinecom>
 		<rconcmdlinecom>Rcon commandline variables</rconcmdlinecom>
+
+		<resetoptions>Reset options</resetoptions>
+		<resetoptques>Are you sure, you want to reset the options?</resetoptques>
+		<restarteditor>Restart Editor</restarteditor>
+		<yrestarteditor>You have to restart the editor for the changes to have effect.</yrestarteditor>
+		<restartedifulleff>Restart editor to take full effect...</restartedifulleff>
+		<restartedieff>Restart editor to take effect...</restartedieff>
+		<program>Program</program>
+		<hardwareacc>Use hardware acceleration (if available)</hardwareacc>
+		<uianim>UI animations</uianim>
+		<openinc>Auto open includes</openinc>
+		<openincrec>Open Includes Recursivly</openincrec>
+		<autoupdate>Search automatically for updates</autoupdate>
+		<showtoolbar>Show toolbar</showtoolbar>
+		<dynamicisac>Dynamic Autocompletition/Intellisense</dynamicisac>
+		<darktheme>Dark theme</darktheme>
+		<themecolor>Theme color</themecolor>
+		<languagestr>Language</languagestr>
+		<editor>Editor</editor>
+		<fontsize>Font Size</fontsize>
+		<scrollspeed>Scroll Speed</scrollspeed>
+		<wordwrap>Word wrap</wordwrap>
+		<aggindentation>Agressive Indentation</aggindentation>
+		<reformataftersem>Reformatting line after semicolon</reformataftersem>
+		<tabstospace>Replace tabs with spaces</tabstospace>
+		<autoclosebrack>Auto close brackets</autoclosebrack>
+		<autoclosestrchr>Auto close Strings, Chars</autoclosestrchr>
+		<showsapaces>Show spaces</showsapaces>
+		<showtabs>Show tabs</showtabs>
+		<indentationsize>Indentation Size</indentationsize>
+		<fontfamily>Font</fontfamily>
+		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
+		<highdeprecat>Highlight deprecated (&lt;1.7) syntax</highdeprecat>
 	</ru>
 </translations>
