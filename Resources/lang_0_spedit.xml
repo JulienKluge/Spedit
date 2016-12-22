@@ -20,10 +20,10 @@
 		<decompiling>Dekompillieren</decompiling>
 		<editconfig>Konfigurationen bearbeiten</editconfig>
 		<foundinoff>Gefunden mit Offset {0} und Länge {1}</foundinoff>
-		<foundnothing>Found Nothing</foundnothing>
+		<foundnothing>Nichts gefunden</foundnothing>
 		<replacedoff>Ersetzt am Offset</replacedoff>
 		<replacedocc>{0} Vorkommen ersetzt in {1} Dokumenten</replacedocc>
-		<occfound>occurences found</occfound>
+		<occfound>Vorkommen gefunden</occfound>
 		<emptypatt>Leerer Suchausdruck</emptypatt>
 		<novalidregex>Kein valider Regex-Ausdruck</novalidregex>
 		<failedcheck>Fehler bei der Suche</failedcheck> <!--in sense of searching for updates-->
@@ -33,8 +33,8 @@
 		<details>Details</details>
 		<compiling>Kompillieren</compiling>
 		<error>Fehler</error>
-		<spcompnotstarted>The spcomp.exe compiler did not started correctly.</spcompnotstarted>
-		<spcompnotfound>The spcomp.exe compiler could not be found.</spcompnotfound>
+		<spcompnotstarted>Der spcomp.exe Compiler konnte nicht richtig gestartet werden.</spcompnotstarted>
+		<spcompnotfound>Der spcomp.exe Compiler konnte nicht gefunden werden.</spcompnotfound>
 		<copied>Kopiert</copied>
 		<deleted>Gelöscht</deleted>
 		<failcopy>Fehlgeschlagene Kopierung</failcopy>
