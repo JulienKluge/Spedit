@@ -120,6 +120,10 @@ namespace Spedit.Interop
 		public string ColAbb;
 		public string LnAbb;
 		public string LenAbb;
+		public string SPEditCap;
+		public string WrittenBy;
+		public string License;
+		public string PeopleInv;
 
 		public void LoadLanguage(string lang)
 		{
@@ -369,6 +373,14 @@ namespace Spedit.Interop
 								LenAbb = nv;
 							else if (nn == "ptabb")
 								PtAbb = nv;
+							else if (nn == "speditcap")
+								SPEditCap = nv;
+							else if (nn == "writtenby")
+								WrittenBy = nv;
+							else if (nn == "license")
+								License = nv;
+							else if (nn == "peopleinv")
+								PeopleInv = nv;
 						}
 					}
 				}
@@ -490,6 +502,10 @@ namespace Spedit.Interop
 			ColAbb = "Col";
 			LnAbb = "Ln";
 			LenAbb = "Len";
-		}
+			SPEditCap = "a lightweight sourcepawn editor";
+			WrittenBy = "written by: {0}";
+			License = "License";
+			PeopleInv = "People involved";
+	}
 	}
 }

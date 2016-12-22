@@ -24,8 +24,8 @@
     </controls:MetroWindow.Flyouts>
     <Grid>
         <TextBlock Name="TitleBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" FontSize="16" FontWeight="Light" IsHitTestVisible="False" />
-        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Text="written by: Julien Kluge  (Julien.Kluge@gmail.com)" FontSize="16" FontWeight="Thin" IsHitTestVisible="False" />
-        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,15,180,5" Text="License:" FontSize="16" FontWeight="Thin" FontStyle="Italic" IsHitTestVisible="False" />
+        <TextBlock Name="WrittenByBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Text="written by: Julien Kluge  (Julien.Kluge@gmail.com)" FontSize="16" FontWeight="Thin" IsHitTestVisible="False" />
+        <TextBlock Name="LicenseBlock" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,15,180,5" Text="License:" FontSize="16" FontWeight="Thin" FontStyle="Italic" IsHitTestVisible="False" />
         <Button Name="LicenseOpenButton" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,130,0" Width="40" Height="40" Click="OpenLicenseFlyout" Style="{StaticResource MetroCircleButtonStyle}">
             <Button.Content>
                 <Image Source="/Spedit;component/Resources/AboutImages/license.png" Width="20" Height="20" />
@@ -45,7 +45,7 @@
         <ScrollViewer Margin="0,65,0,0">
             <StackPanel Name="ContentStackPanel">
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="Auto" Margin="0,2,0,2" IsHitTestVisible="False">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
+                    <TextBlock Name="PeopleInvolvedBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" Text="People involved:" FontSize="30" FontWeight="Thin" />
                     <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="325,15,0,15">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Bara (Tester, Proposer, Contributor, Updateserver owner)" FontWeight="Bold" FontSize="15" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- mev (Proposer, Contributor, Color-Sheme-Designer)" FontWeight="Bold" />

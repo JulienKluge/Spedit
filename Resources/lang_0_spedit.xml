@@ -104,6 +104,10 @@
 		<colabb>Sp</colabb> <!--Coloum abbreviation-->
 		<lnabb>Zl</lnabb> <!--Line abbreviation-->
 		<lenabb>Lng</lenabb> <!--Length abbreviation-->
+		<speditcap>ein leichtgewichtiger Sourcepawn Editor</speditcap>
+		<writtenby>geschrieben von: {0}</writtenby>
+		<license>Lizens:</license>
+		<peopleinv>Menschen involviert:</peopleinv>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -210,5 +214,9 @@
 		<colabb>Col</colabb> <!--Coloum abbreviation-->
 		<lnabb>Ln</lnabb> <!--Line abbreviation-->
 		<lenabb>Len</lenabb> <!--Length abbreviation-->
+		<speditcap>a lightweight sourcepawn editor</speditcap>
+		<writtenby>written by: {0}</writtenby>
+		<license>License</license>
+		<peopleinv>People involved</peopleinv>
 	</ru>
 </translations>
