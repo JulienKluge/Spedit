@@ -1,0 +1,189 @@
+<en>
+	<language>english</language>
+	<serverrunning>Server running</serverrunning>
+	<saving>Saving</saving>
+	<saveufiles>Save all unsaved files?</saveufiles>
+	<compileall>Compile All</compileall>
+	<compilecurr>Compile current</compilecurr>
+	<copy>Copy</copy>
+	<ftpup>FTP Upload</ftpup>
+	<startserver>Start Server</startserver>
+	<replace>Replace</replace>
+	<replaceall>Replace All</replaceall>
+	<opennewfile>Open new File</opennewfile>
+	<nofilopened>No Files Openend.</nofilopened>
+	<nofileopenedcap>None of the selected files could be opened.</nofileopenedcap>
+	<savefileas>Save file as</savefileas>
+	<savefollow>Save following files</savefollow>
+	<chdecomp>Select plugin to decompile</chdecomp>
+	<decompiling>Decompiling</decompiling>
+	<editconfig>Edit Configurations</editconfig>
+	<foundinoff>Found in offset {0} with length {1}</foundinoff>
+	<foundnothing>Found Nothing</foundnothing>
+	<replacedoff>Replaced in offset</replacedoff>
+	<replacedocc>Replaced {0} occurences in {1} documents</replacedocc>
+	<occfound>occurences found</occfound>
+	<emptypatt>Empty search pattern</emptypatt>
+	<novalidregex>No valid regex pattern</novalidregex>
+	<failedcheck>Failed to check</failedcheck> <!--in sense of searching for updates-->
+	<errorupdate>Error while checking for updates.</errorupdate>
+	<versuptodate>Version up to date</versuptodate>
+	<versionyour>Your program version {0} is up to date.</versionyour>
+	<details>Details</details>
+	<compiling>Compiling</compiling>
+	<error>Error</error>
+	<spcompnotstarted>The spcomp.exe compiler did not started correctly.</spcompnotstarted>
+	<spcompnotfound>The spcomp.exe compiler could not be found.</spcompnotfound>
+	<copied>Copied</copied>
+	<deleted>Deleted</deleted>
+	<failcopy>Failed to copy</failcopy>
+	<nofilescopy>No files copied</nofilescopy>
+	<uploaded>Uploaded</uploaded>
+	<erroruploadfile>Error while uploading file: {0} to {1}</erroruploadfile>
+	<errorupload>Error while uploading files</errorupload>
+	<done>done</done>
+	<file>File</file>
+	<new>New</new>
+	<open>Open</open>
+	<save>Save</save>
+	<saveall>Save all</saveall>
+	<saveas>Save as</saveas>
+	<close>Close</close>
+	<closeall>Close all</closeall>
+	<build>Build</build>
+	<copyplugin>Copy plugins</copyplugin>
+	<sendrcon>Send RCon Commands</sendrcon>
+	<config>Configuration</config>
+	<edit>Edit</edit>
+	<undo>Undo</undo>
+	<redo>Redo</redo>
+	<cut>Cut</cut>
+	<paste>Paste</paste>
+	<folding>Foldings</folding>
+	<expandall>Expand all</expandall>
+	<collapseall>Collapse all</collapseall>
+	<jumpto>Jump to</jumpto>
+	<togglcomment>Toggle Comments</togglcomment>
+	<selectall>Select All</selectall>
+	<findreplace>Find &amp; Replace</findreplace>
+	<tools>Tools</tools>
+	<options>Options</options>
+	<parsedincdir>Parsed from include directory</parsedincdir>
+	<oldapiweb>Old API webside</oldapiweb>
+	<newapiweb>New API webside</newapiweb>
+	<reformatter>Syntax reformatter</reformatter>
+	<reformatcurr>Reformat current</reformatcurr>
+	<reformatall>Reformat all</reformatall>
+	<decompile>Decompile</decompile>
+	<reportbuggit>Report bug on GitHub</reportbuggit>
+	<checkupdates>Check for updates</checkupdates>
+	<about>About</about>
+	<filename>File Name</filename>
+	<line>Line</line>
+	<type>Type</type>
+	<normalsearch>Normal search</normalsearch>
+	<matchwhowords>Match whole words</matchwhowords>
+	<advancsearch>Advanced search</advancsearch>
+	<regexsearch>Regex search</regexsearch>
+	<currdoc>Current document</currdoc>
+	<alldoc>All open documents</alldoc>
+	<find>Find</find>
+	<count>Count</count>
+	<casesen>Case sensitive</casesen>
+	<multilineregex>Multiline regex</multilineregex>
+	<errorfileloadproc>Error while loading and processing the file.</errorfileloadproc>
+	<notdissmethod>Could not disassemble method {0}: {1}</notdissmethod>
+	<dfilechanged>{0} has changed.</dfilechanged>
+	<filechanged>File changed</filechanged>
+	<filetryreload>Try reloading file?</filetryreload>
+	<dsaveerror>An error occured while saving.</dsaveerror>
+	<saveerror>Save error</saveerror>
+	<savingfile>Saving file</savingfile>
+	<ptabb>pt</ptabb> <!--point abbreviation-->
+	<colabb>Col</colabb> <!--Coloum abbreviation-->
+	<lnabb>Ln</lnabb> <!--Line abbreviation-->
+	<lenabb>Len</lenabb> <!--Length abbreviation-->
+	<speditcap>a lightweight sourcepawn editor</speditcap>
+	<writtenby>written by: {0}</writtenby>
+	<license>License</license>
+	<peopleinv>People involved</peopleinv>
+	<preview>Preview</preview>
+	<newfile>New file</newfile>
+	<configwrongpars>The config was not able to parse a sourcepawn definiton.</configwrongpars>
+	<noname>no name</noname>
+	<poslen>pos: {0} - len: {1}</poslen>
+	<inheritedfr>inherited from</inheritedfr>
+	<methodfrom>Method from</methodfrom> <!--do not translate 'Method'-->
+	<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'-->
+	<search>search</search>
+	<delete>Delete</delete>
+	<name>Name</name>
+	<scriptdir>Scripting directories</scriptdir>
+	<delimitedwi>Delimit with</delimitedwi>
+	<copydir>Copy directory</copydir>
+	<serverexe>Server executable</serverexe>
+	<serverstartargs>Server-start arguments</serverstartargs>
+	<prebuildcom>Pre-Build commandline</prebuildcom>
+	<postbuildcom>Post-Build commandline</postbuildcom>
+	<optimizelvl>Optimization level</optimizelvl>
+	<verboselvl>Verbose level</verboselvl>
+	<autocopy>Auto copy after compile</autocopy>
+	<deleteoldsmx>Delete old .smx after copy</deleteoldsmx>
+	<ftphost>FTP host</ftphost>
+	<ftpuser>FTP user</ftpuser>
+	<ftppw>FTP password</ftppw>
+	<ftpdir>FTP directory</ftpdir>
+	<comeditordir>Directory of the SPEdit binary</comeditordir>
+	<comscriptdir>Directory of the Compiling script</comscriptdir>
+	<comcopydir>Directory where the smx should be copied</comcopydir>
+	<comscriptfile>Full Directory and Name of the script</comscriptfile>
+	<comscriptname>File Name of the script</comscriptname>
+	<compluginfile>Full Directory and Name of the compiled script</compluginfile>
+	<compluginname>File Name of the compiled script</compluginname>
+	<rconengine>RCon Server Engine</rconengine>
+	<rconip>RCon Server IP</rconip>
+	<rconport>RCon Server port</rconport>
+	<rconpw>RCon Server password</rconpw>
+	<rconcom>RCon Server commands</rconcom>
+	<compluginsreload>Reloads all compiled plugins</compluginsreload>
+	<compluginsloas>Loads all compiled plugins</compluginsloas>
+	<compluginsunload>Unloads all compiled plugins</compluginsunload>
+	<newconfig>New config</newconfig>
+	<cannotdelconf>Cannot delete config</cannotdelconf>
+	<ycannotdelconf>You cannot delete this config!</ycannotdelconf>
+	<selectexe>Select Executable</selectexe>
+	<cmdlinecom>Commandline variables</cmdlinecom>
+	<rconcmdlinecom>Rcon commandline variables</rconcmdlinecom>
+	<resetoptions>Reset options</resetoptions>
+	<resetoptques>Are you sure, you want to reset the options?</resetoptques>
+	<restarteditor>Restart Editor</restarteditor>
+	<yrestarteditor>You have to restart the editor for the changes to have effect.</yrestarteditor>
+	<restartedifulleff>Restart editor to take full effect...</restartedifulleff>
+	<restartedieff>Restart editor to take effect...</restartedieff>
+	<program>Program</program>
+	<hardwareacc>Use hardware acceleration (if available)</hardwareacc>
+	<uianim>UI animations</uianim>
+	<openinc>Auto open includes</openinc>
+	<openincrec>Open Includes Recursivly</openincrec>
+	<autoupdate>Search automatically for updates</autoupdate>
+	<showtoolbar>Show toolbar</showtoolbar>
+	<dynamicisac>Dynamic Autocompletition/Intellisense</dynamicisac>
+	<darktheme>Dark theme</darktheme>
+	<themecolor>Theme color</themecolor>
+	<languagestr>Language</languagestr>
+	<editor>Editor</editor>
+	<fontsize>Font Size</fontsize>
+	<scrollspeed>Scroll Speed</scrollspeed>
+	<wordwrap>Word wrap</wordwrap>
+	<aggindentation>Agressive Indentation</aggindentation>
+	<reformataftersem>Reformatting line after semicolon</reformataftersem>
+	<tabstospace>Replace tabs with spaces</tabstospace>
+	<autoclosebrack>Auto close brackets</autoclosebrack>
+	<autoclosestrchr>Auto close Strings, Chars</autoclosestrchr>
+	<showsapaces>Show spaces</showsapaces>
+	<showtabs>Show tabs</showtabs>
+	<indentationsize>Indentation Size</indentationsize>
+	<fontfamily>Font</fontfamily>
+	<syntaxhigh>Syntaxhighlighting</syntaxhigh>
+	<highdeprecat>Highlight deprecated (&lt;1.7) syntax</highdeprecat>
+</en>
