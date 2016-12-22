@@ -32,6 +32,7 @@ namespace Spedit.UI.Windows
             if (result == MessageDialogResult.Affirmative)
             {
                 Program.OptionsObject = new OptionsControl();
+				Program.OptionsObject.ReCreateCryptoKey();
                 Program.MainWindow.OptionMenuEntry.IsEnabled = false;
                 await this.ShowMessageAsync("Restart Editor", "You have to restart the editor for the changes to have effect.", MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                 this.Close();
