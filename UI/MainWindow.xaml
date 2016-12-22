@@ -100,23 +100,23 @@
                 <MenuItem Name="ConfigMenu" Header="Configuration">
                 </MenuItem>
 
-                <MenuItem Header="Tools">
+                <MenuItem Name="MenuI_Tools" Header="Tools">
                     <MenuItem Name="OptionMenuEntry" Header="Options" Click="Menu_OpenOptions" />
                     <Separator />
                     <MenuItem Header="Sourcepawn API">
-                        <MenuItem Header="Parsed from Include Directory" Click="Menu_OpenSPDef" />
-                        <MenuItem Header="Old Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/api/" />
-                        <MenuItem Header="New Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/new-api/" />
+                        <MenuItem Name="MenuI_ParsedIncDir" Header="Parsed from Include Directory" Click="Menu_OpenSPDef" />
+                        <MenuItem Name="MenuI_OldApiWeb" Header="Old Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/api/" />
+                        <MenuItem Name="MenuI_NewApiWeb" Header="New Api Website" Click="Menu_OpenWebsiteFromTag" Tag="https://sm.alliedmods.net/new-api/" />
                     </MenuItem>
-                    <MenuItem Header="Syntax Reformatter">
-                        <MenuItem Header="Reformat Current" InputGestureText="Ctrl+R" Click="Menu_ReFormatCurrent" />
-                        <MenuItem Header="Reformat All" Click="Menu_ReFormatAll" />
+                    <MenuItem Name="MenuI_Reformatter" Header="Syntax Reformatter">
+                        <MenuItem Name="MenuI_ReformattCurr" Header="Reformat Current" InputGestureText="Ctrl+R" Click="Menu_ReFormatCurrent" />
+                        <MenuItem Name="MenuI_ReformattAll" Header="Reformat All" Click="Menu_ReFormatAll" />
                     </MenuItem>
-                    <MenuItem Header="Decompile .smx (Lysis)" Click="Menu_DecompileLysis" />
+                    <MenuItem Name="MenuI_Decompile" Header="Decompile .smx (Lysis)" Click="Menu_DecompileLysis" />
                     <Separator />
-                    <MenuItem Header="Report a Bug on GitHub" Click="ReportBug_Click" />
+                    <MenuItem Name="MenuI_ReportBugGit" Header="Report a Bug on GitHub" Click="ReportBug_Click" />
                     <MenuItem Name="UpdateCheckItem" Header="Check for Updates" Click="UpdateCheck_Click" />
-                    <MenuItem Header="About" Click="Menu_About" />
+                    <MenuItem Name="MenuI_About" Header="About" Click="Menu_About" />
                 </MenuItem>
             </Menu>
         </controls:WindowCommands>

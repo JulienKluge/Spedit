@@ -83,6 +83,18 @@ namespace Spedit.Interop
 		public string TogglComment;
 		public string SelectAll;
 		public string FindReplace;
+		public string Tools;
+		public string Options;
+		public string ParsedIncDir;
+		public string OldAPIWeb;
+		public string NewAPIWeb;
+		public string Reformatter;
+		public string ReformatCurr;
+		public string ReformatAll;
+		public string Decompile;
+		public string ReportBugGit;
+		public string CheckUpdates;
+		public string About;
 
 		public void LoadLanguage(string lang)
 		{
@@ -258,6 +270,30 @@ namespace Spedit.Interop
 								SelectAll = nv;
 							else if (nn == "findreplace")
 								FindReplace = nv;
+							else if (nn == "tools")
+								Tools = nv;
+							else if (nn == "options")
+								Options = nv;
+							else if (nn == "parsedincdir")
+								ParsedIncDir = nv;
+							else if (nn == "oldapiweb")
+								OldAPIWeb = nv;
+							else if (nn == "newapiweb")
+								NewAPIWeb = nv;
+							else if (nn == "reformatter")
+								Reformatter = nv;
+							else if (nn == "reformatcurr")
+								ReformatCurr = nv;
+							else if (nn == "reformatall")
+								ReformatAll = nv;
+							else if (nn == "decompile")
+								Decompile = nv;
+							else if (nn == "reportbuggit")
+								ReportBugGit = nv;
+							else if (nn == "checkupdates")
+								CheckUpdates = nv;
+							else if (nn == "about")
+								About = nv;
 						}
 					}
 				}
@@ -342,6 +378,18 @@ namespace Spedit.Interop
 			TogglComment = "Toggle comment";
 			SelectAll = "Select all";
 			FindReplace = "Find & Replace";
+			Tools = "Tools";
+			Options = "Options";
+			ParsedIncDir = "Parsed from include directory";
+			OldAPIWeb = "Old API webside";
+			NewAPIWeb = "New API webside";
+			Reformatter = "Syntax reformatter";
+			ReformatCurr = "Reformat current";
+			ReformatAll = "Reformat all";
+			Decompile = "Decompile";
+			ReportBugGit = "Report bug on GitHub";
+			CheckUpdates = "Check for updates";
+			About = "About";
 		}
 	}
 }

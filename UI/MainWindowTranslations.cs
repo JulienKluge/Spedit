@@ -60,6 +60,19 @@ namespace Spedit.UI
 			MenuI_SendRCon.Header = Program.Translations.SendRCon;
 
 			ConfigMenu.Header = Program.Translations.Config;
+
+			MenuI_Tools.Header = Program.Translations.Tools;
+			OptionMenuEntry.Header = Program.Translations.Options;
+			MenuI_ParsedIncDir.Header = Program.Translations.ParsedIncDir;
+			MenuI_OldApiWeb.Header = Program.Translations.OldAPIWeb;
+			MenuI_NewApiWeb.Header = Program.Translations.NewAPIWeb;
+			MenuI_Reformatter.Header = Program.Translations.Reformatter;
+			MenuI_ReformattCurr.Header = Program.Translations.ReformatCurr;
+			MenuI_ReformattAll.Header = Program.Translations.ReformatAll;
+			MenuI_Decompile.Header = $"{Program.Translations.Decompile}  .smx (Lysis)";
+			MenuI_ReportBugGit.Header = Program.Translations.ReportBugGit;
+			UpdateCheckItem.Header = Program.Translations.CheckUpdates;
+			MenuI_About.Header = Program.Translations.About;
 		}
 	}
 }

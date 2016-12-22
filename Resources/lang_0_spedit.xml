@@ -63,10 +63,22 @@
 		<folding>Code-Faltung</folding>
 		<expandall>Alle aufdecken</expandall>
 		<collapseall>Alle verstecken</collapseall>
-		<jumpto></jumpto>
-		<togglcomment></togglcomment>
-		<selectall></selectall>
-		<findreplace></findreplace>
+		<jumpto>Springen zu</jumpto>
+		<togglcomment>Kommentar umschalten</togglcomment>
+		<selectall>Alles markieren</selectall>
+		<findreplace>Finden &amp; Ersetzen</findreplace>
+		<tools>Werkzeuge</tools>
+		<options>Optionen</options>
+		<parsedincdir>Vom include-Pfad erkannt</parsedincdir>
+		<oldapiweb>Alte API Webseite</oldapiweb>
+		<newapiweb>Neue API Webseite</newapiweb>
+		<reformatter>Syntax neu formatieren</reformatter>
+		<reformatcurr>Formatieren</reformatcurr>
+		<reformatall>Alle formatieren</reformatall>
+		<decompile>Dekompilieren</decompile>
+		<reportbuggit>Ein Bug auf GitHub melden</reportbuggit>
+		<checkupdates>Nach Updates suchen</checkupdates>
+		<about>Über</about>
 	</de>
 	<ru>
 		<language>русский</language>
@@ -130,11 +142,23 @@
 		<cut>Cut</cut>
 		<paste>Paste</paste>
 		<folding>Foldings</folding>
-		<expandall></expandall>
-		<collapseall></collapseall>
-		<jumpto></jumpto>
-		<togglcomment></togglcomment>
-		<selectall></selectall>
-		<findreplace></findreplace>
+		<expandall>Expand all</expandall>
+		<collapseall>Collapse all</collapseall>
+		<jumpto>Jump to</jumpto>
+		<togglcomment>Toggle Comments</togglcomment>
+		<selectall>Select All</selectall>
+		<findreplace>Find &amp; Replace</findreplace>
+		<tools>Tools</tools>
+		<options>Options</options>
+		<parsedincdir>Parsed from include directory</parsedincdir>
+		<oldapiweb>Old API webside</oldapiweb>
+		<newapiweb>New API webside</newapiweb>
+		<reformatter>Syntax reformatter</reformatter>
+		<reformatcurr>Reformat current</reformatcurr>
+		<reformatall>Reformat all</reformatall>
+		<decompile>Decompile</decompile>
+		<reportbuggit>Report bug on GitHub</reportbuggit>
+		<checkupdates>Check for updates</checkupdates>
+		<about>About</about>
 	</ru>
 </translations>
