@@ -189,7 +189,7 @@ namespace Spedit.Interop
 								ServerRunning = nv;
 							else if (nn == "saving")
 								Saving = nv;
-							else if (nn == "savingufiles")
+							else if (nn == "saveufiles")
 								SavingUFiles = nv;
 							else if (nn == "compileall")
 								CompileAll = nv;
@@ -207,7 +207,7 @@ namespace Spedit.Interop
 								ReplaceAll = nv;
 							else if (nn == "opennewfile")
 								OpenNewFile = nv;
-							else if (nn == "nofileopened")
+							else if (nn == "nofilopened")
 								NoFileOpened = nv;
 							else if (nn == "nofileopenedcap")
 								NoFileOpenedCap = nv;
@@ -229,6 +229,8 @@ namespace Spedit.Interop
 								ReplacedOff = nv;
 							else if (nn == "replacedocc")
 								ReplacedOcc = nv;
+							else if (nn == "occfound")
+								OccFound = nv;
 							else if (nn == "emptypatt")
 								EmptyPatt = nv;
 							else if (nn == "novalidregex")
@@ -556,9 +558,7 @@ namespace Spedit.Interop
 							else if (nn == "highdeprecat")
 								HighDeprecat = nv;
 							else
-							{
 								throw new Exception($"{nn} is not a known language-phrase");
-							}
 						}
 					}
 				}

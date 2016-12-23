@@ -85,8 +85,8 @@
                                 <Binding Source="{StaticResource myFonts}" />
                             </ComboBox.ItemsSource>
                         </ComboBox>
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,230,0,0">
-                            <TextBlock Name="SyntaxHighBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
+                        <TextBlock Name="SyntaxHighBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,220,0,0" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,235,0,0">
 
                             <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
 
