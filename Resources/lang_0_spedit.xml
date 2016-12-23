@@ -26,7 +26,7 @@
 		<occfound>Vorkommen gefunden</occfound>
 		<emptypatt>Leerer Suchausdruck</emptypatt>
 		<novalidregex>Kein valider Regex-Ausdruck</novalidregex>
-		<failedcheck>Fehler bei der Suche</failedcheck> <!--in sense of searching for updates-->
+		<failedcheck>Fehler bei der Suche</failedcheck>
 		<errorupdate>Fehler bei der Suche nach Updates.</errorupdate>
 		<versuptodate>Aktuelle Version</versuptodate>
 		<versionyour>Die Programversion {0} ist aktuell.</versionyour>
@@ -100,10 +100,10 @@
 		<dsaveerror>Es ist ein Fehler beim speichern aufgetreten.</dsaveerror>
 		<saveerror>Speicherfehlerr</saveerror>
 		<savingfile>Speichere Datei</savingfile>
-		<ptabb>pt</ptabb> <!--point abbreviation-->
-		<colabb>Sp</colabb> <!--Coloum abbreviation-->
-		<lnabb>Zl</lnabb> <!--Line abbreviation-->
-		<lenabb>Lng</lenabb> <!--Length abbreviation-->
+		<ptabb>pt</ptabb>
+		<colabb>Sp</colabb>
+		<lnabb>Zl</lnabb>
+		<lenabb>Lng</lenabb>
 		<speditcap>ein leichtgewichtiger Sourcepawn Editor</speditcap>
 		<writtenby>geschrieben von: {0}</writtenby>
 		<license>Lizens:</license>
@@ -114,8 +114,8 @@
 		<noname>kein Name</noname>
 		<poslen>pos: {0} - lng: {1}</poslen>
 		<inheritedfr>geerbt von</inheritedfr>
-		<methodfrom>Method von</methodfrom> <!--do not translate 'Method'-->
-		<propertyfrom>Property von</propertyfrom> <!--do not translate 'property'-->
+		<methodfrom>Method von</methodfrom>
+		<propertyfrom>Property von</propertyfrom>
 		<search>Suche</search>
 		<delete>Löschen</delete>
 		<name>Name</name>
@@ -188,4 +188,193 @@
 		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
 		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
 	</de>
+	<fr>
+		<language>Français</language>
+		<serverrunning>Serveur lancé</serverrunning>
+		<saving>Sauvgarde</saving>
+		<saveufiles>Sauvgarder tout les fichiers non-sauvgardés?</saveufiles>
+		<compileall>Tout compiler</compileall>
+		<compilecurr>Compiler</compilecurr>
+		<copy>Copier</copy>
+		<ftpup>Envoie FTP</ftpup>
+		<startserver>Lancer le serveur</startserver>
+		<replace>Remplacer</replace>
+		<replaceall>Tout remplacer</replaceall>
+		<opennewfile>Ouvrire un nouveau fichier</opennewfile>
+		<nofilopened>Aucun fichier ouvert.</nofilopened>
+		<nofileopenedcap>Aucun des fichiers sélectionés peut-être ouvert.</nofileopenedcap>
+		<savefileas>Sauvgarder sous</savefileas>
+		<savefollow>Sauvgarder les fichiers suivant</savefollow>
+		<chdecomp>Selectionner le plugin à décompiler</chdecomp>
+		<decompiling>Décompilation</decompiling>
+		<editconfig>Modifier la configuration</editconfig>
+		<foundinoff>Trouvé dans l'offset {0} avec un longueur de {1}</foundinoff>
+		<foundnothing>Rien trouvé</foundnothing>
+		<replacedoff>Remplacer dans l'offset</replacedoff>
+		<replacedocc>{0} occurences remplacées dans {1} documents</replacedocc>
+		<occfound>occurences trouvée</occfound>
+		<emptypatt>Terme de recherche vide</emptypatt>
+		<novalidregex>Terme REGEX invalide</novalidregex>
+		<failedcheck>Aucune mise à jour trouvée</failedcheck>
+		<errorupdate>Echec lors de la recherche de mise à jour.</errorupdate>
+		<versuptodate>Version à jour</versuptodate>
+		<versionyour>Votre version du programme ({0}) est à jour.</versionyour>
+		<details>Details</details>
+		<compiling>Compilation</compiling>
+		<error>Erreur</error>
+		<spcompnotstarted>spcomp.exe n'as pas démarrer correctement.</spcompnotstarted>
+		<spcompnotfound>spcomp.exe n'as pas été trouvé.</spcompnotfound>
+		<copied>Copier</copied>
+		<deleted>Supprimer</deleted>
+		<failcopy>Echec lors de la copie</failcopy>
+		<nofilescopy>Aucun fichier copier</nofilescopy>
+		<uploaded>Upload effectué</uploaded>
+		<erroruploadfile>Erreur de l'upload avec le ficher : {0} à {1}</erroruploadfile>
+		<errorupload>Erreur lors de l'upload de fichiers</errorupload>
+		<done>Fait</done>
+		<file>Fichier</file>
+		<new>Nouveau</new>
+		<open>Ouvrir</open>
+		<save>Sauvgarder</save>
+		<saveall>Tout sauvgarder</saveall>
+		<saveas>Sauvgarder sous</saveas>
+		<close>Fermer</close>
+		<closeall>Tout fermer</closeall>
+		<build>Build</build>
+		<copyplugin>Copier les plugins</copyplugin>
+		<sendrcon>Envoie de commandes RCon</sendrcon>
+		<config>Configuration</config>
+		<edit>Modifier</edit>
+		<undo>Annuler</undo>
+		<redo>Refaire</redo>
+		<cut>Couper</cut>
+		<paste>Coller</paste>
+		<folding>Plier</folding>
+		<expandall>Tout déployer</expandall>
+		<collapseall>Tout refermer</collapseall>
+		<jumpto>Effectuer un saut</jumpto>
+		<togglcomment>Commenter</togglcomment>
+		<selectall>Tout selectionner</selectall>
+		<findreplace>Trouvé &amp; remplacer</findreplace>
+		<tools>Outils</tools>
+		<options>Options</options>
+		<parsedincdir>Analysé depuis le dossier 'include'</parsedincdir>
+		<oldapiweb>Ancienne API</oldapiweb>
+		<newapiweb>Nouvelle API</newapiweb>
+		<reformatter>Reformatation de syntax</reformatter>
+		<reformatcurr>Reformater le document</reformatcurr>
+		<reformatall>Tout reformater</reformatall>
+		<decompile>Decompiler</decompile>
+		<reportbuggit>Reporter un bug sur GitHub</reportbuggit>
+		<checkupdates>Vérifier les mises à jour</checkupdates>
+		<about>À propos</about>
+		<filename>Nom de fichier</filename>
+		<line>Ligne</line>
+		<type>Type</type>
+		<normalsearch>Recherche normal</normalsearch>
+		<matchwhowords>Mot entier</matchwhowords>
+		<advancsearch>Recherche avancé</advancsearch>
+		<regexsearch>Recherche REGEX</regexsearch>
+		<currdoc>Document current</currdoc>
+		<alldoc>Tout les documents ouverts</alldoc>
+		<find>Trouver</find>
+		<count>Compter</count>
+		<casesen>Sensible à la case</casesen>
+		<multilineregex>Multiligne REGEX</multilineregex>
+		<errorfileloadproc>Erreur lors du chargement du fichier.</errorfileloadproc>
+		<notdissmethod>Impossible de désassembler la méthode {0}: {1}</notdissmethod>
+		<dfilechanged>{0} as été modifié.</dfilechanged>
+		<filechanged>Fichier modifié</filechanged>
+		<filetryreload>Tenter de recharger le fichier?</filetryreload>
+		<dsaveerror>Une erreur est survenue pendant la sauvgarde.</dsaveerror>
+		<saveerror>Erreur de sauvgarde</saveerror>
+		<savingfile>Enregistrement du fichier</savingfile>
+		<ptabb>pt</ptabb>
+		<colabb>Col</colabb>
+		<lnabb>Ln</lnabb>
+		<lenabb>Long.</lenabb>
+		<speditcap>un IDE sourcepawn portable</speditcap>
+		<writtenby>écrit par : {0}</writtenby>
+		<license>License</license>
+		<peopleinv>Personne impliquées</peopleinv>
+		<preview>Aperçu</preview>
+		<newfile>Nouveau fichier</newfile>
+		<configwrongpars>La configuration n'as pas été capable d'analyser la définition de sourcepawn.</configwrongpars>
+		<noname>aucun nom</noname>
+		<poslen>pos: {0} - long: {1}</poslen>
+		<inheritedfr>hériter de </inheritedfr>
+		<methodfrom>Method de</methodfrom>
+		<propertyfrom>Property de</propertyfrom>
+		<search>Rechercher</search>
+		<delete>Supprimer</delete>
+		<name>Nom</name>
+		<scriptdir>Dossier de script</scriptdir>
+		<delimitedwi>Délimiter avec</delimitedwi>
+		<copydir>Copier le dossier</copydir>
+		<serverexe>Executable du serveur</serverexe>
+		<serverstartargs>Paramètres de démarage</serverstartargs>
+		<prebuildcom>Paramètres de pre-build</prebuildcom>
+		<postbuildcom>Paramètres de post-build</postbuildcom>
+		<optimizelvl>Niveau d'optimisation</optimizelvl>
+		<verboselvl>Niveau verbose</verboselvl>
+		<autocopy>Copier automatiquement apres la compilation</autocopy>
+		<deleteoldsmx>Supprimer le vieux .smx après la copie</deleteoldsmx>
+		<ftphost>Addresse de l'hôte FTP</ftphost>
+		<ftpuser>Utilisateur FTP</ftpuser>
+		<ftppw>Mot de passe FTP</ftppw>
+		<ftpdir>Racine FTP</ftpdir>
+		<comeditordir>Dossier de l'executable de SPEdit</comeditordir>
+		<comscriptdir>Dossier du compilateur</comscriptdir>
+		<comcopydir>Dossier dans le quel le fichier SMX devrai être copier</comcopydir>
+		<comscriptfile>Nom complet du dossier et du nom du script</comscriptfile>
+		<comscriptname>Nom du fichier du script</comscriptname>
+		<compluginfile>Nom complet du dossier et du nom du script compilé</compluginfile>
+		<compluginname>Nom du fichier du script compilé</compluginname>
+		<rconengine>Engine du serveur RCon</rconengine>
+		<rconip>IP du serveur RCon</rconip>
+		<rconport>Port du serveur RCon</rconport>
+		<rconpw>Mot de passe du serveur RCon</rconpw>
+		<rconcom>Command RCon</rconcom>
+		<compluginsreload>Recharger tous les plugins compilés</compluginsreload>
+		<compluginsloas>Charger tous les plugins compilés</compluginsloas>
+		<compluginsunload>Décharger tous les plugins compilés</compluginsunload>
+		<newconfig>Nouvelle configuration</newconfig>
+		<cannotdelconf>Impossible de supprimer la configuration</cannotdelconf>
+		<ycannotdelconf>Vous ne pouvez pas supprimer cette configuration!</ycannotdelconf>
+		<selectexe>Sélectionner l'executable</selectexe>
+		<cmdlinecom>Variable de ligne de commande</cmdlinecom>
+		<rconcmdlinecom>Variable de ligne de commande Rcon</rconcmdlinecom>
+		<resetoptions>Options par défaut</resetoptions>
+		<resetoptques>Êtes vous sûre de vouloir retourner au valeur par défaut?</resetoptques>
+		<restarteditor>Redémarrer l'IDE</restarteditor>
+		<yrestarteditor>Vous devez redémarrer l'IDE pour appliquer les changement.</yrestarteditor>
+		<restartedifulleff>Redémarrer l'éditeur pour que les changements prennent pleinement effet...</restartedifulleff>
+		<restartedieff>Redémarrer l'éditeur pour que les changements prennent effet...</restartedieff>
+		<program>Programme</program>
+		<hardwareacc>Utilisé l'accélération matériel (si disponible)</hardwareacc>
+		<uianim>Animations GUI</uianim>
+		<openinc>Ouvrire automatiquement les includes</openinc>
+		<openincrec>Ouvrire les includes récursivement</openincrec>
+		<autoupdate>Rechercher automatiquement les mises à jour</autoupdate>
+		<showtoolbar>Afficher la toolbar</showtoolbar>
+		<dynamicisac>Autocompletition/Intellisense dynamique</dynamicisac>
+		<darktheme>Theme sombre</darktheme>
+		<themecolor>Couleur de thème</themecolor>
+		<languagestr>Langue</languagestr>
+		<editor>Editeur</editor>
+		<fontsize>Taille de la police</fontsize>
+		<scrollspeed>Vitesse de scroll</scrollspeed>
+		<wordwrap>Encapsulation des mots</wordwrap>
+		<aggindentation>Indentation agressive</aggindentation>
+		<reformataftersem>Reformatter la ligne apres semicolon</reformataftersem>
+		<tabstospace>Remplacer les tabulations par des espaces</tabstospace>
+		<autoclosebrack>Fermer automtiquement les accolades</autoclosebrack>
+		<autoclosestrchr>Fermer automatique les Strings, Chars</autoclosestrchr>
+		<showsapaces>Afficher les espaces</showsapaces>
+		<showtabs>Afficher les tabulations</showtabs>
+		<indentationsize>Taille de l'indentation</indentationsize>
+		<fontfamily>Police</fontfamily>
+		<syntaxhigh>Mise en évidence de la syntax</syntaxhigh>
+		<highdeprecat>Mise en évidence de la syntax (&lt;1.7) obsolète</highdeprecat>
+	</fr>
 </translations>
