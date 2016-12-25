@@ -63,17 +63,18 @@ namespace Spedit.UI
                     case Key.F8: { FTPUpload_Plugins(); e.Handled = true; break; } //ftp upload
                     case Key.F9: { Server_Start(); e.Handled = true; break; }
                     case Key.Escape:
-                        {
-                            if (CompileOutputRow.Height.Value > 8.0)
+						{
+							if (InCompiling)
+							{
+								InCompiling = false;
+								e.Handled = true;
+							}
+							else if (CompileOutputRow.Height.Value > 8.0)
                             {
                                 CompileOutputRow.Height = new GridLength(8.0);
-								if (InCompiling)
-								{
-									InCompiling = false;
-								}
                                 e.Handled = true;
-                            }
-                            break;
+							}
+							break;
                         }
                 }
             }
