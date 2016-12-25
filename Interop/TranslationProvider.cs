@@ -180,6 +180,10 @@ namespace Spedit.Interop
 					{
 						foreach (XmlNode node in rootLangNode.ChildNodes)
 						{
+							if (node.NodeType == XmlNodeType.Comment)
+							{
+								continue;
+							}
 							string nn = node.Name.ToLowerInvariant();
 							string nv = node.InnerText;
 							//and now: brace yourself and tuckle your seatbells:
