@@ -110,6 +110,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Editor_ShowTabs = false;
 					Editor_IndentationSize = 4;
 					Language = "";
+					this.ReCreateCryptoKey();
+					Program.MakeRCCKAlert();
 				}
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars

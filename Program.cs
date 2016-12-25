@@ -23,6 +23,8 @@ namespace Spedit
 
         public static UpdateInfo UpdateStatus;
 
+		private static bool RCCKMade = false;
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -47,10 +49,8 @@ namespace Spedit
                         {
                             if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
                             {
-                                var opt = OptionsObject;
-                                OptionsObject.ReCreateCryptoKey();
-                                MessageBox.Show("All FTP passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
-                                    "Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
+								OptionsObject.ReCreateCryptoKey();
+								MakeRCCKAlert();
                             }
                             else if (args[i].ToLowerInvariant() == "-safe")
                             {
@@ -153,6 +153,17 @@ namespace Spedit
                 }
             }
         }
+
+		public static void MakeRCCKAlert()
+		{
+			if (RCCKMade)
+			{
+				return;
+			}
+			RCCKMade = true;
+			MessageBox.Show("All FTP/RCon passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
+				"Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
+		}
 
 		private static void App_Startup(object sender, StartupEventArgs e)
 		{
