@@ -67,6 +67,10 @@ namespace Spedit.UI
                             if (CompileOutputRow.Height.Value > 8.0)
                             {
                                 CompileOutputRow.Height = new GridLength(8.0);
+								if (InCompiling)
+								{
+									InCompiling = false;
+								}
                                 e.Handled = true;
                             }
                             break;

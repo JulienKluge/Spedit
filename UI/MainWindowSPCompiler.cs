@@ -31,6 +31,7 @@ namespace Spedit.UI
             var c = Program.Configs[Program.SelectedConfig];
             FileInfo spCompInfo = null;
             bool SpCompFound = false;
+			bool PressedEscape = false;
             foreach (string dir in c.SMDirectories)
             {
                 spCompInfo = new FileInfo(Path.Combine(dir, "spcomp.exe"));
@@ -90,6 +91,11 @@ namespace Spedit.UI
                     string outFile = null;
                     for (int i = 0; i < compileCount; ++i)
                     {
+						if (!InCompiling) //pressed escape
+						{
+							PressedEscape = true;
+							break;
+						}
                         string file = filesToCompile[i];
                         progressTask.SetMessage(file);
                         MainWindow.ProcessUITasks();
@@ -140,7 +146,6 @@ namespace Spedit.UI
                                 {
                                     await progressTask.CloseAsync();
                                     await this.ShowMessageAsync(Program.Translations.SPCompNotStarted, Program.Translations.Error, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
-									InCompiling = false;
 									return;
                                 }
                                 if (File.Exists(errorFile))
@@ -178,18 +183,20 @@ namespace Spedit.UI
                             }
                         }
                     }
-                    progressTask.SetProgress(1.0);
-                    CompileOutput.Text = stringOutput.ToString();
-                    if (c.AutoCopy)
-                    {
-                        Copy_Plugins(true);
-                    }
-                    if (CompileOutputRow.Height.Value < 11.0)
-                    {
-                        CompileOutputRow.Height = new GridLength(200.0);
-                    }
+					if (!PressedEscape)
+					{
+						progressTask.SetProgress(1.0);
+						CompileOutput.Text = stringOutput.ToString();
+						if (c.AutoCopy)
+						{
+							Copy_Plugins(true);
+						}
+						if (CompileOutputRow.Height.Value < 11.0)
+						{
+							CompileOutputRow.Height = new GridLength(200.0);
+						}
+					}
                     await progressTask.CloseAsync();
-
                 }
             }
             else
