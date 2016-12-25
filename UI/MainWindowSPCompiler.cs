@@ -47,8 +47,9 @@ namespace Spedit.UI
                 {
                     EditorElement[] editors = GetAllEditorElements();
                     if (editors == null)
-                    {
-                        return;
+					{
+						InCompiling = false;
+						return;
                     }
                     for (int i = 0; i < editors.Length; ++i)
                     {
@@ -62,8 +63,9 @@ namespace Spedit.UI
                 {
                     EditorElement ee = GetCurrentEditorElement();
                     if (ee == null)
-                    {
-                        return;
+					{
+						InCompiling = false;
+						return;
                     }
                     /*
                     ** I've struggled a bit here. Should i check, if the CompileBox is checked 
@@ -138,7 +140,8 @@ namespace Spedit.UI
                                 {
                                     await progressTask.CloseAsync();
                                     await this.ShowMessageAsync(Program.Translations.SPCompNotStarted, Program.Translations.Error, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
-                                    return;
+									InCompiling = false;
+									return;
                                 }
                                 if (File.Exists(errorFile))
                                 {
