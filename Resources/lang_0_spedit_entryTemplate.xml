@@ -11,7 +11,7 @@
 	<replace>Replace</replace>
 	<replaceall>Replace All</replaceall>
 	<opennewfile>Open new File</opennewfile>
-	<nofilopened>No Files Openend.</nofilopened>
+	<nofilopened>No Files Opened.</nofilopened>
 	<nofileopenedcap>None of the selected files could be opened.</nofileopenedcap>
 	<savefileas>Save file as</savefileas>
 	<savefollow>Save following files</savefollow>
