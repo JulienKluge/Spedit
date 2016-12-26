@@ -28,6 +28,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 		public string Program_AccentColor = "Red";
 		public string Program_Theme = "BaseDark";
 
+		public string Program_ObjectBrowserDirectory = string.Empty;
+
         public bool UI_Animations = true;
         public bool UI_ShowToolBar = false;
 
@@ -111,6 +113,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Editor_ShowTabs = false;
 					Editor_IndentationSize = 4;
 					Language = "";
+					Program_ObjectBrowserDirectory = string.Empty;
 					this.ReCreateCryptoKey();
 					Program.MakeRCCKAlert();
 				}

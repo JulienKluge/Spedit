@@ -207,19 +207,44 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <dock:DockingManager Grid.Row="0" x:Name="DockingManager" Margin="0,0,0,0" AllowMixedOrientation="True" Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}"
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="1*" MinWidth="3" />
+                </Grid.ColumnDefinitions>
+                <dock:DockingManager Grid.Column="0" x:Name="DockingManager" Margin="0,0,5,0" AllowMixedOrientation="True" Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}"
                                  ActiveContentChanged="DockingManager_ActiveContentChanged" DocumentClosing="DockingManager_DocumentClosing">
-                <dock:DockingManager.Theme>
-                    <stheme:SMetroTheme />
-                </dock:DockingManager.Theme>
-                <dock:LayoutRoot>
-                    <dock:LayoutPanel>
-                        <dock:LayoutDocumentPaneGroup x:Name="DockingPaneGroup">
-                            <dock:LayoutDocumentPane x:Name="DockingPane" />
-                        </dock:LayoutDocumentPaneGroup>
-                    </dock:LayoutPanel>
-                </dock:LayoutRoot>
-            </dock:DockingManager>
+                    <dock:DockingManager.Theme>
+                        <stheme:SMetroTheme />
+                    </dock:DockingManager.Theme>
+                    <dock:LayoutRoot>
+                        <dock:LayoutPanel>
+                            <dock:LayoutDocumentPaneGroup x:Name="DockingPaneGroup">
+                                <dock:LayoutDocumentPane x:Name="DockingPane" />
+                            </dock:LayoutDocumentPaneGroup>
+                        </dock:LayoutPanel>
+                    </dock:LayoutRoot>
+                </dock:DockingManager>
+                <GridSplitter Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="5" Background="{DynamicResource GrayBrush5}" />
+                <TreeView Grid.Column="1" Name="ObjectBrowser" TreeViewItem.Expanded="TreeViewOBItem_Expanded" Margin="0,28,0,20" />
+                <TextBlock Grid.Column="1" Name="ObjectBrowserDirBlock" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,2,0,2" IsHitTestVisible="False" />
+                <ListView Grid.Column="1" Name="ObjectBrowserButtonHolder" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0" Height="28" ScrollViewer.HorizontalScrollBarVisibility="Hidden" BorderThickness="0" SelectionMode="Single">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListViewItem Selected="ListViewOBItem_SelectFile">
+                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-1-20.png" Width="20" Height="20" />
+                    </ListViewItem>
+                    <ListViewItem Selected="ListViewOBItem_SelectConfig">
+                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-2-20.png" Width="20" Height="20" />
+                    </ListViewItem>
+                    <ListViewItem Selected="ListViewOBItem_SelectOBItem">
+                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-4-20.png" Width="20" Height="20" />
+                    </ListViewItem>
+                </ListView>
+            </Grid>
             <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5" Background="{DynamicResource GrayBrush5}" />
             <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" Margin="0,5,0,0" Style="{DynamicResource MetroFlatButton}" Click="CloseErrorResultGrid">
                 <Canvas Width="10" Height="10" Clip="F1 M 0,0L 76,0L 76,76L 0,76L 0,0">

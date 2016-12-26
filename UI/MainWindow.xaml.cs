@@ -56,6 +56,7 @@ namespace Spedit.UI
             FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
             EnableServerAnim = (Storyboard)this.Resources["EnableServerAnim"];
             DisableServerAnim = (Storyboard)this.Resources["DisableServerAnim"];
+			ChangeObjectBrowserToDirectory(Program.OptionsObject.Program_ObjectBrowserDirectory);
 			Language_Translate(true);
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);
