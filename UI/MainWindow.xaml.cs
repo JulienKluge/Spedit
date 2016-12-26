@@ -96,6 +96,10 @@ namespace Spedit.UI
                         {
                             if (editors[i].FullFilePath == finalPath)
                             {
+								if (SelectMe)
+								{
+									editors[i].Parent.IsSelected = true;
+								}
                                 return false;
                             }
                         }
