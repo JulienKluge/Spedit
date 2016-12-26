@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
+using System.Runtime;
 
 namespace Spedit
 {
@@ -40,9 +41,13 @@ namespace Spedit
 #endif
                         SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
                         splashScreen.Show(false, true);
-                        UpdateStatus = new UpdateInfo();
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                        OptionsObject = OptionsControlIOObject.Load();
+#if !DEBUG
+						ProfileOptimization.SetProfileRoot(Environment.CurrentDirectory);
+						ProfileOptimization.StartProfile("Startup.Profile");
+#endif
+						UpdateStatus = new UpdateInfo();
+						OptionsObject = OptionsControlIOObject.Load();
 						Translations = new TranslationProvider();
 						Translations.LoadLanguage(OptionsObject.Language, true);
 						for (int i = 0; i < args.Length; ++i)
