@@ -25,5 +25,10 @@
 * Lysis Decompiler (Improved Version)
 * smx Dissassembler (Fixed)
 * RCon Querying
+* Dynamic Autocomplete/Intellisense from all opened include-files [NEW]
+* Auto bracket-closing
+* Translations in multiple languages
 
-![Screen of SPEdit](http://i.imgur.com/kx9riAE.png)
+![Screen of SPEdit](http://i.imgur.com/xqNOnWW.png)
+
+![Screen of SPEdit-Themes](http://i.imgur.com/qtQcEnC.png)
