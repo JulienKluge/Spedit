@@ -34,12 +34,13 @@ namespace Spedit
             using (Mutex appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
             {
                 if (mutexReserved)
-                {
+				{
+					bool ProgramIsNew = false;
 #if !DEBUG
                     try
                     {
 #endif
-                        SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
+						SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
                         splashScreen.Show(false, true);
                         Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 #if !DEBUG
@@ -47,7 +48,7 @@ namespace Spedit
 						ProfileOptimization.StartProfile("Startup.Profile");
 #endif
 						UpdateStatus = new UpdateInfo();
-						OptionsObject = OptionsControlIOObject.Load();
+						OptionsObject = OptionsControlIOObject.Load(out ProgramIsNew);
 						Translations = new TranslationProvider();
 						Translations.LoadLanguage(OptionsObject.Language, true);
 						for (int i = 0; i < args.Length; ++i)
@@ -74,8 +75,24 @@ namespace Spedit
                         if (!OptionsObject.Program_UseHardwareAcceleration)
                         {
                             RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
-                        }
-                        MainWindow = new MainWindow(splashScreen);
+						}
+						if (ProgramIsNew)
+						{
+							if (Translations.AvailableLanguageIDs.Length > 0)
+							{
+								splashScreen.Close(new TimeSpan(0, 0, 1));
+								var languageWindow = new UI.Interop.LanguageChooserWindow(Translations.AvailableLanguageIDs, Translations.AvailableLanguages);
+								languageWindow.ShowDialog();
+								string potentialSelectedLanguageID = languageWindow.SelectedID;
+								if (!string.IsNullOrWhiteSpace(potentialSelectedLanguageID))
+								{
+									OptionsObject.Language = potentialSelectedLanguageID;
+									Translations.LoadLanguage(potentialSelectedLanguageID);
+								}
+								splashScreen.Show(false, true);
+							}
+						}
+						MainWindow = new MainWindow(splashScreen);
                         PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
                         pipeServer.Start();
 #if !DEBUG
@@ -90,32 +107,10 @@ namespace Spedit
                         Environment.Exit(Environment.ExitCode);
                     }
 #endif
-                        Application app = new Application();
-                        if (InSafe)
-                        {
-                            try
-                            {
-#if !DEBUG
-                                if (OptionsObject.Program_CheckForUpdates)
-                                {
-                                    UpdateCheck.Check(true);
-                                }
-#endif
-								app.Startup += App_Startup;
-                                app.Run(MainWindow);
-                                OptionsControlIOObject.Save();
-                            }
-                            catch (Exception e)
-                            {
-                                File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
-                                MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
-                                    "Error",
-                                    MessageBoxButton.OK,
-                                    MessageBoxImage.Error);
-                                Environment.Exit(Environment.ExitCode);
-                            }
-                        }
-                        else
+                    Application app = new Application();
+                    if (InSafe)
+                    {
+                        try
                         {
 #if !DEBUG
                             if (OptionsObject.Program_CheckForUpdates)
@@ -123,9 +118,31 @@ namespace Spedit
                                 UpdateCheck.Check(true);
                             }
 #endif
+							app.Startup += App_Startup;
                             app.Run(MainWindow);
                             OptionsControlIOObject.Save();
                         }
+                        catch (Exception e)
+                        {
+                            File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
+                            MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                            Environment.Exit(Environment.ExitCode);
+                        }
+                    }
+                    else
+					{
+#if !DEBUG
+                        if (OptionsObject.Program_CheckForUpdates)
+                        {
+                            UpdateCheck.Check(true);
+                        }
+#endif
+						app.Run(MainWindow);
+                        OptionsControlIOObject.Save();
+                    }
                 }
                 else
                 {

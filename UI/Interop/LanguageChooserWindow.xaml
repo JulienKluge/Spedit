@@ -1,0 +1,22 @@
+﻿<controls:MetroWindow x:Class="Spedit.UI.Interop.LanguageChooserWindow"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             Width="400" Height="110" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" GlowBrush="{DynamicResource AccentColorBrush}" ShowTitleBar="True" Title="Language; Sprache; Langue; Språk; язык">
+    <controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseDark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Red.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </controls:MetroWindow.Resources>
+    <Grid>
+        <ComboBox Name="LanguageBox" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5" />
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Content="OK" Margin="0,45,5,0" Click="Button_Click" />
+    </Grid>
+</controls:MetroWindow>

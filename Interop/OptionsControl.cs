@@ -48,7 +48,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 
         public bool SH_HighlightDeprecateds = true;
 
-		public string Language = "";
+		public string Language = string.Empty;
 
         public SerializeableColor SH_Comments = new SerializeableColor(0xFF, 0x57, 0xA6, 0x49);
         public SerializeableColor SH_CommentsMarker = new SerializeableColor(0xFF, 0xFF, 0x20, 0x20);
@@ -183,7 +183,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
             catch (Exception) { }
         }
 
-        public static OptionsControl Load()
+        public static OptionsControl Load(out bool ProgramIsNew)
         {
             try
             {
@@ -197,13 +197,19 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
                     }
                     OptionsControl oc = (OptionsControl)deserializedOptionsObj;
                     oc.FillNullToDefaults();
-                    return oc;
+					ProgramIsNew = false;
+					return oc;
                 }
             }
             catch (Exception) { }
             OptionsControl oco = new OptionsControl();
             oco.ReCreateCryptoKey();
-            return oco;
+#if DEBUG
+			ProgramIsNew = true;
+#else
+			ProgramIsNew = true;
+#endif
+			return oco;
         }
     }
 }

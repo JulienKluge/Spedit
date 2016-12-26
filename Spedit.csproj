@@ -136,6 +136,9 @@
     <Compile Include="UI\Components\EditorFoldingStrategy.cs" />
     <Compile Include="UI\Components\EditorIndetation.cs" />
     <Compile Include="UI\Components\IntelliSenseController.cs" />
+    <Compile Include="UI\Interop\LanguageChooserWindow.xaml.cs">
+      <DependentUpon>LanguageChooserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\MainWindowBackgroundParser.cs" />
     <Compile Include="UI\MainWindowServerQuery.cs" />
     <Compile Include="UI\MainWindowSPCompiler.cs" />
@@ -184,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Components\EditorElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Interop\LanguageChooserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
