@@ -22,9 +22,9 @@ namespace Spedit.UI.Windows
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
 			Brush gridBrush = null;
 			if (Program.OptionsObject.Program_Theme == "BaseDark")
-			{ gridBrush = new SolidColorBrush(Color.FromArgb(0x80, 0x50, 0x50, 0x50)); }
+			{ gridBrush = new SolidColorBrush(Color.FromArgb(0xC0, 0x10, 0x10, 0x10)); }
 			else
-			{ gridBrush = new SolidColorBrush(Color.FromArgb(0x80, 0xAF, 0xAF, 0xAF)); }
+			{ gridBrush = new SolidColorBrush(Color.FromArgb(0xC0, 0xE0, 0xE0, 0xE0)); }
 			gridBrush.Freeze();
 			foreach (var c in ContentStackPanel.Children)
 			{

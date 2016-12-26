@@ -44,8 +44,8 @@
                 <TextBlock Name="PostBuildBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,265,0,0" Text="Post-Build Commandline: " IsHitTestVisible="False" />
                 <TextBlock Name="OptimizeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,370,0,0" Text="Optimization Level: " IsHitTestVisible="False" />
                 <TextBlock Name="VerboseBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,400,0,0" Text="Verbose Level: " IsHitTestVisible="False" />
-                <CheckBox Name="C_AutoCopy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,375,0,0" Content="Auto Copy after Compile" Checked="C_AutoCopy_Changed" Unchecked="C_AutoCopy_Changed" />
-                <CheckBox Name="C_DeleteAfterCopy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,405,0,0" Content="Delete old .smx after copy" Checked="C_DeleteAfterCopy_Changed" Unchecked="C_DeleteAfterCopy_Changed" />
+                <CheckBox Name="C_AutoCopy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,375,0,0" Content="Auto Copy after Compile" Checked="C_AutoCopy_Changed" Unchecked="C_AutoCopy_Changed" />
+                <CheckBox Name="C_DeleteAfterCopy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="270,405,0,0" Content="Delete old .smx after copy" Checked="C_DeleteAfterCopy_Changed" Unchecked="C_DeleteAfterCopy_Changed" />
                 <TextBox Name="C_Name" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="145,0,5,0" TextChanged="C_Name_TextChanged" />
                 <TextBox Name="C_SMDir" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="145,30,5,0" TextChanged="C_SMDir_TextChanged"
                          Style="{DynamicResource SearchMetroTextBox}"
