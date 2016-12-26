@@ -139,6 +139,7 @@ namespace Spedit.Interop
 		public string ResetOptions, ResetOptQues, RestartEditor, YRestartEditor, RestartEdiFullEff, RestartEdiEff, Program, HardwareAcc, UIAnim, OpenInc, OpenIncRec, AutoUpdate, ShowToolbar;
 		public string DynamicISAC, DarkTheme, ThemeColor, LanguageStr, Editor, FontSize, ScrollSpeed, WordWrap, AggIndentation, ReformatAfterSem, TabsToSpace, AutoCloseBrack, AutoCloseStrChr;
 		public string ShowSpaces, ShowTabs, IndentationSize, FontFamily, SyntaxHigh, HighDeprecat;
+		public string Compile;
 
 
 		public void LoadLanguage(string lang, bool Initial = false)
@@ -561,6 +562,8 @@ namespace Spedit.Interop
 								SyntaxHigh = nv;
 							else if (nn == "highdeprecat")
 								HighDeprecat = nv;
+							else if (nn == "compile")
+								Compile = nv;
 							else
 								throw new Exception($"{nn} is not a known language-phrase");
 						}
@@ -767,6 +770,7 @@ namespace Spedit.Interop
 			FontFamily = "Font";
 			SyntaxHigh = "Syntaxhighlighting";
 			HighDeprecat = "Highlight deprecated (<1.7) syntax";
+			Compile = "Compile";
 		}
 	}
 }

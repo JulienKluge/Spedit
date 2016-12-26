@@ -187,6 +187,7 @@
 		<fontfamily>Schriftart</fontfamily>
 		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
 		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
+		<compile>Kompillieren</compile>
 	</de>
 	<fr>
 		<language>Français</language>
@@ -376,6 +377,7 @@
 		<fontfamily>Police</fontfamily>
 		<syntaxhigh>Mise en évidence de la syntax</syntaxhigh>
 		<highdeprecat>Mise en évidence de la syntax (&lt;1.7) obsolète</highdeprecat>
+		<compile>Compiler</compile>
 	</fr>
 	<sv>
 		<language>Svenska</language>
@@ -565,5 +567,6 @@
 		<fontfamily>Font</fontfamily>
 		<syntaxhigh>Syntax markering</syntaxhigh>
 		<highdeprecat>Markera föråldrat (&lt;1.7) syntax</highdeprecat>
+		<compile>Kompilera</compile>
 	</sv>
 </translations>

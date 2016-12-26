@@ -60,14 +60,14 @@
                            TextChanged="editor_TextChanged" Foreground="{DynamicResource BlackColorBrush}">
             <editor:TextEditor.ContextMenu>
                 <ContextMenu Opened="ContextMenu_Opening">
-                    <MenuItem Header="Undo" Tag="0" Click="HandleContextMenuCommand" />
-                    <MenuItem Header="Redo" Tag="1" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_Undo" Header="Undo" Tag="0" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_Redo" Header="Redo" Tag="1" Click="HandleContextMenuCommand" />
                     <Separator />
-                    <MenuItem Header="Cut" Tag="2" Click="HandleContextMenuCommand" />
-                    <MenuItem Header="Copy" Tag="3" Click="HandleContextMenuCommand" />
-                    <MenuItem Header="Paste" Tag="4" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_Cut" Header="Cut" Tag="2" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_Copy" Header="Copy" Tag="3" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_Paste" Header="Paste" Tag="4" Click="HandleContextMenuCommand" />
                     <Separator />
-                    <MenuItem Header="Select All" Tag="5" Click="HandleContextMenuCommand" />
+                    <MenuItem Name="MenuC_SelectAll" Header="Select All" Tag="5" Click="HandleContextMenuCommand" />
                 </ContextMenu>
             </editor:TextEditor.ContextMenu>
         </editor:TextEditor>

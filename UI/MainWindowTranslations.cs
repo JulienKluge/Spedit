@@ -27,6 +27,17 @@ namespace Spedit.UI
 				actionButtonDict = new ObservableCollection<string>() { Program.Translations.Copy, Program.Translations.FTPUp, Program.Translations.StartServer };
 				findReplaceButtonDict = new ObservableCollection<string>() { Program.Translations.Replace, Program.Translations.ReplaceAll };
 				((MenuItem)ConfigMenu.Items[ConfigMenu.Items.Count - 1]).Header = Program.Translations.EditConfig;
+				EditorElement[] ee = GetAllEditorElements();
+				if (ee != null)
+				{
+					for (int i = 0; i < ee.Length; ++i)
+					{
+						if (ee[i] != null)
+						{
+							ee[i].Language_Translate();
+						}
+					}
+				}
 			}
 			MenuI_File.Header = Program.Translations.FileStr;
 			MenuI_New.Header = Program.Translations.New;

@@ -147,8 +147,8 @@ namespace Spedit.UI.Components
             editor.FontFamily = new FontFamily(Program.OptionsObject.Editor_FontFamily);
             editor.WordWrap = Program.OptionsObject.Editor_WordWrap;
             UpdateFontSize(Program.OptionsObject.Editor_FontSize, false);
-
-            colorizeSelection = new ColorizeSelection();
+			
+			colorizeSelection = new ColorizeSelection();
             editor.TextArea.TextView.LineTransformers.Add(colorizeSelection);
             editor.SyntaxHighlighting = new AeonEditorHighlighting();
 
@@ -165,7 +165,9 @@ namespace Spedit.UI.Components
             }
             _NeedsSave = false;
 
-            var encoding = new UTF8Encoding(false);
+			Language_Translate(true); //The Fontsize and content must be loaded
+
+			var encoding = new UTF8Encoding(false);
             editor.Encoding = encoding; //let them read in whatever encoding they want - but save in UTF8
 
             foldingManager = FoldingManager.Install(editor.TextArea);
@@ -687,6 +689,27 @@ namespace Spedit.UI.Components
             }
             return true;
         }
+
+		public void Language_Translate(bool Initial = false)
+		{
+			if (Program.Translations.IsDefault)
+			{
+				return;
+			}
+			MenuC_Undo.Header = Program.Translations.Undo;
+			MenuC_Redo.Header = Program.Translations.Redo;
+			MenuC_Cut.Header = Program.Translations.Cut;
+			MenuC_Copy.Header = Program.Translations.Copy;
+			MenuC_Paste.Header = Program.Translations.Paste;
+			MenuC_SelectAll.Header = Program.Translations.SelectAll;
+			CompileBox.Content = Program.Translations.Compile;
+			if (!Initial)
+			{
+				StatusLine_Coloumn.Text = $"{Program.Translations.ColAbb} {editor.TextArea.Caret.Column}";
+				StatusLine_Line.Text = $"{Program.Translations.LnAbb} {editor.TextArea.Caret.Line}";
+				StatusLine_FontSize.Text = editor.FontSize.ToString("n0") + $" {Program.Translations.PtAbb}";
+			}
+		}
     }
 
     public class ColorizeSelection : DocumentColorizingTransformer
