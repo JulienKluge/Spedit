@@ -165,6 +165,19 @@ namespace Spedit
 				"Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
+		public static void ClearUpdateFiles()
+		{
+			string[] files = Directory.GetFiles(Environment.CurrentDirectory, "*.exe", SearchOption.TopDirectoryOnly);
+			for (int i = 0; i < files.Length; ++i)
+			{
+				FileInfo fInfo = new FileInfo(files[i]);
+				if (fInfo.Name.StartsWith("updater_", StringComparison.CurrentCultureIgnoreCase))
+				{
+					fInfo.Delete();
+				}
+			}
+		}
+
 		private static void App_Startup(object sender, StartupEventArgs e)
 		{
 			

@@ -75,6 +75,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
             }
             if (OptionsControl.SVersion > this.Version)
             {
+				Program.ClearUpdateFiles();
 				if (Version < 2)
 				{
 					this.UI_ShowToolBar = false;
