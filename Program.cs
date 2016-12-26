@@ -76,6 +76,7 @@ namespace Spedit
                         {
                             RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 						}
+#if !DEBUG
 						if (ProgramIsNew)
 						{
 							if (Translations.AvailableLanguageIDs.Length > 0)
@@ -92,6 +93,7 @@ namespace Spedit
 								splashScreen.Show(false, true);
 							}
 						}
+#endif
 						MainWindow = new MainWindow(splashScreen);
                         PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
                         pipeServer.Start();
