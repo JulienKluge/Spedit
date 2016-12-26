@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Spedit //leave this here instead of .Interop because of reasons...
 {
-    [Serializable]
+	[Serializable]
     public class OptionsControl
     {
         public static int SVersion = 9;

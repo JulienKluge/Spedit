@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Spedit.Utils.SPSyntaxTidy
 {
-    public static class SPSyntaxTidy
+	public static class SPSyntaxTidy
     {
         public static string TidyUp(string source)
         {

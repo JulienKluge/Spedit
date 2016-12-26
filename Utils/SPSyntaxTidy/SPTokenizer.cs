@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Spedit.Utils.SPSyntaxTidy
 {
-    public static class SPTokenizer
+	public static class SPTokenizer
     {
         public static SPToken[] Tokenize(string source)
         {

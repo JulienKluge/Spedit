@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Spedit.Interop
 {
-    public class PipeInteropServer
+    public class PipeInteropServer : IDisposable
     {
         NamedPipeServerStream pipeServer;
         MainWindow _window;
@@ -24,6 +24,11 @@ namespace Spedit.Interop
         {
             pipeServer.Close();
         }
+
+		public void Dispose()
+		{
+			pipeServer.Close();
+		}
 
         private void StartInteropServer()
         {

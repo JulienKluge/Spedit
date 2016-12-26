@@ -18,12 +18,12 @@ namespace Spedit.Interop
                 stream.Write(stringLengthData, 0, stringLengthData.Length);
                 stream.Write(stringData, 0, stringData.Length);
             }
-            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "SpeditNamedPipeServer", PipeDirection.Out, PipeOptions.Asynchronous);
-            pipeClient.Connect(5000);
-            pipeClient.Write(array, 0, array.Length);
-            pipeClient.Flush();
-            pipeClient.Close();
-            pipeClient.Dispose();
+			using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "SpeditNamedPipeServer", PipeDirection.Out, PipeOptions.Asynchronous))
+			{
+				pipeClient.Connect(5000);
+				pipeClient.Write(array, 0, array.Length);
+				pipeClient.Flush();
+			}
         }
     }
 }

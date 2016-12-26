@@ -373,7 +373,7 @@ namespace Spedit.UI.Components
                 detail_buffer_.Append(string.Format("{0,-32}", buffer));
                 if (comment.Length > 0)
                 {
-                    detail_buffer_.Append(string.Format(" ;{1}", buffer, comment));
+                    detail_buffer_.Append(string.Format(" ;{0}", comment));
                 }
                 detail_buffer_.Append("\r\n");
             }
