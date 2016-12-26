@@ -62,6 +62,7 @@
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Keith Warren (r3dw3r3w0lf; Drixevel) (Tester, Proposer) http://www.drixevel.com/" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Xerrion (Tester, Proposer)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- Arkarr (French translation)" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="- JOMENVEST (Swedish translation)" />
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0" Text="Proposer: &#013;Powerlord; Wliu; barel31; asherkin; BAILANDO; Arkarr; turtsmcgurts; Tank Missile&#013;Wilczek; Miu; StealthGus; WhiteThunder; ghost" />
                     </StackPanel>
                 </Grid>
