@@ -207,10 +207,10 @@
                 <RowDefinition />
                 <RowDefinition Name="CompileOutputRow" MinHeight="8" Height="8" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Name="EditorObjectBrowserGrid">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*" />
-                    <ColumnDefinition Width="1*" MinWidth="3" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Name="ObjectBrowserColumn" Width="300" MinWidth="3" />
                 </Grid.ColumnDefinitions>
                 <dock:DockingManager Grid.Column="0" x:Name="DockingManager" Margin="0,0,5,0" AllowMixedOrientation="True" Background="{DynamicResource WhiteColorBrush}" Foreground="{DynamicResource BlackColorBrush}"
                                  ActiveContentChanged="DockingManager_ActiveContentChanged" DocumentClosing="DockingManager_DocumentClosing">

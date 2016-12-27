@@ -8,12 +8,10 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
+using System.ComponentModel;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Layout;
-using Spedit.Interop.Updater;
 
 namespace Spedit.UI
 {
@@ -30,6 +28,8 @@ namespace Spedit.UI
         Storyboard EnableServerAnim;
         Storyboard DisableServerAnim;
 
+		private bool FullyInitialized = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,7 +39,10 @@ namespace Spedit.UI
             InitializeComponent();
 			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
 			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
-            FillConfigMenu();
+			ObjectBrowserColumn.Width = new GridLength(Program.OptionsObject.Program_ObjectbrowserWidth, GridUnitType.Pixel);
+			var heightDescriptor = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ItemsControl));
+			heightDescriptor.AddValueChanged(EditorObjectBrowserGrid.ColumnDefinitions[1], EditorObjectBrowserGridRow_WidthChanged);
+			FillConfigMenu();
             CompileButton.ItemsSource = compileButtonDict;
 			CompileButton.SelectedIndex = 0;
             CActionButton.ItemsSource = actionButtonDict;
@@ -78,6 +81,7 @@ namespace Spedit.UI
             }
             sc.Close(TimeSpan.FromMilliseconds(500.0));
 			StartBackgroundParserThread();
+			FullyInitialized = true;
 		}
 
         public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true, bool SelectMe = false)
@@ -311,7 +315,15 @@ namespace Spedit.UI
             CompileOutputRow.Height = new GridLength(8.0);
         }
 
-        private void UpdateWindowTitle()
+		private void EditorObjectBrowserGridRow_WidthChanged(object sender, EventArgs e)
+		{
+			if (FullyInitialized)
+			{
+				Program.OptionsObject.Program_ObjectbrowserWidth = ObjectBrowserColumn.Width.Value;
+			}
+		}
+
+		private void UpdateWindowTitle()
         {
             EditorElement ee = GetCurrentEditorElement();
             string outString;

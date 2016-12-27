@@ -29,6 +29,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 		public string Program_Theme = "BaseDark";
 
 		public string Program_ObjectBrowserDirectory = string.Empty;
+		public double Program_ObjectbrowserWidth = 300.0;
 
         public bool UI_Animations = true;
         public bool UI_ShowToolBar = false;
@@ -114,6 +115,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Editor_IndentationSize = 4;
 					Language = "";
 					Program_ObjectBrowserDirectory = string.Empty;
+					Program_ObjectbrowserWidth = 300.0;
 					this.ReCreateCryptoKey();
 					Program.MakeRCCKAlert();
 				}
