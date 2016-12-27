@@ -174,7 +174,7 @@ namespace Spedit.UI.Components
             foldingStrategy = new SPFoldingStrategy();
             foldingStrategy.UpdateFoldings(foldingManager, editor.Document);
 
-            regularyTimer = new Timer(2000.0);
+            regularyTimer = new Timer(500.0);
             regularyTimer.Elapsed += regularyTimer_Elapsed;
             regularyTimer.Start();
 
