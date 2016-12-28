@@ -44,7 +44,7 @@ namespace SpeditUpdater
             UpdateMarquee um = (UpdateMarquee)arg;
             string zipFile = Path.Combine(Environment.CurrentDirectory, "updateZipFile.zip");
 
-            byte[] zipFileContent = SpeditUpdater.Properties.Resources.spedit1_1_3_0Update;
+            byte[] zipFileContent = SpeditUpdater.Properties.Resources.spedit1_2_0_0Update;
 
             File.WriteAllBytes(zipFile, zipFileContent);
 
