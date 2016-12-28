@@ -51,20 +51,20 @@
 
                         <TextBlock Name="ScrollSpeedBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,5,0,0" Text="Scroll Speed:" IsHitTestVisible="False" />
                         <Slider Name="ScrollSpeed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,25,0,0" Width="280" Minimum="1" Maximum="20" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="ScrollSpeed_Changed" />
-                        <CheckBox Name="WordWrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,0,0" Content="Word Wrap" Checked="WordWrap_Changed" Unchecked="WordWrap_Changed" />
-                        <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,55,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
-                        <CheckBox Name="LineReformatting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,75,0,0" Content="Reformatting Line after semicolon" Checked="LineReformat_Changed" Unchecked="LineReformat_Changed" />
-                        <CheckBox Name="TabToSpace" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,95,0,0" Content="Replace tabs with spaces" Checked="TabToSpace_Changed" Unchecked="TabToSpace_Changed" />
-                        <CheckBox Name="AutoCloseBrackets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,115,0,0" Content="Auto close Brackets [], {}, ()" Checked="AutoCloseBrackets_Changed" Unchecked="AutoCloseBrackets_Changed" />
-                        <CheckBox Name="AutoCloseStringChars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,135,0,0" Content="Auto close Strings, Chars &quot;&quot;, ''" Checked="AutoCloseStringChars_Changed" Unchecked="AutoCloseStringChars_Changed" />
-                        <CheckBox Name="ShowSpaces" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,155,0,0" Content="Show Spaces" Checked="ShowSpaces_Changed" Unchecked="ShowSpaces_Changed" />
-                        <CheckBox Name="ShowTabs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,175,0,0" Content="Show Tabs" Checked="ShowTabs_Changed" Unchecked="ShowTabs_Changed" />
+                        <CheckBox Name="WordWrap" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,60,0,0" Content="Word Wrap" Checked="WordWrap_Changed" Unchecked="WordWrap_Changed" />
+                        <CheckBox Name="AgressiveIndentation" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,80,0,0" Content="Agressive Indentation" Checked="AIndentation_Changed" Unchecked="AIndentation_Changed" />
+                        <CheckBox Name="LineReformatting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,100,0,0" Content="Reformatting Line after semicolon" Checked="LineReformat_Changed" Unchecked="LineReformat_Changed" />
+                        <CheckBox Name="TabToSpace" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,120,0,0" Content="Replace tabs with spaces" Checked="TabToSpace_Changed" Unchecked="TabToSpace_Changed" />
+                        <CheckBox Name="AutoCloseBrackets" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,140,0,0" Content="Auto close Brackets [], {}, ()" Checked="AutoCloseBrackets_Changed" Unchecked="AutoCloseBrackets_Changed" />
+                        <CheckBox Name="AutoCloseStringChars" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,160,0,0" Content="Auto close Strings, Chars &quot;&quot;, ''" Checked="AutoCloseStringChars_Changed" Unchecked="AutoCloseStringChars_Changed" />
+                        <CheckBox Name="ShowSpaces" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,180,0,0" Content="Show Spaces" Checked="ShowSpaces_Changed" Unchecked="ShowSpaces_Changed" />
+                        <CheckBox Name="ShowTabs" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="350,200,0,0" Content="Show Tabs" Checked="ShowTabs_Changed" Unchecked="ShowTabs_Changed" />
                         
-                        <TextBlock Name="IndentationSizeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,160,0,0" Text="Indentation Size:" IsHitTestVisible="False" />
-                        <Slider Name="IndentationSize" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Width="280" Minimum="1" Maximum="10" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="IndentationSize_Changed" />
+                        <TextBlock Name="IndentationSizeBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,165,0,0" Text="Indentation Size:" IsHitTestVisible="False" />
+                        <Slider Name="IndentationSize" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,185,0,0" Width="280" Minimum="1" Maximum="10" AutoToolTipPlacement="TopLeft" TickFrequency="1" IsSnapToTickEnabled="True" TickPlacement="BottomRight" ValueChanged="IndentationSize_Changed" />
                         
-                        <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,80,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
-                        <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,100,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
+                        <TextBlock Name="FontFamilyTB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,55,5,5" Text="Font (Consolas):" IsHitTestVisible="False" />
+                        <ComboBox Name="FontFamilyCB" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,75,5,5" Width="250" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="FontFamily_Changed">
                             <ComboBox.Resources>
                                 <CollectionViewSource x:Key="myFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
                                     <CollectionViewSource.SortDescriptions>
@@ -85,8 +85,20 @@
                                 <Binding Source="{StaticResource myFonts}" />
                             </ComboBox.ItemsSource>
                         </ComboBox>
-                        <TextBlock Name="SyntaxHighBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,220,0,0" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
-                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,235,0,0">
+                        <TextBlock Name="AutoSaveBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,110,5,5" Text="Auto save (min):" IsHitTestVisible="False" />
+                        <ComboBox Name="AutoSave" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,130,5,5" Width="250" SelectionChanged="AutoSave_Changed">
+                            <ComboBoxItem Content="None" />
+                            <ComboBoxItem Content="0.5" />
+                            <ComboBoxItem Content="1" />
+                            <ComboBoxItem Content="2" />
+                            <ComboBoxItem Content="3" />
+                            <ComboBoxItem Content="4" />
+                            <ComboBoxItem Content="5" />
+                            <ComboBoxItem Content="10" />
+                            <ComboBoxItem Content="15" />
+                        </ComboBox>
+                        <TextBlock Name="SyntaxHighBlock" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,238,0,0" Text="Syntaxhighlighting:" IsHitTestVisible="False" />
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,255,0,5">
 
                             <CheckBox Name="HighlightDeprecateds" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" Content="Highlight Deprecated (&lt;1.7) Syntax" Checked="HighlightDeprecateds_Changed" Unchecked="HighlightDeprecateds_Changed" />
 

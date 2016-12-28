@@ -188,6 +188,7 @@
 		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
 		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
 		<compile>Kompillieren</compile>
+		<autosavemin>Automatisches speichern (Min)</autosavemin>
 	</de>
 	<fr>
 		<language>Français</language>
@@ -378,6 +379,7 @@
 		<syntaxhigh>Mise en évidence de la syntax</syntaxhigh>
 		<highdeprecat>Mise en évidence de la syntax (&lt;1.7) obsolète</highdeprecat>
 		<compile>Compiler</compile>
+		<autosavemin>Sauvegarde automatique (min)</autosavemin>
 	</fr>
 	<sv>
 		<language>Svenska</language>
@@ -568,5 +570,6 @@
 		<syntaxhigh>Syntax markering</syntaxhigh>
 		<highdeprecat>Markera föråldrat (&lt;1.7) syntax</highdeprecat>
 		<compile>Kompilera</compile>
+		<autosavemin>Auto spara (min)</autosavemin>
 	</sv>
 </translations>

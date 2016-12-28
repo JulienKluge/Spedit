@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Xceed.Wpf.AvalonDock.Layout;
+using Spedit.Interop.Updater; //not delete!
 
 namespace Spedit.UI
 {

@@ -34,6 +34,7 @@ namespace Spedit.UI.Components
         FileSystemWatcher fileWatcher;
 
         Timer regularyTimer;
+		public Timer AutoSaveTimer;
         bool WantFoldingUpdate = false;
         bool SelectionIsHighlited = false;
 
@@ -178,8 +179,36 @@ namespace Spedit.UI.Components
             regularyTimer.Elapsed += regularyTimer_Elapsed;
             regularyTimer.Start();
 
+			AutoSaveTimer = new Timer();
+			AutoSaveTimer.Elapsed += AutoSaveTimer_Elapsed;
+			StartAutoSaveTimer();
+
             CompileBox.IsChecked = (bool?)filePath.EndsWith(".sp");
         }
+
+		private void AutoSaveTimer_Elapsed(object sender, ElapsedEventArgs e)
+		{
+			if (NeedsSave)
+			{
+				Dispatcher.Invoke(() =>
+				{
+					Save();
+				});
+			}
+		}
+
+		public void StartAutoSaveTimer()
+		{
+			if (Program.OptionsObject.Editor_AutoSave)
+			{
+				if (AutoSaveTimer.Enabled)
+				{
+					AutoSaveTimer.Stop();
+				}
+				AutoSaveTimer.Interval = 1000.0 * (double)Program.OptionsObject.Editor_AutoSaveInterval;
+				AutoSaveTimer.Start();
+			}
+		}
 
         private void EditorElement_KeyDown(object sender, KeyEventArgs e)
         {

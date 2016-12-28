@@ -5,6 +5,7 @@ using Spedit.UI;
 using System.Windows;
 using System.Windows.Media;
 using MahApps.Metro;
+using System;
 
 namespace Spedit.UI.Windows
 {
@@ -272,6 +273,46 @@ namespace Spedit.UI.Windows
 			ToggleRestartText(true);
 		}
 
+		private void AutoSave_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			int newIndex = AutoSave.SelectedIndex;
+			EditorElement[] editors = Program.MainWindow.GetAllEditorElements();
+			if (newIndex == 0)
+			{
+				Program.OptionsObject.Editor_AutoSave = false;
+				if (editors != null)
+				{
+					for (int i = 0; i < editors.Length; ++i)
+					{
+						if (editors[i].AutoSaveTimer.Enabled)
+						{
+							editors[i].AutoSaveTimer.Stop();
+						}
+					}
+				}
+			}
+			else
+			{
+				Program.OptionsObject.Editor_AutoSave = true;
+				if (newIndex == 1)
+					Program.OptionsObject.Editor_AutoSaveInterval = 30;
+				else if (newIndex == 7)
+					Program.OptionsObject.Editor_AutoSaveInterval = 600;
+				else if (newIndex == 8)
+					Program.OptionsObject.Editor_AutoSaveInterval = 900;
+				else
+					Program.OptionsObject.Editor_AutoSaveInterval = (newIndex - 1) * 60;
+				if (editors != null)
+				{
+					for (int i = 0; i < editors.Length; ++i)
+					{
+						editors[i].StartAutoSaveTimer();
+					}
+				}
+			}
+		}
+
 		private void LoadSettings()
         {
 			for (int i = 0; i < AvailableAccents.Length; ++i)
@@ -305,6 +346,22 @@ namespace Spedit.UI.Windows
 				{
 					LanguageBox.SelectedIndex = i;
 				}
+			}
+			if (Program.OptionsObject.Editor_AutoSave)
+			{
+				int seconds = Program.OptionsObject.Editor_AutoSaveInterval;
+				if (seconds < 60)
+					AutoSave.SelectedIndex = 1;
+				else if (seconds <= 300)
+					AutoSave.SelectedIndex = Math.Max(1, Math.Min(seconds / 60, 5)) + 1;
+				else if (seconds == 600)
+					AutoSave.SelectedIndex = 7;
+				else
+					AutoSave.SelectedIndex = 8;
+			}
+			else
+			{
+				AutoSave.SelectedIndex = 0;
 			}
             HighlightDeprecateds.IsChecked = Program.OptionsObject.SH_HighlightDeprecateds;
             FontSizeD.Value = Program.OptionsObject.Editor_FontSize;
@@ -367,6 +424,7 @@ namespace Spedit.UI.Windows
 			IndentationSizeBlock.Text = Program.Translations.IndentationSize;
 			SyntaxHighBlock.Text = Program.Translations.SyntaxHigh;
 			HighlightDeprecateds.Content = Program.Translations.HighDeprecat;
+			AutoSaveBlock.Text = Program.Translations.AutoSaveMin;
 		}
     }
 }

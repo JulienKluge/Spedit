@@ -46,6 +46,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 		public bool Editor_ShowSpaces = false;
 		public bool Editor_ShowTabs = false;
 		public int Editor_IndentationSize = 4;
+		public bool Editor_AutoSave = false;
+		public int Editor_AutoSaveInterval = 5 * 60;
 
 		public string[] LastOpenFiles = new string[0];
 
@@ -116,6 +118,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Language = "";
 					Program_ObjectBrowserDirectory = string.Empty;
 					Program_ObjectbrowserWidth = 300.0;
+					Editor_AutoSave = false;
+					Editor_AutoSaveInterval = 5 * 60;
 					this.ReCreateCryptoKey();
 					Program.MakeRCCKAlert();
 				}

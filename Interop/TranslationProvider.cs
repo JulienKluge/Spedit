@@ -140,7 +140,7 @@ namespace Spedit.Interop
 		public string DynamicISAC, DarkTheme, ThemeColor, LanguageStr, Editor, FontSize, ScrollSpeed, WordWrap, AggIndentation, ReformatAfterSem, TabsToSpace, AutoCloseBrack, AutoCloseStrChr;
 		public string ShowSpaces, ShowTabs, IndentationSize, FontFamily, SyntaxHigh, HighDeprecat;
 		public string Compile;
-
+		public string AutoSaveMin;
 
 		public void LoadLanguage(string lang, bool Initial = false)
 		{
@@ -564,6 +564,8 @@ namespace Spedit.Interop
 								HighDeprecat = nv;
 							else if (nn == "compile")
 								Compile = nv;
+							else if (nn == "autosavemin")
+								AutoSaveMin = nv;
 							else
 								throw new Exception($"{nn} is not a known language-phrase");
 						}
@@ -771,6 +773,7 @@ namespace Spedit.Interop
 			SyntaxHigh = "Syntaxhighlighting";
 			HighDeprecat = "Highlight deprecated (<1.7) syntax";
 			Compile = "Compile";
+			AutoSaveMin = "Auto save (min)";
 		}
 	}
 }

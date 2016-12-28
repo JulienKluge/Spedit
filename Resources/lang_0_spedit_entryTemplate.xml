@@ -187,4 +187,5 @@
 	<syntaxhigh>Syntaxhighlighting</syntaxhigh>
 	<highdeprecat>Highlight deprecated (&lt;1.7) syntax</highdeprecat>
 	<compile>Compile</compile>
+	<autosavemin>Auto save (min)</autosavemin>
 </en>
