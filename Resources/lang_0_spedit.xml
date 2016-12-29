@@ -763,4 +763,195 @@
 		<compile>Компиляция</compile>
 		<autosavemin>Aвтосохранение (мин)</autosavemin>
 	</ru>
+	<pt>
+		<language>Português</language>
+		<serverrunning>Servidor em execução</serverrunning>
+		<saving>Salvar</saving>
+		<saveufiles>Salvar todos os arquivos não salvos?</saveufiles>
+		<compileall>Compilar tudo</compileall>
+		<compilecurr>Compilar Atual</compilecurr>
+		<copy>Copiar</copy>
+		<ftpup>Enviar FTP</ftpup>
+		<startserver>Iniciar Servidor</startserver>
+		<replace>Substituir</replace>
+		<replaceall>Substituir tudo</replaceall>
+		<opennewfile>Abrir novo arquivo</opennewfile>
+		<nofilopened>Nenhum arquivo aberto.</nofilopened>
+		<nofileopenedcap>Nenhum dos arquivos selecionados pode ser aberto.</nofileopenedcap>
+		<savefileas>Salvar arquivo como</savefileas>
+		<savefollow>Salve os seguintes arquivos</savefollow>
+		<chdecomp>Selecione plugin para descompilar</chdecomp>
+		<decompiling>Descompilação</decompiling>
+		<editconfig>Editar configurações</editconfig>
+		<foundinoff>Encontrado no offset {0} com comprimento {1}</foundinoff>
+		<foundnothing>Nada encontrado</foundnothing>
+		<replacedoff>Substituído em offset</replacedoff>
+		<replacedocc>Substituiu {0} ocorrências em {1} documentos</replacedocc>
+		<occfound>Ocorrências encontradas</occfound>
+		<emptypatt>Padrão de pesquisa vazio</emptypatt>
+		<novalidregex>Nenhum padrão de regex válido</novalidregex>
+		<failedcheck>Falha ao verificar</failedcheck>
+		<errorupdate>Erro ao verificar atualizações.</errorupdate>
+		<versuptodate>Versão atualizada</versuptodate>
+		<versionyour>Sua versão do programa {0} está atualizada.</versionyour>
+		<details>Detalhos</details>
+		<compiling>Compilando</compiling>
+		<error>Erro</error>
+		<spcompnotstarted>O compilador spcomp.exe não iniciou corretamente.</spcompnotstarted>
+		<spcompnotfound>Não foi possível encontrar o compilador spcomp.exe.</spcompnotfound>
+		<copied>Copiado</copied>
+		<deleted>Apagado</deleted>
+		<failcopy>Falha ao copiar</failcopy>
+		<nofilescopy>Nenhum arquivo copiado</nofilescopy>
+		<uploaded>Carregado</uploaded>
+		<erroruploadfile>Erro ao carregar o ficheiro: {0} para {1}</erroruploadfile>
+		<errorupload>Erro ao carregar ficheiros</errorupload>
+		<done>feito</done>
+		<file>Arquivo</file>
+		<new>Novo</new>
+		<open>Aberta</open>
+		<save>Salvar</save>
+		<saveall>Salvar tudo</saveall>
+		<saveas>Salvar como</saveas>
+		<close>Fechar</close>
+		<closeall>Fechar tudo</closeall>
+		<build>Construir</build>
+		<copyplugin>Copiar plugins</copyplugin>
+		<sendrcon>Enviar comandos RCon</sendrcon>
+		<config>Configuração</config>
+		<edit>Editar</edit>
+		<undo>Desfazer</undo>
+		<redo>Refazer</redo>
+		<cut>Curtar</cut>
+		<paste>Colar</paste>
+		<folding>Dobrados</folding>
+		<expandall>Expandir todos</expandall>
+		<collapseall>Recolher todos</collapseall>
+		<jumpto>Saltar para</jumpto>
+		<togglcomment>interruptar comentarios</togglcomment>
+		<selectall>Selecionar tudo</selectall>
+		<findreplace>Localizar &amp; Substituir</findreplace>
+		<tools>Ferramentas</tools>
+		<options>Opções</options>
+		<parsedincdir>Analisado do diretório include</parsedincdir>
+		<oldapiweb>Site da API antiga</oldapiweb>
+		<newapiweb>Novo site da API</newapiweb>
+		<reformatter>Reformatar Sintaxe</reformatter>
+		<reformatcurr>Reformatar atual</reformatcurr>
+		<reformatall>Reformatar Tudo</reformatall>
+		<decompile>Descompilar</decompile>
+		<reportbuggit>Relatar erro no GitHub</reportbuggit>
+		<checkupdates>Verificar atualizações</checkupdates>
+		<about>Sobre</about>
+		<filename>Nome do arquivo</filename>
+		<line>Linha</line>
+		<type>Digitar</type>
+		<normalsearch>Pesquisa normal</normalsearch>
+		<matchwhowords>Combinar palavras inteiras</matchwhowords>
+		<advancsearch>Busca Avançada</advancsearch>
+		<regexsearch>Pesquisa Regex</regexsearch>
+		<currdoc>Documento atual</currdoc>
+		<alldoc>Todos os documentos abertos</alldoc>
+		<find>Encontrar</find>
+		<count>Contagem</count>
+		<casesen>Caso Sensivel</casesen>
+		<multilineregex>Regex Multilinhas</multilineregex>
+		<errorfileloadproc>Erro ao carregar e ao processar o arquivo.</errorfileloadproc>
+		<notdissmethod>Não foi possível desmontar o método {0}: {1}</notdissmethod>
+		<dfilechanged>{0} foi alterado.</dfilechanged>
+		<filechanged>Arquivo alterado</filechanged>
+		<filetryreload>Tente recarregar o arquivo?</filetryreload>
+		<dsaveerror>Ocorreu um erro ao salvar.</dsaveerror>
+		<saveerror>Salvar erro</saveerror>
+		<savingfile>Salvando arquivo</savingfile>
+		<ptabb>pt</ptabb>
+		<colabb>Col</colabb>
+		<lnabb>Ln</lnabb>
+		<lenabb>len</lenabb>
+		<speditcap>Um editor Leve do sourcepawn</speditcap>
+		<writtenby>Escrito por: {0}</writtenby>
+		<license>Licença</license>
+		<peopleinv>Pessoas envolvidas</peopleinv>
+		<preview>Visualização</preview>
+		<newfile>Novo arquivo</newfile>
+		<configwrongpars>A configuração não foi capaz de analisar uma definição de sourcepawn.</configwrongpars>
+		<noname>Sem nome</noname>
+		<poslen>pos: {0} - len: {1}</poslen>
+		<inheritedfr>Herdado de</inheritedfr>
+		<methodfrom>Method de</methodfrom>
+		<propertyfrom>Property de</propertyfrom>
+		<search>pesquisa</search>
+		<delete>Excluir</delete>
+		<name>Nome</name>
+		<scriptdir>Diretórios de script</scriptdir>
+		<delimitedwi>Delimit com</delimitedwi>
+		<copydir>Copiar o diretório</copydir>
+		<serverexe>Servidor executável</serverexe>
+		<serverstartargs>Argumentos de inicialização do servidor</serverstartargs>
+		<prebuildcom>linha de comando Pre-Build</prebuildcom>
+		<postbuildcom>linha de comando Post-Build</postbuildcom>
+		<optimizelvl>Nível de otimização</optimizelvl>
+		<verboselvl>Nível detalhado</verboselvl>
+		<autocopy>Cópia automática após compilação</autocopy>
+		<deleteoldsmx>Exclua o .smx antigo após a cópia</deleteoldsmx>
+		<ftphost>Host FTP</ftphost>
+		<ftpuser>Usuário de FTP</ftpuser>
+		<ftppw>Senha de FTP</ftppw>
+		<ftpdir>Diretório do FTP</ftpdir>
+		<comeditordir>Diretório do binário SPEdit</comeditordir>
+		<comscriptdir>Diretório do script de compilação</comscriptdir>
+		<comcopydir>Diretório onde o smx deve ser copiado</comcopydir>
+		<comscriptfile>Diretório completo e nome do script</comscriptfile>
+		<comscriptname>Nome do arquivo do script</comscriptname>
+		<compluginfile>Diretório completo e nome do script compilado</compluginfile>
+		<compluginname>Nome do arquivo do script compilado</compluginname>
+		<rconengine>RCon Motor do servidor</rconengine>
+		<rconip>RCon IP do Servidor</rconip>
+		<rconport>RCon Porta do servidor</rconport>
+		<rconpw>RCon Senha do servidor</rconpw>
+		<rconcom>RCon Comandos do servidor</rconcom>
+		<compluginsreload>Recarrega todos os plugins compilados</compluginsreload>
+		<compluginsloas>Carrega todos os plugins compilados</compluginsloas>
+		<compluginsunload>Descarrega todos os plugins compilados</compluginsunload>
+		<newconfig>Nova configuração</newconfig>
+		<cannotdelconf>Não é possível excluir a configuração</cannotdelconf>
+		<ycannotdelconf>Voce nao pode apagar esta configuração!</ycannotdelconf>
+		<selectexe>Selecionar Executável</selectexe>
+		<cmdlinecom>Variáveis da linha de comando</cmdlinecom>
+		<rconcmdlinecom>Rcon Variáveis de linha de comando</rconcmdlinecom>
+		<resetoptions>Redefinir opções</resetoptions>
+		<resetoptques>Tem certeza de que deseja redefinir as opções?</resetoptques>
+		<restarteditor>Reinicie o editor</restarteditor>
+		<yrestarteditor>Você precisa reiniciar o editor para que as alterações tenham efeito.</yrestarteditor>
+		<restartedifulleff>Reinicie o editor para ter pleno efeito...</restartedifulleff>
+		<restartedieff>Reinicie o editor para ter efeito...</restartedieff>
+		<program>Programa</program>
+		<hardwareacc>Usar aceleração de hardware (se disponível)</hardwareacc>
+		<uianim>Animações da UI</uianim>
+		<openinc>Abertura automática inclui</openinc>
+		<openincrec>Abrir Inclui Recursivo</openincrec>
+		<autoupdate>Pesquisar atualizações automaticamente</autoupdate>
+		<showtoolbar>Mostrar barra de ferramentas</showtoolbar>
+		<dynamicisac>Autocomplemento Dinâmico / Intellisense</dynamicisac>
+		<darktheme>Tema escuro</darktheme>
+		<themecolor>Cor do tema</themecolor>
+		<languagestr>Língua</languagestr>
+		<editor>Editor</editor>
+		<fontsize>Tamanho da fonte</fontsize>
+		<scrollspeed>Velocidade de deslocamento</scrollspeed>
+		<wordwrap>Envolvimento de palavras</wordwrap>
+		<aggindentation>Indentação agressiva</aggindentation>
+		<reformataftersem>Reformatar linha após ponto e vírgula</reformataftersem>
+		<tabstospace>Substituir guias por espaços</tabstospace>
+		<autoclosebrack>Fechamento automático de parênteses</autoclosebrack>
+		<autoclosestrchr>Fechar automaticamente Strings, Chars</autoclosestrchr>
+		<showsapaces>Mostrar espaços</showsapaces>
+		<showtabs>Mostrar guias</showtabs>
+		<indentationsize>Indentação de Tamanho</indentationsize>
+		<fontfamily>Fonte</fontfamily>
+		<syntaxhigh>Destaque de Syntaxe</syntaxhigh>
+		<highdeprecat>Destaque a sintaxe depreciada (&lt; 1.7)</highdeprecat>
+		<compile>Compilar</compile>
+		<autosavemin>Salvamento automático (min)</autosavemin>
+	</pt>
 </translations>
