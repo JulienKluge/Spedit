@@ -572,8 +572,8 @@
 		<compile>Kompilera</compile>
 		<autosavemin>Auto spara (min)</autosavemin>
 	</sv>
-	<ru>
-		<language>Pусский</language>
+<ru>
+		<language>Русский</language>
 		<serverrunning>Сервер запущен</serverrunning>
 		<saving>Сохранение</saving>
 		<saveufiles>Сохранить все несохранённые файлы?</saveufiles>
@@ -591,10 +591,10 @@
 		<savefollow>Сохранить следующие файлы</savefollow>
 		<chdecomp>Выбрать плагин для декомпилирования</chdecomp>
 		<decompiling>Декомпилирование</decompiling>
-		<editconfig>Изменить настройки</editconfig>
+		<editconfig>Редактировать конфиги</editconfig>
 		<foundinoff>Найдено в смещении {0} размером {1}</foundinoff>
 		<foundnothing>Ничего не найдено</foundnothing>
-		<replacedoff>Replaced in offset</replacedoff>
+		<replacedoff>Заменено в смещении</replacedoff>
 		<replacedocc>Произведено {0} замен в документе {1}</replacedocc>
 		<occfound>совпадений найдено</occfound>
 		<emptypatt>Поисковый шаблон пуст</emptypatt>
@@ -624,10 +624,10 @@
 		<saveas>Сохранить как...</saveas>
 		<close>Закрыть</close>
 		<closeall>Закрыть всё</closeall>
-		<build>Билд</build>
+		<build>Сборка</build>
 		<copyplugin>Скопировать плагины</copyplugin>
 		<sendrcon>Отправить RCon команду</sendrcon>
-		<config>Настройки</config>
+		<config>Конфиги</config>
 		<edit>Редактировать</edit>
 		<undo>Отмена</undo>
 		<redo>Повтор</redo>
@@ -636,15 +636,15 @@
 		<folding>Блоки</folding>
 		<expandall>Развернуть все</expandall>
 		<collapseall>Свернуть все</collapseall>
-		<jumpto>Переместиться к</jumpto>
-		<togglcomment>Toggle Comments</togglcomment>
+		<jumpto>Перейти к</jumpto>
+		<togglcomment>Раз-/Закомментировать</togglcomment>
 		<selectall>Выбрать всё</selectall>
 		<findreplace>Поиск и замена</findreplace>
 		<tools>Инструменты</tools>
-		<options>Опции</options>
-		<parsedincdir>Parsed from include directory</parsedincdir>
-		<oldapiweb>Старого API webside</oldapiweb>
-		<newapiweb>Нового API webside</newapiweb>
+		<options>Настройки программы</options>
+		<parsedincdir>Установленный на ПК</parsedincdir>
+		<oldapiweb>Страница старого API</oldapiweb>
+		<newapiweb>Страница нового API</newapiweb>
 		<reformatter>Переформатирование синтаксиса</reformatter>
 		<reformatcurr>Переформатировать текущий</reformatcurr>
 		<reformatall>Переформатировать все</reformatall>
@@ -664,7 +664,7 @@
 		<find>Найти</find>
 		<count>Считать</count>
 		<casesen>Учитывать регистр</casesen>
-		<multilineregex>Многострочное регуляное выражение</multilineregex>
+		<multilineregex>Многострочная регулярка</multilineregex>
 		<errorfileloadproc>Ошибка при загрузке и обработке файла.</errorfileloadproc>
 		<notdissmethod>Не удалось разобрать метод {0}: {1}</notdissmethod>
 		<dfilechanged>{0} был изменён.</dfilechanged>
@@ -674,13 +674,13 @@
 		<saveerror>Ошибка сохранения</saveerror>
 		<savingfile>Сохранение файлов</savingfile>
 		<ptabb>пункт</ptabb>
-		<colabb>Столб</colabb>
-		<lnabb>Стр</lnabb>
-		<lenabb>Длин</lenabb>
+		<colabb>Столбец</colabb>
+		<lnabb>Строка</lnabb>
+		<lenabb>Длина</lenabb>
 		<speditcap>легкий редактор SourcePawn</speditcap>
-		<writtenby>написан: {0}</writtenby>
+		<writtenby>Автор: {0}</writtenby>
 		<license>Лицензия</license>
-		<peopleinv>Участвовали</peopleinv>
+		<peopleinv>Помогали:</peopleinv>
 		<preview>Предпросмотр</preview>
 		<newfile>Новый файл</newfile>
 		<configwrongpars>Конфиг не смог прочесть определения SourcePawn.</configwrongpars>
@@ -699,8 +699,8 @@
 		<serverstartargs>Аргументы запуска сервера</serverstartargs>
 		<prebuildcom>Pre-Build командная строка</prebuildcom>
 		<postbuildcom>Post-Build командная строка</postbuildcom>
-		<optimizelvl>Уровень оптимизации</optimizelvl>
-		<verboselvl>Подробный уровень</verboselvl>
+		<optimizelvl>Оптимизация</optimizelvl>
+		<verboselvl>Уровень оптимизации</verboselvl>
 		<autocopy>Скопировать после компиляции</autocopy>
 		<deleteoldsmx>Удалить старый .smx после копирования</deleteoldsmx>
 		<ftphost>Хост FTP</ftphost>
@@ -714,7 +714,7 @@
 		<comscriptname>Имя файла скрипта</comscriptname>
 		<compluginfile>Full Directory and Name of the compiled script</compluginfile>
 		<compluginname>Имя скомпилированного скрипта</compluginname>
-		<rconengine>RCon Server Engine</rconengine>
+		<rconengine>Движок RCon сервера</rconengine>
 		<rconip>IP адрес RCon сервера</rconip>
 		<rconport>Порт RCon сервера</rconport>
 		<rconpw>Пароль RCon сервера</rconpw>
@@ -738,7 +738,7 @@
 		<hardwareacc>Использовать аппаратное ускорение (если возможно)</hardwareacc>
 		<uianim>Анимация интерфейса</uianim>
 		<openinc>Автоматическое использование инклюдов</openinc>
-		<openincrec>Открыть инклюды рекурсивно</openincrec>
+		<openincrec>Открывать инклюды рекурсивно</openincrec>
 		<autoupdate>Автоматический поиск обновлений</autoupdate>
 		<showtoolbar>Отобразить панель инструментов</showtoolbar>
 		<dynamicisac>Динамическое автодополнение</dynamicisac>
@@ -753,14 +753,14 @@
 		<reformataftersem>Переформатирование строки после точки с запятой</reformataftersem>
 		<tabstospace>Заменить табуляцию пробелами</tabstospace>
 		<autoclosebrack>Автозакрытие скобок</autoclosebrack>
-		<autoclosestrchr>Автозакрытие строковых и символьных переменных</autoclosestrchr>
+		<autoclosestrchr>Автозакрытие кавычек для типов String, Char</autoclosestrchr>
 		<showsapaces>Отображать пробелы</showsapaces>
 		<showtabs>Отображать табуляцию</showtabs>
 		<indentationsize>Размер отступа</indentationsize>
 		<fontfamily>Шрифт</fontfamily>
 		<syntaxhigh>Подсветка синтаксиса</syntaxhigh>
 		<highdeprecat>Подсветка устаревшего (&lt;1.7) синтаксиса</highdeprecat>
-		<compile>Cоставить</compile>
-		<autosavemin>Aвтосохранение (минут)</autosavemin>
+		<compile>Компиляция</compile>
+		<autosavemin>Aвтосохранение (мин)</autosavemin>
 	</ru>
 </translations>
