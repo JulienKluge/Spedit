@@ -46,10 +46,15 @@ namespace Spedit.UI
 		{
 			DirectoryInfo currentInfo = new DirectoryInfo(CurrentObjectBrowserDirectory);
 			DirectoryInfo parentInfo = currentInfo.Parent;
-			if (parentInfo.Exists)
+			if (parentInfo != null)
 			{
-				ChangeObjectBrowserToDirectory(parentInfo.FullName);
+				if (parentInfo.Exists)
+				{
+					ChangeObjectBrowserToDirectory(parentInfo.FullName);
+					return;
+				}
 			}
+			ChangeObjectBrowserToDrives();
 		}
 
 		private void TreeViewOBItemFile_DoubleClicked(object sender, RoutedEventArgs e)
@@ -109,10 +114,15 @@ namespace Spedit.UI
 					{
 						DirectoryInfo currentInfo = new DirectoryInfo(CurrentObjectBrowserDirectory);
 						DirectoryInfo parentInfo = currentInfo.Parent;
-						if (parentInfo.Exists)
+						if (parentInfo != null)
 						{
-							ChangeObjectBrowserToDirectory(parentInfo.FullName);
+							if (parentInfo.Exists)
+							{
+								ChangeObjectBrowserToDirectory(parentInfo.FullName);
+								return;
+							}
 						}
+						ChangeObjectBrowserToDrives();
 					}
 				}
 				((ListViewItem)sender).IsSelected = false;
@@ -129,6 +139,11 @@ namespace Spedit.UI
 				{
 					dir = cc.SMDirectories[0];
 				}
+			}
+			else if (dir == "0:")
+			{
+				ChangeObjectBrowserToDrives();
+				return;
 			}
 			if (!Directory.Exists(dir))
 			{
@@ -151,6 +166,33 @@ namespace Spedit.UI
 				foreach (var item in newItems)
 				{
 					ObjectBrowser.Items.Add(item);
+				}
+			}
+		}
+
+		private void ChangeObjectBrowserToDrives()
+		{
+			Program.OptionsObject.Program_ObjectBrowserDirectory = "0:";
+			DriveInfo[] drives = DriveInfo.GetDrives();
+			using (var dd = Dispatcher.DisableProcessing())
+			{
+				ObjectBrowserDirBlock.Text = string.Empty;
+				ObjectBrowser.Items.Clear();
+				foreach (var dInfo in drives)
+				{
+					if (dInfo.IsReady && (dInfo.DriveType == DriveType.Fixed || dInfo.DriveType == DriveType.Removable))
+					{
+						if (dInfo.RootDirectory != null)
+						{
+							var tvi = new TreeViewItem()
+							{
+								Header = BuildTreeViewItemContent(dInfo.Name, "iconmonstr-folder-13-16.png"),
+								Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.Directory, Value = dInfo.RootDirectory.FullName }
+							};
+							tvi.Items.Add("...");
+							ObjectBrowser.Items.Add(tvi);
+						}
+					}
 				}
 			}
 		}
