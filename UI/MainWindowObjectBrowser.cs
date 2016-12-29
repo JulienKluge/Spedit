@@ -218,8 +218,9 @@ namespace Spedit.UI
 			image.Source = new BitmapImage(new Uri(uriPath, UriKind.Relative));
 			image.Width = 16;
 			image.Height = 16;
-			Label lbl = new Label();
-			lbl.Content = headerString;
+			TextBlock lbl = new TextBlock();
+			lbl.Text = headerString;
+			lbl.Margin = new Thickness(2.0, 0.0, 0.0, 0.0);
 			stack.Children.Add(image);
 			stack.Children.Add(lbl);
 			return stack;
