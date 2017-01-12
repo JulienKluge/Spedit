@@ -381,6 +381,197 @@
 		<compile>Compiler</compile>
 		<autosavemin>Sauvegarde automatique (min)</autosavemin>
 	</fr>
+	<ko>
+		<language>한국어</language>
+		<serverrunning>서버 가동중</serverrunning>
+		<saving>저장중</saving>
+		<saveufiles>저장되지 않은 모든 파일을 저장합니까?</saveufiles>
+		<compileall>모두 컴파일</compileall>
+		<compilecurr>현재 문서 컴파일</compilecurr>
+		<copy>복사</copy>
+		<ftpup>FTP 업로드</ftpup>
+		<startserver>서버 시작</startserver>
+		<replace>바꾸기</replace>
+		<replaceall>모두 바꾸기</replaceall>
+		<opennewfile>새 파일 열기</opennewfile>
+		<nofilopened>열려있는 파일이 없습니다.</nofilopened>
+		<nofileopenedcap>선택한 파일들 중 열 수 있는 파일이 없습니다.</nofileopenedcap>
+		<savefileas>다른 이름으로 저장</savefileas>
+		<savefollow>다음 파일들을 저장하시겠습니까?</savefollow>
+		<chdecomp>디컴파일할 플러그인을 선택하세요</chdecomp>
+		<decompiling>디컴파일 중</decompiling>
+		<editconfig>컴파일 설정 편집</editconfig>
+		<foundinoff>{0}위치에서 발견 (길이: {1})</foundinoff>
+		<foundnothing>찾을 수 없음</foundnothing>
+		<replacedoff>바꾸기 실행 위치:</replacedoff><!-- need parameter (pos: {0}) -->
+		<replacedocc>{1}개 문서에서 바꾸기 {0}번 실행됨</replacedocc>
+		<occfound>개의 일치 항목 발견</occfound><!-- need parameter({0} occ...) -->
+		<emptypatt>검색할 내용을 입력해주세요.</emptypatt>
+		<novalidregex>유효하지 않은 정규표현식입니다.</novalidregex>
+		<failedcheck>업데이트 확인에 실패했습니다.</failedcheck> <!--in sense of searching for updates-->
+		<errorupdate>업데이트를 확인하는 도중 오류가 발생했습니다.</errorupdate>
+		<versuptodate>최신 버전</versuptodate>
+		<versionyour>현재 사용하고 계신 {0} 버전은 최신 버전입니다.</versionyour>
+		<details>세부내용</details>
+		<compiling>컴파일중</compiling>
+		<error>오류</error>
+		<spcompnotstarted>spcomp.exe 컴파일러가 정상적으로 시작되지 않았습니다.</spcompnotstarted>
+		<spcompnotfound>spcomp.exe 컴파일러를 찾을 수 없습니다.</spcompnotfound>
+		<copied>복사됨</copied>
+		<deleted>삭제됨</deleted>
+		<failcopy>복사에 실패함</failcopy>
+		<nofilescopy>복사된 파일이 없음</nofilescopy>
+		<uploaded>업로드됨</uploaded>
+		<erroruploadfile>파일을 업로드 하는 중 에러가 발생했습니다: {0} to {1}</erroruploadfile>
+		<errorupload>파일을 업로드 하는 중 에러가 발생했습니다.</errorupload>
+		<done>완료</done>
+		<file>파일</file>
+		<new>새로 만들기</new>
+		<open>열기</open>
+		<save>저장</save>
+		<saveall>모두 저장</saveall>
+		<saveas>다른 이름으로 저장</saveas>
+		<close>닫기</close>
+		<closeall>모두 닫기</closeall>
+		<build>빌드</build>
+		<copyplugin>플러그인 복사</copyplugin>
+		<sendrcon>RCon 명령어 전송</sendrcon>
+		<config>컴파일 설정</config>
+		<edit>편집</edit>
+		<undo>실행 취소</undo>
+		<redo>다시 실행</redo>
+		<cut>잘라내기</cut>
+		<paste>붙여넣기</paste>
+		<folding>접기</folding>
+		<expandall>모두 펼치기</expandall>
+		<collapseall>모두 접기</collapseall>
+		<jumpto>이동</jumpto>
+		<togglcomment>주석 달기/제거</togglcomment>
+		<selectall>모두 선택</selectall>
+		<findreplace>찾기 &amp; 바꾸기</findreplace>
+		<tools>도구</tools>
+		<options>편집기 설정</options>
+		<parsedincdir>Include 디렉토리에서 분석</parsedincdir>
+		<oldapiweb>구 문법 API</oldapiweb>
+		<newapiweb>새 문법 API</newapiweb>
+		<reformatter>문법 정리</reformatter>
+		<reformatcurr>현재 문서의 문법 정리</reformatcurr>
+		<reformatall>모든 문서의 문법 정리</reformatall>
+		<decompile>디컴파일</decompile>
+		<reportbuggit>GitHub에 버그 제보하기</reportbuggit>
+		<checkupdates>업데이트 확인</checkupdates>
+		<about>정보</about>
+		<filename>파일 이름</filename>
+		<line>Line</line>
+		<type>Type</type>
+		<normalsearch>일반</normalsearch>
+		<matchwhowords>모든 단어 일치</matchwhowords>
+		<advancsearch>확장</advancsearch>
+		<regexsearch>정규표현식</regexsearch>
+		<currdoc>현재 문서</currdoc>
+		<alldoc>모든 열린 문서</alldoc>
+		<find>찾기</find>
+		<count>일치 항목 수</count>
+		<casesen>대/소문자 구분</casesen>
+		<multilineregex>여러 줄 정규표현식</multilineregex>
+		<errorfileloadproc>파일을 불러오고 처리하는 과정에서 오류가 발생했습니다.</errorfileloadproc>
+		<notdissmethod>{0} 메서드를 디스어셈블할 수 없었습니다: {1}</notdissmethod>
+		<dfilechanged>{0} 파일이 변경되었습니다.</dfilechanged>
+		<filechanged>파일 변경됨</filechanged>
+		<filetryreload>파일을 다시 불러오시겠습니까?</filetryreload>
+		<dsaveerror>저장하는 도중 오류가 발생했습니다.</dsaveerror>
+		<saveerror>저장 오류</saveerror>
+		<savingfile>파일 저장중</savingfile>
+		<ptabb>pt</ptabb> <!--point abbreviation-->
+		<colabb>Col</colabb> <!--Coloum abbreviation-->
+		<lnabb>Ln</lnabb> <!--Line abbreviation-->
+		<lenabb>Len</lenabb> <!--Length abbreviation-->
+		<speditcap>가벼운 Sourcepawn 편집기</speditcap>
+		<writtenby>제작자: {0}</writtenby>
+		<license>라이센스</license>
+		<peopleinv>관여한 사람들</peopleinv>
+		<preview>미리보기</preview>
+		<newfile>새 파일</newfile>
+		<configwrongpars>설정을 통해 sourcepawn 정의를 분석할 수 없었습니다.</configwrongpars>
+		<noname>이름 없음</noname>
+		<poslen>위치: {0} - 길이: {1}</poslen>
+		<inheritedfr>inherited from</inheritedfr> <!-- need parameter(from {0}) -->
+		<methodfrom>Method from</methodfrom> <!--do not translate 'Method'--> <!-- need parameter(from {0}) -->
+		<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'--> <!-- need parameter(from {0}) -->
+		<search>검색</search>
+		<delete>삭제</delete>
+		<name>설정 이름</name>
+		<scriptdir>Scripting 폴더 위치</scriptdir>
+		<delimitedwi>구분자</delimitedwi> <!-- need parameter (delimited with {0}) -->
+		<copydir>복사할 디렉토리</copydir>
+		<serverexe>서버 실행 파일 경로</serverexe>
+		<serverstartargs>서버 실행(명령줄) 인수</serverstartargs>
+		<prebuildcom>빌드 전 실행 명령줄</prebuildcom>
+		<postbuildcom>빌드 후 실행 명령줄</postbuildcom>
+		<optimizelvl>컴파일 최적화 수준</optimizelvl>
+		<verboselvl>컴파일 상세성 수준</verboselvl>
+		<autocopy>컴파일 이후 파일 자동 복사</autocopy>
+		<deleteoldsmx>복사 후 이전의 .smx 파일 삭제</deleteoldsmx>
+		<ftphost>FTP 호스트</ftphost>
+		<ftpuser>FTP 유저</ftpuser>
+		<ftppw>FTP 비밀번호</ftppw>
+		<ftpdir>FTP 경로</ftpdir>
+		<comeditordir>SPEdit의 실행파일이 존재하는 폴더의 경로</comeditordir>
+		<comscriptdir>컴파일하는 스크립트의 폴더의 경로</comscriptdir>
+		<comcopydir>.smx 파일이 복사될 경로</comcopydir>
+		<comscriptfile>스크립트 파일의 이름을 포함한 모든 경로</comscriptfile>
+		<comscriptname>스크립트 파일의 이름</comscriptname>
+		<compluginfile>컴파일된 플러그인 파일의 이름을 포함한 모든 경로</compluginfile>
+		<compluginname>컴파일된 플러그인 파일의 이름</compluginname>
+		<rconengine>RCon 서버 엔진</rconengine>
+		<rconip>RCon 서버 IP</rconip>
+		<rconport>RCon 서버 포트</rconport>
+		<rconpw>RCon 서버 암호</rconpw>
+		<rconcom>RCon 서버 명령어</rconcom>
+		<compluginsreload>모든 컴파일된 플러그인 리로드</compluginsreload>
+		<compluginsloas>모든 컴파일된 플러그인 로드</compluginsloas>
+		<compluginsunload>모든 컴파일된 플러그인 언로드</compluginsunload>
+		<newconfig>새 설정</newconfig>
+		<cannotdelconf>설정을 지울 수 없습니다</cannotdelconf>
+		<ycannotdelconf>이 설정을 지울 수 없습니다!</ycannotdelconf>
+		<selectexe>실행파일 선택</selectexe>
+		<cmdlinecom>명령줄 변수</cmdlinecom>
+		<rconcmdlinecom>Rcon 명령줄 변수</rconcmdlinecom>
+		<resetoptions>설정 초기화</resetoptions>
+		<resetoptques>정말로 설정을 초기화하시겠습니까?</resetoptques>
+		<restarteditor>편집기 다시시작</restarteditor>
+		<yrestarteditor>변경한 내용은 프로그램을 다시 시작하면 적용됩니다.</yrestarteditor>
+		<restartedifulleff>변경한 모든 내용은 프로그램을 다시 시작하면 적용됩니다...</restartedifulleff>
+		<restartedieff>변경한 내용은 프로그램을 다시 시작하면 적용됩니다...</restartedieff>
+		<program>프로그램</program>
+		<hardwareacc>하드웨어 가속 사용 (가능할 시)</hardwareacc>
+		<uianim>UI 애니메이션</uianim>
+		<openinc>Include 파일 자동으로 열기</openinc>
+		<openincrec>Include 파일 안의 Include 파일 열기</openincrec>
+		<autoupdate>자동 업데이트 검색</autoupdate>
+		<showtoolbar>툴바 보이기</showtoolbar>
+		<dynamicisac>동적 자동완성 / 인텔리센스</dynamicisac>
+		<darktheme>어두운 테마</darktheme>
+		<themecolor>테마 색상</themecolor>
+		<languagestr>언어</languagestr>
+		<editor>편집기</editor>
+		<fontsize>폰트 크기</fontsize>
+		<scrollspeed>스크롤 속도</scrollspeed>
+		<wordwrap>자동 줄 바꿈</wordwrap>
+		<aggindentation>자동 들여쓰기</aggindentation>
+		<reformataftersem>세미콜론 뒤의 문장 정리</reformataftersem>
+		<tabstospace>탭을 공백으로 바꾸기</tabstospace>
+		<autoclosebrack>괄호 자동닫기</autoclosebrack>
+		<autoclosestrchr>문자열 자동닫기</autoclosestrchr>
+		<showsapaces>공백 보이기</showsapaces>
+		<showtabs>탭(들여쓰기) 보이기</showtabs>
+		<indentationsize>들여쓰기 길이</indentationsize>
+		<fontfamily>폰트</fontfamily>
+		<syntaxhigh>문법강조</syntaxhigh>
+		<highdeprecat>구 문법 (&lt;1.7) 강조</highdeprecat>
+		<compile>컴파일</compile>
+		<autosavemin>자동 저장 (분)</autosavemin>
+	</ko>
 	<sv>
 		<language>Svenska</language>
 		<serverrunning>Server körs</serverrunning>
