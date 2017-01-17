@@ -403,12 +403,12 @@
 		<editconfig>컴파일 설정 편집</editconfig>
 		<foundinoff>{0}위치에서 발견 (길이: {1})</foundinoff>
 		<foundnothing>찾을 수 없음</foundnothing>
-		<replacedoff>바꾸기 실행 위치:</replacedoff><!-- need parameter (pos: {0}) -->
+		<replacedoff>바꾸기 실행 위치:</replacedoff>
 		<replacedocc>{1}개 문서에서 바꾸기 {0}번 실행됨</replacedocc>
-		<occfound>개의 일치 항목 발견</occfound><!-- need parameter({0} occ...) -->
+		<occfound>개의 일치 항목 발견</occfound>
 		<emptypatt>검색할 내용을 입력해주세요.</emptypatt>
 		<novalidregex>유효하지 않은 정규표현식입니다.</novalidregex>
-		<failedcheck>업데이트 확인에 실패했습니다.</failedcheck> <!--in sense of searching for updates-->
+		<failedcheck>업데이트 확인에 실패했습니다.</failedcheck>
 		<errorupdate>업데이트를 확인하는 도중 오류가 발생했습니다.</errorupdate>
 		<versuptodate>최신 버전</versuptodate>
 		<versionyour>현재 사용하고 계신 {0} 버전은 최신 버전입니다.</versionyour>
@@ -482,10 +482,10 @@
 		<dsaveerror>저장하는 도중 오류가 발생했습니다.</dsaveerror>
 		<saveerror>저장 오류</saveerror>
 		<savingfile>파일 저장중</savingfile>
-		<ptabb>pt</ptabb> <!--point abbreviation-->
-		<colabb>Col</colabb> <!--Coloum abbreviation-->
-		<lnabb>Ln</lnabb> <!--Line abbreviation-->
-		<lenabb>Len</lenabb> <!--Length abbreviation-->
+		<ptabb>pt</ptabb>
+		<colabb>Col</colabb>
+		<lnabb>Ln</lnabb>
+		<lenabb>Len</lenabb>
 		<speditcap>가벼운 Sourcepawn 편집기</speditcap>
 		<writtenby>제작자: {0}</writtenby>
 		<license>라이센스</license>
@@ -495,14 +495,14 @@
 		<configwrongpars>설정을 통해 sourcepawn 정의를 분석할 수 없었습니다.</configwrongpars>
 		<noname>이름 없음</noname>
 		<poslen>위치: {0} - 길이: {1}</poslen>
-		<inheritedfr>inherited from</inheritedfr> <!-- need parameter(from {0}) -->
-		<methodfrom>Method from</methodfrom> <!--do not translate 'Method'--> <!-- need parameter(from {0}) -->
-		<propertyfrom>Property from</propertyfrom> <!--do not translate 'property'--> <!-- need parameter(from {0}) -->
+		<inheritedfr>inherited from</inheritedfr>
+		<methodfrom>Method from</methodfrom>
+		<propertyfrom>Property from</propertyfrom>
 		<search>검색</search>
 		<delete>삭제</delete>
 		<name>설정 이름</name>
 		<scriptdir>Scripting 폴더 위치</scriptdir>
-		<delimitedwi>구분자</delimitedwi> <!-- need parameter (delimited with {0}) -->
+		<delimitedwi>구분자</delimitedwi>
 		<copydir>복사할 디렉토리</copydir>
 		<serverexe>서버 실행 파일 경로</serverexe>
 		<serverstartargs>서버 실행(명령줄) 인수</serverstartargs>
