@@ -1336,4 +1336,195 @@
 		<compile>Kompiluj</compile>
 		<autosavemin>Automatyczny zapis (min)</autosavemin>
 	</pl>
+	<tr>
+		<language>Türkçe</language>
+		<serverrunning>Sunucu Çalışıyor</serverrunning>
+		<saving>Kaydet</saving>
+		<saveufiles>Tüm Dosyaları Kaydet</saveufiles>
+		<compileall>Herşeyi Derle</compileall>
+		<compilecurr>Derle</compilecurr>
+		<copy>Derle</copy>
+		<ftpup>FTP Yükle</ftpup>
+		<startserver>Sunucu Başlar</startserver>
+		<replace>Değiştir</replace>
+		<replaceall>Herşeyi Değiştir</replaceall>
+		<opennewfile>Yeni Dosya Aç</opennewfile>
+		<nofilopened>Açık Dosya Yok</nofilopened>
+		<nofileopenedcap>Seçilen Dosyalar Açılamaz</nofileopenedcap>
+		<savefileas>Farklı Kaydet</savefileas>
+		<savefollow>Aşağıdaki Dosyaları Kaydet</savefollow>
+		<chdecomp>Decompile İçin Dosya Seçin</chdecomp>
+		<decompiling>Decompile</decompiling>
+		<editconfig>Düzen Yapılandırma</editconfig>
+		<foundinoff>Ofset ve uzunluğu {0} ile bulunan {1}</foundinoff>
+		<foundnothing>Hiçbir şey bulunamadı</foundnothing>
+		<replacedoff>Ofset değiştirir</replacedoff>
+		<replacedocc>{0} olaylar {1} belgelerde yerini değiştir</replacedocc>
+		<occfound>Olaylar bulundu</occfound>
+		<emptypatt>Boş arama terimi</emptypatt>
+		<novalidregex>Geçerli regex ifadesi değil</novalidregex>
+		<failedcheck>Doğrulanamadı</failedcheck>
+		<errorupdate>Güncellemele hatası</errorupdate>
+		<versuptodate>Güncel Sürüm</versuptodate>
+		<versionyour>Program sürümü {0} şu anda.</versionyour>
+		<details>Detaylar</details>
+		<compiling>Derle</compiling>
+		<error>Hata</error>
+		<spcompnotstarted>Spcomp.exe derleyici düzgün başlatılamadı.</spcompnotstarted>
+		<spcompnotfound>Spcomp.exe derleyici bulunamadı.</spcompnotfound>
+		<copied>Kopyalandı</copied>
+		<deleted>Silindi</deleted>
+		<failcopy>Kopyalama Hatası</failcopy>
+		<nofilescopy>Hiçbir dosya kopyalanamadı</nofilescopy>
+		<uploaded>Yüklendi</uploaded>
+		<erroruploadfile>Hata Yükleme: {0} ile {1}</erroruploadfile>
+		<errorupload>Dosya Yükleme Hatası</errorupload>
+		<done>Başarılı</done>
+		<file>Dosya</file>
+		<new>Yeni</new>
+		<open>Aç</open>
+		<save>Kaydet</save>
+		<saveall>Tümünü Kaydet</saveall>
+		<saveas>Farklı Kaydet</saveas>
+		<close>Kapat</close>
+		<closeall>Tümünü Kapat</closeall>
+		<build>Derle</build>
+		<copyplugin>Eklenti Kopyalandı</copyplugin>
+		<sendrcon>Rcon Komutu Gönder</sendrcon>
+		<config>Ayarlar</config>
+		<edit>Düzen</edit>
+		<undo>Geri Al</undo>
+		<redo>İleri Al</redo>
+		<cut>Kes</cut>
+		<paste>Yapıştır</paste>
+		<folding>Bloklar</folding>
+		<expandall>Tümünü genişlet</expandall>
+		<collapseall>Hepsini kapa</collapseall>
+		<jumpto>Git</jumpto>
+		<togglcomment>Yorum Satırı</togglcomment>
+		<selectall>Tümünü Seç</selectall>
+		<findreplace>Bul &amp; Değiştir</findreplace>
+		<tools>Araçlar</tools>
+		<options>Ayarlar</options>
+		<parsedincdir>Vom include-Pfad erkannt</parsedincdir>
+		<oldapiweb>Eski API web sitesi</oldapiweb>
+		<newapiweb>Yeni API web sitesi</newapiweb>
+		<reformatter>Biçimlendirme Sözdizimi yeni</reformatter>
+		<reformatcurr>biçim</reformatcurr>
+		<reformatall>Biçimlendirme tüm</reformatall>
+		<decompile>Decompile</decompile>
+		<reportbuggit>GitHub üzerinde hata bildir</reportbuggit>
+		<checkupdates>Güncelleme Denetler</checkupdates>
+		<about>Hakkında</about>
+		<filename>Dosya İsimi</filename>
+		<line>Satır</line>
+		<type>Tür</type>
+		<normalsearch>Normal Arama</normalsearch>
+		<matchwhowords>Kelime Arama</matchwhowords>
+		<advancsearch>Gelişmiş Arama</advancsearch>
+		<regexsearch>Regex Arama</regexsearch>
+		<currdoc>Anlık Belge</currdoc>
+		<alldoc>Tüm Açık Belgeler</alldoc>
+		<find>Bul</find>
+		<count>Say</count>
+		<casesen>Büyük / küçük harf</casesen>
+		<multilineregex>Çok satırlı regex</multilineregex>
+		<errorfileloadproc>Hata</errorfileloadproc>
+		<notdissmethod>Yöntemi ayrıştırılamıyor {0}: {1}</notdissmethod>
+		<dfilechanged>{0} değişti.</dfilechanged>
+		<filechanged>değiştirilmiş dosya</filechanged>
+		<filetryreload>Bu dosyayı güncelle?</filetryreload>
+		<dsaveerror>Kaydederken bir hata olmuştur.</dsaveerror>
+		<saveerror>Kaydetme Hatası</saveerror>
+		<savingfile>dosyayı kaydetmek</savingfile>
+		<ptabb>pt</ptabb>
+		<colabb>Sp</colabb>
+		<lnabb>Zl</lnabb>
+		<lenabb>Lng</lenabb>
+		<speditcap>Kolay SourcePawn Editörü</speditcap>
+		<writtenby>Yazar: {0}</writtenby>
+		<license>Lisans</license>
+		<peopleinv>Yardımda Bulunanlar:</peopleinv>
+		<preview>Önizleme</preview>
+		<newfile>Yeni Dosya</newfile>
+		<configwrongpars>Yapılandırma tanımı SourcePawn okuyamadı.</configwrongpars>
+		<noname>İsim Yok</noname>
+		<poslen>Pos: {0} - Len: {1}</poslen>
+		<inheritedfr>Miras</inheritedfr>
+		<methodfrom>Yöntem</methodfrom>
+		<propertyfrom>Mülkiyeti</propertyfrom>
+		<search>Ara</search>
+		<delete>Sil</delete>
+		<name>İsim</name>
+		<scriptdir>Script Dizini</scriptdir>
+		<delimitedwi>Pay</delimitedwi>
+		<copydir>Kopyala Yol</copydir>
+		<serverexe>Sunucu yolu</serverexe>
+		<serverstartargs>Sunucu başlatma parametresi</serverstartargs>
+		<prebuildcom>Pre-build komutları</prebuildcom>
+		<postbuildcom>Post-build komutları</postbuildcom>
+		<optimizelvl>optimizasyon</optimizelvl>
+		<verboselvl>Ayrıntılı Seviye</verboselvl>
+		<autocopy>Otomatik olarak derleme kopyalaması</autocopy>
+		<deleteoldsmx>Eski .SMX Dosyasını Sil</deleteoldsmx>
+		<ftphost>FTP Sunucusu</ftphost>
+		<ftpuser>FTP Kullanıcı Adı</ftpuser>
+		<ftppw>FTP Şifre</ftppw>
+		<ftpdir>FTP Dizin</ftpdir>
+		<comeditordir>Yol SPEDIT-Binary için</comeditordir>
+		<comscriptdir>Yer derlenmiş komut dosyaları</comscriptdir>
+		<comcopydir>SMX Kopya yolu</comcopydir>
+		<comscriptfile>Script dosyası için tam yolu ve adı</comscriptfile>
+		<comscriptname>Script dosya adı</comscriptname>
+		<compluginfile>Derlenmiş scriptin Tam Dizini ve Adı</compluginfile>
+		<compluginname>Derlenmiş script Ad</compluginname>
+		<rconengine>RCon Sunucu</rconengine>
+		<rconip>RCon Sunucu IP</rconip>
+		<rconport>RCon Sunucu Port</rconport>
+		<rconpw>RCon Sunucu Şifre</rconpw>
+		<rconcom>RCon Server Komut</rconcom>
+		<compluginsreload>Tüm derlenmiş eklentileri yeniden başlatın</compluginsreload>
+		<compluginsloas>Tüm derlenmiş eklentileri çalıştır</compluginsloas>
+		<compluginsunload>Derlenen tüm eklentileri durdur</compluginsunload>
+		<newconfig>Yeni yapılandırma</newconfig>
+		<cannotdelconf>Yapılandırma silinemiyor</cannotdelconf>
+		<ycannotdelconf>Bu yapılandırmayı silemezsiniz.</ycannotdelconf>
+		<selectexe>dosyayi seçin</selectexe>
+		<cmdlinecom>Değişkenler komut satırı</cmdlinecom>
+		<rconcmdlinecom>Rcon komutu değişkenleri</rconcmdlinecom>
+		<resetoptions>sıfırlama seçenekleri</resetoptions>
+		<resetoptques>Seçeneklerini sıfırlamak istediğinize emin misiniz?</resetoptques>
+		<restarteditor>Düzenleyici sıfırlandı</restarteditor>
+		<yrestarteditor>Değişiklikleri uygulamak için editörü yeniden başlatmanız gerekir.</yrestarteditor>
+		<restartedifulleff>Editör tam etkili olması için yeniden başlatın...</restartedifulleff>
+		<restartedieff>Reset Seçenekleri</restartedieff>
+		<program>Programm</program>
+		<hardwareacc>Kullanım donanım hızlandırma (varsa)</hardwareacc>
+		<uianim>UI Animasyonları</uianim>
+		<openinc>Otomatik kullanım Include</openinc>
+		<openincrec>Include aç</openincrec>
+		<autoupdate>Otomatik Güncelle</autoupdate>
+		<showtoolbar>Araç çubuğunu göster</showtoolbar>
+		<dynamicisac>Dinamik Otomatik Geçiş / Duyarlılık</dynamicisac>
+		<darktheme>Karanlık Tema</darktheme>
+		<themecolor>Tema Rengi</themecolor>
+		<languagestr>Dil</languagestr>
+		<editor>Editör</editor>
+		<fontsize>Font Boyutu</fontsize>
+		<scrollspeed>Kaydırma Hızı</scrollspeed>
+		<wordwrap>Kelime Sarma</wordwrap>
+		<aggindentation>Agresif girinti</aggindentation>
+		<reformataftersem>Noktalı virgül ile hat reformasyon</reformataftersem>
+		<tabstospace>Sekmeleri boşluk ile değiştirmek</tabstospace>
+		<autoclosebrack>Otomatik olarak parantezi kapat</autoclosebrack>
+		<autoclosestrchr>Otomatik olarak dizeleri, parantezleri kapat</autoclosestrchr>
+		<showsapaces>Boşlukları Göster</showsapaces>
+		<showtabs>Sekmeleri Göster</showtabs>
+		<indentationsize>Girinti büyüklüğü</indentationsize>
+		<fontfamily>Yazı</fontfamily>
+		<syntaxhigh>Sözdizimi vurgulama</syntaxhigh>
+		<highdeprecat>Önerililen sözdizimi vurgulayın (&lt; 1.7)</highdeprecat>
+		<compile>Derle</compile>
+		<autosavemin>Otomatik kaydetme (Dakika)</autosavemin>
+	</tr>
 </translations>
