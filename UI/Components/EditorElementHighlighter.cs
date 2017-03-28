@@ -125,7 +125,7 @@ namespace Spedit.UI.Components
                 });
                 rs.Rules.Add(new HighlightingRule() //std includes - string color!
                 {
-                    Regex = new Regex(@"\s[<][\w\\/]+(\.\w+)?[>]", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
+                    Regex = new Regex(@"\s[<][\w\\/\-]+(\.[\w\-]+)?[>]", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture),
                     Color = new HighlightingColor() { Foreground = stringBrush }
                 });
                 var def = Program.Configs[Program.SelectedConfig].GetSMDef();
