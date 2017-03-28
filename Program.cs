@@ -24,7 +24,7 @@ namespace Spedit
 
         public static UpdateInfo UpdateStatus;
 
-		private static bool RCCKMade = false;
+		public static bool RCCKMade = false;
 
         [STAThread]
         public static void Main(string[] args)

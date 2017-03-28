@@ -36,10 +36,11 @@
                         <CheckBox Name="ShowToolBar" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,130,0,0" Content="Show Toolbar" Checked="ShowToolbar_Changed" Unchecked="ShowToolbar_Changed" />
                         <CheckBox Name="DynamicISAC" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,155,0,0" Content="Dynamic Autocompletition/Intellisense" Checked="DynamicISAC_Changed" Unchecked="DynamicISAC_Changed" />
                         <CheckBox Name="DarkTheme" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,180,0,0" Content="Dark Theme" Checked="DarkTheme_Changed" Unchecked="DarkTheme_Changed" />
-                        <Label Name="ThemeColorLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,205,0,0" Content="Theme Color:" />
-                        <ComboBox Name="AccentColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,205,0,0" Width="200" SelectionChanged="AccentColor_Changed" />
-                        <Label Name="LanguageLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,235,0,0" Content="Language:" />
-                        <ComboBox Name="LanguageBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,235,0,0" Width="200" SelectionChanged="LanguageBox_Changed" />
+                        <CheckBox Name="HardwareSalts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,205,0,0" Content="Hardware Encryption" Checked="HardwareSalts_Changed" Unchecked="HardwareSalts_Changed" />
+                        <Label Name="ThemeColorLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,230,0,0" Content="Theme Color:" />
+                        <ComboBox Name="AccentColor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,230,0,0" Width="200" SelectionChanged="AccentColor_Changed" />
+                        <Label Name="LanguageLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,260,0,0" Content="Language:" />
+                        <ComboBox Name="LanguageBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,260,0,0" Width="200" SelectionChanged="LanguageBox_Changed" />
                     </Grid>
                 </ScrollViewer>
             </controls:MetroTabItem>

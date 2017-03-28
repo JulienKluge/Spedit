@@ -69,6 +69,8 @@ namespace Spedit.Utils
 			{
 				CreateSalt();
 			}
+			if (!Program.OptionsObject.Program_UseHardwareSalts)
+				return key;
 			byte[] buffer = new byte[16];
 			for (int i = 0; i < 16; ++i)
 			{

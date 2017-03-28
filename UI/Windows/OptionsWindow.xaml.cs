@@ -273,6 +273,15 @@ namespace Spedit.UI.Windows
 			ToggleRestartText(true);
 		}
 
+		private void HardwareSalts_Changed(object sender, RoutedEventArgs e)
+		{
+			if (!AllowChanging) { return; }
+			Program.OptionsObject.Program_UseHardwareSalts = HardwareSalts.IsChecked.Value;
+			Program.RCCKMade = false;
+			Program.OptionsObject.ReCreateCryptoKey();
+			Program.MakeRCCKAlert();
+		}
+
 		private void AutoSave_Changed(object sender, RoutedEventArgs e)
 		{
 			if (!AllowChanging) { return; }
@@ -377,6 +386,7 @@ namespace Spedit.UI.Windows
 			FontFamilyTB.Text = $"{Program.Translations.FontFamily} ({Program.OptionsObject.Editor_FontFamily}):";
             FontFamilyCB.SelectedValue = new FontFamily(Program.OptionsObject.Editor_FontFamily);
 			IndentationSize.Value = (double)Program.OptionsObject.Editor_IndentationSize;
+			HardwareSalts.IsChecked = Program.OptionsObject.Program_UseHardwareSalts;
             LoadSH();
         }
 
