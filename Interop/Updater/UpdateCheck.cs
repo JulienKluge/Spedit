@@ -40,7 +40,7 @@ namespace Spedit.Interop.Updater
                     client.Credentials = new NetworkCredential("sm", "sm_pw"); //heuheu :D 
                     string versionString = client.DownloadString("ftp://127.0.0.1/version_0.txt");
 #else
-                    string versionString = client.DownloadString("http://updater.spedit.info/version_0.txt");
+                    string versionString = client.DownloadString("https://updater.spedit.info/version_0.txt");
 #endif
                     string[] versionLines = versionString.Split('\n');
                     string version = (versionLines[0].Trim()).Trim('\r');
