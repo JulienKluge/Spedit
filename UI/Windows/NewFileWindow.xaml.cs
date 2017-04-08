@@ -1,6 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -8,132 +6,153 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
 using MahApps.Metro;
+using Microsoft.Win32;
 
 namespace Spedit.UI.Windows
 {
     /// <summary>
-    /// Interaction logic for AboutWindow.xaml
+    ///     Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class NewFileWindow : MetroWindow
+    public partial class NewFileWindow
     {
-        string PathStr = "sourcepawn\\scripts";
-        Dictionary<string, TemplateInfo> TemplateDictionary;
+        private readonly string PathStr = "sourcepawn\\scripts";
+        private Dictionary<string, TemplateInfo> _templateDictionary;
+        private ICommand _textBoxButtonFileCmd;
+
         public NewFileWindow()
         {
             InitializeComponent();
-			Language_Translate();
-			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
-			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
-			ParseTemplateFile();
+            Language_Translate();
+
+            if (Program.OptionsObject.ProgramAccentColor != "Red" || Program.OptionsObject.ProgramTheme != "BaseDark")
+                ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.ProgramAccentColor),
+                    ThemeManager.GetAppTheme(Program.OptionsObject.ProgramTheme));
+
+            ParseTemplateFile();
             TemplateListBox.SelectedIndex = 0;
+        }
+
+        public ICommand TextBoxButtonFileCmd
+        {
+            set
+            {
+                if (value == null) throw new ArgumentNullException(nameof(value));
+            }
+
+            get
+            {
+                if (_textBoxButtonFileCmd != null)
+                    return _textBoxButtonFileCmd;
+
+                var cmd = new SimpleCommand
+                {
+                    CanExecutePredicate = o => true,
+                    ExecuteAction = o =>
+                    {
+                        if (!(o is TextBox))
+                            return;
+
+                        var dialog = new SaveFileDialog
+                        {
+                            AddExtension = true,
+                            Filter = "Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*",
+                            OverwritePrompt = true,
+                            Title = Program.Translations.NewFile
+                        };
+
+                        var result = dialog.ShowDialog();
+
+                        if (result != null && result.Value)
+                            ((TextBox) o).Text = dialog.FileName;
+                    }
+                };
+
+                _textBoxButtonFileCmd = cmd;
+                return cmd;
+            }
         }
 
         private void ParseTemplateFile()
         {
-            TemplateDictionary = new Dictionary<string, TemplateInfo>();
-            if (File.Exists("sourcepawn\\templates\\Templates.xml"))
+            _templateDictionary = new Dictionary<string, TemplateInfo>();
+
+            if (!File.Exists("sourcepawn\\templates\\Templates.xml"))
+                return;
+
+            using (Stream stream = File.OpenRead("sourcepawn\\templates\\Templates.xml"))
             {
-                using (Stream stream = File.OpenRead("sourcepawn\\templates\\Templates.xml"))
-                {
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load(stream);
-                    if (doc.ChildNodes.Count > 0)
+                var doc = new XmlDocument();
+                doc.Load(stream);
+
+                if (doc.ChildNodes.Count <= 0)
+                    return;
+
+                if (doc.ChildNodes[0].Name != "Templates")
+                    return;
+
+                var mainNode = doc.ChildNodes[0];
+
+                for (var i = 0; i < mainNode.ChildNodes.Count; ++i)
+                    if (mainNode.ChildNodes[i].Name == "Template")
                     {
-                        if (doc.ChildNodes[0].Name == "Templates")
-                        {
-                            XmlNode mainNode = doc.ChildNodes[0];
-                            for (int i = 0; i < mainNode.ChildNodes.Count; ++i)
+                        var attributes = mainNode.ChildNodes[i].Attributes;
+
+                        if (attributes == null)
+                            continue;
+
+                        var nameStr = attributes["Name"].Value;
+                        var fileNameStr = attributes["File"].Value;
+                        var newNameStr = attributes["NewName"].Value;
+                        var filePathStr = Path.Combine("sourcepawn\\templates\\", fileNameStr);
+
+                        if (!File.Exists(filePathStr))
+                            continue;
+
+                        _templateDictionary.Add(nameStr,
+                            new TemplateInfo
                             {
-                                if (mainNode.ChildNodes[i].Name == "Template")
-                                {
-                                    XmlAttributeCollection attributes = mainNode.ChildNodes[i].Attributes;
-                                    string NameStr = attributes["Name"].Value;
-                                    string FileNameStr = attributes["File"].Value;
-                                    string NewNameStr = attributes["NewName"].Value;
-                                    string FilePathStr = Path.Combine("sourcepawn\\templates\\", FileNameStr);
-                                    if (File.Exists(FilePathStr))
-                                    {
-                                        TemplateDictionary.Add(NameStr, new TemplateInfo() { Name = NameStr, FileName = FileNameStr, Path = FilePathStr, NewName = NewNameStr });
-                                        TemplateListBox.Items.Add(NameStr);
-                                    }
-                                }
-                            }
-                        }
+                                Name = nameStr,
+                                FileName = fileNameStr,
+                                Path = filePathStr,
+                                NewName = newNameStr
+                            });
+
+                        TemplateListBox.Items.Add(nameStr);
                     }
-                }
             }
         }
 
         private void TemplateListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TemplateInfo templateInfo = TemplateDictionary[(string)TemplateListBox.SelectedItem];
+            var templateInfo = _templateDictionary[(string) TemplateListBox.SelectedItem];
             PrevieBox.Text = File.ReadAllText(templateInfo.Path);
             PathBox.Text = Path.Combine(PathStr, templateInfo.NewName);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            FileInfo destFile = new FileInfo(PathBox.Text);
-            TemplateInfo templateInfo = TemplateDictionary[(string)TemplateListBox.SelectedItem];
+            var destFile = new FileInfo(PathBox.Text);
+            var templateInfo = _templateDictionary[(string) TemplateListBox.SelectedItem];
+
             File.Copy(templateInfo.Path, destFile.FullName, true);
             Program.MainWindow.TryLoadSourceFile(destFile.FullName, true, true, true);
-            this.Close();
+
+            Close();
         }
 
-		private void Language_Translate()
-		{
-			if (Program.Translations.IsDefault)
-			{
-				return;
-			}
-			PreviewBlock.Text = $"{Program.Translations.Preview}:";
-			SaveButton.Content = Program.Translations.Save;
-		}
-
-        private ICommand textBoxButtonFileCmd;
-
-        public ICommand TextBoxButtonFileCmd
+        private void Language_Translate()
         {
-            set { }
-            get
-            {
-                if (this.textBoxButtonFileCmd == null)
-                {
-                    var cmd = new SimpleCommand();
-                    cmd.CanExecutePredicate = o =>
-                    {
-                        return true;
-                    };
-                    cmd.ExecuteAction = o =>
-                    {
-                        if (o is TextBox)
-                        {
-                            var dialog = new SaveFileDialog();
-                            dialog.AddExtension = true;
-                            dialog.Filter = "Sourcepawn Files (*.sp *.inc)|*.sp;*.inc|All Files (*.*)|*.*";
-                            dialog.OverwritePrompt = true;
-                            dialog.Title = Program.Translations.NewFile;
-                            var result = dialog.ShowDialog();
-                            if (result.Value)
-                            {
-                                ((TextBox)o).Text = dialog.FileName;
-                            }
-                        }
-                    };
-                    this.textBoxButtonFileCmd = cmd;
-                    return cmd;
-                }
-                else
-                {
-                    return textBoxButtonFileCmd;
-                }
-            }
+            if (Program.Translations.IsDefault)
+                return;
+
+            PreviewBlock.Text = $"{Program.Translations.Preview}:";
+            SaveButton.Content = Program.Translations.Save;
         }
 
         private class SimpleCommand : ICommand
         {
             public Predicate<object> CanExecutePredicate { get; set; }
-            public Action<object> ExecuteAction { get; set; }
+            public Action<object> ExecuteAction { private get; set; }
 
             public bool CanExecute(object parameter)
             {
@@ -148,19 +167,16 @@ namespace Spedit.UI.Windows
 
             public void Execute(object parameter)
             {
-                if (ExecuteAction != null)
-                {
-                    ExecuteAction(parameter);
-                }
+                ExecuteAction?.Invoke(parameter);
             }
         }
     }
 
     public class TemplateInfo
     {
-        public string Name;
         public string FileName;
-        public string Path;
+        public string Name;
         public string NewName;
+        public string Path;
     }
 }

@@ -1,7 +1,5 @@
-﻿using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls.Dialogs;
 using Spedit.Interop.Updater;
-using Spedit.UI.Components;
 using Spedit.UI.Windows;
 using System;
 using System.Diagnostics;
@@ -11,22 +9,23 @@ using System.Windows.Controls;
 
 namespace Spedit.UI
 {
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
         private void FileMenu_Open(object sender, RoutedEventArgs e)
         {
 			var editors = GetAllEditorElements();
-            bool EditorsAreOpen = false;
+            var editorsAreOpen = false;
+
 			if (editors != null)
-			{
-				EditorsAreOpen = (editors.Length > 0);
-			}
-            bool EditorIsSelected = (GetCurrentEditorElement() != null);
-            ((MenuItem)((MenuItem)sender).Items[3]).IsEnabled = EditorIsSelected;
-            ((MenuItem)((MenuItem)sender).Items[5]).IsEnabled = EditorIsSelected;
-            ((MenuItem)((MenuItem)sender).Items[7]).IsEnabled = EditorIsSelected;
-            ((MenuItem)((MenuItem)sender).Items[4]).IsEnabled = EditorsAreOpen;
-            ((MenuItem)((MenuItem)sender).Items[8]).IsEnabled = EditorsAreOpen;
+				editorsAreOpen = (editors.Length > 0);
+
+            var editorIsSelected = GetCurrentEditorElement() != null;
+
+            ((MenuItem)((MenuItem)sender).Items[3]).IsEnabled = editorIsSelected;
+            ((MenuItem)((MenuItem)sender).Items[5]).IsEnabled = editorIsSelected;
+            ((MenuItem)((MenuItem)sender).Items[7]).IsEnabled = editorIsSelected;
+            ((MenuItem)((MenuItem)sender).Items[4]).IsEnabled = editorsAreOpen;
+            ((MenuItem)((MenuItem)sender).Items[8]).IsEnabled = editorsAreOpen;
         }
 
         private void Menu_New(object sender, RoutedEventArgs e)
@@ -58,6 +57,7 @@ namespace Spedit.UI
         {
             Command_Close();
         }
+
         private void Menu_CloseAll(object sender, RoutedEventArgs e)
         {
             Command_CloseAll();
@@ -65,28 +65,30 @@ namespace Spedit.UI
 
         private void EditMenu_Open(object sender, RoutedEventArgs e)
         {
-            EditorElement ee = GetCurrentEditorElement();
-            MenuItem menu = (MenuItem)sender;
-            if (ee == null)
+            var element = GetCurrentEditorElement();
+            var menu = (MenuItem)sender;
+
+            if (element == null)
             {
-                for (int i = 0; i < menu.Items.Count; ++i)
+                foreach (var item in menu.Items)
                 {
-                    if (menu.Items[i] is MenuItem)
-                    {
-                        ((MenuItem)menu.Items[i]).IsEnabled = false;
-                    }
+                    var menuItem = item as MenuItem;
+
+                    if (menuItem != null)
+                        menuItem.IsEnabled = false;
                 }
             }
             else
             {
-                MenuI_Undo.IsEnabled = ee.editor.CanUndo;
-                MenuI_Redo.IsEnabled = ee.editor.CanRedo;
-                for (int i = 2; i < menu.Items.Count; ++i)
+                MenuI_Undo.IsEnabled = element.editor.CanUndo;
+                MenuI_Redo.IsEnabled = element.editor.CanRedo;
+
+                for (var i = 2; i < menu.Items.Count; ++i)
                 {
-                    if (menu.Items[i] is MenuItem)
-                    {
-                        ((MenuItem)menu.Items[i]).IsEnabled = true;
-                    }
+                    var item = menu.Items[i] as MenuItem;
+
+                    if (item != null)
+                        item.IsEnabled = true;
                 }
             }
         }
@@ -136,7 +138,6 @@ namespace Spedit.UI
 			Command_ToggleCommentLine();
 		}
 
-
 		private void Menu_SelectAll(object sender, RoutedEventArgs e)
         {
             Command_SelectAll();
@@ -174,30 +175,30 @@ namespace Spedit.UI
 
         private void Menu_SendRCon(object sender, RoutedEventArgs e)
         {
-            Server_Query();
+            ServerQuery();
         }
 
         private void Menu_OpenWebsiteFromTag(object sender, RoutedEventArgs e)
         {
-            string url = (string)((MenuItem)sender).Tag;
+            var url = (string)((MenuItem)sender).Tag;
             Process.Start(new ProcessStartInfo(url));
         }
 
         private void Menu_About(object sender, RoutedEventArgs e)
         {
-            AboutWindow aboutWindow = new AboutWindow() { Owner = this, ShowInTaskbar = false };
+            var aboutWindow = new AboutWindow() { Owner = this, ShowInTaskbar = false };
             aboutWindow.ShowDialog();
         }
 
         private void Menu_OpenSPDef(object sender, RoutedEventArgs e)
         {
-            SPDefinitionWindow spDefinitionWindow = new SPDefinitionWindow() { Owner = this, ShowInTaskbar = false };
+            var spDefinitionWindow = new SPDefinitionWindow() { Owner = this, ShowInTaskbar = false };
             spDefinitionWindow.ShowDialog();
         }
 
         private void Menu_OpenOptions(object sender, RoutedEventArgs e)
         {
-            OptionsWindow optionsWindow = new OptionsWindow() { Owner = this, ShowInTaskbar = false };
+            var optionsWindow = new OptionsWindow() { Owner = this, ShowInTaskbar = false };
             optionsWindow.ShowDialog();
         }
 
@@ -224,64 +225,66 @@ namespace Spedit.UI
         private void UpdateCheck_Click(object sender, RoutedEventArgs e)
         {
             UpdateCheck.Check(false);
+
             var status = Program.UpdateStatus;
+
             if (status.IsAvailable)
             {
-                UpdateWindow uWindow = new UpdateWindow(status) { Owner = this };
+                var uWindow = new UpdateWindow(status) { Owner = this };
                 uWindow.ShowDialog();
-                if (uWindow.Succeeded)
+
+                if (!uWindow.Succeeded)
+                    return;
+
+                Command_SaveAll();
+
+                lock (Program.UpdateStatus)
                 {
-                    Command_SaveAll();
-                    lock (Program.UpdateStatus)
-                    {
-                        Program.UpdateStatus.WriteAble = false;
-                        Program.UpdateStatus.IsAvailable = false;
-                    }
-                    this.Close();
+                    Program.UpdateStatus.WriteAble = false;
+                    Program.UpdateStatus.IsAvailable = false;
                 }
+
+                Close();
             }
             else
             {
                 if (status.GotException)
                 {
                     this.ShowMessageAsync(Program.Translations.FailedCheck, Program.Translations.ErrorUpdate + Environment.NewLine + $"{Program.Translations.Details}: " + status.ExceptionMessage
-                        , MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                        , MessageDialogStyle.Affirmative, MetroDialogOptions);
                 }
                 else
                 {
-                    this.ShowMessageAsync(Program.Translations.VersUpToDate, string.Format(Program.Translations.VersionYour, Assembly.GetEntryAssembly().GetName().Version.ToString())
-                        , MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                    this.ShowMessageAsync(Program.Translations.VersUpToDate, string.Format(Program.Translations.VersionYour, Assembly.GetEntryAssembly().GetName().Version)
+                        , MessageDialogStyle.Affirmative, MetroDialogOptions);
                 }
             }
         }
 
         private void MenuButton_Compile(object sender, RoutedEventArgs e)
         {
-            int selected = CompileButton.SelectedIndex;
-            if (selected == 1)
-            {
-                Compile_SPScripts(false);
-            }
-            else
-            {
-                Compile_SPScripts(true);
-            }
+            var selected = CompileButton.SelectedIndex;
+            Compile_SPScripts(selected != 1);
         }
 
         private void MenuButton_Action(object sender, RoutedEventArgs e)
         {
-            int selected = CActionButton.SelectedIndex;
-            if (selected == 0)
+            var selected = CActionButton.SelectedIndex;
+
+            switch (selected)
             {
-                Copy_Plugins(false);
-            }
-            else if (selected == 1)
-            {
-                FTPUpload_Plugins();
-            }
-            else if (selected == 2)
-            {
-                Server_Start();
+                case 0:
+                    Copy_Plugins();
+                    break;
+                case 1:
+                    FTPUpload_Plugins();
+                    break;
+                case 2:
+                    Server_Start();
+                    break;
+                default:
+                    // ignored
+                    break;
             }
         }
     }
