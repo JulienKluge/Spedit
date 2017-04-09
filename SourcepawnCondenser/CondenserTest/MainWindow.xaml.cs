@@ -277,13 +277,13 @@ namespace CondenserTest
 				case TokenKind.BraceClose:
 				case TokenKind.BraceOpen: return Brushes.LightGray;
 				case TokenKind.Character: return Brushes.LightSalmon;
-				case TokenKind.EOF: return Brushes.LimeGreen;
+				case TokenKind.Eof: return Brushes.LimeGreen;
 				case TokenKind.Identifier: return Brushes.LightSteelBlue;
 				case TokenKind.Number: return Brushes.LightSeaGreen;
 				case TokenKind.ParenthesisClose:
 				case TokenKind.ParenthesisOpen: return Brushes.LightSlateGray;
 				case TokenKind.Quote: return Brushes.LightGoldenrodYellow;
-				case TokenKind.EOL: return Brushes.Aqua;
+				case TokenKind.Eol: return Brushes.Aqua;
 				case TokenKind.SingleLineComment:
 				case TokenKind.MultiLineComment: return Brushes.Honeydew;
 				default: return Brushes.IndianRed;

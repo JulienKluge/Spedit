@@ -19,8 +19,8 @@ namespace Spedit.UI.Components
         private int _lastShowedLine = -1;
         private string[] _funcNames;
         private SMFunction[] _funcs;
-        private ACNode[] _acEntrys;
-        private ISNode[] _isEntrys;
+        private AcNode[] _acEntrys;
+        private IsNode[] _isEntrys;
         private Storyboard _fadeIsacIn;
         private Storyboard _fadeIsacOut;
         private Storyboard _fadeAcIn;
@@ -55,14 +55,14 @@ namespace Spedit.UI.Components
 
             _funcNames = def.FunctionStrings;
 			_funcs = def.Functions.ToArray();
-            _acEntrys = def.ProduceACNodes();
-            _isEntrys = def.ProduceISNodes();
+            _acEntrys = def.ProduceAcNodes();
+            _isEntrys = def.ProduceIsNodes();
 
 			AutoCompleteBox.ItemsSource = _acEntrys;
 			MethodAutoCompleteBox.ItemsSource = _isEntrys;
         }
 
-		public void InterruptLoadAutoCompletes(string[] functionStrings, SMFunction[] functionArray, ACNode[] acNodes, ISNode[] isNodes)
+		public void InterruptLoadAutoCompletes(string[] functionStrings, SMFunction[] functionArray, AcNode[] acNodes, IsNode[] isNodes)
 		{
 			Dispatcher.Invoke(() => {
 				_funcNames = functionStrings;
@@ -325,13 +325,13 @@ namespace Spedit.UI.Components
 
                     if (_acIsFuncC)
                     {
-                        replaceString = ((ACNode)AutoCompleteBox.SelectedItem).EntryName;
+                        replaceString = ((AcNode)AutoCompleteBox.SelectedItem).EntryName;
                         if (_acEntrys[AutoCompleteBox.SelectedIndex].IsExecuteable)
                             replaceString = replaceString + "(";
                     }
                     else
                     {
-                        replaceString = ((ISNode)MethodAutoCompleteBox.SelectedItem).EntryName;
+                        replaceString = ((IsNode)MethodAutoCompleteBox.SelectedItem).EntryName;
                         if (_isEntrys[MethodAutoCompleteBox.SelectedIndex].IsExecuteable)
                             replaceString = replaceString + "(";
                     }

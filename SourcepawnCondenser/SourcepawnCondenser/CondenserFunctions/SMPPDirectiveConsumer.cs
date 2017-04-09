@@ -1,37 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SourcepawnCondenser.SourcemodDefinition;
+﻿using SourcepawnCondenser.SourcemodDefinition;
 using SourcepawnCondenser.Tokenizer;
 
 namespace SourcepawnCondenser
 {
 	public partial class Condenser
 	{
-		private int ConsumeSMPPDirective()
+		private int ConsumeSmppDirective()
 		{
-			if (t[position].Value == "#define")
-			{
-				if ((position + 1) < length)
-				{
-					if (t[position + 1].Kind == TokenKind.Identifier)
-					{
-                        def.Defines.Add(new SMDefine() { Index = t[position].Index, Length = (t[position + 1].Index - t[position].Index) + t[position + 1].Length, File = FileName,
-							Name = t[position + 1].Value });
-						for (int j = position + 1; j < length; ++j)
-						{
-							if (t[j].Kind == TokenKind.EOL)
-							{
-								return j;
-							}
-						}
-						return position + 1;
-					}
-				}
-			}
-			return -1;
+		    if (_t[_position].Value != "#define")
+                return -1;
+
+		    if (_position + 1 >= _length)
+                return -1;
+
+		    if (_t[_position + 1].Kind != TokenKind.Identifier)
+                return -1;
+
+		    _def.Defines.Add(new SMDefine
+		    {
+		        Index = _t[_position].Index,
+		        Length = _t[_position + 1].Index - _t[_position].Index + _t[_position + 1].Length,
+		        File = _fileName,
+		        Name = _t[_position + 1].Value
+		    });
+
+		    for (var j = _position + 1; j < _length; ++j)
+		        if (_t[j].Kind == TokenKind.Eol)
+		            return j;
+
+		    return _position + 1;
 		}
 	}
 }

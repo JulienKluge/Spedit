@@ -15,8 +15,8 @@ namespace Spedit.UI
 
         public ulong CurrentSMDefUID;
         public SMFunction[] CurrentSMFunctions;
-        public ACNode[] CurrentAcNodes;
-        public ISNode[] CurrentIsNodes;
+        public AcNode[] CurrentAcNodes;
+        public IsNode[] CurrentIsNodes;
 
 		public void StartBackgroundParserThread()
 		{
@@ -84,8 +84,8 @@ namespace Spedit.UI
 
 				    _currentSMDef = (Program.Configs[Program.SelectedConfig].GetSMDef()).ProduceTemporaryExpandedDefinition(definitions);
 				    CurrentSMFunctions = _currentSMDef.Functions.ToArray();
-				    CurrentAcNodes = _currentSMDef.ProduceACNodes();
-				    CurrentIsNodes = _currentSMDef.ProduceISNodes();
+				    CurrentAcNodes = _currentSMDef.ProduceAcNodes();
+				    CurrentIsNodes = _currentSMDef.ProduceIsNodes();
 				    ++CurrentSMDefUID;
 				}
 
