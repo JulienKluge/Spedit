@@ -53,7 +53,7 @@ namespace Spedit.Interop.Updater
 #if DEBUG
                         info.UpdaterDownloadUrl = "ftp://127.0.0.1/" + destinationFileName;
 #else
-                        info.Updater_DownloadURL = "http://updater.spedit.info/" + destinationFileName;
+                        info.Updater_DownloadURL = "https://updater.spedit.info/" + destinationFileName;
 #endif
                         info.UpdateVersion = version;
                         var updateInfoString = new StringBuilder();
