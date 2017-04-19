@@ -9,24 +9,25 @@ namespace Spedit.UI
         private void MainWindowEvent_KeyDown(object sender, KeyEventArgs e)
         {
             if (!e.IsDown)
-            {
                 return;
-            }
+
             if (e.SystemKey == Key.F10)
             {
-                Server_Query();
+                ServerQuery();
                 e.Handled = true;
                 return;
             }
+
             if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl))
             {
                 if (e.KeyboardDevice.IsKeyDown(Key.LeftAlt))
                 {
-                    switch (e.Key)
-                    {
-                        case Key.S: { Command_SaveAs(); e.Handled = true; break; }
-					}
-				}
+                    if (e.Key != Key.S)
+                        return;
+
+                    Command_SaveAs();
+                    e.Handled = true;
+                }
                 else if (e.KeyboardDevice.IsKeyDown(Key.LeftShift))
                 {
                     switch (e.Key)
@@ -34,6 +35,9 @@ namespace Spedit.UI
                         case Key.S: { Command_SaveAll(); e.Handled = true; break; }
                         case Key.W: { Command_CloseAll(); e.Handled = true; break; }
                         case Key.P: { Command_FlushFoldingState(true); e.Handled = true; break; }
+                        default:
+                            // ignored
+                            break;
                     }
                 }
                 else if (!e.KeyboardDevice.IsKeyDown(Key.RightAlt))
@@ -49,7 +53,10 @@ namespace Spedit.UI
                         case Key.P: { Command_FlushFoldingState(false); e.Handled = true; break; }
 						case Key.D7: //i hate key mapping...
 						case Key.OemQuestion: { Command_ToggleCommentLine(); break; }
-					}
+                        default:
+                            // ignored
+                            break;
+                    }
                 }
             }
             else
@@ -64,9 +71,9 @@ namespace Spedit.UI
                     case Key.F9: { Server_Start(); e.Handled = true; break; }
                     case Key.Escape:
 						{
-							if (InCompiling)
+							if (_inCompiling)
 							{
-								InCompiling = false;
+								_inCompiling = false;
 								e.Handled = true;
 							}
 							else if (CompileOutputRow.Height.Value > 8.0)
@@ -76,6 +83,9 @@ namespace Spedit.UI
 							}
 							break;
                         }
+                    default:
+                        // ignored
+                        break;
                 }
             }
         }

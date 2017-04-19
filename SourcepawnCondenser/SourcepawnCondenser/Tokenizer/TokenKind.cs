@@ -14,8 +14,7 @@
 		MultiLineComment,		//d
 		Semicolon,				//d
 		Comma,					//d
-		Assignment,				//d
-		
+		Assignment,				//d	
 		FunctionIndicator,		//d
 		Constant,				//d
 		Enum,					//d
@@ -25,8 +24,7 @@
 		PrePocessorDirective,	//d
 		TypeDef,				//d
 		TypeSet,				//d
-
-		EOL,					//d
-		EOF,					//d
+		Eol,					//d
+		Eof,					//d
 	}
 }

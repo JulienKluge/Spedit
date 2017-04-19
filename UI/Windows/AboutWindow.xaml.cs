@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
@@ -12,29 +11,36 @@ namespace Spedit.UI.Windows
     /// <summary>
     /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class AboutWindow : MetroWindow
+    public partial class AboutWindow
     {
         public AboutWindow()
         {
             InitializeComponent();
-			Language_Translate();
-			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
-			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
-			Brush gridBrush = null;
-			if (Program.OptionsObject.Program_Theme == "BaseDark")
-			{ gridBrush = new SolidColorBrush(Color.FromArgb(0xC0, 0x10, 0x10, 0x10)); }
-			else
-			{ gridBrush = new SolidColorBrush(Color.FromArgb(0xC0, 0xE0, 0xE0, 0xE0)); }
-			gridBrush.Freeze();
-			foreach (var c in ContentStackPanel.Children)
-			{
-				if (c is Grid)
-				{
-					Grid g = (Grid)c;
-					g.Background = gridBrush;
-				}
-			}
-			TitleBox.Text = $"SPEdit ({Assembly.GetEntryAssembly().GetName().Version.ToString()}) - {Program.Translations.SPEditCap}";
+            Language_Translate();
+
+            if (Program.OptionsObject.ProgramAccentColor != "Red" || Program.OptionsObject.ProgramTheme != "BaseDark")
+                ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.ProgramAccentColor),
+                    ThemeManager.GetAppTheme(Program.OptionsObject.ProgramTheme));
+
+            Brush gridBrush = Program.OptionsObject.ProgramTheme == "BaseDark"
+                ? new SolidColorBrush(Color.FromArgb(0xC0, 0x10, 0x10, 0x10))
+                : new SolidColorBrush(Color.FromArgb(0xC0, 0xE0, 0xE0, 0xE0));
+
+            gridBrush.Freeze();
+
+            foreach (var c in ContentStackPanel.Children)
+            {
+                var grid = c as Grid;
+
+                if (grid == null)
+                    continue;
+
+                var g = grid;
+                g.Background = gridBrush;
+            }
+
+            TitleBox.Text =
+                $"SPEdit ({Assembly.GetEntryAssembly().GetName().Version}) - {Program.Translations.SPEditCap}";
             LicenseField.Text = LicenseString;
         }
 
@@ -52,15 +58,14 @@ namespace Spedit.UI.Windows
 		private void Language_Translate()
 		{
 			if (Program.Translations.IsDefault)
-			{
 				return;
-			}
+
 			WrittenByBlock.Text = string.Format(Program.Translations.WrittenBy, "Julien Kluge  (Julien.Kluge@gmail.com)");
 			LicenseBlock.Text = Program.Translations.License;
 			PeopleInvolvedBlock.Text = Program.Translations.PeopleInv;
 		}
 
-        private string LicenseString = @"---------------------
+        private const string LicenseString = @"---------------------
     7th march 2015
     SPEdit - A lightweight Sourcepawn Editor
     Copyright (C) 2015  Julien Kluge

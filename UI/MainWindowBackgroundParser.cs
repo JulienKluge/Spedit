@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SourcepawnCondenser;
+﻿using SourcepawnCondenser;
 using SourcepawnCondenser.SourcemodDefinition;
 using System.Threading;
 using System.Timers;
@@ -13,79 +9,86 @@ namespace Spedit.UI
 {
 	public partial class MainWindow
 	{
-		public ulong currentSMDefUID = 0;
-		Thread backgroundParserThread;
-		SMDefinition currentSMDef = null;
-		System.Timers.Timer parseDistributorTimer;
+        private Thread _backgroundParserThread;
+        private SMDefinition _currentSMDef;
+        private System.Timers.Timer _parseDistributorTimer;
+
+        public ulong CurrentSMDefUID;
+        public SMFunction[] CurrentSMFunctions;
+        public AcNode[] CurrentAcNodes;
+        public IsNode[] CurrentIsNodes;
 
 		public void StartBackgroundParserThread()
 		{
-			backgroundParserThread = new Thread(new ThreadStart(BackgroundParser_Worker));
-			backgroundParserThread.Start();
-			parseDistributorTimer = new System.Timers.Timer(500.0);
-			parseDistributorTimer.Elapsed += ParseDistributorTimer_Elapsed;
-			parseDistributorTimer.Start();
+			_backgroundParserThread = new Thread(BackgroundParser_Worker);
+			_backgroundParserThread.Start();
+			_parseDistributorTimer = new System.Timers.Timer(500.0);
+			_parseDistributorTimer.Elapsed += ParseDistributorTimer_Elapsed;
+			_parseDistributorTimer.Start();
 		}
 
 		private void ParseDistributorTimer_Elapsed(object sender, ElapsedEventArgs args)
 		{
-			if (currentSMDefUID == 0) { return; }
+		    if (CurrentSMDefUID == 0)
+		        return;
+
 			EditorElement[] ee = null;
 			EditorElement ce = null;
-			this.Dispatcher.Invoke(() =>
+
+			Dispatcher.Invoke(() =>
 			{
 				ee = GetAllEditorElements();
 				ce = GetCurrentEditorElement();
 			});
-			if (ee == null || ce == null) { return; } //this can happen!
+
+		    if (ee == null || ce == null)
+		        return;
+
 			foreach (var e in ee)
 			{
-				if (e.LastSMDefUpdateUID < currentSMDefUID) //wants an update of the SMDefintion
-				{
-					if (e == ce)
-					{
-						if (ce.ISAC_Open)
-						{
-							continue;
-						}
-					}
-					e.InterruptLoadAutoCompletes(currentSMDef.FunctionStrings, currentSMFunctions, currentACNodes, currentISNodes);
-					e.LastSMDefUpdateUID = currentSMDefUID;
-				}
+			    if (e.LastSMDefUpdateUID >= CurrentSMDefUID)
+                    continue;
+
+			    if (e == ce)
+			        if (ce.IsacOpen)
+			            continue;
+
+			    e.InterruptLoadAutoCompletes(_currentSMDef.FunctionStrings, CurrentSMFunctions, CurrentAcNodes, CurrentIsNodes);
+			    e.LastSMDefUpdateUID = CurrentSMDefUID;
 			}
 		}
 		
-		public SMFunction[] currentSMFunctions;
-		public ACNode[] currentACNodes;
-		public ISNode[] currentISNodes;
-
 		private void BackgroundParser_Worker()
 		{
 			while (true)
 			{
-				while (Program.OptionsObject.Program_DynamicISAC)
+				while (Program.OptionsObject.ProgramDynamicIsac)
 				{
 					Thread.Sleep(5000);
 					var ee = GetAllEditorElements();
-					if (ee != null)
-					{
-						SMDefinition[] definitions = new SMDefinition[ee.Length];
-						for (int i = 0; i < ee.Length; ++i)
-						{
-							FileInfo fInfo = new FileInfo(ee[i].FullFilePath);
-							if (fInfo.Extension.Trim('.').ToLowerInvariant() == "inc")
-							{
-								var condenser = new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name);
-								definitions[i] = ((new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name)).Condense());
-							}
-						}
-						currentSMDef = (Program.Configs[Program.SelectedConfig].GetSMDef()).ProduceTemporaryExpandedDefinition(definitions);
-						currentSMFunctions = currentSMDef.Functions.ToArray();
-						currentACNodes = currentSMDef.ProduceACNodes();
-						currentISNodes = currentSMDef.ProduceISNodes();
-						++currentSMDefUID;
-					}
+
+				    if (ee == null)
+                        continue;
+
+				    var definitions = new SMDefinition[ee.Length];
+
+				    for (var i = 0; i < ee.Length; ++i)
+				    {
+				        var fInfo = new FileInfo(ee[i].FullFilePath);
+
+				        if (fInfo.Extension.Trim('.').ToLowerInvariant() != "inc")
+                            continue;
+				        
+				        definitions[i] = new Condenser(File.ReadAllText(fInfo.FullName), fInfo.Name).Condense();
+				    }
+
+				    _currentSMDef = (Program.Configs[Program.SelectedConfig].GetSMDef()).ProduceTemporaryExpandedDefinition(definitions);
+				    CurrentSMFunctions = _currentSMDef.Functions.ToArray();
+				    CurrentAcNodes = _currentSMDef.ProduceAcNodes();
+				    CurrentIsNodes = _currentSMDef.ProduceIsNodes();
+				    ++CurrentSMDefUID;
 				}
+
 				Thread.Sleep(5000);
 			}
 		}

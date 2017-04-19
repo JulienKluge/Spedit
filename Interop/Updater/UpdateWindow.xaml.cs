@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
@@ -11,25 +10,25 @@ namespace Spedit.Interop.Updater
     /// <summary>
     /// Interaction logic for UpdateWindow.xaml
     /// </summary>
-    public partial class UpdateWindow : MetroWindow
+    public partial class UpdateWindow
     {
-        private UpdateInfo updateInfo;
+        private readonly UpdateInfo _updateInfo;
 
-        public bool Succeeded = false;
+        public bool Succeeded;
 
         public UpdateWindow()
         {
             InitializeComponent();
         }
+
         public UpdateWindow(UpdateInfo info)
         {
-            updateInfo = info;
+            _updateInfo = info;
             InitializeComponent();
-            DescriptionBox.Text = updateInfo.Update_Info;
+            DescriptionBox.Text = _updateInfo.Info;
+
             if (info.SkipDialog)
-            {
                 StartUpdate();
-            }
         }
 
         private void ActionYesButton_Click(object sender, RoutedEventArgs e)
@@ -44,66 +43,63 @@ namespace Spedit.Interop.Updater
 
         private void StartUpdate()
         {
-            if (updateInfo == null)
+            if (_updateInfo == null)
             {
                 Close();
                 return;
             }
-            ActionYesButton.Visibility = System.Windows.Visibility.Hidden;
-            ActionNoButton.Visibility = System.Windows.Visibility.Hidden;
+
+            ActionYesButton.Visibility = Visibility.Hidden;
+            ActionNoButton.Visibility = Visibility.Hidden;
             Progress.IsActive = true;
-            MainLine.Text = "Updating to " + updateInfo.Update_StringVersion;
+            MainLine.Text = "Updating to " + _updateInfo.UpdateStringVersion;
             SubLine.Text = "Downloading Updater";
-            Thread t = new Thread(new ThreadStart(UpdateDownloadWorker));
+            var t = new Thread(UpdateDownloadWorker);
             t.Start();
         }
 
         private void UpdateDownloadWorker()
         {
-            if (File.Exists(updateInfo.Updater_File))
-            {
-                File.Delete(updateInfo.Updater_File);
-            }
+            if (File.Exists(_updateInfo.UpdaterFile))
+                File.Delete(_updateInfo.UpdaterFile);
+
             try
             {
-                using (WebClient client = new WebClient())
+                using (var client = new WebClient())
                 {
 #if DEBUG
                     client.Credentials = new NetworkCredential("sm", "sm_pw"); //heuheu :D 
 #endif
-                    client.DownloadFile(updateInfo.Updater_DownloadURL, updateInfo.Updater_File);
+                    client.DownloadFile(_updateInfo.UpdaterDownloadUrl, _updateInfo.UpdaterFile);
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error while downloading the updater." + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "$$$" + e.StackTrace,
                     "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                this.Dispatcher.Invoke(() =>
-                {
-                    Close();
-                });
+                Dispatcher.Invoke(Close);
             }
+
             Thread.Sleep(100); //safety reasons
-            this.Dispatcher.Invoke(() =>
-            {
-                FinalizeUpdate();
-            });
+            Dispatcher.Invoke(FinalizeUpdate);
         }
 
         private void FinalizeUpdate()
         {
             SubLine.Text = "Starting Updater";
-            this.UpdateLayout();
+            UpdateLayout();
+
             try
             {
-                using (Process p = new Process())
+                using (var process = new Process())
                 {
-                    p.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                    p.StartInfo.UseShellExecute = true;
-                    p.StartInfo.Verb = "runas";
-                    p.StartInfo.FileName = updateInfo.Updater_File;
-                    p.Start();
+                    process.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                    process.StartInfo.UseShellExecute = true;
+                    process.StartInfo.Verb = "runas";
+                    process.StartInfo.FileName = _updateInfo.UpdaterFile;
+                    process.Start();
                 }
+
                 Succeeded = true;
             }
             catch (Exception e)
@@ -111,6 +107,7 @@ namespace Spedit.Interop.Updater
                 MessageBox.Show("Error while trying to start the updater." + Environment.NewLine + "Details: " + e.Message + Environment.NewLine + "$$$" + e.StackTrace,
                     "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+
             Close();
         }
     }

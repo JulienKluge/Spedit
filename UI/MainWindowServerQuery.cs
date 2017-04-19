@@ -1,110 +1,116 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Threading.Tasks;
-using Spedit.Interop;
 using QueryMaster;
 
 namespace Spedit.UI
 {
     public partial class MainWindow
     {
-        public void Server_Query()
+        public void ServerQuery()
         {
-            Config c = Program.Configs[Program.SelectedConfig];
+            var c = Program.Configs[Program.SelectedConfig];
+            var stringOutput = new StringBuilder();
+
             if (string.IsNullOrWhiteSpace(c.RConIP) || string.IsNullOrWhiteSpace(c.RConCommands))
-            { return; }
-            StringBuilder stringOutput = new StringBuilder();
+                return;       
+
             try
             {
-                EngineType type = EngineType.GoldSource;
+                var type = EngineType.GoldSource;
+
                 if (c.RConUseSourceEngine)
-                {
                     type = EngineType.Source;
-                }
-                using (Server server = ServerQuery.GetServerInstance(type, c.RConIP, c.RConPort, null))
+
+                using (var server = QueryMaster.ServerQuery.GetServerInstance(type, c.RConIP, c.RConPort, null))
                 {
                     var serverInfo = server.GetInfo();
                     stringOutput.AppendLine(serverInfo.Name);
+
                     using (var rcon = server.GetControl(c.RConPassword))
                     {
-                        string[] cmds = ReplaceRconCMDVaraibles(c.RConCommands).Split('\n');
-                        for (int i = 0; i < cmds.Length; ++i)
+                        var cmds = ReplaceRconCmdVaraibles(c.RConCommands).Split('\n');
+                        foreach (var str in cmds)
                         {
-							Task t = Task.Run(() =>
-							{
-								string command = (cmds[i].Trim(new char[] { '\r' })).Trim();
-								if (!string.IsNullOrWhiteSpace(command))
-								{
-									stringOutput.AppendLine(rcon.SendCommand(command));
-								}
-							});
-							t.Wait();
+                            var t = Task.Run(() =>
+                            {
+                                var command = str.Trim('\r').Trim();
+
+                                if (string.IsNullOrWhiteSpace(command))
+                                    return;
+
+                                if (rcon != null)
+                                    stringOutput.AppendLine(rcon.SendCommand(command));
+                            });
+
+                            t.Wait();
                         }
                     }
                 }
+
                 stringOutput.AppendLine("Done");
             }
             catch (Exception e)
             {
                 stringOutput.AppendLine("Error: " + e.Message);
             }
+
             CompileOutput.Text = stringOutput.ToString();
+
             if (CompileOutputRow.Height.Value < 11.0)
-            {
                 CompileOutputRow.Height = new GridLength(200.0);
-            }
         }
 
-        private string ReplaceRconCMDVaraibles(string input)
+        private string ReplaceRconCmdVaraibles(string input)
         {
-            if (compiledFileNames.Count < 1)
-            { return input; }
-            if (input.IndexOf("{plugins_reload}") >= 0)
+            if (_compiledFileNames.Count < 1)
+                return input;
+
+            if (input.IndexOf("{plugins_reload}", StringComparison.Ordinal) >= 0)
             {
-                StringBuilder replacement = new StringBuilder();
+                var replacement = new StringBuilder();
                 replacement.AppendLine();
-                for (int i = 0; i < compiledFileNames.Count; ++i)
-                {
-                    replacement.Append("sm plugins reload " + StripSMXPostFix(compiledFileNames[i]) + ";");
-                }
+
+                foreach (var str in _compiledFileNames)
+                    replacement.Append("sm plugins reload " + StripSmxPostFix(str) + ";");
+
                 replacement.AppendLine();
                 input = input.Replace("{plugins_reload}", replacement.ToString());
             }
-            if (input.IndexOf("{plugins_load}") >= 0)
+
+            if (input.IndexOf("{plugins_load}", StringComparison.Ordinal) >= 0)
             {
-                StringBuilder replacement = new StringBuilder();
+                var replacement = new StringBuilder();
                 replacement.AppendLine();
-                for (int i = 0; i < compiledFileNames.Count; ++i)
-                {
-                    replacement.Append("sm plugins load " + StripSMXPostFix(compiledFileNames[i]) + ";");
-                }
+
+                foreach (var str in _compiledFileNames)
+                    replacement.Append("sm plugins load " + StripSmxPostFix(str) + ";");
+
                 replacement.AppendLine();
                 input = input.Replace("{plugins_load}", replacement.ToString());
             }
-            if (input.IndexOf("{plugins_unload}") >= 0)
+
+            if (input.IndexOf("{plugins_unload}", StringComparison.Ordinal) < 0)
+                return input;
+
             {
-                StringBuilder replacement = new StringBuilder();
+                var replacement = new StringBuilder();
                 replacement.AppendLine();
-                for (int i = 0; i < compiledFileNames.Count; ++i)
-                {
-                    replacement.Append("sm plugins unload " + StripSMXPostFix(compiledFileNames[i]) + ";");
-                }
+
+                foreach (var str in _compiledFileNames)
+                    replacement.Append("sm plugins unload " + StripSmxPostFix(str) + ";");
+
                 replacement.AppendLine();
                 input = input.Replace("{plugins_unload}", replacement.ToString());
             }
+
             return input;
         }
 
-        private string StripSMXPostFix(string fileName)
+        private static string StripSmxPostFix(string fileName)
         {
-            if (fileName.EndsWith(".smx"))
-            {
-                return fileName.Substring(0, fileName.Length - 4);
-            }
-            return fileName;
+            return fileName.EndsWith(".smx") ? fileName.Substring(0, fileName.Length - 4) : fileName;
         }
     }
 }

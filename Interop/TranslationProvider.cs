@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
 using System.IO;
 using System.Xml;
 using System.Windows;
@@ -11,11 +8,9 @@ namespace Spedit.Interop
 {
 	public class TranslationProvider
 	{
-		public string[] AvailableLanguageIDs;
+        public bool IsDefault = true;
+        public string[] AvailableLanguageIDs;
 		public string[] AvailableLanguages;
-
-		public bool IsDefault = true;
-
 		public string Language;
 		public string ServerRunning;
 		public string Saving;
@@ -142,432 +137,628 @@ namespace Spedit.Interop
 		public string Compile;
 		public string AutoSaveMin;
 
-		public void LoadLanguage(string lang, bool Initial = false)
+		public void LoadLanguage(string lang, bool initial = false)
 		{
 			FillToEnglishDefaults();
-			List<string> languageList = new List<string>();
-			List<string> languageIDList = new List<string>();
+
+			var languageList = new List<string>();
+			var languageIdList = new List<string>();
+
 			languageList.Add("English");
-			languageIDList.Add("");
+			languageIdList.Add("");
 			lang = lang.Trim().ToLowerInvariant();
-			IsDefault = (string.IsNullOrEmpty(lang) || lang.ToLowerInvariant() == "en") && Initial;
+			IsDefault = (string.IsNullOrEmpty(lang) || lang.ToLowerInvariant() == "en") && initial;
+
 			if (File.Exists("lang_0_spedit.xml"))
 			{
 				try
 				{
-					XmlDocument document = new XmlDocument();
+					var document = new XmlDocument();
 					document.Load("lang_0_spedit.xml");
+
 					if (document.ChildNodes.Count < 1)
-					{
 						throw new Exception("No Root-Node: \"translations\" found");
-					}
+
 					XmlNode rootLangNode = null;
+
 					foreach (XmlNode childNode in document.ChildNodes[0].ChildNodes)
 					{
-						string lID = childNode.Name;
-						string lNm = lID;
+						var lId = childNode.Name;
+                        var lNm = lId;
+
 						if (childNode.Name.ToLowerInvariant() == lang)
-						{
-							rootLangNode = childNode;
-						}
-						if (childNode.FirstChild.Name.ToLowerInvariant() == "language")
-						{
-							lNm = childNode.FirstChild.InnerText;
-						}
-						languageList.Add(lNm);
-						languageIDList.Add(lID);
+						    rootLangNode = childNode;
+
+					    if (childNode.FirstChild.Name.ToLowerInvariant() == "language")
+					        lNm = childNode.FirstChild.InnerText;
+
+					    languageList.Add(lNm);
+						languageIdList.Add(lId);
 					}
+
 					if (rootLangNode != null)
 					{
 						foreach (XmlNode node in rootLangNode.ChildNodes)
 						{
 							if (node.NodeType == XmlNodeType.Comment)
-							{
 								continue;
-							}
-							string nn = node.Name.ToLowerInvariant();
-							string nv = node.InnerText;
+
+							var nn = node.Name.ToLowerInvariant();
+                            var nv = node.InnerText;
+
 							//and now: brace yourself and tuckle your seatbells:
-							if (nn == "language")
-								Language = nv;
-							else if (nn == "serverrunning")
-								ServerRunning = nv;
-							else if (nn == "saving")
-								Saving = nv;
-							else if (nn == "saveufiles")
-								SavingUFiles = nv;
-							else if (nn == "compileall")
-								CompileAll = nv;
-							else if (nn == "compilecurr")
-								CompileCurr = nv;
-							else if (nn == "copy")
-								Copy = nv;
-							else if (nn == "ftpup")
-								FTPUp = nv;
-							else if (nn == "startserver")
-								StartServer = nv;
-							else if (nn == "replace")
-								Replace = nv;
-							else if (nn == "replaceall")
-								ReplaceAll = nv;
-							else if (nn == "opennewfile")
-								OpenNewFile = nv;
-							else if (nn == "nofilopened")
-								NoFileOpened = nv;
-							else if (nn == "nofileopenedcap")
-								NoFileOpenedCap = nv;
-							else if (nn == "savefileas")
-								SaveFileAs = nv;
-							else if (nn == "savefollow")
-								SaveFollow = nv;
-							else if (nn == "decompiling")
-								Decompiling = nv;
-							else if (nn == "chdecomp")
-								ChDecomp = nv;
-							else if (nn == "editconfig")
-								EditConfig = nv;
-							else if (nn == "foundinoff")
-								FoundInOff = nv;
-							else if (nn == "foundnothing")
-								FoundNothing = nv;
-							else if (nn == "replacedoff")
-								ReplacedOff = nv;
-							else if (nn == "replacedocc")
-								ReplacedOcc = nv;
-							else if (nn == "occfound")
-								OccFound = nv;
-							else if (nn == "emptypatt")
-								EmptyPatt = nv;
-							else if (nn == "novalidregex")
-								NoValidRegex = nv;
-							else if (nn == "failedcheck")
-								FailedCheck = nv;
-							else if (nn == "errorupdate")
-								ErrorUpdate = nv;
-							else if (nn == "versuptodate")
-								VersUpToDate = nv;
-							else if (nn == "versionyour")
-								VersionYour = nv;
-							else if (nn == "details")
-								Details = nv;
-							else if (nn == "compiling")
-								Compiling = nv;
-							else if (nn == "error")
-								Error = nv;
-							else if (nn == "spcompnotstarted")
-								SPCompNotStarted = nv;
-							else if (nn == "spcompnotfound")
-								SPCompNotFound = nv;
-							else if (nn == "copied")
-								Copied = nv;
-							else if (nn == "deleted")
-								Deleted = nv;
-							else if (nn == "failcopy")
-								FailCopy = nv;
-							else if (nn == "nofilescopy")
-								NoFilesCopy = nv;
-							else if (nn == "uploaded")
-								Uploaded = nv;
-							else if (nn == "erroruploadfile")
-								ErrorUploadFile = nv;
-							else if (nn == "errorupload")
-								ErrorUpload = nv;
-							else if (nn == "done")
-								Done = nv;
-							else if (nn == "file")
-								FileStr = nv;
-							else if (nn == "new")
-								New = nv;
-							else if (nn == "open")
-								Open = nv;
-							else if (nn == "save")
-								Save = nv;
-							else if (nn == "saveall")
-								SaveAll = nv;
-							else if (nn == "saveas")
-								SaveAs = nv;
-							else if (nn == "close")
-								Close = nv;
-							else if (nn == "closeall")
-								CloseAll = nv;
-							else if (nn == "build")
-								Build = nv;
-							else if (nn == "copyplugin")
-								CopyPlugin = nv;
-							else if (nn == "sendrcon")
-								SendRCon = nv;
-							else if (nn == "config")
-								Config = nv;
-							else if (nn == "edit")
-								Edit = nv;
-							else if (nn == "undo")
-								Undo = nv;
-							else if (nn == "redo")
-								Redo = nv;
-							else if (nn == "cut")
-								Cut = nv;
-							else if (nn == "paste")
-								Paste = nv;
-							else if (nn == "folding")
-								Folding = nv;
-							else if (nn == "expandall")
-								ExpandAll = nv;
-							else if (nn == "collapseall")
-								CollapseAll = nv;
-							else if (nn == "jumpto")
-								JumpTo = nv;
-							else if (nn == "togglcomment")
-								TogglComment = nv;
-							else if (nn == "selectall")
-								SelectAll = nv;
-							else if (nn == "findreplace")
-								FindReplace = nv;
-							else if (nn == "tools")
-								Tools = nv;
-							else if (nn == "options")
-								Options = nv;
-							else if (nn == "parsedincdir")
-								ParsedIncDir = nv;
-							else if (nn == "oldapiweb")
-								OldAPIWeb = nv;
-							else if (nn == "newapiweb")
-								NewAPIWeb = nv;
-							else if (nn == "reformatter")
-								Reformatter = nv;
-							else if (nn == "reformatcurr")
-								ReformatCurr = nv;
-							else if (nn == "reformatall")
-								ReformatAll = nv;
-							else if (nn == "decompile")
-								Decompile = nv;
-							else if (nn == "reportbuggit")
-								ReportBugGit = nv;
-							else if (nn == "checkupdates")
-								CheckUpdates = nv;
-							else if (nn == "about")
-								About = nv;
-							else if (nn == "filename")
-								FileName = nv;
-							else if (nn == "line")
-								Line = nv;
-							else if (nn == "type")
-								TypeStr = nv;
-							else if (nn == "normalsearch")
-								NormalSearch = nv;
-							else if (nn == "matchwhowords")
-								MatchWholeWords = nv;
-							else if (nn == "advancsearch")
-								AdvancSearch = nv;
-							else if (nn == "regexsearch")
-								RegexSearch = nv;
-							else if (nn == "currdoc")
-								CurrDoc = nv;
-							else if (nn == "alldoc")
-								AllDoc = nv;
-							else if (nn == "find")
-								Find = nv;
-							else if (nn == "count")
-								Count = nv;
-							else if (nn == "casesen")
-								CaseSen = nv;
-							else if (nn == "multilineregex")
-								MultilineRegex = nv;
-							else if (nn == "errorfileloadproc")
-								ErrorFileLoadProc = nv;
-							else if (nn == "notdissmethod")
-								NotDissMethod = nv;
-							else if (nn == "dfilechanged")
-								DFileChanged = nv;
-							else if (nn == "filechanged")
-								FileChanged = nv;
-							else if (nn == "filetryreload")
-								FileTryReload = nv;
-							else if (nn == "dsaveerror")
-								DSaveError = nv;
-							else if (nn == "saveerror")
-								SaveError = nv;
-							else if (nn == "savingfile")
-								SavingFile = nv;
-							else if (nn == "colabb")
-								ColAbb = nv;
-							else if (nn == "lnabb")
-								LnAbb = nv;
-							else if (nn == "lenabb")
-								LenAbb = nv;
-							else if (nn == "ptabb")
-								PtAbb = nv;
-							else if (nn == "speditcap")
-								SPEditCap = nv;
-							else if (nn == "writtenby")
-								WrittenBy = nv;
-							else if (nn == "license")
-								License = nv;
-							else if (nn == "peopleinv")
-								PeopleInv = nv;
-							else if (nn == "preview")
-								Preview = nv;
-							else if (nn == "newfile")
-								NewFile = nv;
-							else if (nn == "configwrongpars")
-								ConfigWrongPars = nv;
-							else if (nn == "noname")
-								NoName = nv;
-							else if (nn == "poslen")
-								PosLen = nv;
-							else if (nn == "inheritedfr")
-								InheritedFrom = nv;
-							else if (nn == "methodfrom")
-								MethodFrom = nv;
-							else if (nn == "propertyfrom")
-								PropertyFrom = nv;
-							else if (nn == "search")
-								Search = nv;
-							else if (nn == "delete")
-								Delete = nv;
-							else if (nn == "name")
-								Name = nv;
-							else if (nn == "scriptdir")
-								ScriptDir = nv;
-							else if (nn == "delimitedwi")
-								DelimiedWi = nv;
-							else if (nn == "copydir")
-								CopyDir = nv;
-							else if (nn == "serverexe")
-								ServerExe = nv;
-							else if (nn == "serverstartargs")
-								serverStartArgs = nv;
-							else if (nn == "prebuildcom")
-								PreBuildCom = nv;
-							else if (nn == "postbuildcom")
-								PostBuildCom = nv;
-							else if (nn == "optimizelvl")
-								OptimizeLvl = nv;
-							else if (nn == "verboselvl")
-								VerboseLvl = nv;
-							else if (nn == "autocopy")
-								AutoCopy = nv;
-							else if (nn == "deleteoldsmx")
-								DeleteOldSMX = nv;
-							else if (nn == "ftphost")
-								FTPHost = nv;
-							else if (nn == "ftpuser")
-								FTPUser = nv;
-							else if (nn == "ftppw")
-								FTPPw = nv;
-							else if (nn == "ftpdir")
-								FTPDir = nv;
-							else if (nn == "comeditordir")
-								ComEditorDir = nv;
-							else if (nn == "comscriptdir")
-								ComScriptDir = nv;
-							else if (nn == "comcopydir")
-								ComCopyDir = nv;
-							else if (nn == "comscriptfile")
-								ComScriptFile = nv;
-							else if (nn == "comscriptname")
-								ComScriptName = nv;
-							else if (nn == "compluginfile")
-								ComPluginFile = nv;
-							else if (nn == "compluginname")
-								ComPluginName = nv;
-							else if (nn == "rconengine")
-								RConEngine = nv;
-							else if (nn == "rconip")
-								RConIP = nv;
-							else if (nn == "rconport")
-								RconPort = nv;
-							else if (nn == "rconpw")
-								RconPw = nv;
-							else if (nn == "rconcom")
-								RconCom = nv;
-							else if (nn == "compluginsreload")
-								ComPluginsReload = nv;
-							else if (nn == "compluginsloas")
-								ComPluginsLoad = nv;
-							else if (nn == "compluginsunload")
-								ComPluginsUnload = nv;
-							else if (nn == "newconfig")
-								NewConfig = nv;
-							else if (nn == "cannotdelconf")
-								CannotDelConf = nv;
-							else if (nn == "ycannotdelconf")
-								YCannotDelConf = nv;
-							else if (nn == "selectexe")
-								SelectExe = nv;
-							else if (nn == "cmdlinecom")
-								CMDLineCom = nv;
-							else if (nn == "rconcmdlinecom")
-								RConCMDLineCom = nv;
-							else if (nn == "resetoptions")
-								ResetOptions = nv;
-							else if (nn == "resetoptques")
-								ResetOptQues = nv;
-							else if (nn == "restarteditor")
-								RestartEditor = nv;
-							else if (nn == "yrestarteditor")
-								YRestartEditor = nv;
-							else if (nn == "restartedifulleff")
-								RestartEdiFullEff = nv;
-							else if (nn == "restartedieff")
-								RestartEdiEff = nv;
-							else if (nn == "program")
-								Program = nv;
-							else if (nn == "hardwareacc")
-								HardwareAcc = nv;
-							else if (nn == "uianim")
-								UIAnim = nv;
-							else if (nn == "openinc")
-								OpenInc = nv;
-							else if (nn == "openincrec")
-								OpenIncRec = nv;
-							else if (nn == "autoupdate")
-								AutoUpdate = nv;
-							else if (nn == "showtoolbar")
-								ShowToolbar = nv;
-							else if (nn == "dynamicisac")
-								DynamicISAC = nv;
-							else if (nn == "darktheme")
-								DarkTheme = nv;
-							else if (nn == "themecolor")
-								ThemeColor = nv;
-							else if (nn == "languagestr")
-								LanguageStr = nv;
-							else if (nn == "editor")
-								Editor = nv;
-							else if (nn == "fontsize")
-								FontSize = nv;
-							else if (nn == "scrollspeed")
-								ScrollSpeed = nv;
-							else if (nn == "wordwrap")
-								WordWrap = nv;
-							else if (nn == "aggindentation")
-								AggIndentation = nv;
-							else if (nn == "reformataftersem")
-								ReformatAfterSem = nv;
-							else if (nn == "tabstospace")
-								TabsToSpace = nv;
-							else if (nn == "autoclosebrack")
-								AutoCloseBrack = nv;
-							else if (nn == "autoclosestrchr")
-								AutoCloseStrChr = nv;
-							else if (nn == "showsapaces")
-								ShowSpaces = nv;
-							else if (nn == "showtabs")
-								ShowTabs = nv;
-							else if (nn == "indentationsize")
-								IndentationSize = nv;
-							else if (nn == "fontfamily")
-								FontFamily = nv;
-							else if (nn == "syntaxhigh")
-								SyntaxHigh = nv;
-							else if (nn == "highdeprecat")
-								HighDeprecat = nv;
-							else if (nn == "compile")
-								Compile = nv;
-							else if (nn == "autosavemin")
-								AutoSaveMin = nv;
-							else
-								throw new Exception($"{nn} is not a known language-phrase");
+							switch (nn)
+							{
+							    case "language":
+							        Language = nv;
+							        break;
+							    case "serverrunning":
+							        ServerRunning = nv;
+							        break;
+							    case "saving":
+							        Saving = nv;
+							        break;
+							    case "saveufiles":
+							        SavingUFiles = nv;
+							        break;
+							    case "compileall":
+							        CompileAll = nv;
+							        break;
+							    case "compilecurr":
+							        CompileCurr = nv;
+							        break;
+							    case "copy":
+							        Copy = nv;
+							        break;
+							    case "ftpup":
+							        FTPUp = nv;
+							        break;
+							    case "startserver":
+							        StartServer = nv;
+							        break;
+							    case "replace":
+							        Replace = nv;
+							        break;
+							    case "replaceall":
+							        ReplaceAll = nv;
+							        break;
+							    case "opennewfile":
+							        OpenNewFile = nv;
+							        break;
+							    case "nofilopened":
+							        NoFileOpened = nv;
+							        break;
+							    case "nofileopenedcap":
+							        NoFileOpenedCap = nv;
+							        break;
+							    case "savefileas":
+							        SaveFileAs = nv;
+							        break;
+							    case "savefollow":
+							        SaveFollow = nv;
+							        break;
+							    case "decompiling":
+							        Decompiling = nv;
+							        break;
+							    case "chdecomp":
+							        ChDecomp = nv;
+							        break;
+							    case "editconfig":
+							        EditConfig = nv;
+							        break;
+							    case "foundinoff":
+							        FoundInOff = nv;
+							        break;
+							    case "foundnothing":
+							        FoundNothing = nv;
+							        break;
+							    case "replacedoff":
+							        ReplacedOff = nv;
+							        break;
+							    case "replacedocc":
+							        ReplacedOcc = nv;
+							        break;
+							    case "occfound":
+							        OccFound = nv;
+							        break;
+							    case "emptypatt":
+							        EmptyPatt = nv;
+							        break;
+							    case "novalidregex":
+							        NoValidRegex = nv;
+							        break;
+							    case "failedcheck":
+							        FailedCheck = nv;
+							        break;
+							    case "errorupdate":
+							        ErrorUpdate = nv;
+							        break;
+							    case "versuptodate":
+							        VersUpToDate = nv;
+							        break;
+							    case "versionyour":
+							        VersionYour = nv;
+							        break;
+							    case "details":
+							        Details = nv;
+							        break;
+							    case "compiling":
+							        Compiling = nv;
+							        break;
+							    case "error":
+							        Error = nv;
+							        break;
+							    case "spcompnotstarted":
+							        SPCompNotStarted = nv;
+							        break;
+							    case "spcompnotfound":
+							        SPCompNotFound = nv;
+							        break;
+							    case "copied":
+							        Copied = nv;
+							        break;
+							    case "deleted":
+							        Deleted = nv;
+							        break;
+							    case "failcopy":
+							        FailCopy = nv;
+							        break;
+							    case "nofilescopy":
+							        NoFilesCopy = nv;
+							        break;
+							    case "uploaded":
+							        Uploaded = nv;
+							        break;
+							    case "erroruploadfile":
+							        ErrorUploadFile = nv;
+							        break;
+							    case "errorupload":
+							        ErrorUpload = nv;
+							        break;
+							    case "done":
+							        Done = nv;
+							        break;
+							    case "file":
+							        FileStr = nv;
+							        break;
+							    case "new":
+							        New = nv;
+							        break;
+							    case "open":
+							        Open = nv;
+							        break;
+							    case "save":
+							        Save = nv;
+							        break;
+							    case "saveall":
+							        SaveAll = nv;
+							        break;
+							    case "saveas":
+							        SaveAs = nv;
+							        break;
+							    case "close":
+							        Close = nv;
+							        break;
+							    case "closeall":
+							        CloseAll = nv;
+							        break;
+							    case "build":
+							        Build = nv;
+							        break;
+							    case "copyplugin":
+							        CopyPlugin = nv;
+							        break;
+							    case "sendrcon":
+							        SendRCon = nv;
+							        break;
+							    case "config":
+							        Config = nv;
+							        break;
+							    case "edit":
+							        Edit = nv;
+							        break;
+							    case "undo":
+							        Undo = nv;
+							        break;
+							    case "redo":
+							        Redo = nv;
+							        break;
+							    case "cut":
+							        Cut = nv;
+							        break;
+							    case "paste":
+							        Paste = nv;
+							        break;
+							    case "folding":
+							        Folding = nv;
+							        break;
+							    case "expandall":
+							        ExpandAll = nv;
+							        break;
+							    case "collapseall":
+							        CollapseAll = nv;
+							        break;
+							    case "jumpto":
+							        JumpTo = nv;
+							        break;
+							    case "togglcomment":
+							        TogglComment = nv;
+							        break;
+							    case "selectall":
+							        SelectAll = nv;
+							        break;
+							    case "findreplace":
+							        FindReplace = nv;
+							        break;
+							    case "tools":
+							        Tools = nv;
+							        break;
+							    case "options":
+							        Options = nv;
+							        break;
+							    case "parsedincdir":
+							        ParsedIncDir = nv;
+							        break;
+							    case "oldapiweb":
+							        OldAPIWeb = nv;
+							        break;
+							    case "newapiweb":
+							        NewAPIWeb = nv;
+							        break;
+							    case "reformatter":
+							        Reformatter = nv;
+							        break;
+							    case "reformatcurr":
+							        ReformatCurr = nv;
+							        break;
+							    case "reformatall":
+							        ReformatAll = nv;
+							        break;
+							    case "decompile":
+							        Decompile = nv;
+							        break;
+							    case "reportbuggit":
+							        ReportBugGit = nv;
+							        break;
+							    case "checkupdates":
+							        CheckUpdates = nv;
+							        break;
+							    case "about":
+							        About = nv;
+							        break;
+							    case "filename":
+							        FileName = nv;
+							        break;
+							    case "line":
+							        Line = nv;
+							        break;
+							    case "type":
+							        TypeStr = nv;
+							        break;
+							    case "normalsearch":
+							        NormalSearch = nv;
+							        break;
+							    case "matchwhowords":
+							        MatchWholeWords = nv;
+							        break;
+							    case "advancsearch":
+							        AdvancSearch = nv;
+							        break;
+							    case "regexsearch":
+							        RegexSearch = nv;
+							        break;
+							    case "currdoc":
+							        CurrDoc = nv;
+							        break;
+							    case "alldoc":
+							        AllDoc = nv;
+							        break;
+							    case "find":
+							        Find = nv;
+							        break;
+							    case "count":
+							        Count = nv;
+							        break;
+							    case "casesen":
+							        CaseSen = nv;
+							        break;
+							    case "multilineregex":
+							        MultilineRegex = nv;
+							        break;
+							    case "errorfileloadproc":
+							        ErrorFileLoadProc = nv;
+							        break;
+							    case "notdissmethod":
+							        NotDissMethod = nv;
+							        break;
+							    case "dfilechanged":
+							        DFileChanged = nv;
+							        break;
+							    case "filechanged":
+							        FileChanged = nv;
+							        break;
+							    case "filetryreload":
+							        FileTryReload = nv;
+							        break;
+							    case "dsaveerror":
+							        DSaveError = nv;
+							        break;
+							    case "saveerror":
+							        SaveError = nv;
+							        break;
+							    case "savingfile":
+							        SavingFile = nv;
+							        break;
+							    case "colabb":
+							        ColAbb = nv;
+							        break;
+							    case "lnabb":
+							        LnAbb = nv;
+							        break;
+							    case "lenabb":
+							        LenAbb = nv;
+							        break;
+							    case "ptabb":
+							        PtAbb = nv;
+							        break;
+							    case "speditcap":
+							        SPEditCap = nv;
+							        break;
+							    case "writtenby":
+							        WrittenBy = nv;
+							        break;
+							    case "license":
+							        License = nv;
+							        break;
+							    case "peopleinv":
+							        PeopleInv = nv;
+							        break;
+							    case "preview":
+							        Preview = nv;
+							        break;
+							    case "newfile":
+							        NewFile = nv;
+							        break;
+							    case "configwrongpars":
+							        ConfigWrongPars = nv;
+							        break;
+							    case "noname":
+							        NoName = nv;
+							        break;
+							    case "poslen":
+							        PosLen = nv;
+							        break;
+							    case "inheritedfr":
+							        InheritedFrom = nv;
+							        break;
+							    case "methodfrom":
+							        MethodFrom = nv;
+							        break;
+							    case "propertyfrom":
+							        PropertyFrom = nv;
+							        break;
+							    case "search":
+							        Search = nv;
+							        break;
+							    case "delete":
+							        Delete = nv;
+							        break;
+							    case "name":
+							        Name = nv;
+							        break;
+							    case "scriptdir":
+							        ScriptDir = nv;
+							        break;
+							    case "delimitedwi":
+							        DelimiedWi = nv;
+							        break;
+							    case "copydir":
+							        CopyDir = nv;
+							        break;
+							    case "serverexe":
+							        ServerExe = nv;
+							        break;
+							    case "serverstartargs":
+							        serverStartArgs = nv;
+							        break;
+							    case "prebuildcom":
+							        PreBuildCom = nv;
+							        break;
+							    case "postbuildcom":
+							        PostBuildCom = nv;
+							        break;
+							    case "optimizelvl":
+							        OptimizeLvl = nv;
+							        break;
+							    case "verboselvl":
+							        VerboseLvl = nv;
+							        break;
+							    case "autocopy":
+							        AutoCopy = nv;
+							        break;
+							    case "deleteoldsmx":
+							        DeleteOldSMX = nv;
+							        break;
+							    case "ftphost":
+							        FTPHost = nv;
+							        break;
+							    case "ftpuser":
+							        FTPUser = nv;
+							        break;
+							    case "ftppw":
+							        FTPPw = nv;
+							        break;
+							    case "ftpdir":
+							        FTPDir = nv;
+							        break;
+							    case "comeditordir":
+							        ComEditorDir = nv;
+							        break;
+							    case "comscriptdir":
+							        ComScriptDir = nv;
+							        break;
+							    case "comcopydir":
+							        ComCopyDir = nv;
+							        break;
+							    case "comscriptfile":
+							        ComScriptFile = nv;
+							        break;
+							    case "comscriptname":
+							        ComScriptName = nv;
+							        break;
+							    case "compluginfile":
+							        ComPluginFile = nv;
+							        break;
+							    case "compluginname":
+							        ComPluginName = nv;
+							        break;
+							    case "rconengine":
+							        RConEngine = nv;
+							        break;
+							    case "rconip":
+							        RConIP = nv;
+							        break;
+							    case "rconport":
+							        RconPort = nv;
+							        break;
+							    case "rconpw":
+							        RconPw = nv;
+							        break;
+							    case "rconcom":
+							        RconCom = nv;
+							        break;
+							    case "compluginsreload":
+							        ComPluginsReload = nv;
+							        break;
+							    case "compluginsloas":
+							        ComPluginsLoad = nv;
+							        break;
+							    case "compluginsunload":
+							        ComPluginsUnload = nv;
+							        break;
+							    case "newconfig":
+							        NewConfig = nv;
+							        break;
+							    case "cannotdelconf":
+							        CannotDelConf = nv;
+							        break;
+							    case "ycannotdelconf":
+							        YCannotDelConf = nv;
+							        break;
+							    case "selectexe":
+							        SelectExe = nv;
+							        break;
+							    case "cmdlinecom":
+							        CMDLineCom = nv;
+							        break;
+							    case "rconcmdlinecom":
+							        RConCMDLineCom = nv;
+							        break;
+							    case "resetoptions":
+							        ResetOptions = nv;
+							        break;
+							    case "resetoptques":
+							        ResetOptQues = nv;
+							        break;
+							    case "restarteditor":
+							        RestartEditor = nv;
+							        break;
+							    case "yrestarteditor":
+							        YRestartEditor = nv;
+							        break;
+							    case "restartedifulleff":
+							        RestartEdiFullEff = nv;
+							        break;
+							    case "restartedieff":
+							        RestartEdiEff = nv;
+							        break;
+							    case "program":
+							        Program = nv;
+							        break;
+							    case "hardwareacc":
+							        HardwareAcc = nv;
+							        break;
+							    case "uianim":
+							        UIAnim = nv;
+							        break;
+							    case "openinc":
+							        OpenInc = nv;
+							        break;
+							    case "openincrec":
+							        OpenIncRec = nv;
+							        break;
+							    case "autoupdate":
+							        AutoUpdate = nv;
+							        break;
+							    case "showtoolbar":
+							        ShowToolbar = nv;
+							        break;
+							    case "dynamicisac":
+							        DynamicISAC = nv;
+							        break;
+							    case "darktheme":
+							        DarkTheme = nv;
+							        break;
+							    case "themecolor":
+							        ThemeColor = nv;
+							        break;
+							    case "languagestr":
+							        LanguageStr = nv;
+							        break;
+							    case "editor":
+							        Editor = nv;
+							        break;
+							    case "fontsize":
+							        FontSize = nv;
+							        break;
+							    case "scrollspeed":
+							        ScrollSpeed = nv;
+							        break;
+							    case "wordwrap":
+							        WordWrap = nv;
+							        break;
+							    case "aggindentation":
+							        AggIndentation = nv;
+							        break;
+							    case "reformataftersem":
+							        ReformatAfterSem = nv;
+							        break;
+							    case "tabstospace":
+							        TabsToSpace = nv;
+							        break;
+							    case "autoclosebrack":
+							        AutoCloseBrack = nv;
+							        break;
+							    case "autoclosestrchr":
+							        AutoCloseStrChr = nv;
+							        break;
+							    case "showsapaces":
+							        ShowSpaces = nv;
+							        break;
+							    case "showtabs":
+							        ShowTabs = nv;
+							        break;
+							    case "indentationsize":
+							        IndentationSize = nv;
+							        break;
+							    case "fontfamily":
+							        FontFamily = nv;
+							        break;
+							    case "syntaxhigh":
+							        SyntaxHigh = nv;
+							        break;
+							    case "highdeprecat":
+							        HighDeprecat = nv;
+							        break;
+							    case "compile":
+							        Compile = nv;
+							        break;
+							    case "autosavemin":
+							        AutoSaveMin = nv;
+							        break;
+							    default:
+							        throw new Exception($"{nn} is not a known language-phrase");
+							}
 						}
 					}
 				}
@@ -579,8 +770,9 @@ namespace Spedit.Interop
 						, MessageBoxImage.Warning);
 				}
 			}
+
 			AvailableLanguages = languageList.ToArray();
-			AvailableLanguageIDs = languageIDList.ToArray();
+			AvailableLanguageIDs = languageIdList.ToArray();
 		}
 
 		private void FillToEnglishDefaults()

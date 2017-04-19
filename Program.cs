@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media;
-using System.Runtime;
+using static System.IO.Path;
 
 namespace Spedit
 {
@@ -18,64 +18,68 @@ namespace Spedit
 
         public static MainWindow MainWindow;
         public static OptionsControl OptionsObject;
-		public static TranslationProvider Translations;
+        public static TranslationProvider Translations;
         public static Config[] Configs;
-        public static int SelectedConfig = 0;
-
+        public static int SelectedConfig;
         public static UpdateInfo UpdateStatus;
-
-		public static bool RCCKMade = false;
+        public static bool RCCKMade;
 
         [STAThread]
         public static void Main(string[] args)
         {
-            bool InSafe = false;
+            var inSafe = false;
             bool mutexReserved;
-            using (Mutex appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
+
+            using (var appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
             {
                 if (mutexReserved)
-				{
-					bool ProgramIsNew = false;
+                {
+                    bool programIsNew;
 #if !DEBUG
                     try
                     {
 #endif
-						SplashScreen splashScreen = new SplashScreen("Resources/Icon256x.png");
-                        splashScreen.Show(false, true);
-                        Environment.CurrentDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var splashScreen = new SplashScreen("Resources/Icon256x.png");
+                    splashScreen.Show(false, true);
+                    Environment.CurrentDirectory = GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 #if !DEBUG
 						ProfileOptimization.SetProfileRoot(Environment.CurrentDirectory);
 						ProfileOptimization.StartProfile("Startup.Profile");
 #endif
-						UpdateStatus = new UpdateInfo();
-						OptionsObject = OptionsControlIOObject.Load(out ProgramIsNew);
-						Translations = new TranslationProvider();
-						Translations.LoadLanguage(OptionsObject.Language, true);
-						for (int i = 0; i < args.Length; ++i)
+                    UpdateStatus = new UpdateInfo();
+                    OptionsObject = OptionsControlIoObject.Load(out programIsNew);
+                    Translations = new TranslationProvider();
+                    Translations.LoadLanguage(OptionsObject.Language, true);
+
+                    foreach (var str in args)
+                        switch (str.ToLowerInvariant())
                         {
-                            if (args[i].ToLowerInvariant() == "-rcck") //ReCreateCryptoKey
-                            {
-								OptionsObject.ReCreateCryptoKey();
-								MakeRCCKAlert();
-                            }
-                            else if (args[i].ToLowerInvariant() == "-safe")
-                            {
-                                InSafe = true;
-                            }
-                        }
-                        Configs = ConfigLoader.Load();
-                        for (int i = 0; i < Configs.Length; ++i)
-                        {
-                            if (Configs[i].Name == OptionsObject.Program_SelectedConfig)
-                            {
-                                Program.SelectedConfig = i;
+                            case "-rcck":
+                                OptionsObject.ReCreateCryptoKey();
+                                MakeRcckAlert();
                                 break;
-                            }
+                            case "-safe":
+                                inSafe = true;
+                                break;
+                            default:
+                                // ignored
+                                break;
                         }
-                        if (!OptionsObject.Program_UseHardwareAcceleration)
-                        {
-                            RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
-						}
+
+                    Configs = ConfigLoader.Load();
+
+                    for (var i = 0; i < Configs.Length; ++i)
+                    {
+                        if (Configs[i].Name != OptionsObject.ProgramSelectedConfig)
+                            continue;
+
+                        SelectedConfig = i;
+
+                        break;
+                    }
+
+                    if (!OptionsObject.ProgramUseHardwareAcceleration)
+                        RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
 #if !DEBUG
 						if (ProgramIsNew)
 						{
@@ -94,9 +98,9 @@ namespace Spedit
 							}
 						}
 #endif
-						MainWindow = new MainWindow(splashScreen);
-                        PipeInteropServer pipeServer = new PipeInteropServer(MainWindow);
-                        pipeServer.Start();
+                    MainWindow = new MainWindow(splashScreen);
+                    var pipeServer = new PipeInteropServer(MainWindow);
+                    pipeServer.Start();
 #if !DEBUG
                     }
                     catch (Exception e)
@@ -109,8 +113,9 @@ namespace Spedit
                         Environment.Exit(Environment.ExitCode);
                     }
 #endif
-                    Application app = new Application();
-                    if (InSafe)
+                    var app = new Application();
+
+                    if (inSafe)
                     {
                         try
                         {
@@ -120,14 +125,17 @@ namespace Spedit
                                 UpdateCheck.Check(true);
                             }
 #endif
-							app.Startup += App_Startup;
+                            app.Startup += App_Startup;
                             app.Run(MainWindow);
-                            OptionsControlIOObject.Save();
+                            OptionsControlIoObject.Save();
                         }
                         catch (Exception e)
                         {
-                            File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
-                            MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
+                            File.WriteAllText("CRASH_" + Environment.TickCount + ".txt",
+                                BuildExceptionString(e, "SPEDIT MAIN"));
+                            MessageBox.Show(
+                                "An error occured." + Environment.NewLine +
+                                "A crash report was written in the editor-directory.",
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -135,105 +143,113 @@ namespace Spedit
                         }
                     }
                     else
-					{
+                    {
 #if !DEBUG
                         if (OptionsObject.Program_CheckForUpdates)
                         {
                             UpdateCheck.Check(true);
                         }
 #endif
-						app.Run(MainWindow);
-                        OptionsControlIOObject.Save();
+                        app.Run(MainWindow);
+                        OptionsControlIoObject.Save();
                     }
                 }
                 else
                 {
                     try
                     {
-                        StringBuilder sBuilder = new StringBuilder();
-                        bool addedFiles = false;
-                        for (int i = 0; i < args.Length; ++i)
+                        var sBuilder = new StringBuilder();
+                        var addedFiles = false;
+
+                        for (var i = 0; i < args.Length; ++i)
                         {
-                            if (!string.IsNullOrWhiteSpace(args[i]))
-                            {
-                                FileInfo fInfo = new FileInfo(args[i]);
-                                if (fInfo.Exists)
-                                {
-                                    string ext = fInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
-                                    if (ext == "sp" || ext == "inc" || ext == "txt" || ext == "smx")
-                                    {
-                                        addedFiles = true;
-                                        sBuilder.Append(fInfo.FullName);
-                                        if ((i + 1) != args.Length)
-                                        { sBuilder.Append("|"); }
-                                    }
-                                }
-                            }
+                            if (string.IsNullOrWhiteSpace(args[i]))
+                                continue;
+
+                            var fInfo = new FileInfo(args[i]);
+
+                            if (!fInfo.Exists)
+                                continue;
+
+                            var ext = fInfo.Extension.ToLowerInvariant().Trim('.', ' ');
+
+                            if (ext != "sp" && ext != "inc" && ext != "txt" && ext != "smx")
+                                continue;
+
+                            addedFiles = true;
+                            sBuilder.Append(fInfo.FullName);
+
+                            if (i + 1 != args.Length)
+                                sBuilder.Append("|");
                         }
+
                         if (addedFiles)
-                        { PipeInteropClient.ConnectToMasterPipeAndSendData(sBuilder.ToString()); }
+                            PipeInteropClient.ConnectToMasterPipeAndSendData(sBuilder.ToString());
                     }
-                    catch (Exception) { } //dont fuck the user up with irrelevant data
+                    catch (Exception)
+                    {
+                        // ignored
+                        // dont fuck the user up with irrelevant data
+                    }
                 }
             }
         }
 
-		public static void MakeRCCKAlert()
-		{
-			if (RCCKMade)
-			{
-				return;
-			}
-			RCCKMade = true;
-			MessageBox.Show("All FTP/RCon passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
-				"Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
-		}
-
-		public static void ClearUpdateFiles()
-		{
-			string[] files = Directory.GetFiles(Environment.CurrentDirectory, "*.exe", SearchOption.TopDirectoryOnly);
-			for (int i = 0; i < files.Length; ++i)
-			{
-				FileInfo fInfo = new FileInfo(files[i]);
-				if (fInfo.Name.StartsWith("updater_", StringComparison.CurrentCultureIgnoreCase))
-				{
-					fInfo.Delete();
-				}
-			}
-		}
-
-		private static void App_Startup(object sender, StartupEventArgs e)
-		{
-			
-			Tuple<MahApps.Metro.AppTheme, MahApps.Metro.Accent> appStyle = MahApps.Metro.ThemeManager.DetectAppStyle(Application.Current);
-			MahApps.Metro.ThemeManager.ChangeAppStyle(Application.Current,
-									MahApps.Metro.ThemeManager.GetAccent("Green"),
-									MahApps.Metro.ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
-		}
-
-		private static string BuildExceptionString(Exception e, string SectionName)
+        public static void MakeRcckAlert()
         {
-            StringBuilder outString = new StringBuilder();
-            outString.AppendLine("Section: " + SectionName);
+            if (RCCKMade)
+                return;
+
+            RCCKMade = true;
+
+            MessageBox.Show(
+                "All FTP/RCon passwords are now encrypted wrong!" + Environment.NewLine + "You have to replace them!",
+                "Created new crypto key", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public static void ClearUpdateFiles()
+        {
+            var files = Directory.GetFiles(Environment.CurrentDirectory, "*.exe", SearchOption.TopDirectoryOnly);
+
+            foreach (var t in files)
+            {
+                var fInfo = new FileInfo(t);
+
+                if (fInfo.Name.StartsWith("updater_", StringComparison.CurrentCultureIgnoreCase))
+                    fInfo.Delete();
+            }
+        }
+
+        private static void App_Startup(object sender, StartupEventArgs e)
+        {
+            MahApps.Metro.ThemeManager.ChangeAppStyle(Application.Current,
+                MahApps.Metro.ThemeManager.GetAccent("Green"),
+                MahApps.Metro.ThemeManager.GetAppTheme("BaseDark")); // or appStyle.Item1
+        }
+
+        private static string BuildExceptionString(Exception e, string sectionName)
+        {
+            var outString = new StringBuilder();
+            var eNumber = 1;
+
+            outString.AppendLine("Section: " + sectionName);
             outString.AppendLine(".NET Version: " + Environment.Version);
             outString.AppendLine("OS: " + Environment.OSVersion.VersionString);
-            outString.AppendLine("64 bit OS: " + ((Environment.Is64BitOperatingSystem) ? "TRUE" : "FALSE"));
-            outString.AppendLine("64 bit mode: " + ((Environment.Is64BitProcess) ? "TRUE" : "FALSE"));
+            outString.AppendLine("64 bit OS: " + (Environment.Is64BitOperatingSystem ? "TRUE" : "FALSE"));
+            outString.AppendLine("64 bit mode: " + (Environment.Is64BitProcess ? "TRUE" : "FALSE"));
             outString.AppendLine("Dir: " + Environment.CurrentDirectory);
-            outString.AppendLine("Working Set: " + (Environment.WorkingSet / 1024).ToString() + " kb");
-            outString.AppendLine("Installed UI Culture: " + System.Globalization.CultureInfo.InstalledUICulture ?? "null");
-            outString.AppendLine("Current UI Culture: " + System.Globalization.CultureInfo.CurrentUICulture ?? "null");
-            outString.AppendLine("Current Culture: " + System.Globalization.CultureInfo.CurrentCulture ?? "null");
+            outString.AppendLine("Working Set: " + (Environment.WorkingSet / 1024) + " kb");
+            outString.AppendLine("Installed UI Culture: " + System.Globalization.CultureInfo.InstalledUICulture);
+            outString.AppendLine("Current UI Culture: " + System.Globalization.CultureInfo.CurrentUICulture);
+            outString.AppendLine("Current Culture: " + System.Globalization.CultureInfo.CurrentCulture);
             outString.AppendLine();
-            Exception current = e;
-            int eNumber = 1;
-            for (; ; )
+
+            for (;;)
             {
                 if (e == null)
-                {
                     break;
-                }
-                outString.AppendLine("Exception " + eNumber.ToString());
+
+                outString.AppendLine("Exception " + eNumber);
                 outString.AppendLine("Message:");
                 outString.AppendLine(e.Message);
                 outString.AppendLine("Stacktrace:");
@@ -244,15 +260,17 @@ namespace Spedit
                 outString.AppendLine(e.HResult.ToString());
                 outString.AppendLine("Helplink:");
                 outString.AppendLine(e.HelpLink ?? "null");
+
                 if (e.TargetSite != null)
                 {
                     outString.AppendLine("Targetsite Name:");
-                    outString.AppendLine(e.TargetSite.Name ?? "null");
+                    outString.AppendLine(e.TargetSite.Name);
                 }
+
                 e = e.InnerException;
                 eNumber++;
             }
-            return (eNumber - 1).ToString() + Environment.NewLine + outString.ToString();
+            return eNumber - 1 + Environment.NewLine + outString;
         }
     }
 }
