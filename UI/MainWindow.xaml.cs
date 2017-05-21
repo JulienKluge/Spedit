@@ -105,7 +105,7 @@ namespace Spedit.UI
 								{
 									editors[i].Parent.IsSelected = true;
 								}
-                                return false;
+                                return true;
                             }
                         }
                     }
