@@ -235,13 +235,22 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                     <ListViewItem Selected="ListViewOBItem_SelectFile">
-                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-1-20.png" Width="20" Height="20" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="OBItemText_File" Text="File Dir." />
+                            <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-1-20.png" Width="20" Height="20" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem Selected="ListViewOBItem_SelectConfig">
-                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-2-20.png" Width="20" Height="20" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="OBItemText_Config" Text="Config Dir." />
+                            <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-2-20.png" Width="20" Height="20" />
+                        </StackPanel>
                     </ListViewItem>
                     <ListViewItem Selected="ListViewOBItem_SelectOBItem">
-                        <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-4-20.png" Width="20" Height="20" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Name="OBItemText_Item" Text="Item Dir." />
+                            <Image Source="/Spedit;component/Resources/iconmonstr-code-fork-4-20.png" Width="20" Height="20" />
+                        </StackPanel>
                     </ListViewItem>
                 </ListView>
             </Grid>

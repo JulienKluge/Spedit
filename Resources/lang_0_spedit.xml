@@ -189,6 +189,9 @@
 		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
 		<compile>Kompillieren</compile>
 		<autosavemin>Automatisches speichern (Min)</autosavemin>
+    <obtextfile>Datei Pfad</obtextfile>
+    <obtextconfig>Konfig. Pfad</obtextconfig>
+    <obtextitem>Listenpunkt Pfad</obtextitem>
 	</de>
 	<fr>
 		<language>Français</language>
@@ -380,6 +383,9 @@
 		<highdeprecat>Mise en évidence de la syntax (&lt;1.7) obsolète</highdeprecat>
 		<compile>Compiler</compile>
 		<autosavemin>Sauvegarde automatique (min)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</fr>
 	<ko>
 		<language>한국어</language>
@@ -571,6 +577,9 @@
 		<highdeprecat>구 문법 (&lt;1.7) 강조</highdeprecat>
 		<compile>컴파일</compile>
 		<autosavemin>자동 저장 (분)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</ko>
 	<sv>
 		<language>Svenska</language>
@@ -762,6 +771,9 @@
 		<highdeprecat>Markera föråldrat (&lt;1.7) syntax</highdeprecat>
 		<compile>Kompilera</compile>
 		<autosavemin>Auto spara (min)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</sv>
 <ru>
 		<language>Русский</language>
@@ -953,6 +965,9 @@
 		<highdeprecat>Подсветка устаревшего (&lt;1.7) синтаксиса</highdeprecat>
 		<compile>Компиляция</compile>
 		<autosavemin>Aвтосохранение (мин)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</ru>
 	<pt>
 		<language>Português</language>
@@ -1144,6 +1159,9 @@
 		<highdeprecat>Destaque a sintaxe depreciada (&lt; 1.7)</highdeprecat>
 		<compile>Compilar</compile>
 		<autosavemin>Salvamento automático (min)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</pt>
 	<pl>
 		<language>Polski</language>
@@ -1335,6 +1353,9 @@
 		<highdeprecat>Podświetlaj przestarzałe (&lt;1.7) składnie</highdeprecat>
 		<compile>Kompiluj</compile>
 		<autosavemin>Automatyczny zapis (min)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</pl>
 	<tr>
 		<language>Türkçe</language>
@@ -1526,6 +1547,9 @@
 		<highdeprecat>Önerililen sözdizimi vurgulayın (&lt; 1.7)</highdeprecat>
 		<compile>Derle</compile>
 		<autosavemin>Otomatik kaydetme (Dakika)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</tr>
 	<zhCN>
 		<language>简体中文</language>
@@ -1717,5 +1741,8 @@
 		<highdeprecat>高亮过时语法 (即版本低于 1.7)</highdeprecat>
 		<compile>编译</compile>
 		<autosavemin>自动保存(分钟)</autosavemin>
+    <obtextfile>File Dir.</obtextfile>
+    <obtextconfig>Config Dir.</obtextconfig>
+    <obtextitem>Item Dir.</obtextitem>
 	</zhCN>
 </translations>

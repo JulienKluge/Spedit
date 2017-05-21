@@ -101,6 +101,10 @@ namespace Spedit.UI
 			Count_Button.Content = Program.Translations.Count;
 			CCBox.Content = Program.Translations.CaseSen;
 			MLRBox.Content = Program.Translations.MultilineRegex;
+
+            OBItemText_File.Text = Program.Translations.OBTextFile;
+            OBItemText_Config.Text = Program.Translations.OBTextConfig;
+            OBItemText_Item.Text = Program.Translations.OBTextItem;
 		}
 	}
 }

@@ -188,4 +188,7 @@
 	<highdeprecat>Highlight deprecated (&lt;1.7) syntax</highdeprecat>
 	<compile>Compile</compile>
 	<autosavemin>Auto save (min)</autosavemin>
+  <obtextfile>File Dir.</obtextfile>
+  <obtextconfig>Config Dir.</obtextconfig>
+  <obtextitem>Item Dir.</obtextitem>
 </en>

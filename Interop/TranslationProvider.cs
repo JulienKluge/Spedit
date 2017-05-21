@@ -141,6 +141,7 @@ namespace Spedit.Interop
 		public string ShowSpaces, ShowTabs, IndentationSize, FontFamily, SyntaxHigh, HighDeprecat;
 		public string Compile;
 		public string AutoSaveMin;
+        public string OBTextFile, OBTextConfig, OBTextItem;
 
 		public void LoadLanguage(string lang, bool Initial = false)
 		{
@@ -187,387 +188,393 @@ namespace Spedit.Interop
 							}
 							string nn = node.Name.ToLowerInvariant();
 							string nv = node.InnerText;
-							//and now: brace yourself and tuckle your seatbells:
-							if (nn == "language")
-								Language = nv;
-							else if (nn == "serverrunning")
-								ServerRunning = nv;
-							else if (nn == "saving")
-								Saving = nv;
-							else if (nn == "saveufiles")
-								SavingUFiles = nv;
-							else if (nn == "compileall")
-								CompileAll = nv;
-							else if (nn == "compilecurr")
-								CompileCurr = nv;
-							else if (nn == "copy")
-								Copy = nv;
-							else if (nn == "ftpup")
-								FTPUp = nv;
-							else if (nn == "startserver")
-								StartServer = nv;
-							else if (nn == "replace")
-								Replace = nv;
-							else if (nn == "replaceall")
-								ReplaceAll = nv;
-							else if (nn == "opennewfile")
-								OpenNewFile = nv;
-							else if (nn == "nofilopened")
-								NoFileOpened = nv;
-							else if (nn == "nofileopenedcap")
-								NoFileOpenedCap = nv;
-							else if (nn == "savefileas")
-								SaveFileAs = nv;
-							else if (nn == "savefollow")
-								SaveFollow = nv;
-							else if (nn == "decompiling")
-								Decompiling = nv;
-							else if (nn == "chdecomp")
-								ChDecomp = nv;
-							else if (nn == "editconfig")
-								EditConfig = nv;
-							else if (nn == "foundinoff")
-								FoundInOff = nv;
-							else if (nn == "foundnothing")
-								FoundNothing = nv;
-							else if (nn == "replacedoff")
-								ReplacedOff = nv;
-							else if (nn == "replacedocc")
-								ReplacedOcc = nv;
-							else if (nn == "occfound")
-								OccFound = nv;
-							else if (nn == "emptypatt")
-								EmptyPatt = nv;
-							else if (nn == "novalidregex")
-								NoValidRegex = nv;
-							else if (nn == "failedcheck")
-								FailedCheck = nv;
-							else if (nn == "errorupdate")
-								ErrorUpdate = nv;
-							else if (nn == "versuptodate")
-								VersUpToDate = nv;
-							else if (nn == "versionyour")
-								VersionYour = nv;
-							else if (nn == "details")
-								Details = nv;
-							else if (nn == "compiling")
-								Compiling = nv;
-							else if (nn == "error")
-								Error = nv;
-							else if (nn == "spcompnotstarted")
-								SPCompNotStarted = nv;
-							else if (nn == "spcompnotfound")
-								SPCompNotFound = nv;
-							else if (nn == "copied")
-								Copied = nv;
-							else if (nn == "deleted")
-								Deleted = nv;
-							else if (nn == "failcopy")
-								FailCopy = nv;
-							else if (nn == "nofilescopy")
-								NoFilesCopy = nv;
-							else if (nn == "uploaded")
-								Uploaded = nv;
-							else if (nn == "erroruploadfile")
-								ErrorUploadFile = nv;
-							else if (nn == "errorupload")
-								ErrorUpload = nv;
-							else if (nn == "done")
-								Done = nv;
-							else if (nn == "file")
-								FileStr = nv;
-							else if (nn == "new")
-								New = nv;
-							else if (nn == "open")
-								Open = nv;
-							else if (nn == "save")
-								Save = nv;
-							else if (nn == "saveall")
-								SaveAll = nv;
-							else if (nn == "saveas")
-								SaveAs = nv;
-							else if (nn == "close")
-								Close = nv;
-							else if (nn == "closeall")
-								CloseAll = nv;
-							else if (nn == "build")
-								Build = nv;
-							else if (nn == "copyplugin")
-								CopyPlugin = nv;
-							else if (nn == "sendrcon")
-								SendRCon = nv;
-							else if (nn == "config")
-								Config = nv;
-							else if (nn == "edit")
-								Edit = nv;
-							else if (nn == "undo")
-								Undo = nv;
-							else if (nn == "redo")
-								Redo = nv;
-							else if (nn == "cut")
-								Cut = nv;
-							else if (nn == "paste")
-								Paste = nv;
-							else if (nn == "folding")
-								Folding = nv;
-							else if (nn == "expandall")
-								ExpandAll = nv;
-							else if (nn == "collapseall")
-								CollapseAll = nv;
-							else if (nn == "jumpto")
-								JumpTo = nv;
-							else if (nn == "togglcomment")
-								TogglComment = nv;
-							else if (nn == "selectall")
-								SelectAll = nv;
-							else if (nn == "findreplace")
-								FindReplace = nv;
-							else if (nn == "tools")
-								Tools = nv;
-							else if (nn == "options")
-								Options = nv;
-							else if (nn == "parsedincdir")
-								ParsedIncDir = nv;
-							else if (nn == "oldapiweb")
-								OldAPIWeb = nv;
-							else if (nn == "newapiweb")
-								NewAPIWeb = nv;
-							else if (nn == "reformatter")
-								Reformatter = nv;
-							else if (nn == "reformatcurr")
-								ReformatCurr = nv;
-							else if (nn == "reformatall")
-								ReformatAll = nv;
-							else if (nn == "decompile")
-								Decompile = nv;
-							else if (nn == "reportbuggit")
-								ReportBugGit = nv;
-							else if (nn == "checkupdates")
-								CheckUpdates = nv;
-							else if (nn == "about")
-								About = nv;
-							else if (nn == "filename")
-								FileName = nv;
-							else if (nn == "line")
-								Line = nv;
-							else if (nn == "type")
-								TypeStr = nv;
-							else if (nn == "normalsearch")
-								NormalSearch = nv;
-							else if (nn == "matchwhowords")
-								MatchWholeWords = nv;
-							else if (nn == "advancsearch")
-								AdvancSearch = nv;
-							else if (nn == "regexsearch")
-								RegexSearch = nv;
-							else if (nn == "currdoc")
-								CurrDoc = nv;
-							else if (nn == "alldoc")
-								AllDoc = nv;
-							else if (nn == "find")
-								Find = nv;
-							else if (nn == "count")
-								Count = nv;
-							else if (nn == "casesen")
-								CaseSen = nv;
-							else if (nn == "multilineregex")
-								MultilineRegex = nv;
-							else if (nn == "errorfileloadproc")
-								ErrorFileLoadProc = nv;
-							else if (nn == "notdissmethod")
-								NotDissMethod = nv;
-							else if (nn == "dfilechanged")
-								DFileChanged = nv;
-							else if (nn == "filechanged")
-								FileChanged = nv;
-							else if (nn == "filetryreload")
-								FileTryReload = nv;
-							else if (nn == "dsaveerror")
-								DSaveError = nv;
-							else if (nn == "saveerror")
-								SaveError = nv;
-							else if (nn == "savingfile")
-								SavingFile = nv;
-							else if (nn == "colabb")
-								ColAbb = nv;
-							else if (nn == "lnabb")
-								LnAbb = nv;
-							else if (nn == "lenabb")
-								LenAbb = nv;
-							else if (nn == "ptabb")
-								PtAbb = nv;
-							else if (nn == "speditcap")
-								SPEditCap = nv;
-							else if (nn == "writtenby")
-								WrittenBy = nv;
-							else if (nn == "license")
-								License = nv;
-							else if (nn == "peopleinv")
-								PeopleInv = nv;
-							else if (nn == "preview")
-								Preview = nv;
-							else if (nn == "newfile")
-								NewFile = nv;
-							else if (nn == "configwrongpars")
-								ConfigWrongPars = nv;
-							else if (nn == "noname")
-								NoName = nv;
-							else if (nn == "poslen")
-								PosLen = nv;
-							else if (nn == "inheritedfr")
-								InheritedFrom = nv;
-							else if (nn == "methodfrom")
-								MethodFrom = nv;
-							else if (nn == "propertyfrom")
-								PropertyFrom = nv;
-							else if (nn == "search")
-								Search = nv;
-							else if (nn == "delete")
-								Delete = nv;
-							else if (nn == "name")
-								Name = nv;
-							else if (nn == "scriptdir")
-								ScriptDir = nv;
-							else if (nn == "delimitedwi")
-								DelimiedWi = nv;
-							else if (nn == "copydir")
-								CopyDir = nv;
-							else if (nn == "serverexe")
-								ServerExe = nv;
-							else if (nn == "serverstartargs")
-								serverStartArgs = nv;
-							else if (nn == "prebuildcom")
-								PreBuildCom = nv;
-							else if (nn == "postbuildcom")
-								PostBuildCom = nv;
-							else if (nn == "optimizelvl")
-								OptimizeLvl = nv;
-							else if (nn == "verboselvl")
-								VerboseLvl = nv;
-							else if (nn == "autocopy")
-								AutoCopy = nv;
-							else if (nn == "deleteoldsmx")
-								DeleteOldSMX = nv;
-							else if (nn == "ftphost")
-								FTPHost = nv;
-							else if (nn == "ftpuser")
-								FTPUser = nv;
-							else if (nn == "ftppw")
-								FTPPw = nv;
-							else if (nn == "ftpdir")
-								FTPDir = nv;
-							else if (nn == "comeditordir")
-								ComEditorDir = nv;
-							else if (nn == "comscriptdir")
-								ComScriptDir = nv;
-							else if (nn == "comcopydir")
-								ComCopyDir = nv;
-							else if (nn == "comscriptfile")
-								ComScriptFile = nv;
-							else if (nn == "comscriptname")
-								ComScriptName = nv;
-							else if (nn == "compluginfile")
-								ComPluginFile = nv;
-							else if (nn == "compluginname")
-								ComPluginName = nv;
-							else if (nn == "rconengine")
-								RConEngine = nv;
-							else if (nn == "rconip")
-								RConIP = nv;
-							else if (nn == "rconport")
-								RconPort = nv;
-							else if (nn == "rconpw")
-								RconPw = nv;
-							else if (nn == "rconcom")
-								RconCom = nv;
-							else if (nn == "compluginsreload")
-								ComPluginsReload = nv;
-							else if (nn == "compluginsloas")
-								ComPluginsLoad = nv;
-							else if (nn == "compluginsunload")
-								ComPluginsUnload = nv;
-							else if (nn == "newconfig")
-								NewConfig = nv;
-							else if (nn == "cannotdelconf")
-								CannotDelConf = nv;
-							else if (nn == "ycannotdelconf")
-								YCannotDelConf = nv;
-							else if (nn == "selectexe")
-								SelectExe = nv;
-							else if (nn == "cmdlinecom")
-								CMDLineCom = nv;
-							else if (nn == "rconcmdlinecom")
-								RConCMDLineCom = nv;
-							else if (nn == "resetoptions")
-								ResetOptions = nv;
-							else if (nn == "resetoptques")
-								ResetOptQues = nv;
-							else if (nn == "restarteditor")
-								RestartEditor = nv;
-							else if (nn == "yrestarteditor")
-								YRestartEditor = nv;
-							else if (nn == "restartedifulleff")
-								RestartEdiFullEff = nv;
-							else if (nn == "restartedieff")
-								RestartEdiEff = nv;
-							else if (nn == "program")
-								Program = nv;
-							else if (nn == "hardwareacc")
-								HardwareAcc = nv;
-							else if (nn == "uianim")
-								UIAnim = nv;
-							else if (nn == "openinc")
-								OpenInc = nv;
-							else if (nn == "openincrec")
-								OpenIncRec = nv;
-							else if (nn == "autoupdate")
-								AutoUpdate = nv;
-							else if (nn == "showtoolbar")
-								ShowToolbar = nv;
-							else if (nn == "dynamicisac")
-								DynamicISAC = nv;
-							else if (nn == "darktheme")
-								DarkTheme = nv;
-							else if (nn == "themecolor")
-								ThemeColor = nv;
-							else if (nn == "languagestr")
-								LanguageStr = nv;
-							else if (nn == "editor")
-								Editor = nv;
-							else if (nn == "fontsize")
-								FontSize = nv;
-							else if (nn == "scrollspeed")
-								ScrollSpeed = nv;
-							else if (nn == "wordwrap")
-								WordWrap = nv;
-							else if (nn == "aggindentation")
-								AggIndentation = nv;
-							else if (nn == "reformataftersem")
-								ReformatAfterSem = nv;
-							else if (nn == "tabstospace")
-								TabsToSpace = nv;
-							else if (nn == "autoclosebrack")
-								AutoCloseBrack = nv;
-							else if (nn == "autoclosestrchr")
-								AutoCloseStrChr = nv;
-							else if (nn == "showsapaces")
-								ShowSpaces = nv;
-							else if (nn == "showtabs")
-								ShowTabs = nv;
-							else if (nn == "indentationsize")
-								IndentationSize = nv;
-							else if (nn == "fontfamily")
-								FontFamily = nv;
-							else if (nn == "syntaxhigh")
-								SyntaxHigh = nv;
-							else if (nn == "highdeprecat")
-								HighDeprecat = nv;
-							else if (nn == "compile")
-								Compile = nv;
-							else if (nn == "autosavemin")
-								AutoSaveMin = nv;
-							else
-								throw new Exception($"{nn} is not a known language-phrase");
+                            //and now: brace yourself and tuckle your seatbells:
+                            if (nn == "language")
+                                Language = nv;
+                            else if (nn == "serverrunning")
+                                ServerRunning = nv;
+                            else if (nn == "saving")
+                                Saving = nv;
+                            else if (nn == "saveufiles")
+                                SavingUFiles = nv;
+                            else if (nn == "compileall")
+                                CompileAll = nv;
+                            else if (nn == "compilecurr")
+                                CompileCurr = nv;
+                            else if (nn == "copy")
+                                Copy = nv;
+                            else if (nn == "ftpup")
+                                FTPUp = nv;
+                            else if (nn == "startserver")
+                                StartServer = nv;
+                            else if (nn == "replace")
+                                Replace = nv;
+                            else if (nn == "replaceall")
+                                ReplaceAll = nv;
+                            else if (nn == "opennewfile")
+                                OpenNewFile = nv;
+                            else if (nn == "nofilopened")
+                                NoFileOpened = nv;
+                            else if (nn == "nofileopenedcap")
+                                NoFileOpenedCap = nv;
+                            else if (nn == "savefileas")
+                                SaveFileAs = nv;
+                            else if (nn == "savefollow")
+                                SaveFollow = nv;
+                            else if (nn == "decompiling")
+                                Decompiling = nv;
+                            else if (nn == "chdecomp")
+                                ChDecomp = nv;
+                            else if (nn == "editconfig")
+                                EditConfig = nv;
+                            else if (nn == "foundinoff")
+                                FoundInOff = nv;
+                            else if (nn == "foundnothing")
+                                FoundNothing = nv;
+                            else if (nn == "replacedoff")
+                                ReplacedOff = nv;
+                            else if (nn == "replacedocc")
+                                ReplacedOcc = nv;
+                            else if (nn == "occfound")
+                                OccFound = nv;
+                            else if (nn == "emptypatt")
+                                EmptyPatt = nv;
+                            else if (nn == "novalidregex")
+                                NoValidRegex = nv;
+                            else if (nn == "failedcheck")
+                                FailedCheck = nv;
+                            else if (nn == "errorupdate")
+                                ErrorUpdate = nv;
+                            else if (nn == "versuptodate")
+                                VersUpToDate = nv;
+                            else if (nn == "versionyour")
+                                VersionYour = nv;
+                            else if (nn == "details")
+                                Details = nv;
+                            else if (nn == "compiling")
+                                Compiling = nv;
+                            else if (nn == "error")
+                                Error = nv;
+                            else if (nn == "spcompnotstarted")
+                                SPCompNotStarted = nv;
+                            else if (nn == "spcompnotfound")
+                                SPCompNotFound = nv;
+                            else if (nn == "copied")
+                                Copied = nv;
+                            else if (nn == "deleted")
+                                Deleted = nv;
+                            else if (nn == "failcopy")
+                                FailCopy = nv;
+                            else if (nn == "nofilescopy")
+                                NoFilesCopy = nv;
+                            else if (nn == "uploaded")
+                                Uploaded = nv;
+                            else if (nn == "erroruploadfile")
+                                ErrorUploadFile = nv;
+                            else if (nn == "errorupload")
+                                ErrorUpload = nv;
+                            else if (nn == "done")
+                                Done = nv;
+                            else if (nn == "file")
+                                FileStr = nv;
+                            else if (nn == "new")
+                                New = nv;
+                            else if (nn == "open")
+                                Open = nv;
+                            else if (nn == "save")
+                                Save = nv;
+                            else if (nn == "saveall")
+                                SaveAll = nv;
+                            else if (nn == "saveas")
+                                SaveAs = nv;
+                            else if (nn == "close")
+                                Close = nv;
+                            else if (nn == "closeall")
+                                CloseAll = nv;
+                            else if (nn == "build")
+                                Build = nv;
+                            else if (nn == "copyplugin")
+                                CopyPlugin = nv;
+                            else if (nn == "sendrcon")
+                                SendRCon = nv;
+                            else if (nn == "config")
+                                Config = nv;
+                            else if (nn == "edit")
+                                Edit = nv;
+                            else if (nn == "undo")
+                                Undo = nv;
+                            else if (nn == "redo")
+                                Redo = nv;
+                            else if (nn == "cut")
+                                Cut = nv;
+                            else if (nn == "paste")
+                                Paste = nv;
+                            else if (nn == "folding")
+                                Folding = nv;
+                            else if (nn == "expandall")
+                                ExpandAll = nv;
+                            else if (nn == "collapseall")
+                                CollapseAll = nv;
+                            else if (nn == "jumpto")
+                                JumpTo = nv;
+                            else if (nn == "togglcomment")
+                                TogglComment = nv;
+                            else if (nn == "selectall")
+                                SelectAll = nv;
+                            else if (nn == "findreplace")
+                                FindReplace = nv;
+                            else if (nn == "tools")
+                                Tools = nv;
+                            else if (nn == "options")
+                                Options = nv;
+                            else if (nn == "parsedincdir")
+                                ParsedIncDir = nv;
+                            else if (nn == "oldapiweb")
+                                OldAPIWeb = nv;
+                            else if (nn == "newapiweb")
+                                NewAPIWeb = nv;
+                            else if (nn == "reformatter")
+                                Reformatter = nv;
+                            else if (nn == "reformatcurr")
+                                ReformatCurr = nv;
+                            else if (nn == "reformatall")
+                                ReformatAll = nv;
+                            else if (nn == "decompile")
+                                Decompile = nv;
+                            else if (nn == "reportbuggit")
+                                ReportBugGit = nv;
+                            else if (nn == "checkupdates")
+                                CheckUpdates = nv;
+                            else if (nn == "about")
+                                About = nv;
+                            else if (nn == "filename")
+                                FileName = nv;
+                            else if (nn == "line")
+                                Line = nv;
+                            else if (nn == "type")
+                                TypeStr = nv;
+                            else if (nn == "normalsearch")
+                                NormalSearch = nv;
+                            else if (nn == "matchwhowords")
+                                MatchWholeWords = nv;
+                            else if (nn == "advancsearch")
+                                AdvancSearch = nv;
+                            else if (nn == "regexsearch")
+                                RegexSearch = nv;
+                            else if (nn == "currdoc")
+                                CurrDoc = nv;
+                            else if (nn == "alldoc")
+                                AllDoc = nv;
+                            else if (nn == "find")
+                                Find = nv;
+                            else if (nn == "count")
+                                Count = nv;
+                            else if (nn == "casesen")
+                                CaseSen = nv;
+                            else if (nn == "multilineregex")
+                                MultilineRegex = nv;
+                            else if (nn == "errorfileloadproc")
+                                ErrorFileLoadProc = nv;
+                            else if (nn == "notdissmethod")
+                                NotDissMethod = nv;
+                            else if (nn == "dfilechanged")
+                                DFileChanged = nv;
+                            else if (nn == "filechanged")
+                                FileChanged = nv;
+                            else if (nn == "filetryreload")
+                                FileTryReload = nv;
+                            else if (nn == "dsaveerror")
+                                DSaveError = nv;
+                            else if (nn == "saveerror")
+                                SaveError = nv;
+                            else if (nn == "savingfile")
+                                SavingFile = nv;
+                            else if (nn == "colabb")
+                                ColAbb = nv;
+                            else if (nn == "lnabb")
+                                LnAbb = nv;
+                            else if (nn == "lenabb")
+                                LenAbb = nv;
+                            else if (nn == "ptabb")
+                                PtAbb = nv;
+                            else if (nn == "speditcap")
+                                SPEditCap = nv;
+                            else if (nn == "writtenby")
+                                WrittenBy = nv;
+                            else if (nn == "license")
+                                License = nv;
+                            else if (nn == "peopleinv")
+                                PeopleInv = nv;
+                            else if (nn == "preview")
+                                Preview = nv;
+                            else if (nn == "newfile")
+                                NewFile = nv;
+                            else if (nn == "configwrongpars")
+                                ConfigWrongPars = nv;
+                            else if (nn == "noname")
+                                NoName = nv;
+                            else if (nn == "poslen")
+                                PosLen = nv;
+                            else if (nn == "inheritedfr")
+                                InheritedFrom = nv;
+                            else if (nn == "methodfrom")
+                                MethodFrom = nv;
+                            else if (nn == "propertyfrom")
+                                PropertyFrom = nv;
+                            else if (nn == "search")
+                                Search = nv;
+                            else if (nn == "delete")
+                                Delete = nv;
+                            else if (nn == "name")
+                                Name = nv;
+                            else if (nn == "scriptdir")
+                                ScriptDir = nv;
+                            else if (nn == "delimitedwi")
+                                DelimiedWi = nv;
+                            else if (nn == "copydir")
+                                CopyDir = nv;
+                            else if (nn == "serverexe")
+                                ServerExe = nv;
+                            else if (nn == "serverstartargs")
+                                serverStartArgs = nv;
+                            else if (nn == "prebuildcom")
+                                PreBuildCom = nv;
+                            else if (nn == "postbuildcom")
+                                PostBuildCom = nv;
+                            else if (nn == "optimizelvl")
+                                OptimizeLvl = nv;
+                            else if (nn == "verboselvl")
+                                VerboseLvl = nv;
+                            else if (nn == "autocopy")
+                                AutoCopy = nv;
+                            else if (nn == "deleteoldsmx")
+                                DeleteOldSMX = nv;
+                            else if (nn == "ftphost")
+                                FTPHost = nv;
+                            else if (nn == "ftpuser")
+                                FTPUser = nv;
+                            else if (nn == "ftppw")
+                                FTPPw = nv;
+                            else if (nn == "ftpdir")
+                                FTPDir = nv;
+                            else if (nn == "comeditordir")
+                                ComEditorDir = nv;
+                            else if (nn == "comscriptdir")
+                                ComScriptDir = nv;
+                            else if (nn == "comcopydir")
+                                ComCopyDir = nv;
+                            else if (nn == "comscriptfile")
+                                ComScriptFile = nv;
+                            else if (nn == "comscriptname")
+                                ComScriptName = nv;
+                            else if (nn == "compluginfile")
+                                ComPluginFile = nv;
+                            else if (nn == "compluginname")
+                                ComPluginName = nv;
+                            else if (nn == "rconengine")
+                                RConEngine = nv;
+                            else if (nn == "rconip")
+                                RConIP = nv;
+                            else if (nn == "rconport")
+                                RconPort = nv;
+                            else if (nn == "rconpw")
+                                RconPw = nv;
+                            else if (nn == "rconcom")
+                                RconCom = nv;
+                            else if (nn == "compluginsreload")
+                                ComPluginsReload = nv;
+                            else if (nn == "compluginsloas")
+                                ComPluginsLoad = nv;
+                            else if (nn == "compluginsunload")
+                                ComPluginsUnload = nv;
+                            else if (nn == "newconfig")
+                                NewConfig = nv;
+                            else if (nn == "cannotdelconf")
+                                CannotDelConf = nv;
+                            else if (nn == "ycannotdelconf")
+                                YCannotDelConf = nv;
+                            else if (nn == "selectexe")
+                                SelectExe = nv;
+                            else if (nn == "cmdlinecom")
+                                CMDLineCom = nv;
+                            else if (nn == "rconcmdlinecom")
+                                RConCMDLineCom = nv;
+                            else if (nn == "resetoptions")
+                                ResetOptions = nv;
+                            else if (nn == "resetoptques")
+                                ResetOptQues = nv;
+                            else if (nn == "restarteditor")
+                                RestartEditor = nv;
+                            else if (nn == "yrestarteditor")
+                                YRestartEditor = nv;
+                            else if (nn == "restartedifulleff")
+                                RestartEdiFullEff = nv;
+                            else if (nn == "restartedieff")
+                                RestartEdiEff = nv;
+                            else if (nn == "program")
+                                Program = nv;
+                            else if (nn == "hardwareacc")
+                                HardwareAcc = nv;
+                            else if (nn == "uianim")
+                                UIAnim = nv;
+                            else if (nn == "openinc")
+                                OpenInc = nv;
+                            else if (nn == "openincrec")
+                                OpenIncRec = nv;
+                            else if (nn == "autoupdate")
+                                AutoUpdate = nv;
+                            else if (nn == "showtoolbar")
+                                ShowToolbar = nv;
+                            else if (nn == "dynamicisac")
+                                DynamicISAC = nv;
+                            else if (nn == "darktheme")
+                                DarkTheme = nv;
+                            else if (nn == "themecolor")
+                                ThemeColor = nv;
+                            else if (nn == "languagestr")
+                                LanguageStr = nv;
+                            else if (nn == "editor")
+                                Editor = nv;
+                            else if (nn == "fontsize")
+                                FontSize = nv;
+                            else if (nn == "scrollspeed")
+                                ScrollSpeed = nv;
+                            else if (nn == "wordwrap")
+                                WordWrap = nv;
+                            else if (nn == "aggindentation")
+                                AggIndentation = nv;
+                            else if (nn == "reformataftersem")
+                                ReformatAfterSem = nv;
+                            else if (nn == "tabstospace")
+                                TabsToSpace = nv;
+                            else if (nn == "autoclosebrack")
+                                AutoCloseBrack = nv;
+                            else if (nn == "autoclosestrchr")
+                                AutoCloseStrChr = nv;
+                            else if (nn == "showsapaces")
+                                ShowSpaces = nv;
+                            else if (nn == "showtabs")
+                                ShowTabs = nv;
+                            else if (nn == "indentationsize")
+                                IndentationSize = nv;
+                            else if (nn == "fontfamily")
+                                FontFamily = nv;
+                            else if (nn == "syntaxhigh")
+                                SyntaxHigh = nv;
+                            else if (nn == "highdeprecat")
+                                HighDeprecat = nv;
+                            else if (nn == "compile")
+                                Compile = nv;
+                            else if (nn == "autosavemin")
+                                AutoSaveMin = nv;
+                            else if (nn == "obtextfile")
+                                OBTextFile = nv;
+                            else if (nn == "obtextconfig")
+                                OBTextConfig = nv;
+                            else if (nn == "obtextitem")
+                                OBTextItem = nv;
+                            else
+                                throw new Exception($"{nn} is not a known language-phrase");
 						}
 					}
 				}
@@ -774,6 +781,9 @@ namespace Spedit.Interop
 			HighDeprecat = "Highlight deprecated (<1.7) syntax";
 			Compile = "Compile";
 			AutoSaveMin = "Auto save (min)";
-		}
+            OBTextFile = "File Dir.";
+            OBTextConfig = "Config Dir.";
+            OBTextItem = "Item Dir.";
+        }
 	}
 }
