@@ -29,7 +29,6 @@ namespace Spedit
         [STAThread]
         public static void Main(string[] args)
         {
-            bool InSafe = false;
             bool mutexReserved;
             using (Mutex appMutex = new Mutex(true, "SpeditGlobalMutex", out mutexReserved))
             {
@@ -57,10 +56,6 @@ namespace Spedit
                             {
 								OptionsObject.ReCreateCryptoKey();
 								MakeRCCKAlert();
-                            }
-                            else if (args[i].ToLowerInvariant() == "-safe")
-                            {
-                                InSafe = true;
                             }
                         }
                         Configs = ConfigLoader.Load();
@@ -110,41 +105,29 @@ namespace Spedit
                     }
 #endif
                     Application app = new Application();
-                    if (InSafe)
+#if !DEBUG
+                    try
                     {
-                        try
-                        {
-#if !DEBUG
-                            if (OptionsObject.Program_CheckForUpdates)
-                            {
-                                UpdateCheck.Check(true);
-                            }
-#endif
-							app.Startup += App_Startup;
-                            app.Run(MainWindow);
-                            OptionsControlIOObject.Save();
-                        }
-                        catch (Exception e)
-                        {
-                            File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
-                            MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-                            Environment.Exit(Environment.ExitCode);
-                        }
-                    }
-                    else
-					{
-#if !DEBUG
                         if (OptionsObject.Program_CheckForUpdates)
                         {
                             UpdateCheck.Check(true);
                         }
 #endif
-						app.Run(MainWindow);
+                        app.Startup += App_Startup;
+                        app.Run(MainWindow);
                         OptionsControlIOObject.Save();
+#if !DEBUG
                     }
+                    catch (Exception e)
+                    {
+                        File.WriteAllText("CRASH_" + Environment.TickCount.ToString() + ".txt", BuildExceptionString(e, "SPEDIT MAIN"));
+                        MessageBox.Show("An error occured." + Environment.NewLine + "A crash report was written in the editor-directory.",
+                            "Error",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        Environment.Exit(Environment.ExitCode);
+                    }
+#endif
                 }
                 else
                 {
