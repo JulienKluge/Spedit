@@ -219,7 +219,7 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
             OptionsControl oco = new OptionsControl();
             oco.ReCreateCryptoKey();
 #if DEBUG
-			ProgramIsNew = true;
+			ProgramIsNew = false;
 #else
 			ProgramIsNew = true;
 #endif
