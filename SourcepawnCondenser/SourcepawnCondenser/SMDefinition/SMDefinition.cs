@@ -131,7 +131,7 @@ namespace SourcepawnCondenser.SourcemodDefinition
 			try
 			{
 				nodes.AddRange(ISNode.ConvertFromStringArray(MethodsStrings, true, "▲ "));
-				nodes.AddRange(ISNode.ConvertFromStringArray(FieldStrings, true, "• "));
+				nodes.AddRange(ISNode.ConvertFromStringArray(FieldStrings, false, "• "));
 				nodes = nodes.Distinct(new ISNodeEqualityComparer()).ToList();
 				nodes.Sort((a, b) => { return string.Compare(a.EntryName, b.EntryName); });
 			} catch (Exception) { }
