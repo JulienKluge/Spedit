@@ -1,17 +1,22 @@
 ﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spedit.Interop;
 using Spedit.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Xml;
+using Microsoft.CSharp;
 using Microsoft.Win32;
 
 namespace Spedit.UI.Windows
@@ -19,23 +24,21 @@ namespace Spedit.UI.Windows
     /// <summary>
     /// Interaction logic for AboutWindow.xaml
     /// </summary>
-    public partial class ConfigWindow
+    public partial class ConfigWindow : MetroWindow
     {
-        private bool _needsSMDefInvalidation;
-        private bool _allowChange;
+        private bool NeedsSMDefInvalidation = false;
+        private bool AllowChange = false;
 
         public ConfigWindow()
         {
             InitializeComponent();
-            Language_Translate();
-
-            if (Program.OptionsObject.ProgramAccentColor != "Red" || Program.OptionsObject.ProgramTheme != "BaseDark")
-                ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.ProgramAccentColor),
-                    ThemeManager.GetAppTheme(Program.OptionsObject.ProgramTheme));
-
-            foreach (var config in Program.Configs)
-                ConfigListBox.Items.Add(new ListBoxItem() {Content = config.Name});
-
+			Language_Translate();
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			for (int i = 0; i < Program.Configs.Length; ++i)
+            {
+                ConfigListBox.Items.Add(new ListBoxItem() { Content = Program.Configs[i].Name });
+            }
             ConfigListBox.SelectedIndex = Program.SelectedConfig;
         }
 
@@ -47,17 +50,15 @@ namespace Spedit.UI.Windows
         private void LoadConfigToUI(int index)
         {
             if (index < 0 || index >= Program.Configs.Length)
+            {
                 return;
-
-            _allowChange = false;
-            var c = Program.Configs[index];
+            }
+            AllowChange = false;
+            Config c = Program.Configs[index];
             C_Name.Text = c.Name;
-            var smDirOut = new StringBuilder();
-
-            foreach (var dir in c.SMDirectories)
-                smDirOut.Append(dir.Trim() + ";");
-
-            C_SMDir.Text = smDirOut.ToString();
+            StringBuilder SMDirOut = new StringBuilder();
+            foreach (string dir in c.SMDirectories) { SMDirOut.Append(dir.Trim() + ";"); }
+            C_SMDir.Text = SMDirOut.ToString();
             C_AutoCopy.IsChecked = c.AutoCopy;
             C_CopyDir.Text = c.CopyDirectory;
             C_ServerFile.Text = c.ServerFile;
@@ -71,274 +72,227 @@ namespace Spedit.UI.Windows
             C_FTPUser.Text = c.FTPUser;
             C_FTPPW.Password = c.FTPPassword;
             C_FTPDir.Text = c.FTPDir;
-            C_RConEngine.SelectedIndex = c.RConUseSourceEngine ? 0 : 1;
+            C_RConEngine.SelectedIndex = (c.RConUseSourceEngine) ? 0 : 1;
             C_RConIP.Text = c.RConIP;
             C_RConPort.Text = c.RConPort.ToString();
             C_RConPW.Password = c.RConPassword;
             C_RConCmds.Text = c.RConCommands;
-            _allowChange = true;
+            AllowChange = true;
         }
 
         private void NewButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var c = new Config() { Name = "New Config", Standard = false, OptimizeLevel = 2, VerboseLevel = 1 };
-            var configList = new List<Config>(Program.Configs) {c};
-
+            Config c = new Config() { Name = "New Config", Standard = false, OptimizeLevel = 2, VerboseLevel = 1 };
+            List<Config> configList = new List<Config>(Program.Configs);
+            configList.Add(c);
             Program.Configs = configList.ToArray();
             ConfigListBox.Items.Add(new ListBoxItem() { Content = Program.Translations.NewConfig });
         }
 
         private void DeleteButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var index = ConfigListBox.SelectedIndex;
-            var c = Program.Configs[index];
-
+            int index = ConfigListBox.SelectedIndex;
+            Config c = Program.Configs[index];
             if (c.Standard)
             {
-                this.ShowMessageAsync(Program.Translations.CannotDelConf, Program.Translations.YCannotDelConf, MessageDialogStyle.Affirmative, MetroDialogOptions);
+                this.ShowMessageAsync(Program.Translations.CannotDelConf, Program.Translations.YCannotDelConf, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
                 return;
             }
-
-            var configList = new List<Config>(Program.Configs);
-
+            List<Config> configList = new List<Config>(Program.Configs);
             configList.RemoveAt(index);
             Program.Configs = configList.ToArray();
             ConfigListBox.Items.RemoveAt(index);
-
             if (index == Program.SelectedConfig)
+            {
                 Program.SelectedConfig = 0;
-
+            }
             ConfigListBox.SelectedIndex = 0;
         }
 
         private void C_Name_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
-            var name = C_Name.Text;
-
-            Program.Configs[ConfigListBox.SelectedIndex].Name = name;
-            ((ListBoxItem) ConfigListBox.SelectedItem).Content = name;
+            if (!AllowChange) { return; }
+            string Name = C_Name.Text;
+            Program.Configs[ConfigListBox.SelectedIndex].Name = Name;
+            ((ListBoxItem)ConfigListBox.SelectedItem).Content = Name;
         }
 
         private void C_SMDir_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
-            var smDirs = C_SMDir.Text.Split(';');
-
-            Program.Configs[ConfigListBox.SelectedIndex].SMDirectories = smDirs.Select(dir => dir.Trim()).ToArray();
-
-            _needsSMDefInvalidation = true;
+            if (!AllowChange) { return; }
+            string[] SMDirs = C_SMDir.Text.Split(';');
+            List<string> dirs = new List<string>();
+            foreach (string dir in SMDirs)
+            {
+                string d = dir.Trim();
+                dirs.Add(d);
+            }
+            Program.Configs[ConfigListBox.SelectedIndex].SMDirectories = dirs.ToArray();
+            NeedsSMDefInvalidation = true;
         }
 
         private void C_CopyDir_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].CopyDirectory = C_CopyDir.Text;
         }
 
         private void C_ServerFile_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].ServerFile = C_ServerFile.Text;
         }
 
         private void C_ServerArgs_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].ServerArgs = C_ServerArgs.Text;
         }
 
         private void C_PostBuildCmd_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].PostCmd = C_PostBuildCmd.Text;
         }
 
         private void C_PreBuildCmd_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].PreCmd = C_PreBuildCmd.Text;
         }
 
         private void C_OptimizationLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_allowChange)
-                return;
-
-            Program.Configs[ConfigListBox.SelectedIndex].OptimizeLevel = (int) C_OptimizationLevel.Value;
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].OptimizeLevel = (int)C_OptimizationLevel.Value;
         }
 
         private void C_VerboseLevel_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (!_allowChange)
-                return;
-
-            Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int) C_VerboseLevel.Value;
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].VerboseLevel = (int)C_VerboseLevel.Value;
         }
 
         private void C_AutoCopy_Changed(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
-            if (C_AutoCopy.IsChecked != null)
-                Program.Configs[ConfigListBox.SelectedIndex].AutoCopy = C_AutoCopy.IsChecked.Value;
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].AutoCopy = C_AutoCopy.IsChecked.Value;
         }
 
         private void C_DeleteAfterCopy_Changed(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
-            if (C_DeleteAfterCopy.IsChecked != null)
-                Program.Configs[ConfigListBox.SelectedIndex].DeleteAfterCopy = C_DeleteAfterCopy.IsChecked.Value;
+            if (!AllowChange) { return; }
+            Program.Configs[ConfigListBox.SelectedIndex].DeleteAfterCopy = C_DeleteAfterCopy.IsChecked.Value;
         }
 
         private void C_FTPHost_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPHost = C_FTPHost.Text;
         }
 
         private void C_FTPUser_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPUser = C_FTPUser.Text;
         }
 
         private void C_FTPPW_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPPassword = C_FTPPW.Password;
         }
 
         private void C_FTPDir_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].FTPDir = C_FTPDir.Text;
         }
 
         private void C_RConEngine_Changed(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             if (ConfigListBox.SelectedIndex >= 0)
-                Program.Configs[ConfigListBox.SelectedIndex].RConUseSourceEngine = C_RConEngine.SelectedIndex == 0;
+            {
+                Program.Configs[ConfigListBox.SelectedIndex].RConUseSourceEngine = (C_RConEngine.SelectedIndex == 0);
+            }
         }
 
         private void C_RConIP_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].RConIP = C_RConIP.Text;
         }
 
         private void C_RConPort_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             ushort newPort;
-
             if (!ushort.TryParse(C_RConPort.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out newPort))
             {
                 newPort = 27015;
                 C_RConPort.Text = "27015";
             }
-
             Program.Configs[ConfigListBox.SelectedIndex].RConPort = newPort;
         }
 
         private void C_RConPW_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].RConPassword = C_RConPW.Password;
         }
 
         private void C_RConCmds_TextChanged(object sender, RoutedEventArgs e)
         {
-            if (!_allowChange)
-                return;
-
+            if (!AllowChange) { return; }
             Program.Configs[ConfigListBox.SelectedIndex].RConCommands = C_RConCmds.Text;
         }
 
         private void MetroWindow_Closed(object sender, EventArgs e)
         {
-            if (_needsSMDefInvalidation)
-                foreach (var config in Program.Configs)
-                    config.InvalidateSMDef();
-  
-
+            if (NeedsSMDefInvalidation)
+            {
+                for (int i = 0; i < Program.Configs.Length; ++i)
+                {
+                    Program.Configs[i].InvalidateSMDef();
+                }
+            }
             Program.MainWindow.FillConfigMenu();
             Program.MainWindow.ChangeConfig(Program.SelectedConfig);
-
-            var outString = new StringBuilder();
-            var settings = new XmlWriterSettings() { Indent = true, IndentChars = "\t", NewLineOnAttributes = false, OmitXmlDeclaration = true };
-
-            using (var writer = XmlWriter.Create(outString, settings))
+            StringBuilder outString = new StringBuilder();
+            XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, IndentChars = "\t", NewLineOnAttributes = false, OmitXmlDeclaration = true };
+            using (XmlWriter writer = XmlWriter.Create(outString, settings))
             {
                 writer.WriteStartElement("Configurations");
-
-                foreach (var config in Program.Configs)
+                for (int i = 0; i < Program.Configs.Length; ++i)
                 {
+                    Config c = Program.Configs[i];
                     writer.WriteStartElement("Config");
-                    writer.WriteAttributeString("Name", config.Name);
-
-                    var smDirOut = new StringBuilder();
-
-                    foreach (var dir in config.SMDirectories)
-                        smDirOut.Append(dir.Trim() + ";");
-
-                    writer.WriteAttributeString("SMDirectory", smDirOut.ToString());
-                    writer.WriteAttributeString("Standard", (config.Standard) ? "1" : "0");
-                    writer.WriteAttributeString("CopyDirectory", config.CopyDirectory);
-                    writer.WriteAttributeString("AutoCopy", (config.AutoCopy) ? "1" : "0");
-                    writer.WriteAttributeString("ServerFile", config.ServerFile);
-                    writer.WriteAttributeString("ServerArgs", config.ServerArgs);
-                    writer.WriteAttributeString("PostCmd", config.PostCmd);
-                    writer.WriteAttributeString("PreCmd", config.PreCmd);
-                    writer.WriteAttributeString("OptimizationLevel", config.OptimizeLevel.ToString());
-                    writer.WriteAttributeString("VerboseLevel", config.VerboseLevel.ToString());
-                    writer.WriteAttributeString("DeleteAfterCopy", (config.DeleteAfterCopy) ? "1" : "0");
-                    writer.WriteAttributeString("FTPHost", config.FTPHost);
-                    writer.WriteAttributeString("FTPUser", config.FTPUser);
-                    writer.WriteAttributeString("FTPPassword", ManagedAES.Encrypt(config.FTPPassword));
-                    writer.WriteAttributeString("FTPDir", config.FTPDir);
-                    writer.WriteAttributeString("RConSourceEngine", (config.RConUseSourceEngine) ? "1" : "0");
-                    writer.WriteAttributeString("RConIP", config.RConIP);
-                    writer.WriteAttributeString("RConPort", config.RConPort.ToString());
-                    writer.WriteAttributeString("RConPassword", ManagedAES.Encrypt(config.RConPassword));
-                    writer.WriteAttributeString("RConCommands", config.RConCommands);
+                    writer.WriteAttributeString("Name", c.Name);
+                    StringBuilder SMDirOut = new StringBuilder();
+                    foreach (string dir in c.SMDirectories) { SMDirOut.Append(dir.Trim() + ";"); }
+                    writer.WriteAttributeString("SMDirectory", SMDirOut.ToString());
+                    writer.WriteAttributeString("Standard", (c.Standard) ? "1" : "0");
+                    writer.WriteAttributeString("CopyDirectory", c.CopyDirectory);
+                    writer.WriteAttributeString("AutoCopy", (c.AutoCopy) ? "1" : "0");
+                    writer.WriteAttributeString("ServerFile", c.ServerFile);
+                    writer.WriteAttributeString("ServerArgs", c.ServerArgs);
+                    writer.WriteAttributeString("PostCmd", c.PostCmd);
+                    writer.WriteAttributeString("PreCmd", c.PreCmd);
+                    writer.WriteAttributeString("OptimizationLevel", c.OptimizeLevel.ToString());
+                    writer.WriteAttributeString("VerboseLevel", c.VerboseLevel.ToString());
+                    writer.WriteAttributeString("DeleteAfterCopy", (c.DeleteAfterCopy) ? "1" : "0");
+                    writer.WriteAttributeString("FTPHost", c.FTPHost);
+                    writer.WriteAttributeString("FTPUser", c.FTPUser);
+                    writer.WriteAttributeString("FTPPassword", ManagedAES.Encrypt(c.FTPPassword));
+                    writer.WriteAttributeString("FTPDir", c.FTPDir);
+                    writer.WriteAttributeString("RConSourceEngine", (c.RConUseSourceEngine) ? "1" : "0");
+                    writer.WriteAttributeString("RConIP", c.RConIP);
+                    writer.WriteAttributeString("RConPort", c.RConPort.ToString());
+                    writer.WriteAttributeString("RConPassword", ManagedAES.Encrypt(c.RConPassword));
+                    writer.WriteAttributeString("RConCommands", c.RConCommands);
                     writer.WriteEndElement();
                 }
-
                 writer.WriteEndElement();
                 writer.Flush();
             }
@@ -348,8 +302,9 @@ namespace Spedit.UI.Windows
 		private void Language_Translate()
 		{
 			if (Program.Translations.IsDefault)
+			{
 				return;
-
+			}
 			NewButton.Content = Program.Translations.New;
 			DeleteButton.Content = Program.Translations.Delete;
 			NameBlock.Text = Program.Translations.Name;
@@ -387,94 +342,91 @@ namespace Spedit.UI.Windows
 			MenuC_PluginsUnload.Content = "{plugins_unload} - " + Program.Translations.ComPluginsUnload;
 		}
 
-		private ICommand _textBoxButtonFolderCmd;
-
-        private ICommand _textBoxButtonFileCmd;
+		private ICommand textBoxButtonFolderCmd;
 
         public ICommand TextBoxButtonFolderCmd
         {
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-            }
-
+            set { }
             get
             {
-                if (_textBoxButtonFolderCmd != null)
-                    return _textBoxButtonFolderCmd;
-
-                var cmd = new SimpleCommand
+                if (this.textBoxButtonFolderCmd == null)
                 {
-                    CanExecutePredicate = o => true,
-                    ExecuteAction = o =>
+                    var cmd = new SimpleCommand();
+                    cmd.CanExecutePredicate = o =>
                     {
-                        if (!(o is TextBox))
-                            return;
-
-                        var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                        var result = dialog.ShowDialog();
-
-                        if (result == System.Windows.Forms.DialogResult.OK)
+                        return true;
+                    };
+                    cmd.ExecuteAction = o =>
+                    {
+                        if (o is TextBox)
                         {
-                            ((TextBox) o).Text = dialog.SelectedPath;
+                            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+                            var result = dialog.ShowDialog();
+                            if (result == System.Windows.Forms.DialogResult.OK)
+                            {
+                                ((TextBox)o).Text = dialog.SelectedPath;
+                            }
                         }
-                    }
-                };
-
-                _textBoxButtonFolderCmd = cmd;
-                return cmd;
+                    };
+                    this.textBoxButtonFolderCmd = cmd;
+                    return cmd;
+                }
+                else
+                {
+                    return textBoxButtonFolderCmd;
+                }
             }
-        }     
+        }
+
+        private ICommand textBoxButtonFileCmd;
 
         public ICommand TextBoxButtonFileCmd
         {
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-            }
+            set { }
             get
             {
-                if (_textBoxButtonFileCmd != null)
-                    return _textBoxButtonFileCmd;
-
-                var cmd = new SimpleCommand
+                if (this.textBoxButtonFileCmd == null)
                 {
-                    CanExecutePredicate = o => true,
-                    ExecuteAction = o =>
+                    var cmd = new SimpleCommand();
+                    cmd.CanExecutePredicate = o =>
                     {
-                        if (!(o is TextBox))
-                            return;
-
-                        var dialog = new OpenFileDialog
+                        return true;
+                    };
+                    cmd.ExecuteAction = o =>
+                    {
+                        if (o is TextBox)
                         {
-                            Filter = "Executables *.exe|*.exe|All Files *.*|*.*",
-                            Multiselect = false,
-                            CheckFileExists = true,
-                            CheckPathExists = true,
-                            Title = Program.Translations.SelectExe
-                        };
-
-                        var result = dialog.ShowDialog();
-
-                        if (result == null || !result.Value)
-                            return;
-
-                        var fileInfo = new FileInfo(dialog.FileName);
-
-                        if (fileInfo.Exists)    
-                            ((TextBox) o).Text = fileInfo.FullName;
-                    }
-                };
-
-                _textBoxButtonFileCmd = cmd;
-                return cmd;
+                            var dialog = new OpenFileDialog();
+                            dialog.Filter = "Executables *.exe|*.exe|All Files *.*|*.*";
+                            dialog.Multiselect = false;
+                            dialog.CheckFileExists = true; dialog.CheckPathExists = true;
+                            dialog.Title = Program.Translations.SelectExe;
+                            var result = dialog.ShowDialog();
+                            if (result.Value)
+                            {
+                                FileInfo fInfo = new FileInfo(dialog.FileName);
+                                if (fInfo.Exists)
+                                {
+                                    ((TextBox)o).Text = fInfo.FullName;
+                                }
+                            }
+                        }
+                    };
+                    this.textBoxButtonFileCmd = cmd;
+                    return cmd;
+                }
+                else
+                {
+                    return textBoxButtonFileCmd;
+                }
             }
         }
+
 
         private class SimpleCommand : ICommand
         {
             public Predicate<object> CanExecutePredicate { get; set; }
-            public Action<object> ExecuteAction { private get; set; }
+            public Action<object> ExecuteAction { get; set; }
 
             public bool CanExecute(object parameter)
             {
@@ -489,7 +441,10 @@ namespace Spedit.UI.Windows
 
             public void Execute(object parameter)
             {
-                ExecuteAction?.Invoke(parameter);
+                if (ExecuteAction != null)
+                {
+                    ExecuteAction(parameter);
+                }
             }
         }
 

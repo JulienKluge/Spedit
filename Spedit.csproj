@@ -114,7 +114,6 @@
   <ItemGroup>
     <Compile Include="App\AssemblyInfo1.cs" />
     <Compile Include="Interop\ConfigControl.cs" />
-    <Compile Include="Interop\OptionsControlIOObject.cs" />
     <Compile Include="Interop\PipeInteropClient.cs" />
     <Compile Include="Interop\PipeInteropServer.cs" />
     <Compile Include="Interop\OptionsControl.cs" />

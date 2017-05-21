@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using Spedit.UI.Components;
 using System;
 using System.Collections.Generic;
@@ -18,230 +19,234 @@ namespace Spedit.UI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
-    {      
-        private readonly bool _fullyInitialized;
-        private readonly Storyboard _blendOverEffect;
-        private readonly Storyboard _fadeFindReplaceGridIn;
-        private readonly Storyboard _fadeFindReplaceGridOut;
-        private readonly Storyboard _enableServerAnim;
-        private readonly Storyboard _disableServerAnim;
-
-        private ObservableCollection<string> _compileButtonDict = new ObservableCollection<string> { Program.Translations.CompileAll, Program.Translations.CompileCurr };
-        private ObservableCollection<string> _actionButtonDict = new ObservableCollection<string> { Program.Translations.Copy, Program.Translations.FTPUp, Program.Translations.StartServer };
-        private ObservableCollection<string> _findReplaceButtonDict = new ObservableCollection<string> { Program.Translations.Replace, Program.Translations.ReplaceAll };
-
+    public partial class MainWindow : MetroWindow
+    {
         public List<EditorElement> EditorsReferences = new List<EditorElement>();
+
+        Storyboard BlendOverEffect;
+        Storyboard FadeFindReplaceGridIn;
+        Storyboard FadeFindReplaceGridOut;
+        Storyboard EnableServerAnim;
+        Storyboard DisableServerAnim;
+
+		private bool FullyInitialized = false;
 
         public MainWindow()
         {
             InitializeComponent();
         }
-
         public MainWindow(SplashScreen sc)
         {
             InitializeComponent();
-
-            if (Program.OptionsObject.ProgramAccentColor != "Red" || Program.OptionsObject.ProgramTheme != "BaseDark")
+			if (Program.OptionsObject.Program_AccentColor != "Red" || Program.OptionsObject.Program_Theme != "BaseDark")
+			{ ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.Program_AccentColor), ThemeManager.GetAppTheme(Program.OptionsObject.Program_Theme)); }
+			ObjectBrowserColumn.Width = new GridLength(Program.OptionsObject.Program_ObjectbrowserWidth, GridUnitType.Pixel);
+			var heightDescriptor = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty, typeof(ItemsControl));
+			heightDescriptor.AddValueChanged(EditorObjectBrowserGrid.ColumnDefinitions[1], EditorObjectBrowserGridRow_WidthChanged);
+			FillConfigMenu();
+            CompileButton.ItemsSource = compileButtonDict;
+			CompileButton.SelectedIndex = 0;
+            CActionButton.ItemsSource = actionButtonDict;
+			CActionButton.SelectedIndex = 0;
+            ReplaceButton.ItemsSource = findReplaceButtonDict;
+			ReplaceButton.SelectedIndex = 0;
+            if (Program.OptionsObject.UI_ShowToolBar)
             {
-                ThemeManager.ChangeAppStyle(this, ThemeManager.GetAccent(Program.OptionsObject.ProgramAccentColor),
-                    ThemeManager.GetAppTheme(Program.OptionsObject.ProgramTheme));
-            }
-
-            ObjectBrowserColumn.Width = new GridLength(Program.OptionsObject.ProgramObjectbrowserWidth,
-                GridUnitType.Pixel);
-            var heightDescriptor = DependencyPropertyDescriptor.FromProperty(ColumnDefinition.WidthProperty,
-                typeof(ItemsControl));
-            heightDescriptor.AddValueChanged(EditorObjectBrowserGrid.ColumnDefinitions[1],
-                EditorObjectBrowserGridRow_WidthChanged);
-            FillConfigMenu();
-            CompileButton.ItemsSource = _compileButtonDict;
-            CompileButton.SelectedIndex = 0;
-            CActionButton.ItemsSource = _actionButtonDict;
-            CActionButton.SelectedIndex = 0;
-            ReplaceButton.ItemsSource = _findReplaceButtonDict;
-            ReplaceButton.SelectedIndex = 0;
-
-            if (Program.OptionsObject.UIShowToolBar)
                 Win_ToolBar.Height = double.NaN;
-
-            MetroDialogOptions.AnimateHide = MetroDialogOptions.AnimateShow = false;
-            _blendOverEffect = (Storyboard) Resources["BlendOverEffect"];
-            _fadeFindReplaceGridIn = (Storyboard) Resources["FadeFindReplaceGridIn"];
-            _fadeFindReplaceGridOut = (Storyboard) Resources["FadeFindReplaceGridOut"];
-            _enableServerAnim = (Storyboard) Resources["EnableServerAnim"];
-            _disableServerAnim = (Storyboard) Resources["DisableServerAnim"];
-            ChangeObjectBrowserToDirectory(Program.OptionsObject.ProgramObjectBrowserDirectory);
-            Language_Translate(true);
+            }
+            this.MetroDialogOptions.AnimateHide = this.MetroDialogOptions.AnimateShow = false;
+            BlendOverEffect = (Storyboard)this.Resources["BlendOverEffect"];
+            FadeFindReplaceGridIn = (Storyboard)this.Resources["FadeFindReplaceGridIn"];
+            FadeFindReplaceGridOut = (Storyboard)this.Resources["FadeFindReplaceGridOut"];
+            EnableServerAnim = (Storyboard)this.Resources["EnableServerAnim"];
+            DisableServerAnim = (Storyboard)this.Resources["DisableServerAnim"];
+			ChangeObjectBrowserToDirectory(Program.OptionsObject.Program_ObjectBrowserDirectory);
+			Language_Translate(true);
 #if DEBUG
             TryLoadSourceFile(@"C:\Users\Jelle\Desktop\scripting\AeroControler.sp", false);
 #endif
             if (Program.OptionsObject.LastOpenFiles != null)
-                foreach (var filePath in Program.OptionsObject.LastOpenFiles)
-                    TryLoadSourceFile(filePath, false);
-
-            var args = Environment.GetCommandLineArgs();
-
-            for (var i = 0; i < args.Length; ++i)
-                if (!args[i].EndsWith("exe"))
-                    TryLoadSourceFile(args[i], false, true, (i == 0));
-
-            sc.Close(TimeSpan.FromMilliseconds(500.0));
-            StartBackgroundParserThread();
-            _fullyInitialized = true;
-        }
-
-        public bool TryLoadSourceFile(string filePath, bool useBlendoverEffect = true, bool tryOpenIncludes = true, bool selectMe = false)
-        {
-            var fileInfo = new FileInfo(filePath);
-
-            if (!fileInfo.Exists)
-                return false;
-
-            var extension = fileInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
-            switch (extension)
             {
-                case "sp":
-                case "inc":
-                case "txt":
-                case "cfg":
-                case "ini":
-                    var finalPath = fileInfo.FullName;
-                    var editors = GetAllEditorElements();
+                for (int i = 0; i < Program.OptionsObject.LastOpenFiles.Length; ++i)
+                {
+                    TryLoadSourceFile(Program.OptionsObject.LastOpenFiles[i], false, true, false);
+                }
+            }
+            string[] args = Environment.GetCommandLineArgs();
+            for (int i = 0; i < args.Length; ++i)
+            {
+                if (!args[i].EndsWith("exe"))
+                {
+                    TryLoadSourceFile(args[i], false, true, (i == 0));
+                }
+            }
+            sc.Close(TimeSpan.FromMilliseconds(500.0));
+			StartBackgroundParserThread();
+			FullyInitialized = true;
+		}
 
+        public bool TryLoadSourceFile(string filePath, bool UseBlendoverEffect = true, bool TryOpenIncludes = true, bool SelectMe = false)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            if (fileInfo.Exists)
+            {
+                string extension = fileInfo.Extension.ToLowerInvariant().Trim(new char[] { '.', ' ' });
+                if (extension == "sp" || extension == "inc" || extension == "txt" || extension == "cfg" || extension == "ini")
+                {
+                    string finalPath = fileInfo.FullName;
+                    EditorElement[] editors = GetAllEditorElements();
                     if (editors != null)
                     {
-                        foreach (var element in editors)
+                        for (int i = 0; i < editors.Length; ++i)
                         {
-                            if (element.FullFilePath != finalPath)
-                                continue;
-
-                            if (selectMe)
-                                element.Parent.IsSelected = true;
-
-                            return false;
-                        }
-                    }
-
-                    AddEditorElement(finalPath, fileInfo.Name, selectMe);
-
-                    if (tryOpenIncludes && Program.OptionsObject.ProgramOpenCustomIncludes)
-                    {
-                        using (var textReader = fileInfo.OpenText())
-                        {
-                            var source = Regex.Replace(textReader.ReadToEnd(), @"/\*.*?\*/", string.Empty, RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
-                            var regex = new Regex(@"^\s*\#include\s+((\<|"")(?<name>.+?)(\>|""))", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
-                            var mc = regex.Matches(source);
-
-                            for (var i = 0; i < mc.Count; ++i)
+                            if (editors[i].FullFilePath == finalPath)
                             {
-                                try
-                                {
-                                    var fileName = mc[i].Groups["name"].Value;
-
-                                    if (!(fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith(".sp", StringComparison.InvariantCultureIgnoreCase)))
-                                        fileName = fileName + ".inc";
-
-                                    if (fileInfo.DirectoryName != null)
-                                        fileName = Path.Combine(fileInfo.DirectoryName, fileName);
-
-                                    TryLoadSourceFile(fileName, false, Program.OptionsObject.ProgramOpenIncludesRecursively);
-                                }
-                                catch (Exception)
-                                {
-                                    // ignored
-                                }
+								if (SelectMe)
+								{
+									editors[i].Parent.IsSelected = true;
+								}
+                                return false;
                             }
                         }
                     }
-                    break;
-                case "smx":
-                    var layoutDocument = new LayoutDocument {Title = "DASM: " + fileInfo.Name};
-                    var dasmElement = new DASMElement(fileInfo);
+                    AddEditorElement(finalPath, fileInfo.Name, SelectMe);
+                    if (TryOpenIncludes && Program.OptionsObject.Program_OpenCustomIncludes)
+                    {
+                        using (var textReader = fileInfo.OpenText())
+                        {
+                            string source = Regex.Replace(textReader.ReadToEnd(), @"/\*.*?\*/", string.Empty, RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Singleline);
+                            Regex regex = new Regex(@"^\s*\#include\s+((\<|"")(?<name>.+?)(\>|""))", RegexOptions.Compiled | RegexOptions.ExplicitCapture | RegexOptions.Multiline);
+                            MatchCollection mc = regex.Matches(source);
+                            for (int i = 0; i < mc.Count; ++i)
+                            {
+                                try
+                                {
+                                    string fileName = mc[i].Groups["name"].Value;
+                                    if (!(fileName.EndsWith(".inc", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith(".sp", StringComparison.InvariantCultureIgnoreCase)))
+                                    {
+                                        fileName = fileName + ".inc";
+                                    }
+                                    fileName = System.IO.Path.Combine(fileInfo.DirectoryName, fileName);
+                                    TryLoadSourceFile(fileName, false, Program.OptionsObject.Program_OpenIncludesRecursively);
+                                }
+                                catch (Exception) { }
+                            }
+                        }
+                    }
+                }
+                else if (extension == "smx")
+                {
+                    LayoutDocument layoutDocument = new LayoutDocument();
+                    layoutDocument.Title = "DASM: " + fileInfo.Name;
+                    DASMElement dasmElement = new DASMElement(fileInfo);
                     layoutDocument.Content = dasmElement;
                     DockingPane.Children.Add(layoutDocument);
                     DockingPane.SelectedContentIndex = DockingPane.ChildrenCount - 1;
-                    break;
-                default:
-                    // ignored
-                    break;
+                }
+                if (UseBlendoverEffect)
+                {
+                    BlendOverEffect.Begin();
+                }
+                return true;
             }
-
-            if (useBlendoverEffect)
-                _blendOverEffect.Begin();
-
-            return true;
+            return false;
         }
 
-        public void AddEditorElement(string filePath, string name, bool selectMe)
+        public void AddEditorElement(string filePath, string name, bool SelectMe)
         {
-            var layoutDocument = new LayoutDocument {Title = name};
+            LayoutDocument layoutDocument = new LayoutDocument();
+            layoutDocument.Title = name;
             layoutDocument.Closing += layoutDocument_Closing;
             layoutDocument.ToolTip = filePath;
-            var editor = new EditorElement(filePath) {Parent = layoutDocument};
+            EditorElement editor = new EditorElement(filePath);
+            editor.Parent = layoutDocument;
             layoutDocument.Content = editor;
             EditorsReferences.Add(editor);
             DockingPane.Children.Add(layoutDocument);
-
-            if (selectMe)
+            if (SelectMe)
+            {
 				layoutDocument.IsSelected = true;
+            }
         }
 
         private void DockingManager_ActiveContentChanged(object sender, EventArgs e)
         {
             UpdateWindowTitle();
-            var element = GetCurrentEditorElement();
-            element?.editor.Focus();
+            EditorElement ee = GetCurrentEditorElement();
+            if (ee != null)
+            {
+                ee.editor.Focus();
+            }
         }
 
         private void DockingManager_DocumentClosing(object sender, Xceed.Wpf.AvalonDock.DocumentClosingEventArgs e)
         {
-            var element = e.Document.Content as EditorElement;
-            element?.Close();
+            if (e.Document.Content is EditorElement)
+            {
+                ((EditorElement)e.Document.Content).Close();
+            }
             UpdateWindowTitle();
         }
 
-        private static void layoutDocument_Closing(object sender, CancelEventArgs e)
+        private void layoutDocument_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 			e.Cancel = true;
         }
 
-        private void MetroWindow_Closing(object sender, CancelEventArgs e)
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            _backgroundParserThread?.Abort();
-            _parseDistributorTimer?.Stop();
-            ServerCheckThread?.Abort(); //a join would not work, so we have to be..forcefully...
-            var lastOpenFiles = new List<string>();
-            var editors = GetAllEditorElements();
-            bool? saveUnsaved = null;
-
+			if (backgroundParserThread != null)
+			{
+				backgroundParserThread.Abort();
+			}
+			if (parseDistributorTimer != null)
+			{
+				parseDistributorTimer.Stop();
+			}
+            if (ServerCheckThread != null)
+            {
+                ServerCheckThread.Abort(); //a join would not work, so we have to be..forcefully...
+            }
+            List<string> lastOpenFiles = new List<string>();
+            EditorElement[] editors = GetAllEditorElements();
+            bool? SaveUnsaved = null;
 			if (editors != null)
 			{
-				foreach (var element in editors)
+				for (int i = 0; i < editors.Length; ++i)
 				{
-				    if (!File.Exists(element.FullFilePath))
-                        continue;
-
-				    lastOpenFiles.Add(element.FullFilePath);
-
-				    if (element.NeedsSave)
-				    {
-				        if (saveUnsaved == null)
-				        {
-				            var result = MessageBox.Show(this, Program.Translations.SavingUFiles, Program.Translations.Saving, MessageBoxButton.YesNo, MessageBoxImage.Question);
-				            saveUnsaved = result == MessageBoxResult.Yes;
-				        }
-
-				        if (saveUnsaved.Value)
-				            element.Close(true);
-				        else
-				            element.Close(false, false);
-				    }
-				    else
-				        element.Close(false, false);
+					if (File.Exists(editors[i].FullFilePath))
+					{
+						lastOpenFiles.Add(editors[i].FullFilePath);
+						if (editors[i].NeedsSave)
+						{
+							if (SaveUnsaved == null)
+							{
+								var result = MessageBox.Show(this, Program.Translations.SavingUFiles, Program.Translations.Saving, MessageBoxButton.YesNo, MessageBoxImage.Question);
+								if (result == MessageBoxResult.Yes)
+								{
+									SaveUnsaved = true;
+								}
+								else
+								{
+									SaveUnsaved = false;
+								}
+							}
+							if (SaveUnsaved.Value)
+							{
+								editors[i].Close(true, true);
+							}
+							else
+							{
+								editors[i].Close(false, false);
+							}
+						}
+						else
+						{
+							editors[i].Close(false, false);
+						}
+					}
 				}
 			}
-
             Program.OptionsObject.LastOpenFiles = lastOpenFiles.ToArray();
 #if !DEBUG
             if (Program.UpdateStatus.IsAvailable)
@@ -254,63 +259,55 @@ namespace Spedit.UI
 
         private void MetroWindow_Drop(object sender, DragEventArgs e)
         {
-            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
-                return;
-
-            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            if (files == null)
-                return;
-
-            Activate();
-            Focus();
-
-            for (var i = 0; i < files.Length; ++i)
-                TryLoadSourceFile(files[i], i == 0, true, i == 0);
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                this.Activate();
+                this.Focus();
+                for (int i = 0; i < files.Length; ++i)
+                {
+                    TryLoadSourceFile(files[i], (i == 0), true, (i == 0));
+                }
+            }
         }
 
         public static void ProcessUITasks()
         {
-            var frame = new DispatcherFrame();
-
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate
+            DispatcherFrame frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(delegate(object parameter)
             {
                 frame.Continue = false;
                 return null;
             }), null);
-
             Dispatcher.PushFrame(frame);
         }
 
         private void ErrorResultGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var row = ((ErrorDataGridRow)ErrorResultGrid.SelectedItem);
-
             if (row == null)
-                return;
-
-            var fileName = row.File;
-            var editors = GetAllEditorElements();
-
-            if (editors == null)
-                return;
-
-            foreach (var element in editors)
             {
-                if (element.FullFilePath != fileName)
-                    continue;
-
-                element.Parent.IsSelected = true;
-
-                var line = GetLineInteger(row.Line);
-
-                if (line <= 0 || line > element.editor.LineCount)
-                    continue;
-
-                var lineObj = element.editor.Document.Lines[line - 1];
-
-                element.editor.ScrollToLine(line - 1);
-                element.editor.Select(lineObj.Offset, lineObj.Length);
+                return;
+            }
+            string fileName = row.file;
+            EditorElement[] editors = GetAllEditorElements();
+            if (editors == null)
+            {
+                return;
+            }
+            for (int i = 0; i < editors.Length; ++i)
+            {
+                if (editors[i].FullFilePath == fileName)
+                {
+                    ((LayoutDocument)editors[i].Parent).IsSelected = true;
+                    int line = GetLineInteger(row.line);
+                    if (line > 0 && line <= editors[i].editor.LineCount)
+                    {
+                        var lineObj = editors[i].editor.Document.Lines[line - 1];
+                        editors[i].editor.ScrollToLine(line - 1);
+                        editors[i].editor.Select(lineObj.Offset, lineObj.Length);
+                    }
+                }
             }
         }
 
@@ -321,42 +318,55 @@ namespace Spedit.UI
 
 		private void EditorObjectBrowserGridRow_WidthChanged(object sender, EventArgs e)
 		{
-			if (_fullyInitialized)
-				Program.OptionsObject.ProgramObjectbrowserWidth = ObjectBrowserColumn.Width.Value;
+			if (FullyInitialized)
+			{
+				Program.OptionsObject.Program_ObjectbrowserWidth = ObjectBrowserColumn.Width.Value;
+			}
 		}
 
 		private void UpdateWindowTitle()
         {
-            var element = GetCurrentEditorElement();
+            EditorElement ee = GetCurrentEditorElement();
             string outString;
-
-            if (element == null)
+            if (ee == null)
+            {
                 outString = "SPEdit";
+            }
             else
-                outString = element.FullFilePath + " - SPEdit";
-
+            {
+                outString = ee.FullFilePath + " - SPEdit";
+            }
             if (ServerIsRunning)
+            {
                 outString = $"{outString} ({Program.Translations.ServerRunning})";
-
-            Title = outString;
+            }
+            this.Title = outString;
         }
 
-        private static int GetLineInteger(string lineStr)
+        private int GetLineInteger(string lineStr)
         {
-            var end = 0;
-
-            for (var i = 0; i < lineStr.Length; ++i)
+            int end = 0;
+            for (int i = 0; i < lineStr.Length; ++i)
+            {
                 if (lineStr[i] >= '0' && lineStr[i] <= '9')
+                {
                     end = i;
+                }
                 else
+                {
                     break;
-
+                }
+            }
             int line;
-
             if (int.TryParse(lineStr.Substring(0, end + 1), out line))
+            {
                 return line;
-
+            }
             return -1;
         }
+
+        private ObservableCollection<string> compileButtonDict = new ObservableCollection<string>() { Program.Translations.CompileAll, Program.Translations.CompileCurr };
+        private ObservableCollection<string> actionButtonDict = new ObservableCollection<string>() { Program.Translations.Copy, Program.Translations.FTPUp, Program.Translations.StartServer };
+        private ObservableCollection<string> findReplaceButtonDict = new ObservableCollection<string>() { Program.Translations.Replace, Program.Translations.ReplaceAll };
     }
 }

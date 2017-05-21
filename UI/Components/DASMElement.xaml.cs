@@ -1,9 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.IO;
 using smxdasm;
 
@@ -12,25 +20,24 @@ namespace Spedit.UI.Components
     /// <summary>
     /// Interaction logic for DASMElement.xaml
     /// </summary>
-    public partial class DASMElement
+    public partial class DASMElement : UserControl
     {
-        private readonly StringBuilder _detailBuffer = new StringBuilder();
-        private SmxFile _file;
-        private double _lineHeight;
+        double LineHeight = 0.0;
 
-        public delegate void DrawNodeFn();
+        private SmxFile file_;
+        private StringBuilder detail_buffer_ = new StringBuilder();
 
         public DASMElement()
         {
             InitializeComponent();
         }
-
         public DASMElement(FileInfo fInfo)
         {
             InitializeComponent();
-
             LoadFile(fInfo);
+
             detailbox_.PreviewMouseWheel += PrevMouseWheel;
+
             detailbox_.Options.EnableHyperlinks = false;
             detailbox_.Options.HighlightCurrentLine = true;
             detailbox_.TextArea.SelectionCornerRadius = 0.0;
@@ -45,54 +52,48 @@ namespace Spedit.UI.Components
                 {
                     using (var reader = new BinaryReader(stream))
                     {
-                        _file = new SmxFile(reader);
+                        file_ = new SmxFile(reader);
                     }
                 }
             }
             catch (Exception e)
             {
-                detailbox_.Text = Program.Translations.ErrorFileLoadProc + Environment.NewLine + Environment.NewLine +
-                                  $"{Program.Translations.Details}: " + e.Message;
+                detailbox_.Text = Program.Translations.ErrorFileLoadProc + Environment.NewLine + Environment.NewLine + $"{Program.Translations.Details}: " + e.Message;
                 return;
             }
-
-            RenderFile();
+            renderFile();
         }
 
         private void PrevMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (_lineHeight == 0.0)
-                _lineHeight = detailbox_.TextArea.TextView.DefaultLineHeight;
-
-            detailbox_.ScrollToVerticalOffset(detailbox_.VerticalOffset - (Math.Sign((double)e.Delta) * _lineHeight * Program.OptionsObject.EditorScrollLines));
+            if (LineHeight == 0.0)
+            {
+                LineHeight = detailbox_.TextArea.TextView.DefaultLineHeight;
+            }
+            detailbox_.ScrollToVerticalOffset(detailbox_.VerticalOffset - (Math.Sign((double)e.Delta) * LineHeight * Program.OptionsObject.Editor_ScrollLines));
             e.Handled = true;
         }
 
-        private void RenderFile()
+        private void renderFile()
         {
             var roots = new Dictionary<string, TreeViewItem>();
-            var node = new TreeViewItem
-            {
-                Header = "(header)",
-                Tag = new NodeData(RenderFileDetail, null)
-            }; //hehe
-
+            //treeview_.BeginUpdate();
             treeview_.Items.Clear();
-            treeview_.Items.Add(node);      
+            var node = new TreeViewItem() { Header = "(header)" }; //hehe
+            treeview_.Items.Add(node);
+            var toproot = node;
+            node.Tag = new NodeData(renderFileDetail, null);
 
             // Add section headers.
-            foreach (var sec in _file.Header.Sections)
+            foreach (var section_ in file_.Header.Sections)
             {
-                var section = sec;
-                var root = new TreeViewItem
+                var section = section_;
+                var root = new TreeViewItem() { Header = section.Name };
+                root.Tag = new NodeData(delegate()
                 {
-                    Header = section.Name,
-                    Tag = new NodeData(delegate
-                    {
-                        RenderSectionHeaderDetail(section);
-                        EndDetailUpdate();
-                    }, section)
-                };
+                    renderSectionHeaderDetail(section);
+                    endDetailUpdate();
+                }, section);
 
                 roots[section.Name] = root;
                 treeview_.Items.Add(root);
@@ -100,167 +101,160 @@ namespace Spedit.UI.Components
 
             // Add specific sections.
             if (roots.ContainsKey(".natives"))
-                RenderNativeList(roots[".natives"], _file.Natives);
+                renderNativeList(roots[".natives"], file_.Natives);
             if (roots.ContainsKey(".tags"))
-                RenderTagList(roots[".tags"], _file.Tags);
+                renderTagList(roots[".tags"], file_.Tags);
             if (roots.ContainsKey(".pubvars"))
-                RenderPubvarList(roots[".pubvars"], _file.Pubvars);
+                renderPubvarList(roots[".pubvars"], file_.Pubvars);
             if (roots.ContainsKey(".publics"))
-                RenderPublicsList(roots[".publics"], _file.Publics);
+                renderPublicsList(roots[".publics"], file_.Publics);
             if (roots.ContainsKey(".code"))
-                RenderCodeSection(roots[".code"], _file.CodeV1);
+                renderCodeSection(roots[".code"], file_.CodeV1);
             if (roots.ContainsKey(".data"))
-                RenderDataList(roots[".data"], _file.Data);
+                renderDataList(roots[".data"], file_.Data);
             if (roots.ContainsKey(".names"))
-                RenderNamesList(roots[".names"], _file.Names);
+                renderNamesList(roots[".names"], file_.Names);
             if (roots.ContainsKey(".dbg.files"))
-                RenderDebugFiles(roots[".dbg.files"], _file.DebugFiles);
+                renderDebugFiles(roots[".dbg.files"], file_.DebugFiles);
             if (roots.ContainsKey(".dbg.lines"))
-                RenderDebugLines(roots[".dbg.lines"], _file.DebugLines);
+                renderDebugLines(roots[".dbg.lines"], file_.DebugLines);
             if (roots.ContainsKey(".dbg.info"))
-                RenderDebugInfo(roots[".dbg.info"], _file.DebugInfo);
+                renderDebugInfo(roots[".dbg.info"], file_.DebugInfo);
             if (roots.ContainsKey(".dbg.strings"))
-                RenderNamesList(roots[".dbg.strings"], _file.DebugNames);
+                renderNamesList(roots[".dbg.strings"], file_.DebugNames);
             if (roots.ContainsKey(".dbg.symbols"))
-                RenderDebugSymbols(roots[".dbg.symbols"], _file.DebugSymbols);
+                renderDebugSymbols(roots[".dbg.symbols"], file_.DebugSymbols);
             if (roots.ContainsKey(".dbg.natives"))
-                RenderDebugNatives(roots[".dbg.natives"], _file.DebugNatives);
+                renderDebugNatives(roots[".dbg.natives"], file_.DebugNatives);
 
-            RenderFileDetail();
+
+            renderFileDetail();
         }
 
-        private void StartDetailUpdate()
+        private void startDetailUpdate()
         {
-            _detailBuffer.Clear();
+            detail_buffer_.Clear();
         }
 
-        private void StartDetail(string fmt, params object[] args)
+        private void startDetail(string fmt, params object[] args)
         {
-            StartDetailUpdate();
-            AddDetailLine(fmt, args);
+            startDetailUpdate();
+            addDetailLine(fmt, args);
         }
 
-        private void AddDetailLine(string fmt, params object[] args)
+        private void addDetailLine(string fmt, params object[] args)
         {
-            _detailBuffer.Append(string.Format(fmt, args) + "\r\n");
+            detail_buffer_.Append(String.Format(fmt, args) + "\r\n");
         }
 
-        private void EndDetailUpdate()
+        private void endDetailUpdate()
         {
-            detailbox_.Text = _detailBuffer.ToString();
+            detailbox_.Text = detail_buffer_.ToString();
         }
 
-        private void RenderFileDetail()
+        private void renderFileDetail()
         {
-            StartDetailUpdate();
-
-            AddDetailLine("magic = 0x{0:x}", _file.Header.Magic);
-            AddDetailLine("version = 0x{0:x}", _file.Header.Version);
-            AddDetailLine("compression = {0} (0x{1:x})", _file.Header.Compression.ToString(), _file.Header.Compression);
-            AddDetailLine("disksize = {0} bytes", _file.Header.DiskSize);
-            AddDetailLine("imagesize = {0} bytes", _file.Header.ImageSize);
-            AddDetailLine("sections = {0}", _file.Header.num_sections);
-            AddDetailLine("stringtab = @{0}", _file.Header.stringtab);
-            AddDetailLine("dataoffs = @{0}", _file.Header.dataoffs);
-
-            EndDetailUpdate();
+            startDetailUpdate();
+            addDetailLine("magic = 0x{0:x}", file_.Header.Magic);
+            addDetailLine("version = 0x{0:x}", file_.Header.Version);
+            addDetailLine("compression = {0} (0x{1:x})", file_.Header.Compression.ToString(), file_.Header.Compression);
+            addDetailLine("disksize = {0} bytes", file_.Header.DiskSize);
+            addDetailLine("imagesize = {0} bytes", file_.Header.ImageSize);
+            addDetailLine("sections = {0}", file_.Header.num_sections);
+            addDetailLine("stringtab = @{0}", file_.Header.stringtab);
+            addDetailLine("dataoffs = @{0}", file_.Header.dataoffs);
+            endDetailUpdate();
         }
 
-        private void RenderSectionHeaderDetail(SectionEntry header)
+        private void renderSectionHeaderDetail(SectionEntry header)
         {
-            StartDetailUpdate();
-
-            AddDetailLine(".nameoffs = 0x{0:x} ; \"{1}\"", header.nameoffs, header.Name);
-            AddDetailLine(".dataoffs = 0x{0:x}", header.dataoffs);
-            AddDetailLine(".size = {0} bytes", header.Size);
+            startDetailUpdate();
+            addDetailLine(".nameoffs = 0x{0:x} ; \"{1}\"", header.nameoffs, header.Name);
+            addDetailLine(".dataoffs = 0x{0:x}", header.dataoffs);
+            addDetailLine(".size = {0} bytes", header.Size);
         }
 
-        private void RenderByteView(BinaryReader reader, int size)
+        private void renderByteView(BinaryReader reader, int size)
         {
-            var ndigits = $"{size:x}".Length;
+            var ndigits = string.Format("{0:x}", size).Length;
             var addrfmt = "0x{0:x" + ndigits + "}: ";
+
             var chars = new StringBuilder();
 
-            StartDetailUpdate();
-
-            for (var i = 0; i < size; i++)
+            startDetailUpdate();
+            for (int i = 0; i < size; i++)
             {
                 if (i % 16 == 0)
                 {
                     if (i != 0)
                     {
-                        _detailBuffer.Append("  ");
-                        _detailBuffer.Append(chars);
-                        _detailBuffer.Append("\r\n");
+                        detail_buffer_.Append("  ");
+                        detail_buffer_.Append(chars);
+                        detail_buffer_.Append("\r\n");
                         chars.Clear();
                     }
-                    _detailBuffer.Append(string.Format(addrfmt, i));
+                    detail_buffer_.Append(string.Format(addrfmt, i));
                 }
                 else if (i % 8 == 0)
                 {
-                    _detailBuffer.Append(" ");
+                    detail_buffer_.Append(" ");
                     chars.Append(" ");
                 }
 
                 var value = reader.ReadByte();
-                _detailBuffer.Append($"{value:x2} ");
+                detail_buffer_.Append(string.Format("{0:x2} ", value));
 
                 if (value >= 0x21 && value <= 0x7f)
                     chars.Append(Convert.ToChar(value));
                 else
                     chars.Append(".");
             }
-            _detailBuffer.Append("  ");
-            _detailBuffer.Append(chars);
-            _detailBuffer.Append("\r\n");
+            detail_buffer_.Append("  ");
+            detail_buffer_.Append(chars);
+            detail_buffer_.Append("\r\n");
 
-            EndDetailUpdate();
+            endDetailUpdate();
         }
 
-        private void RenderHexView(BinaryReader reader, int size)
+        private void renderHexView(BinaryReader reader, int size)
         {
-            var ndigits = $"{size:x}".Length;
+            var ndigits = string.Format("{0:x}", size).Length;
             var addrfmt = "0x{0:x" + ndigits + "}: ";
 
-            StartDetailUpdate();
-
-            for (var i = 0; i < size; i += 4)
+            startDetailUpdate();
+            for (int i = 0; i < size; i += 4)
             {
                 if (i % 32 == 0)
                 {
                     if (i != 0)
                     {
-                        _detailBuffer.Append("  ");
-                        _detailBuffer.Append("\r\n");
+                        detail_buffer_.Append("  ");
+                        detail_buffer_.Append("\r\n");
                     }
-
-                    _detailBuffer.Append(string.Format(addrfmt, i));
+                    detail_buffer_.Append(string.Format(addrfmt, i));
                 }
                 else if (i % 16 == 0)
                 {
-                    _detailBuffer.Append(" ");
+                    detail_buffer_.Append(" ");
                 }
 
                 var value = reader.ReadInt32();
-                _detailBuffer.Append($"{value:x8} ");
+                detail_buffer_.Append(string.Format("{0:x8} ", value));
             }
-
-            EndDetailUpdate();
+            endDetailUpdate();
         }
 
-        private void RenderStringAnalysis(MemoryStream stream, BinaryReader reader, int size)
+        private void renderStringAnalysis(MemoryStream stream, BinaryReader reader, int size)
         {
-            StartDetailUpdate();
+            startDetailUpdate();
 
             var current = new StringBuilder();
-
             for (var i = 0; i < size; i++)
             {
-                var b = reader.ReadByte();
-
+                byte b = reader.ReadByte();
                 if (b == 0 && current.Length > 0)
                 {
-                    AddDetailLine("0x{0:x6}: {1}", i, current.ToString());
+                    addDetailLine("0x{0:x6}: {1}", i, current.ToString());
                     current.Clear();
                 }
 
@@ -272,45 +266,44 @@ namespace Spedit.UI.Components
 
                 current.Append(Convert.ToChar(b));
             }
-
-            EndDetailUpdate();
+            endDetailUpdate();
         }
 
-        private void RenderCodeView(SmxCodeV1Section code, string name, int address)
+        private void renderCodeView(SmxCodeV1Section code, string name, int address)
         {
-            StartDetailUpdate();
+            startDetailUpdate();
 
             V1Instruction[] insns;
-
             try
             {
-                insns = V1Disassembler.Disassemble(_file, code, address);
+                insns = V1Disassembler.Disassemble(file_, code, address);
             }
             catch (Exception e)
             {
-                AddDetailLine(Program.Translations.NotDissMethod, name, e.Message);
-                EndDetailUpdate();
+                addDetailLine(Program.Translations.NotDissMethod, name, e.Message);
+                endDetailUpdate();
                 return;
             }
 
-            AddDetailLine("; {0}", name);
-            AddDetailLine("; {0} instruction(s)", insns.Length);
-            AddDetailLine("; starts at code address 0x{0:x}", address);
-            AddDetailLine("---");
+            addDetailLine("; {0}", name);
+            addDetailLine("; {0} instruction(s)", insns.Length);
+            addDetailLine("; starts at code address 0x{0:x}", address);
+            addDetailLine("---");
 
             if (insns.Length == 0)
             {
-                EndDetailUpdate();
+                endDetailUpdate();
                 return;
             }
 
+
             // Find the largest address so we can get consistent column length.
-            var lastAddress = insns[insns.Length - 1].Address;
-            var ndigits = $"{lastAddress:x}".Length;
+            int last_address = insns[insns.Length - 1].Address;
+            var ndigits = string.Format("{0:x}", last_address).Length;
             var addrfmt = "0x{0:x" + ndigits + "}: ";
+
             var buffer = new StringBuilder();
             var comment = new StringBuilder();
-
             foreach (var insn in insns)
             {
                 buffer.Clear();
@@ -328,96 +321,105 @@ namespace Spedit.UI.Components
                     {
                         case V1Param.Constant:
                         case V1Param.CaseTable:
-                            buffer.Append($" 0x{value:x}");
-                            comment.Append($" {value}");
+                            buffer.Append(string.Format(" 0x{0:x}", value));
+                            comment.Append(string.Format(" {0}", value));
                             break;
                         case V1Param.Native:
-                            buffer.Append($" {value}");
-                            if (_file.Natives != null && value < _file.Natives.Length)
-                                comment.Append($" {_file.Natives[value].Name}");
+                            buffer.Append(string.Format(" {0}", value));
+                            if (file_.Natives != null && value < file_.Natives.Length)
+                                comment.Append(string.Format(" {0}", file_.Natives[value].Name));
                             break;
                         case V1Param.Jump:
-                            var delta = value - insn.Address;
-                            buffer.Append($" 0x{value:x}");
-                            comment.Append(delta >= 0 ? $" +0x{delta:x}" : $" -0x{-delta:x}");
+                            int delta = value - insn.Address;
+                            buffer.Append(string.Format(" 0x{0:x}", value));
+                            if (delta >= 0)
+                                comment.Append(string.Format(" +0x{0:x}", delta));
+                            else
+                                comment.Append(string.Format(" -0x{0:x}", -delta));
                             break;
                         case V1Param.Address:
-                        {
-                            DebugSymbolEntry sym = null;
-                            if (_file.DebugSymbols != null)
-                                sym = _file.DebugSymbols.FindDataRef(value);
-                            buffer.Append($" 0x{value:x}");
-                            comment.Append(sym != null ? $" {sym.Name}" : $" {value}");
-                            break;
-                        }
+                            {
+                                DebugSymbolEntry sym = null;
+                                if (file_.DebugSymbols != null)
+                                    sym = file_.DebugSymbols.FindDataRef(value);
+                                buffer.Append(string.Format(" 0x{0:x}", value));
+                                if (sym != null)
+                                    comment.Append(string.Format(" {0}", sym.Name));
+                                else
+                                    comment.Append(string.Format(" {0}", value));
+                                break;
+                            }
                         case V1Param.Stack:
-                        {
-                            DebugSymbolEntry sym = null;
-                            if (_file.DebugSymbols != null)
-                                sym = _file.DebugSymbols.FindStackRef(insn.Address, value);
-                            buffer.Append($" 0x{value:x}");
-                            comment.Append(sym != null ? $" {sym.Name}" : $" {value}");
-                            break;
-                        }
+                            {
+                                DebugSymbolEntry sym = null;
+                                if (file_.DebugSymbols != null)
+                                    sym = file_.DebugSymbols.FindStackRef(insn.Address, value);
+                                buffer.Append(string.Format(" 0x{0:x}", value));
+                                if (sym != null)
+                                    comment.Append(string.Format(" {0}", sym.Name));
+                                else
+                                    comment.Append(string.Format(" {0}", value));
+                                break;
+                            }
                         case V1Param.Function:
-                            var fun = _file.FindFunctionName(value);
-                            buffer.Append($" 0x{value:x}");
-                            comment.Append($" {fun}");
-                            break;
-                        default:
-                            // ignored
+                            string fun = file_.FindFunctionName(value);
+                            buffer.Append(string.Format(" 0x{0:x}", value));
+                            comment.Append(string.Format(" {0}", fun));
                             break;
                     }
                 }
 
-                _detailBuffer.Append(string.Format(addrfmt, insn.Address));
-                _detailBuffer.Append($"{buffer,-32}");
-
+                detail_buffer_.Append(string.Format(addrfmt, insn.Address));
+                detail_buffer_.Append(string.Format("{0,-32}", buffer));
                 if (comment.Length > 0)
-                    _detailBuffer.Append($" ;{comment}");
-
-                _detailBuffer.Append("\r\n");
+                {
+                    detail_buffer_.Append(string.Format(" ;{0}", comment));
+                }
+                detail_buffer_.Append("\r\n");
             }
 
-            EndDetailUpdate();
+            endDetailUpdate();
         }
 
-        private void RenderCodeSection(ItemsControl root, SmxCodeV1Section code)
+        private void renderCodeSection(TreeViewItem root, SmxCodeV1Section code)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(code.SectionHeader);
-                AddDetailLine("codesize = {0} bytes", code.Header.CodeSize);
-                AddDetailLine("cellsize = {0} bytes", code.Header.CellSize);
-                AddDetailLine("codeversion = 0x{0:x}", code.Header.CodeVersion);
-                AddDetailLine("flags = 0x{0:x} ; {0}", code.Header.Flags, code.Header.Flags.ToString());
-                AddDetailLine("main = 0x{0:x}", code.Header.main);
-                AddDetailLine("codeoffs = 0x{0:x}", code.Header.codeoffs);
-                EndDetailUpdate();
+                renderSectionHeaderDetail(code.SectionHeader);
+                addDetailLine("codesize = {0} bytes", code.Header.CodeSize);
+                addDetailLine("cellsize = {0} bytes", code.Header.CellSize);
+                addDetailLine("codeversion = 0x{0:x}", code.Header.CodeVersion);
+                addDetailLine("flags = 0x{0:x} ; {0}", code.Header.Flags, code.Header.Flags.ToString());
+                addDetailLine("main = 0x{0:x}", code.Header.main);
+                addDetailLine("codeoffs = 0x{0:x}", code.Header.codeoffs);
+                endDetailUpdate();
             }, code);
 
             var node = new TreeViewItem() { Header = "cell view" };
-
             root.Items.Add(node);
-            node.Tag = new NodeData(delegate
+            node.Tag = new NodeData(delegate()
             {
-                RenderHexView(code.Reader(), code.Header.CodeSize);
+                renderHexView(code.Reader(), (int)code.Header.CodeSize);
             }, null);
 
             var functionMap = new Dictionary<string, uint>();
 
-            if (_file.Publics != null)
-                foreach (var pubfun in _file.Publics.Entries)
+            if (file_.Publics != null)
+            {
+                foreach (var pubfun in file_.Publics.Entries)
+                {
                     functionMap[pubfun.Name] = pubfun.Address;
-
-            if (_file.DebugSymbols != null)
-                foreach (var sym in _file.DebugSymbols.Entries)
+                }
+            }
+            if (file_.DebugSymbols != null)
+            {
+                foreach (var sym in file_.DebugSymbols.Entries)
                 {
                     if (sym.Ident != SymKind.Function)
                         continue;
-
                     functionMap[sym.Name] = sym.CodeStart;
                 }
+            }
 
             foreach (var pair in functionMap)
             {
@@ -427,396 +429,385 @@ namespace Spedit.UI.Components
                 root.Items.Add(snode);
                 snode.Tag = new NodeData(delegate()
                 {
-                    RenderCodeView(code, name, (int)address);
+                    renderCodeView(code, name, (int)address);
                 }, null);
             }
         }
 
-        private void RenderDataList(ItemsControl root, SmxDataSection data)
+        private void renderDataList(TreeViewItem root, SmxDataSection data)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(data.SectionHeader);
-                AddDetailLine("datasize = {0} bytes", data.Header.DataSize);
-                AddDetailLine("memory = {0} bytes", data.Header.MemorySize);
-                AddDetailLine("dataoffs = 0x{0:x}", data.Header.dataoffs);
-                EndDetailUpdate();
+                renderSectionHeaderDetail(data.SectionHeader);
+                addDetailLine("datasize = {0} bytes", data.Header.DataSize);
+                addDetailLine("memory = {0} bytes", data.Header.MemorySize);
+                addDetailLine("dataoffs = 0x{0:x}", data.Header.dataoffs);
+                endDetailUpdate();
             }, data);
 
-            var node = new TreeViewItem { Header = "byte view" };
-
+            var node = new TreeViewItem() { Header = "byte view" };
             root.Items.Add(node);
-            node.Tag = new NodeData(delegate
+            node.Tag = new NodeData(delegate()
             {
-                RenderByteView(data.Reader(), (int)data.Header.DataSize);
+                renderByteView(data.Reader(), (int)data.Header.DataSize);
             }, null);
-
             node = new TreeViewItem() { Header = "cell view" };
             root.Items.Add(node);
             node.Tag = new NodeData(delegate()
             {
-                RenderHexView(data.Reader(), (int)data.Header.DataSize);
+                renderHexView(data.Reader(), (int)data.Header.DataSize);
             }, null);
-
-            node = new TreeViewItem { Header = "string analysis" };
+            node = new TreeViewItem() { Header = "string analysis" };
             root.Items.Add(node);
-            node.Tag = new NodeData(delegate
+            node.Tag = new NodeData(delegate()
             {
-                RenderStringAnalysis(data.Memory(), data.Reader(), (int)data.Header.DataSize);
+                renderStringAnalysis(data.Memory(), data.Reader(), (int)data.Header.DataSize);
             }, null);
         }
 
-        private void RenderPublicsList(ItemsControl root, SmxPublicTable publics)
+        private void renderPublicsList(TreeViewItem root, SmxPublicTable publics)
         {
-            for (var i = 0; i < publics.Length; i++)
+            for (int i = 0; i < publics.Length; i++)
             {
                 var index = i;
                 var pubfun = publics[i];
-                var node = new TreeViewItem { Header = i + ": " + pubfun.Name };
-
+                var node = new TreeViewItem() { Header = (i.ToString() + ": " + pubfun.Name) };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    StartDetail("; public entry {0}", index);
-                    AddDetailLine("nameoffs = 0x{0:x} ; {1}", pubfun.nameoffs, pubfun.Name);
-                    AddDetailLine("address = 0x{0:x}", pubfun.Address);
-                    EndDetailUpdate();
+                    startDetail("; public entry {0}", index);
+                    addDetailLine("nameoffs = 0x{0:x} ; {1}", pubfun.nameoffs, pubfun.Name);
+                    addDetailLine("address = 0x{0:x}", pubfun.Address);
+                    endDetailUpdate();
                 }, null);
             }
         }
 
-        private void RenderPubvarList(ItemsControl root, SmxPubvarTable pubvars)
+        private void renderPubvarList(TreeViewItem root, SmxPubvarTable pubvars)
         {
-            for (var i = 0; i < pubvars.Length; i++)
+            for (int i = 0; i < pubvars.Length; i++)
             {
                 var index = i;
                 var pubvar = pubvars[i];
-                var node = new TreeViewItem { Header = i + ": " + pubvar.Name };
-
+                var node = new TreeViewItem() { Header = (i.ToString() + ": " + pubvar.Name) };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    StartDetail("; pubvar entry {0}", index);
-                    AddDetailLine("nameoffs = 0x{0:x} ; {1}", pubvar.nameoffs, pubvar.Name);
-                    AddDetailLine("address = 0x{0:x}", pubvar.Address);
-                    EndDetailUpdate();
+                    startDetail("; pubvar entry {0}", index);
+                    addDetailLine("nameoffs = 0x{0:x} ; {1}", pubvar.nameoffs, pubvar.Name);
+                    addDetailLine("address = 0x{0:x}", pubvar.Address);
+                    endDetailUpdate();
                 }, null);
             }
         }
 
-        private void RenderTagList(ItemsControl root, SmxTagTable tags)
+        private void renderTagList(TreeViewItem root, SmxTagTable tags)
         {
             for (var i = 0; i < tags.Length; i++)
             {
                 var tag = tags[i];
                 var text = tag.Id + ": " + tag.Name;
-
                 if ((tag.Flags & ~(TagFlags.Fixed)) != 0)
                     text += " (" + (tag.Flags & ~(TagFlags.Fixed)) + ")";
-
                 var node = new TreeViewItem() { Header = text };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    StartDetail("tag: 0x{0:x} ; flags = {1}", tag.Value, tag.Flags.ToString());
-                    AddDetailLine("nameoffs: 0x{0:x} ; {1}", tag.entry.nameoffs, tag.Name);
-                    AddDetailLine("id: 0x{0:x}", tag.Id);
-                    EndDetailUpdate();
+                    startDetail("tag: 0x{0:x} ; flags = {1}", tag.Value, tag.Flags.ToString());
+                    addDetailLine("nameoffs: 0x{0:x} ; {1}", tag.entry.nameoffs, tag.Name);
+                    addDetailLine("id: 0x{0:x}", tag.Id);
+                    endDetailUpdate();
                 }, null);
             }
         }
 
-        private void RenderDebugLines(FrameworkElement root, SmxDebugLinesTable lines)
+        private void renderDebugLines(TreeViewItem root, SmxDebugLinesTable lines)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(lines.SectionHeader);
-
+                renderSectionHeaderDetail(lines.SectionHeader);
                 foreach (var line in lines.Entries)
-                    AddDetailLine("line {0} @ address 0x{1:x}", line.Line, line.Address);
-
-                EndDetailUpdate();
+                {
+                    addDetailLine("line {0} @ address 0x{1:x}", line.Line, line.Address);
+                }
+                endDetailUpdate();
             }, null);
         }
 
-        private void RenderNativeList(ItemsControl root, SmxNativeTable natives)
+        private void renderNativeList(TreeViewItem root, SmxNativeTable natives)
         {
             for (var i = 0; i < natives.Length; i++)
             {
                 var index = i;
                 var native = natives[i];
-                var node = new TreeViewItem { Header = ("[" + i + "] " + native.Name) };
-
+                var node = new TreeViewItem() { Header = ("[" + i + "] " + native.Name) };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    StartDetail("index = {0}", index);
-                    AddDetailLine("nameoffs: 0x{0:x} ; {1}", native.nameoffs, native.Name);
-                    EndDetailUpdate();
+                    startDetail("index = {0}", index);
+                    addDetailLine("nameoffs: 0x{0:x} ; {1}", native.nameoffs, native.Name);
+                    endDetailUpdate();
                 }, null);
             }
         }
 
-        private void RenderNamesList(FrameworkElement root, SmxNameTable names)
+        private void renderNamesList(TreeViewItem root, SmxNameTable names)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(names.SectionHeader);
-
+                renderSectionHeaderDetail(names.SectionHeader);
                 foreach (var offset in names.Extents)
-                    AddDetailLine("0x{0:x}: {1}", offset, names.StringAt(offset));
-
-                EndDetailUpdate();
+                {
+                    addDetailLine("0x{0:x}: {1}", offset, names.StringAt(offset));
+                }
+                endDetailUpdate();
             }, null);
         }
 
-        private void RenderDebugFiles(FrameworkElement root, SmxDebugFilesTable files)
+        private void renderDebugFiles(TreeViewItem root, SmxDebugFilesTable files)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(files.SectionHeader);
-                AddDetailLine("--");
-
+                renderSectionHeaderDetail(files.SectionHeader);
+                addDetailLine("--");
                 foreach (var file in files.Entries)
                 {
-                    AddDetailLine("\"{0}\"", file.Name);
-                    AddDetailLine(" nameoffs = 0x{0:x}", file.nameoffs);
-                    AddDetailLine(" address = 0x{0:x}", file.Address);
+                    addDetailLine("\"{0}\"", file.Name);
+                    addDetailLine(" nameoffs = 0x{0:x}", file.nameoffs);
+                    addDetailLine(" address = 0x{0:x}", file.Address);
                 }
-
-                EndDetailUpdate();
+                endDetailUpdate();
             }, null);
         }
 
-        private void RenderDebugInfo(FrameworkElement root, SmxDebugInfoSection info)
+        private void renderDebugInfo(TreeViewItem root, SmxDebugInfoSection info)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSectionHeaderDetail(info.SectionHeader);
-                AddDetailLine("num_files = {0}", info.NumFiles);
-                AddDetailLine("num_lines = {0}", info.NumLines);
-                AddDetailLine("num_symbols = {0}", info.NumSymbols);
-                AddDetailLine("num_arrays = {0}", info.NumArrays);
-                EndDetailUpdate();
+                renderSectionHeaderDetail(info.SectionHeader);
+                addDetailLine("num_files = {0}", info.NumFiles);
+                addDetailLine("num_lines = {0}", info.NumLines);
+                addDetailLine("num_symbols = {0}", info.NumSymbols);
+                addDetailLine("num_arrays = {0}", info.NumArrays);
+                endDetailUpdate();
             }, null);
         }
 
-        private static string DimsToString(Tag tag, IReadOnlyList<DebugSymbolDimEntry> dims)
+        private string dimsToString(Tag tag, DebugSymbolDimEntry[] dims)
         {
-            var str = "";
-
-            for (var i = 0; i < dims.Count; i++)
+            string str = "";
+            for (var i = 0; i < dims.Length; i++)
             {
                 int size;
-                if (i == dims.Count - 1 && tag != null && tag.Name == "String")
+                if (i == dims.Length - 1 && tag != null && tag.Name == "String")
                     size = dims[i].Size * 4;
                 else
                     size = dims[i].Size;
-
                 if (size == 0)
                     str += "[]";
                 else
-                    str += $"[{size}]";
+                    str += string.Format("[{0}]", size);
             }
-
             return str;
         }
 
-        private void RenderSymbolDetail(DebugSymbolEntry entry)
+        private void renderSymbolDetail(DebugSymbolEntry entry)
         {
             Tag tag = null;
+            if (file_.Tags != null)
+                tag = file_.Tags.FindTag(entry.TagId);
 
-            if (_file.Tags != null)
-                tag = _file.Tags.FindTag(entry.TagId);
-
-            StartDetail("; {0}", entry.Name);
-
+            startDetail("; {0}", entry.Name);
             if (entry.Address < 0)
-                AddDetailLine("address = -0x{0:x}", -entry.Address);
+                addDetailLine("address = -0x{0:x}", -entry.Address);
             else
-                AddDetailLine("address = 0x{0:x}", entry.Address);
-
+                addDetailLine("address = 0x{0:x}", entry.Address);
             if (tag == null)
-                AddDetailLine("tagid = 0x{0:x}", entry.TagId);
+                addDetailLine("tagid = 0x{0:x}", entry.TagId);
             else
-                AddDetailLine("tagid = 0x{0:x} ; {1}", entry.TagId, tag.Name);
-
-            AddDetailLine("codestart = 0x{0:x}", entry.CodeStart);
-            AddDetailLine("codeend = 0x{0:x}", entry.CodeEnd);
-            AddDetailLine("nameoffs = 0x{0:x} ; {1}", entry.nameoffs, entry.Name);
-            AddDetailLine("kind = {0:d} ; {1}", entry.Ident, entry.Ident.ToString());
-            AddDetailLine("scope = {0:d} ; {1}", entry.Scope, entry.Scope.ToString());
+                addDetailLine("tagid = 0x{0:x} ; {1}", entry.TagId, tag.Name);
+            addDetailLine("codestart = 0x{0:x}", entry.CodeStart);
+            addDetailLine("codeend = 0x{0:x}", entry.CodeEnd);
+            addDetailLine("nameoffs = 0x{0:x} ; {1}", entry.nameoffs, entry.Name);
+            addDetailLine("kind = {0:d} ; {1}", entry.Ident, entry.Ident.ToString());
+            addDetailLine("scope = {0:d} ; {1}", entry.Scope, entry.Scope.ToString());
 
             if (entry.Dims != null)
-                AddDetailLine("dims = {0}", DimsToString(tag, entry.Dims));
+            {
+                addDetailLine("dims = {0}", dimsToString(tag, entry.Dims));
+            }
 
             string file = null;
-
-            if (_file.DebugFiles != null)
-                file = _file.DebugFiles.FindFile(entry.CodeStart);
-
+            if (file_.DebugFiles != null)
+                file = file_.DebugFiles.FindFile(entry.CodeStart);
             if (file != null)
-                AddDetailLine("file: \"{0}\"", file);
+                addDetailLine("file: \"{0}\"", (string)file);
 
             uint? line = null;
-
-            if (_file.DebugLines != null)
-                line = _file.DebugLines.FindLine(entry.CodeStart);
-
+            if (file_.DebugLines != null)
+                line = file_.DebugLines.FindLine(entry.CodeStart);
             if (line != null)
-                AddDetailLine("line: \"{0}\"", (uint)line);
-
-            EndDetailUpdate();
+                addDetailLine("line: \"{0}\"", (uint)line);
+            endDetailUpdate();
         }
 
-        private void RenderDebugFunction(SmxDebugSymbolsTable syms, ItemsControl root, DebugSymbolEntry fun)
+        private void renderDebugFunction(SmxDebugSymbolsTable syms, TreeViewItem root, DebugSymbolEntry fun)
         {
-            root.Tag = new NodeData(delegate
+            root.Tag = new NodeData(delegate()
             {
-                RenderSymbolDetail(fun);
+                renderSymbolDetail(fun);
             }, null);
 
             var args = new List<DebugSymbolEntry>();
             var locals = new List<DebugSymbolEntry>();
-
-            foreach (var symbol in syms.Entries)
+            foreach (var sym_ in syms.Entries)
             {
-                var sym = symbol;
-
+                var sym = sym_;
                 if (sym.Scope == SymScope.Global)
                     continue;
-
                 if (sym.CodeStart < fun.CodeStart || sym.CodeEnd > fun.CodeEnd)
                     continue;
-
                 if (sym.Address < 0)
                     locals.Add(sym);
                 else
                     args.Add(sym);
             }
 
-            args.Sort((e1, e2) => e1.Address.CompareTo(e2.Address));
-
-            foreach (var symbol in args)
+            args.Sort(delegate(DebugSymbolEntry e1, DebugSymbolEntry e2)
             {
-                var sym = symbol;
-                var node = new TreeViewItem { Header = sym.Name };
+                return e1.Address.CompareTo(e2.Address);
+            });
+            foreach (var sym_ in args)
+            {
+                var sym = sym_;
+                var node = new TreeViewItem() { Header = sym.Name };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    RenderSymbolDetail(sym);
+                    renderSymbolDetail(sym);
                 }, null);
             }
 
-            locals.Sort((e1, e2) => e1.CodeStart.CompareTo(e2.CodeStart));
-
-            foreach (var symbol in locals)
+            locals.Sort(delegate(DebugSymbolEntry e1, DebugSymbolEntry e2)
             {
-                var sym = symbol;
+                return e1.CodeStart.CompareTo(e2.CodeStart);
+            });
+            foreach (var sym_ in locals)
+            {
+                var sym = sym_;
                 var node = new TreeViewItem() { Header = sym.Name };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    RenderSymbolDetail(sym);
+                    renderSymbolDetail(sym);
                 }, null);
             }
         }
 
-        private void RenderDebugSymbols(ItemsControl root, SmxDebugSymbolsTable syms)
+        private void renderDebugSymbols(TreeViewItem root, SmxDebugSymbolsTable syms)
         {
-            root.Items.Add("globals");
-
-            foreach (var symbol in syms.Entries)
+            var globals = root.Items.Add("globals");
+            foreach (var sym_ in syms.Entries)
             {
-                var sym = symbol;
-
+                var sym = sym_;
                 if (sym.Scope != SymScope.Global)
                     continue;
-
                 if (sym.Ident == SymKind.Function)
                     continue;
-
                 var node = new TreeViewItem() { Header = sym.Name };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate
+                node.Tag = new NodeData(delegate()
                 {
-                    RenderSymbolDetail(sym);
+                    renderSymbolDetail(sym);
                 }, null);
             }
 
-            root.Items.Add("functions");
-
-            foreach (var symbol in syms.Entries)
+            var functions = root.Items.Add("functions");
+            foreach (var sym_ in syms.Entries)
             {
-                var sym = symbol;
+                var sym = sym_;
                 if (sym.Scope != SymScope.Global)
                     continue;
                 if (sym.Ident != SymKind.Function)
                     continue;
-                var node = new TreeViewItem { Header = sym.Name };
+                var node = new TreeViewItem() { Header = sym.Name };
                 root.Items.Add(node);
-                RenderDebugFunction(syms, node, sym);
+                renderDebugFunction(syms, node, sym);
             }
         }
 
-        private void RenderDebugNative(DebugNativeEntry entry)
+        private void renderDebugNative(DebugNativeEntry entry)
         {
             Tag tag = null;
+            if (file_.Tags != null)
+                tag = file_.Tags.FindTag(entry.tagid);
 
-            if (_file.Tags != null)
-                tag = _file.Tags.FindTag(entry.tagid);
-
-            StartDetailUpdate();
-
-            AddDetailLine("nameoffs = 0x{0:x}", entry.nameoffs, entry.Name);
-
+            startDetailUpdate();
+            addDetailLine("nameoffs = 0x{0:x}", entry.nameoffs, entry.Name);
             if (tag == null)
-                AddDetailLine("tagid = 0x{0:x}", entry.tagid);
+                addDetailLine("tagid = 0x{0:x}", entry.tagid);
             else
-                AddDetailLine("tagid = 0x{0:x} ; {1}", entry.tagid, entry.Name);
-
-            AddDetailLine("index = {0}", entry.Index);
-
+                addDetailLine("tagid = 0x{0:x} ; {1}", entry.tagid, entry.Name);
+            addDetailLine("index = {0}", entry.Index);
             for (var i = 0; i < entry.Args.Length; i++)
             {
                 var arg = entry.Args[i];
-                AddDetailLine("arg {0}", i);
-                AddDetailLine("  nameoffs = 0x{0:x} ; {1}", arg.nameoffs, arg.Name);
-                AddDetailLine("  kind = {0:d} ; {1}", arg.Ident, arg.Ident.ToString());
+                addDetailLine("arg {0}", i);
+                addDetailLine("  nameoffs = 0x{0:x} ; {1}", arg.nameoffs, arg.Name);
+                addDetailLine("  kind = {0:d} ; {1}", arg.Ident, arg.Ident.ToString());
 
                 if (arg.Dims != null)
-                    AddDetailLine("  dims = {0}", DimsToString(tag, arg.Dims));
+                {
+                    addDetailLine("  dims = {0}", dimsToString(tag, arg.Dims));
+                }
             }
-            EndDetailUpdate();
+            endDetailUpdate();
         }
 
-        private void RenderDebugNatives(ItemsControl root, SmxDebugNativesTable natives)
+        private void renderDebugNatives(TreeViewItem root, SmxDebugNativesTable natives)
         {
-            foreach (var native in natives.Entries)
+            foreach (var native_ in natives.Entries)
             {
-                var nat = native;
-                var node = new TreeViewItem {Header = nat.Name};
+                var native = native_;
+                var node = new TreeViewItem() { Header = native.Name };
                 root.Items.Add(node);
-                node.Tag = new NodeData(delegate { RenderDebugNative(nat); }, null);
+                node.Tag = new NodeData(delegate()
+                {
+                    renderDebugNative(native);
+                }, null);
             }
         }
 
         private void treeview__SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var node = treeview_.SelectedItem;
-            var data = (NodeData) (node as TreeViewItem)?.Tag;
-            data?.Callback?.Invoke();
+            if (node is TreeViewItem)
+            {
+                if (((TreeViewItem)node).Tag == null)
+                {
+                    return;
+                }
+                var data = (NodeData)((TreeViewItem)node).Tag;
+                if (data.callback == null)
+                {
+                    return;
+                }
+                data.callback();
+            }
+            return;
         }
+
+        public delegate void DrawNodeFn();
 
         public class NodeData
         {
-            public DrawNodeFn Callback;
-            public object Data;
+            public DrawNodeFn callback;
+            public object data;
 
             public NodeData(DrawNodeFn aCallback, object aData)
             {
-                Callback = aCallback;
-                Data = aData;
+                callback = aCallback;
+                data = aData;
             }
         }
     }
