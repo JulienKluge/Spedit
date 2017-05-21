@@ -60,7 +60,8 @@ CreateDirectory "$INSTDIR\sourcepawn\scripts"
 CreateDirectory "$INSTDIR\sourcepawn\temp"
 CreateDirectory "$INSTDIR\sourcepawn\templates"
 CreateDirectory "$INSTDIR\sourcepawn\configs"
-CreateDirectory "$INSTDIR\sourcepawn\configs\sm_one_seven"
+CreateDirectory "$INSTDIR\sourcepawn\configs\sm_1_8_5995_smlib_0_11"
+CreateDirectory "$INSTDIR\sourcepawn\configs\sm_1_8_5995"
 CreateDirectory "$INSTDIR\sourcepawn\configs\sm_one_six"
 
 File /r ".\sourcepawn"
@@ -126,6 +127,7 @@ Delete $INSTDIR\smxdasm.dll
 Delete $INSTDIR\LysisForSpedit.dll
 Delete $INSTDIR\QueryMaster.dll
 Delete $INSTDIR\Ionic.BZip2.dll
+Delete $INSTDIR\lang_0_spedit.xml
 Delete $INSTDIR\GPLv3.txt
 Delete $INSTDIR\*.dat
 RMDir /r $INSTDIR\sourcepawn
