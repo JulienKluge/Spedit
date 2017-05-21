@@ -390,6 +390,7 @@ namespace Spedit.UI.Components
                 {
                     MessageBox.Show(Program.MainWindow, Program.Translations.DSaveError + Environment.NewLine + "(" + e.Message + ")", Program.Translations.SaveError,
 						MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
                 NeedsSave = false;
                 if (fileWatcher != null)
