@@ -149,6 +149,14 @@ namespace Spedit.UI
 			{
 				dir = Environment.CurrentDirectory;
 			}
+            try
+            {
+                Directory.GetAccessControl(dir);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return;
+            }
 			CurrentObjectBrowserDirectory = dir;
 			Program.OptionsObject.Program_ObjectBrowserDirectory = CurrentObjectBrowserDirectory;
 
@@ -210,6 +218,14 @@ namespace Spedit.UI
 				{
 					continue;
 				}
+                try
+                {
+                    dInfo.GetAccessControl();
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    continue;
+                }
 				var tvi = new TreeViewItem()
 				{
 					Header = BuildTreeViewItemContent(dInfo.Name, "iconmonstr-folder-13-16.png"),
