@@ -94,6 +94,14 @@ namespace Spedit.UI
                 if (extension == "sp" || extension == "inc" || extension == "txt" || extension == "cfg" || extension == "ini")
                 {
                     string finalPath = fileInfo.FullName;
+                    try
+                    {
+                        File.GetAccessControl(finalPath);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        return false;
+                    }
                     EditorElement[] editors = GetAllEditorElements();
                     if (editors != null)
                     {
