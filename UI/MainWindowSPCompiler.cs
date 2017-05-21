@@ -201,7 +201,7 @@ namespace Spedit.UI
             }
             else
             {
-                await this.ShowMessageAsync(Program.Translations.SPCompNotFound, Program.Translations.Error, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
+                await this.ShowMessageAsync(Program.Translations.Error, Program.Translations.SPCompNotFound, MessageDialogStyle.Affirmative, this.MetroDialogOptions);
             }
             InCompiling = false;
         }
