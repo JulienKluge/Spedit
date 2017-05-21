@@ -238,7 +238,7 @@ namespace Spedit.UI
                             editors[index].editor.Select(m.Index + addToOffset, result.Length);
                             var location = editors[index].editor.Document.GetLocation(m.Index + addToOffset);
                             editors[index].editor.ScrollTo(location.Line, location.Column);
-                            FindResultBlock.Text = $"{Program.Translations.ReplacedOff} {MinHeight + addToOffset}";
+                            FindResultBlock.Text = string.Format(Program.Translations.ReplacedOff, MinHeight + addToOffset);
                             break;
                         }
                     }

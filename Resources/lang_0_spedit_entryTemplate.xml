@@ -20,7 +20,7 @@
 	<editconfig>Edit Configurations</editconfig>
 	<foundinoff>Found in offset {0} with length {1}</foundinoff>
 	<foundnothing>Found Nothing</foundnothing>
-	<replacedoff>Replaced in offset</replacedoff>
+	<replacedoff>Replaced in offset {0}</replacedoff>
 	<replacedocc>Replaced {0} occurences in {1} documents</replacedocc>
 	<occfound>occurences found</occfound>
 	<emptypatt>Empty search pattern</emptypatt>

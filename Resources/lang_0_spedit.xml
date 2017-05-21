@@ -21,7 +21,7 @@
 		<editconfig>Konfigurationen bearbeiten</editconfig>
 		<foundinoff>Gefunden mit Offset {0} und Länge {1}</foundinoff>
 		<foundnothing>Nichts gefunden</foundnothing>
-		<replacedoff>Ersetzt am Offset</replacedoff>
+		<replacedoff>Ersetzt am Offset {0}</replacedoff>
 		<replacedocc>{0} Vorkommen ersetzt in {1} Dokumenten</replacedocc>
 		<occfound>Vorkommen gefunden</occfound>
 		<emptypatt>Leerer Suchausdruck</emptypatt>
@@ -212,7 +212,7 @@
 		<editconfig>Modifier la configuration</editconfig>
 		<foundinoff>Trouvé dans l'offset {0} avec un longueur de {1}</foundinoff>
 		<foundnothing>Rien trouvé</foundnothing>
-		<replacedoff>Remplacer dans l'offset</replacedoff>
+		<replacedoff>Remplacer dans l'offset {0}</replacedoff>
 		<replacedocc>{0} occurences remplacées dans {1} documents</replacedocc>
 		<occfound>occurences trouvée</occfound>
 		<emptypatt>Terme de recherche vide</emptypatt>
@@ -403,7 +403,7 @@
 		<editconfig>컴파일 설정 편집</editconfig>
 		<foundinoff>{0}위치에서 발견 (길이: {1})</foundinoff>
 		<foundnothing>찾을 수 없음</foundnothing>
-		<replacedoff>바꾸기 실행 위치:</replacedoff>
+		<replacedoff>바꾸기 실행 위치: {0}</replacedoff>
 		<replacedocc>{1}개 문서에서 바꾸기 {0}번 실행됨</replacedocc>
 		<occfound>개의 일치 항목 발견</occfound>
 		<emptypatt>검색할 내용을 입력해주세요.</emptypatt>
@@ -594,7 +594,7 @@
 		<editconfig>Redigera konfigurationer</editconfig>
 		<foundinoff>Hittad i {0} med längden {1}</foundinoff>
 		<foundnothing>Hittade inget</foundnothing>
-		<replacedoff>Bytte ut motvikt</replacedoff>
+		<replacedoff>Bytte ut motvikt {0}</replacedoff>
 		<replacedocc>Bytte {0} förekomster i {1} dokument</replacedocc>
 		<occfound>Förekomster hittade</occfound>
 		<emptypatt>Tomt sök mönster</emptypatt>
@@ -785,7 +785,7 @@
 		<editconfig>Редактировать конфиги</editconfig>
 		<foundinoff>Найдено в смещении {0} размером {1}</foundinoff>
 		<foundnothing>Ничего не найдено</foundnothing>
-		<replacedoff>Заменено в смещении</replacedoff>
+		<replacedoff>Заменено в смещении {0}</replacedoff>
 		<replacedocc>Произведено {0} замен в документе {1}</replacedocc>
 		<occfound>совпадений найдено</occfound>
 		<emptypatt>Поисковый шаблон пуст</emptypatt>
@@ -976,7 +976,7 @@
 		<editconfig>Editar configurações</editconfig>
 		<foundinoff>Encontrado no offset {0} com comprimento {1}</foundinoff>
 		<foundnothing>Nada encontrado</foundnothing>
-		<replacedoff>Substituído em offset</replacedoff>
+		<replacedoff>Substituído em offset {0}</replacedoff>
 		<replacedocc>Substituiu {0} ocorrências em {1} documentos</replacedocc>
 		<occfound>Ocorrências encontradas</occfound>
 		<emptypatt>Padrão de pesquisa vazio</emptypatt>
@@ -1167,7 +1167,7 @@
 		<editconfig>Edytuj Konfiguracje</editconfig>
 		<foundinoff>Znaleziono w marginesie {0} o długości {1}</foundinoff>
 		<foundnothing>Nie znaleziono</foundnothing>
-		<replacedoff>Zamieniono w marginesie</replacedoff>
+		<replacedoff>Zamieniono w marginesie {0}</replacedoff>
 		<replacedocc>Zamieniono {0} wystąpień w {1} dokumentach</replacedocc>
 		<occfound>znalezionych wystąpień</occfound>
 		<emptypatt>Pusty wzór wyszukiwania</emptypatt>
@@ -1358,7 +1358,7 @@
 		<editconfig>Düzen Yapılandırma</editconfig>
 		<foundinoff>Ofset ve uzunluğu {0} ile bulunan {1}</foundinoff>
 		<foundnothing>Hiçbir şey bulunamadı</foundnothing>
-		<replacedoff>Ofset değiştirir</replacedoff>
+		<replacedoff>Ofset değiştirir {0}</replacedoff>
 		<replacedocc>{0} olaylar {1} belgelerde yerini değiştir</replacedocc>
 		<occfound>Olaylar bulundu</occfound>
 		<emptypatt>Boş arama terimi</emptypatt>

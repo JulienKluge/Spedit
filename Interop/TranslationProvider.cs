@@ -606,7 +606,7 @@ namespace Spedit.Interop
 			EditConfig = "Edit Configurations";
 			FoundInOff = "Found in offset {0} with length {1}";
 			FoundNothing = "Found nothing";
-			ReplacedOff = "Replaced in offset";
+			ReplacedOff = "Replaced in offset {0}";
 			ReplacedOcc = "Replaced {0} occurences in {1} documents";
 			OccFound = "occurences found";
 			EmptyPatt = "Empty search pattern";
