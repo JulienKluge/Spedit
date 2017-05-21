@@ -1,49 +1,51 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using Spedit.UI.Components;
+using Spedit.Utils;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Collections.ObjectModel;
 
 namespace Spedit.UI
 {
-	public partial class MainWindow
+	public partial class MainWindow : MetroWindow
 	{
-		private string _currentObjectBrowserDirectory = string.Empty;
-
+		private string CurrentObjectBrowserDirectory = string.Empty;
 		private void TreeViewOBItem_Expanded(object sender, RoutedEventArgs e)
 		{
-			var source = e.Source;
-
-		    if (!(source is TreeViewItem))
-                return;
-
-		    var item = (TreeViewItem)source;
-            var itemInfo = (ObjectBrowserTag)item.Tag;
-
-		    if (itemInfo.Kind != ObjectBrowserItemKind.Directory)
-                return;
-
-		    if (!Directory.Exists(itemInfo.Value))
-		        return;
-
-		    using (Dispatcher.DisableProcessing())
-		    {
-		        item.Items.Clear();
-		        var newItems = BuildDirectoryItems(itemInfo.Value);
-
-		        foreach (var i in newItems)
-		        {
-		            item.Items.Add(i);
-		        }
-		    }
+			object source = e.Source;
+			if (source is TreeViewItem)
+			{
+				TreeViewItem item = (TreeViewItem)source;
+				ObjectBrowserTag itemInfo = (ObjectBrowserTag)item.Tag;
+				if (itemInfo.Kind == ObjectBrowserItemKind.Directory)
+				{
+					if (!Directory.Exists(itemInfo.Value))
+					{
+						return;
+					}
+					using (var dd = Dispatcher.DisableProcessing())
+					{
+						item.Items.Clear();
+						List<TreeViewItem> newItems = BuildDirectoryItems(itemInfo.Value);
+						foreach (var i in newItems)
+						{
+							item.Items.Add(i);
+						}
+					}
+				}
+			}
 		}
 
 		private void TreeViewOBItemParentDir_DoubleClicked(object sender, RoutedEventArgs e)
 		{
-			var currentInfo = new DirectoryInfo(_currentObjectBrowserDirectory);
-            var parentInfo = currentInfo.Parent;
-
+			DirectoryInfo currentInfo = new DirectoryInfo(CurrentObjectBrowserDirectory);
+			DirectoryInfo parentInfo = currentInfo.Parent;
 			if (parentInfo != null)
 			{
 				if (parentInfo.Exists)
@@ -52,95 +54,80 @@ namespace Spedit.UI
 					return;
 				}
 			}
-
 			ChangeObjectBrowserToDrives();
 		}
 
 		private void TreeViewOBItemFile_DoubleClicked(object sender, RoutedEventArgs e)
 		{
-		    if (!(sender is TreeViewItem))
-                return;
-
-		    var item = (TreeViewItem)sender;
-            var itemInfo = (ObjectBrowserTag)item.Tag;
-
-		    if (itemInfo.Kind == ObjectBrowserItemKind.File)
-		        TryLoadSourceFile(itemInfo.Value, true, false, true);
+			if (sender is TreeViewItem)
+			{
+				TreeViewItem item = (TreeViewItem)sender;
+				ObjectBrowserTag itemInfo = (ObjectBrowserTag)item.Tag;
+				if (itemInfo.Kind == ObjectBrowserItemKind.File)
+				{
+					TryLoadSourceFile(itemInfo.Value, true, false, true);
+				}
+			}
 		}
 
 		private void ListViewOBItem_SelectFile(object sender, RoutedEventArgs e)
 		{
-		    if (!(sender is ListViewItem))
-                return;
-
-		    var element = GetCurrentEditorElement();
-
-		    if (element != null)
-		    {
-		        var fInfo = new FileInfo(element.FullFilePath);
-		        ChangeObjectBrowserToDirectory(fInfo.DirectoryName);
-		    }
-
-		    ((ListViewItem)sender).IsSelected = false;
-		    ObjectBrowserButtonHolder.SelectedIndex = -1;
+			if (sender is ListViewItem)
+			{
+				EditorElement ee = GetCurrentEditorElement();
+				if (ee != null)
+				{
+					FileInfo fInfo = new FileInfo(ee.FullFilePath);
+					ChangeObjectBrowserToDirectory(fInfo.DirectoryName);
+				}
+				((ListViewItem)sender).IsSelected = false;
+				ObjectBrowserButtonHolder.SelectedIndex = -1;
+			}
 		}
-
 		private void ListViewOBItem_SelectConfig(object sender, RoutedEventArgs e)
 		{
-		    if (!(sender is ListViewItem))
-                return;
-
-		    var cc = Program.Configs[Program.SelectedConfig];
-
-		    if (cc.SMDirectories.Length > 0)
-		        ChangeObjectBrowserToDirectory(cc.SMDirectories[0]);
-
-		    ((ListViewItem)sender).IsSelected = false;
-		    ObjectBrowserButtonHolder.SelectedIndex = -1;
+			if (sender is ListViewItem)
+			{
+				var cc = Program.Configs[Program.SelectedConfig];
+				if (cc.SMDirectories.Length > 0)
+				{
+					ChangeObjectBrowserToDirectory(cc.SMDirectories[0]);
+				}
+				((ListViewItem)sender).IsSelected = false;
+				ObjectBrowserButtonHolder.SelectedIndex = -1;
+			}
 		}
-
 		private void ListViewOBItem_SelectOBItem(object sender, RoutedEventArgs e)
 		{
-		    if (!(sender is ListViewItem))
-                return;
-
-		    var objectBrowserSelectedItem = ObjectBrowser.SelectedItem;
-		    var viewItem = objectBrowserSelectedItem as TreeViewItem;
-
-		    if (viewItem != null)
-		    {
-		        var item = viewItem;
-                var itemInfo = (ObjectBrowserTag)item.Tag;
-
-		        switch (itemInfo.Kind)
-		        {
-		            case ObjectBrowserItemKind.Directory:
-		                ChangeObjectBrowserToDirectory(itemInfo.Value);
-		                break;
-		            case ObjectBrowserItemKind.ParentDirectory:
-                        var currentInfo = new DirectoryInfo(_currentObjectBrowserDirectory);
-		                var parentInfo = currentInfo.Parent;
-		                if (parentInfo != null)
-		                {
-		                    if (parentInfo.Exists)
-		                    {
-		                        ChangeObjectBrowserToDirectory(parentInfo.FullName);
-		                        return;
-		                    }
-		                }
-		                ChangeObjectBrowserToDrives();
-		                break;
-		            case ObjectBrowserItemKind.File:
-                        // ignored
-                        break;
-		            default:
-                        // ignored
-		                break;
-		        }
-		    }
-
-		    ((ListViewItem)sender).IsSelected = false;
-		    ObjectBrowserButtonHolder.SelectedIndex = -1;
+			if (sender is ListViewItem)
+			{
+				object objectBrowserSelectedItem = ObjectBrowser.SelectedItem;
+				if (objectBrowserSelectedItem is TreeViewItem)
+				{
+					TreeViewItem item = (TreeViewItem)objectBrowserSelectedItem;
+					ObjectBrowserTag itemInfo = (ObjectBrowserTag)item.Tag;
+					if (itemInfo.Kind == ObjectBrowserItemKind.Directory)
+					{
+						ChangeObjectBrowserToDirectory(itemInfo.Value);
+					}
+					else if (itemInfo.Kind == ObjectBrowserItemKind.ParentDirectory)
+					{
+						DirectoryInfo currentInfo = new DirectoryInfo(CurrentObjectBrowserDirectory);
+						DirectoryInfo parentInfo = currentInfo.Parent;
+						if (parentInfo != null)
+						{
+							if (parentInfo.Exists)
+							{
+								ChangeObjectBrowserToDirectory(parentInfo.FullName);
+								return;
+							}
+						}
+						ChangeObjectBrowserToDrives();
+					}
+				}
+				((ListViewItem)sender).IsSelected = false;
+				ObjectBrowserButtonHolder.SelectedIndex = -1;
+			}
 		}
 
 		private void ChangeObjectBrowserToDirectory(string dir)
@@ -148,9 +135,10 @@ namespace Spedit.UI
 			if (string.IsNullOrWhiteSpace(dir))
 			{
 				var cc = Program.Configs[Program.SelectedConfig];
-
 				if (cc.SMDirectories.Length > 0)
+				{
 					dir = cc.SMDirectories[0];
+				}
 			}
 			else if (dir == "0:")
 			{
@@ -158,136 +146,125 @@ namespace Spedit.UI
 				return;
 			}
 			if (!Directory.Exists(dir))
-				dir = Environment.CurrentDirectory;
-
-			_currentObjectBrowserDirectory = dir;
-			Program.OptionsObject.ProgramObjectBrowserDirectory = _currentObjectBrowserDirectory;
-
-			using (Dispatcher.DisableProcessing())
 			{
-			    ObjectBrowserDirBlock.Text = dir;
-			    ObjectBrowser.Items.Clear();
+				dir = Environment.CurrentDirectory;
+			}
+			CurrentObjectBrowserDirectory = dir;
+			Program.OptionsObject.Program_ObjectBrowserDirectory = CurrentObjectBrowserDirectory;
 
-			    var parentDirItem = new TreeViewItem() {
-			        Header = "..",
-			        Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.ParentDirectory }
-			    };
-
-			    parentDirItem.MouseDoubleClick += TreeViewOBItemParentDir_DoubleClicked;
-			    ObjectBrowser.Items.Add(parentDirItem);
-			    var newItems = BuildDirectoryItems(dir);
-
-			    foreach (var item in newItems)
-			        ObjectBrowser.Items.Add(item);
+			using (var dd = Dispatcher.DisableProcessing())
+			{
+				ObjectBrowserDirBlock.Text = dir;
+				ObjectBrowser.Items.Clear();
+				TreeViewItem parentDirItem = new TreeViewItem() {
+					Header = "..",
+					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.ParentDirectory }
+				};
+				parentDirItem.MouseDoubleClick += TreeViewOBItemParentDir_DoubleClicked;
+				ObjectBrowser.Items.Add(parentDirItem);
+				List<TreeViewItem> newItems = BuildDirectoryItems(dir);
+				foreach (var item in newItems)
+				{
+					ObjectBrowser.Items.Add(item);
+				}
 			}
 		}
 
 		private void ChangeObjectBrowserToDrives()
 		{
-			Program.OptionsObject.ProgramObjectBrowserDirectory = "0:";
-			var drives = DriveInfo.GetDrives();
-
-			using (Dispatcher.DisableProcessing())
+			Program.OptionsObject.Program_ObjectBrowserDirectory = "0:";
+			DriveInfo[] drives = DriveInfo.GetDrives();
+			using (var dd = Dispatcher.DisableProcessing())
 			{
-			    ObjectBrowserDirBlock.Text = string.Empty;
-			    ObjectBrowser.Items.Clear();
-			    foreach (var dInfo in drives)
-			    {
-			        if (!dInfo.IsReady || (dInfo.DriveType != DriveType.Fixed && dInfo.DriveType != DriveType.Removable))
-			            continue;
-
-			        var tvi = new TreeViewItem()
-			        {
-			            Header = BuildTreeViewItemContent(dInfo.Name, "iconmonstr-folder-13-16.png"),
-			            Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.Directory, Value = dInfo.RootDirectory.FullName }
-			        };
-
-			        tvi.Items.Add("...");
-			        ObjectBrowser.Items.Add(tvi);
-			    }
+				ObjectBrowserDirBlock.Text = string.Empty;
+				ObjectBrowser.Items.Clear();
+				foreach (var dInfo in drives)
+				{
+					if (dInfo.IsReady && (dInfo.DriveType == DriveType.Fixed || dInfo.DriveType == DriveType.Removable))
+					{
+						if (dInfo.RootDirectory != null)
+						{
+							var tvi = new TreeViewItem()
+							{
+								Header = BuildTreeViewItemContent(dInfo.Name, "iconmonstr-folder-13-16.png"),
+								Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.Directory, Value = dInfo.RootDirectory.FullName }
+							};
+							tvi.Items.Add("...");
+							ObjectBrowser.Items.Add(tvi);
+						}
+					}
+				}
 			}
 		}
 
-		private IEnumerable<TreeViewItem> BuildDirectoryItems(string dir)
+		private List<TreeViewItem> BuildDirectoryItems(string dir)
 		{
-			var itemList = new List<TreeViewItem>();
-			var spFiles = Directory.GetFiles(dir, "*.sp", SearchOption.TopDirectoryOnly);
-            var incFiles = Directory.GetFiles(dir, "*.inc", SearchOption.TopDirectoryOnly);
-            var directories = Directory.GetDirectories(dir, "*", SearchOption.TopDirectoryOnly);
-
-			foreach (var str in directories)
+			List<TreeViewItem> itemList = new List<TreeViewItem>();
+			string[] spFiles = Directory.GetFiles(dir, "*.sp", SearchOption.TopDirectoryOnly);
+			string[] incFiles = Directory.GetFiles(dir, "*.inc", SearchOption.TopDirectoryOnly);
+			string[] directories = Directory.GetDirectories(dir, "*", SearchOption.TopDirectoryOnly);
+			foreach (string d in directories)
 			{
-				var dInfo = new DirectoryInfo(str);
-
+				DirectoryInfo dInfo = new DirectoryInfo(d);
 				if (!dInfo.Exists)
+				{
 					continue;
-
+				}
 				var tvi = new TreeViewItem()
 				{
 					Header = BuildTreeViewItemContent(dInfo.Name, "iconmonstr-folder-13-16.png"),
 					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.Directory, Value = dInfo.FullName }
 				};
-
 				tvi.Items.Add("...");
 				itemList.Add(tvi);
 			}
-
-			foreach (var fileName in spFiles)
+			foreach (string f in spFiles)
 			{
-				var fileInfo = new FileInfo(fileName);
-
-				if (!fileInfo.Exists)
+				FileInfo fInfo = new FileInfo(f);
+				if (!fInfo.Exists)
+				{
 					continue;
-
+				}
 				var tvi = new TreeViewItem()
 				{
-					Header = BuildTreeViewItemContent(fileInfo.Name, "iconmonstr-file-5-16.png"),
-					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.File, Value = fileInfo.FullName }
+					Header = BuildTreeViewItemContent(fInfo.Name, "iconmonstr-file-5-16.png"),
+					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.File, Value = fInfo.FullName }
 				};
-
 				tvi.MouseDoubleClick += TreeViewOBItemFile_DoubleClicked;
 				itemList.Add(tvi);
 			}
-
-			foreach (var fileName in incFiles)
+			foreach (string f in incFiles)
 			{
-				var fileInfo = new FileInfo(fileName);
-
-				if (!fileInfo.Exists)
+				FileInfo fInfo = new FileInfo(f);
+				if (!fInfo.Exists)
+				{
 					continue;
-
+				}
 				var tvi = new TreeViewItem()
 				{
-					Header = BuildTreeViewItemContent(fileInfo.Name, "iconmonstr-file-8-16.png"),
-					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.File, Value = fileInfo.FullName }
+					Header = BuildTreeViewItemContent(fInfo.Name, "iconmonstr-file-8-16.png"),
+					Tag = new ObjectBrowserTag() { Kind = ObjectBrowserItemKind.File, Value = fInfo.FullName }
 				};
-
 				tvi.MouseDoubleClick += TreeViewOBItemFile_DoubleClicked;
 				itemList.Add(tvi);
 			}
-
 			return itemList;
 		}
 
-		private static object BuildTreeViewItemContent(string headerString, string iconFile)
+		private object BuildTreeViewItemContent(string headerString, string iconFile)
 		{
-		    var stack = new StackPanel {Orientation = Orientation.Horizontal};
-		    var image = new Image();
+			StackPanel stack = new StackPanel();
+			stack.Orientation = Orientation.Horizontal;
+			Image image = new Image();
 			string uriPath = $"/Spedit;component/Resources/{iconFile}";
-
 			image.Source = new BitmapImage(new Uri(uriPath, UriKind.Relative));
 			image.Width = 16;
 			image.Height = 16;
-
-		    var textBlock = new TextBlock
-		    {
-		        Text = headerString,
-		        Margin = new Thickness(2.0, 0.0, 0.0, 0.0)
-		    };
-
-		    stack.Children.Add(image);
-			stack.Children.Add(textBlock);
-
+			TextBlock lbl = new TextBlock();
+			lbl.Text = headerString;
+			lbl.Margin = new Thickness(2.0, 0.0, 0.0, 0.0);
+			stack.Children.Add(image);
+			stack.Children.Add(lbl);
 			return stack;
 		}
 

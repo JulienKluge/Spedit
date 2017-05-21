@@ -7,8 +7,8 @@ namespace Spedit.Interop
 {
     public class PipeInteropServer : IDisposable
     {
-        private NamedPipeServerStream _pipeServer;
-        private readonly MainWindow _window;
+        NamedPipeServerStream pipeServer;
+        MainWindow _window;
 
         public PipeInteropServer(MainWindow window)
         {
@@ -22,54 +22,50 @@ namespace Spedit.Interop
 
         public void Close()
         {
-            _pipeServer.Close();
+            pipeServer.Close();
         }
 
 		public void Dispose()
 		{
-			_pipeServer.Close();
+			pipeServer.Close();
 		}
 
         private void StartInteropServer()
         {
-            if (_pipeServer != null)
+            if (pipeServer != null)
             {
-                _pipeServer.Close();
-                _pipeServer = null;
+                pipeServer.Close();
+                pipeServer = null;
             }
-
-            _pipeServer = new NamedPipeServerStream("SpeditNamedPipeServer", PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            _pipeServer.BeginWaitForConnection(PipeConnection_MessageIn, null);
+            pipeServer = new NamedPipeServerStream("SpeditNamedPipeServer", PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+            pipeServer.BeginWaitForConnection(new AsyncCallback(PipeConnection_MessageIn), null);
         }
 
         private void PipeConnection_MessageIn(IAsyncResult iar)
         {
-            _pipeServer.EndWaitForConnection(iar);
-            var byteBuffer = new byte[4];
-            _pipeServer.Read(byteBuffer, 0, sizeof(int));
-            var length = BitConverter.ToInt32(byteBuffer, 0);
+            pipeServer.EndWaitForConnection(iar);
+            byte[] byteBuffer = new byte[4];
+            pipeServer.Read(byteBuffer, 0, sizeof(Int32));
+            int length = BitConverter.ToInt32(byteBuffer, 0);
             byteBuffer = new byte[length];
-            _pipeServer.Read(byteBuffer, 0, length);
-            var data = Encoding.UTF8.GetString(byteBuffer);
-            var files = data.Split('|');
-            var selectIt = true;
-
-            foreach (var filePath in files)
+            pipeServer.Read(byteBuffer, 0, length);
+            string data = Encoding.UTF8.GetString(byteBuffer);
+            string[] files = data.Split('|');
+			bool SelectIt = true;
+            for (int i = 0; i < files.Length; ++i)
             {
                 _window.Dispatcher.Invoke(() =>
                 {
-                    if (!_window.IsLoaded)
-                        return;
-
-                    if (!_window.TryLoadSourceFile(filePath, selectIt) ||
-                        _window.WindowState != System.Windows.WindowState.Minimized)
-                        return;
-
-                    _window.WindowState = System.Windows.WindowState.Normal;
-                    selectIt = false;
+                    if (_window.IsLoaded)
+                    {
+                        if (_window.TryLoadSourceFile(files[i], SelectIt) && _window.WindowState == System.Windows.WindowState.Minimized)
+                        {
+                            _window.WindowState = System.Windows.WindowState.Normal;
+							SelectIt = false;
+						}
+                    }
                 });
             }
-
             StartInteropServer();
         }
     }

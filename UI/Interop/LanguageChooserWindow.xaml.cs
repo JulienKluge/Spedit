@@ -1,47 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using MahApps.Metro.Controls;
+using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+using MahApps.Metro;
 
 namespace Spedit.UI.Interop
 {
 	/// <summary>
 	/// Interaction logic for LanguageChooserWindow.xaml
 	/// </summary>
-	public partial class LanguageChooserWindow
+	public partial class LanguageChooserWindow : MetroWindow
 	{
-		public string SelectedId = string.Empty;
-
+		public string SelectedID = string.Empty;
 		public LanguageChooserWindow()
 		{
 			InitializeComponent();
 		}
 
-		public LanguageChooserWindow(IReadOnlyList<string> ids, IReadOnlyList<string> languages)
+		public LanguageChooserWindow(string[] ids, string[] languages)
 		{
 			InitializeComponent();
-
-			for (var i = 0; i < ids.Count; ++i)
+			for (int i = 0; i < ids.Length; ++i)
+			{
 				LanguageBox.Items.Add(new ComboBoxItem() { Content = languages[i], Tag = ids[i] });
-
-			if (ids.Count > 0)
+			}
+			if (ids.Length > 0)
+			{
 				LanguageBox.SelectedIndex = 0;
+			}
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			var selectedObj = LanguageBox.SelectedItem;
-
+			object selectedObj = LanguageBox.SelectedItem;
 			if (selectedObj == null)
-				return;
-
-		    var item = selectedObj as ComboBoxItem;
-
-		    if (item != null)
 			{
-				var selectedItem = item;
-				SelectedId = (string)selectedItem.Tag;
+				return;
 			}
-
+			if (selectedObj is ComboBoxItem)
+			{
+				ComboBoxItem selectedItem = (ComboBoxItem)selectedObj;
+				SelectedID = (string)selectedItem.Tag;
+			}
 			Close();
 		}
 	}

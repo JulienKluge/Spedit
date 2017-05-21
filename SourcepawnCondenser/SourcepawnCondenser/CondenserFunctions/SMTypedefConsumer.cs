@@ -1,4 +1,9 @@
-﻿using SourcepawnCondenser.SourcemodDefinition;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SourcepawnCondenser.SourcemodDefinition;
 using SourcepawnCondenser.Tokenizer;
 
 namespace SourcepawnCondenser
@@ -7,80 +12,71 @@ namespace SourcepawnCondenser
 	{
 		private int ConsumeSMTypedef()
 		{
-			var startIndex = _t[_position].Index;
-
-		    if ((_position + 2) >= _length)
-                return -1;
-
-		    ++_position;
-
-		    if (_t[_position].Kind != TokenKind.Identifier)
-                return -1;
-
-		    var name = _t[_position].Value;
-
-		    for (var iteratePosition = _position + 1; iteratePosition < _length; ++iteratePosition)
-		    {
-		        if (_t[iteratePosition].Kind != TokenKind.Semicolon)
-                    continue;
-
-		        _def.Typedefs.Add(new SMTypedef
-		        {
-		            Index = startIndex,
-		            Length = _t[iteratePosition].Index - startIndex + 1,
-		            File = _fileName,
-		            Name = name,
-		            FullName = _source.Substring(startIndex, _t[iteratePosition].Index - startIndex + 1)
-		        });
-
-		        return iteratePosition;
-		    }
-
-		    return -1;
+			int startIndex = t[position].Index;
+			if ((position + 2) < length)
+			{
+				++position;
+				string name = string.Empty;
+				if (t[position].Kind == TokenKind.Identifier)
+				{
+					name = t[position].Value;
+					for (int iteratePosition = position + 1; iteratePosition < length; ++iteratePosition)
+					{
+						if (t[iteratePosition].Kind == TokenKind.Semicolon)
+						{
+							def.Typedefs.Add(new SMTypedef()
+							{
+								Index = startIndex,
+								Length = t[iteratePosition].Index - startIndex + 1,
+								File = FileName,
+								Name = name,
+								FullName = source.Substring(startIndex, t[iteratePosition].Index - startIndex + 1)
+							});
+							return iteratePosition;
+						}
+					}
+				}
+			}
+			return -1;
 		}
 
-	    private int ConsumeSMTypeset()
-	    {
-	        var startIndex = _t[_position].Index;
-
-	        if (_position + 2 >= _length)
-	            return -1;
-
-	        ++_position;
-
-	        if (_t[_position].Kind != TokenKind.Identifier)
-	            return -1;
-
-	        var name = _t[_position].Value;
-	        var bracketIndex = 0;
-
-	        for (var iteratePosition = _position + 1; iteratePosition < _length; ++iteratePosition)
-	            switch (_t[iteratePosition].Kind)
-	            {
-	                case TokenKind.BraceClose:
-	                    --bracketIndex;
-	                    if (bracketIndex == 0)
-	                    {
-	                        _def.Typedefs.Add(new SMTypedef
-	                        {
-	                            Index = startIndex,
-	                            Length = _t[iteratePosition].Index - startIndex + 1,
-	                            File = _fileName,
-	                            Name = name,
-	                            FullName = _source.Substring(startIndex, _t[iteratePosition].Index - startIndex + 1)
-	                        });
-
-	                        return iteratePosition;
-	                    }
-	                    break;
-	                case TokenKind.BraceOpen:
-	                    ++bracketIndex;
-	                    break;
-	                default:
-	                    // ignored
-	                    break;
-	            }
-	        return -1;
-	    }
+		private int ConsumeSMTypeset()
+		{
+			int startIndex = t[position].Index;
+			if ((position + 2) < length)
+			{
+				++position;
+				string name = string.Empty;
+				if (t[position].Kind == TokenKind.Identifier)
+				{
+					name = t[position].Value;
+					int bracketIndex = 0;
+					for (int iteratePosition = position + 1; iteratePosition < length; ++iteratePosition)
+					{
+						if (t[iteratePosition].Kind == TokenKind.BraceClose)
+						{
+							--bracketIndex;
+							if (bracketIndex == 0)
+							{
+								def.Typedefs.Add(new SMTypedef()
+								{
+									Index = startIndex,
+									Length = t[iteratePosition].Index - startIndex + 1,
+									File = FileName,
+									Name = name,
+									FullName = source.Substring(startIndex, t[iteratePosition].Index - startIndex + 1)
+								});
+								return iteratePosition;
+							}
+						}
+						else if (t[iteratePosition].Kind == TokenKind.BraceOpen)
+						{
+							++bracketIndex;
+						}
+					}
+				}
+			}
+			return -1;
+		}
 	}
 }

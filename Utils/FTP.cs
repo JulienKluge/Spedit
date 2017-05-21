@@ -6,56 +6,54 @@ namespace Spedit.Utils
 {
     public class FTP
     {
-        private readonly string _host;
-        private readonly string _user;
-        private readonly string _pass;
-        private FtpWebRequest _ftpRequest;
-        private Stream _ftpStream;
-        private const int BufferSize = 2048;
+        private string host = null;
+        private string user = null;
+        private string pass = null;
+        private FtpWebRequest ftpRequest = null;
+        private Stream ftpStream = null;
+        private int bufferSize = 2048;
 
-        public FTP(string hostIP, string userName, string password)
-        {
-            _host = hostIP;
-            _user = userName;
-            _pass = password;
-        }
+        public FTP(string hostIP, string userName, string password) { host = hostIP; user = userName; pass = password; }
 
         //thanks to: http://www.codeproject.com/Tips/443588/Simple-Csharp-FTP-Class
-        public void Upload(string remoteFile, string localFile)
+        public void upload(string remoteFile, string localFile)
         {
-            var requestUri = new StringBuilder(_host);
-
-            if (_host[_host.Length - 1] == '/')
-                requestUri.Append(remoteFile[0] == '/' ? remoteFile.Substring(1) : remoteFile);
-            else
-            {
-                if (remoteFile[0] == '/')
-                    requestUri.Append(remoteFile);
-                else
-                {
-                    requestUri.Append("/");
-                    requestUri.Append(remoteFile);
-                }
-            }
-
-            _ftpRequest = (FtpWebRequest) WebRequest.Create(requestUri.ToString());
-            _ftpRequest.Credentials = new NetworkCredential(_user, _pass);
-            _ftpRequest.UseBinary = true;
-            _ftpRequest.UsePassive = true;
-            _ftpRequest.KeepAlive = true;
-            _ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
-            _ftpStream = _ftpRequest.GetRequestStream();
-            var localFileStream = new FileStream(localFile, FileMode.Open);
-            var byteBuffer = new byte[BufferSize];
-            var bytesSent = localFileStream.Read(byteBuffer, 0, BufferSize);
+			StringBuilder requestUri = new StringBuilder(host);
+			if (host[host.Length - 1] == '/')
+			{
+				if (remoteFile[0] == '/')
+				{ requestUri.Append(remoteFile.Substring(1)); }
+				else
+				{ requestUri.Append(remoteFile); }
+			}
+			else
+			{
+				if (remoteFile[0] == '/')
+				{ requestUri.Append(remoteFile); }
+				else
+				{
+					requestUri.Append("/");
+					requestUri.Append(remoteFile);
+				}
+			}
+            ftpRequest = (FtpWebRequest)FtpWebRequest.Create(requestUri.ToString());
+            ftpRequest.Credentials = new NetworkCredential(user, pass);
+            ftpRequest.UseBinary = true;
+            ftpRequest.UsePassive = true;
+            ftpRequest.KeepAlive = true;
+            ftpRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            ftpStream = ftpRequest.GetRequestStream();
+            FileStream localFileStream = new FileStream(localFile, FileMode.Open);
+            byte[] byteBuffer = new byte[bufferSize];
+            int bytesSent = localFileStream.Read(byteBuffer, 0, bufferSize);
             while (bytesSent != 0)
             {
-                _ftpStream.Write(byteBuffer, 0, bytesSent);
-                bytesSent = localFileStream.Read(byteBuffer, 0, BufferSize);
+                ftpStream.Write(byteBuffer, 0, bytesSent);
+                bytesSent = localFileStream.Read(byteBuffer, 0, bufferSize);
             }
             localFileStream.Close();
-            _ftpStream.Close();
-            _ftpRequest = null;
+            ftpStream.Close();
+            ftpRequest = null;
         }
-    }
+    } 
 }

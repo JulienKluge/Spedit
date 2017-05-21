@@ -8,148 +8,120 @@ namespace Spedit.Utils
 {
     public static class ManagedAES
     {
-        private static byte[] _salt;
-
+		private static byte[] Salt = null;
         public static string Encrypt(string plainText)
         {
             if (plainText.Length < 1)
+            {
                 return string.Empty;
-
+            }
             try
             {
-                var symmetricKey = new RijndaelManaged() {Mode = CipherMode.CBC, Padding = PaddingMode.Zeros};
-                var encryptor = symmetricKey.CreateEncryptor(SaltKey(Program.OptionsObject.ProgramCryptoKey),
-                    Encoding.ASCII.GetBytes("SPEdit.Utils.AES")); //so cool that this matches :D
+                var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.Zeros };
+                var encryptor = symmetricKey.CreateEncryptor(SaltKey(Program.OptionsObject.Program_CryptoKey), Encoding.ASCII.GetBytes("SPEdit.Utils.AES")); //so cool that this matches :D
                 byte[] cipherTextBytes;
-
                 using (var memoryStream = new MemoryStream())
                 {
                     using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
                     {
-                        var buffer = Encoding.UTF8.GetBytes(plainText);
+                        byte[] buffer = Encoding.UTF8.GetBytes(plainText);
                         cryptoStream.Write(buffer, 0, buffer.Length);
                         cryptoStream.FlushFinalBlock();
                         cipherTextBytes = memoryStream.ToArray();
                     }
                 }
-
                 return Convert.ToBase64String(cipherTextBytes);
             }
-            catch (Exception)
-            {
-                // ignored
-            }
-
+            catch (Exception) { }
             return string.Empty;
         }
 
         public static string Decrypt(string encryptedText)
         {
             if (encryptedText.Length < 1)
+            {
                 return string.Empty;
-
+            }
             try
-            {
-                var cipherTextBytes = Convert.FromBase64String(encryptedText);
-                var symmetricKey = new RijndaelManaged() {Mode = CipherMode.CBC, Padding = PaddingMode.None};
-                var decryptor = symmetricKey.CreateDecryptor(SaltKey(Program.OptionsObject.ProgramCryptoKey),
-                    Encoding.ASCII.GetBytes("SPEdit.Utils.AES"));
-                string outString;
-
-                using (var memoryStream = new MemoryStream(cipherTextBytes))
-                {
-                    using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
-                    {
-                        var plainTextBytes = new byte[cipherTextBytes.Length];
-                        var decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
-                        outString =
-                            Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd('\0');
-                    }
-                }
-
-                return outString;
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-
+			{
+				byte[] cipherTextBytes = Convert.FromBase64String(encryptedText);
+                var symmetricKey = new RijndaelManaged() { Mode = CipherMode.CBC, Padding = PaddingMode.None };
+                var decryptor = symmetricKey.CreateDecryptor(SaltKey(Program.OptionsObject.Program_CryptoKey), Encoding.ASCII.GetBytes("SPEdit.Utils.AES"));
+				string outString = string.Empty;
+				using (var memoryStream = new MemoryStream(cipherTextBytes))
+				{
+					using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+					{
+						byte[] plainTextBytes = new byte[cipherTextBytes.Length];
+						int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+						outString = Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount).TrimEnd(new char[] { '\0' });
+					}
+				}
+				return outString;
+			}
+            catch (Exception) { }
             return string.Empty;
         }
 
-        private static byte[] SaltKey(byte[] key)
-        {
-            if (_salt == null)
-                CreateSalt();
+		private static byte[] SaltKey(byte[] key)
+		{
+			if (Salt == null)
+			{
+				CreateSalt();
+			}
+			if (!Program.OptionsObject.Program_UseHardwareSalts)
+				return key;
+			byte[] buffer = new byte[16];
+			for (int i = 0; i < 16; ++i)
+			{
+				if (i < Salt.Length)
+					buffer[i] = (byte)((uint)key[i] ^ (uint)Salt[i]);
+				else
+					buffer[i] = key[i];
+			}
+			return buffer;
+		}
 
-            if (!Program.OptionsObject.ProgramUseHardwareSalts)
-                return key;
+		private static void CreateSalt()
+		{
+			byte[] buffer;
+			using (MD5 md5Provider = new MD5CryptoServiceProvider())
+			{
+				string inString = $"SPEditSalt {cpuId()}{diskId()}{Environment.ProcessorCount.ToString()}{(Environment.Is64BitOperatingSystem ? "T" : "F")}";
+				UTF8Encoding encoder = new UTF8Encoding();
+				buffer = md5Provider.ComputeHash(encoder.GetBytes(inString));
+			}
+			Salt = buffer;
+		}
 
-            var buffer = new byte[16];
-
-            for (var i = 0; i < 16; ++i)
-                if (_salt != null && i < _salt.Length)
-                    buffer[i] = (byte) ((uint) key[i] ^ _salt[i]);
-                else
-                    buffer[i] = key[i];
-
-            return buffer;
-        }
-
-        private static void CreateSalt()
-        {
-            byte[] buffer;
-            using (MD5 md5Provider = new MD5CryptoServiceProvider())
-            {
-                string inString =
-                    $"SPEditSalt {CpuId()}{DiskId()}{Environment.ProcessorCount}{(Environment.Is64BitOperatingSystem ? "T" : "F")}";
-                var encoder = new UTF8Encoding();
-                buffer = md5Provider.ComputeHash(encoder.GetBytes(inString));
-            }
-            _salt = buffer;
-        }
-
-        //thanks to: http://jai-on-asp.blogspot.de/2010/03/finding-hardware-id-of-computer.html
-        private static string CpuId()
-        {
-            var id = string.Empty;
-
-            try
-            {
-                var mbs = new ManagementObjectSearcher("Select ProcessorId From Win32_processor");
-                var mbsList = mbs.Get();
-
-                foreach (var o in mbsList)
-                {
-                    var mo = (ManagementObject) o;
-                    id = mo["ProcessorId"].ToString();
-                    break;
-                }
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-
-            return id;
-        }
-
-        private static string DiskId()
-        {
-            var id = string.Empty;
-
-            try
-            {
-                var dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
-                dsk.Get();
-                id = dsk["VolumeSerialNumber"].ToString();
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-
-            return id;
-        }
-    }
+		//thanks to: http://jai-on-asp.blogspot.de/2010/03/finding-hardware-id-of-computer.html
+		private static string cpuId()
+		{
+			string id = string.Empty;
+			try
+			{
+				var mbs = new ManagementObjectSearcher("Select ProcessorId From Win32_processor");
+				ManagementObjectCollection mbsList = mbs.Get();
+				foreach (ManagementObject mo in mbsList)
+				{
+					id = mo["ProcessorId"].ToString();
+					break;
+				}
+			}
+			catch (Exception) { }
+			return id;
+		}
+		private static string diskId()
+		{
+			string id = string.Empty;
+			try
+			{
+				ManagementObject dsk = new ManagementObject(@"win32_logicaldisk.deviceid=""c:""");
+				dsk.Get();
+				id = dsk["VolumeSerialNumber"].ToString();
+			}
+			catch (Exception) { }
+			return id;
+		}
+	}
 }

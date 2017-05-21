@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -8,16 +9,19 @@ namespace Spedit.Interop.Updater
 {
     public static class UpdateCheck
     {
-        public static void Check(bool asynchronous)
+        public static void Check(bool Asynchronous)
         {
             if (Program.UpdateStatus != null)
-                if (Program.UpdateStatus.IsAvailable)
-                    return;
-
-            if (asynchronous)
             {
-                var thread = new Thread(CheckInternal);
-                thread.Start();
+                if (Program.UpdateStatus.IsAvailable)
+                {
+                    return;
+                }
+            }
+            if (Asynchronous)
+            {
+                Thread t = new Thread(new ThreadStart(CheckInternal));
+                t.Start();
             }
             else
             {
@@ -27,46 +31,42 @@ namespace Spedit.Interop.Updater
 
         private static void CheckInternal()
         {
-            var info = new UpdateInfo();
-
+            UpdateInfo info = new UpdateInfo();
             try
             {
-                using (var client = new WebClient())
+                using (WebClient client = new WebClient())
                 {
 #if DEBUG
                     client.Credentials = new NetworkCredential("sm", "sm_pw"); //heuheu :D 
-                    var versionString = client.DownloadString("ftp://127.0.0.1/version_0.txt");
+                    string versionString = client.DownloadString("ftp://127.0.0.1/version_0.txt");
 #else
                     string versionString = client.DownloadString("https://updater.spedit.info/version_0.txt");
 #endif
-                    var versionLines = versionString.Split('\n');
-                    var version = versionLines[0].Trim().Trim('\r');
-
+                    string[] versionLines = versionString.Split('\n');
+                    string version = (versionLines[0].Trim()).Trim('\r');
                     if (version != Program.ProgramInternalVersion)
                     {
-                        var destinationFileName = "updater_" + version + ".exe";
-                        var destinationFile = Path.Combine(Environment.CurrentDirectory, destinationFileName);
-
+                        string destinationFileName = "updater_" + version + ".exe";
+                        string destinationFile = Path.Combine(Environment.CurrentDirectory, destinationFileName);
                         info.IsAvailable = true;
-                        info.UpdaterFile = destinationFile;
-                        info.UpdaterFileName = destinationFileName;
+                        info.Updater_File = destinationFile;
+                        info.Updater_FileName = destinationFileName;
 #if DEBUG
-                        info.UpdaterDownloadUrl = "ftp://127.0.0.1/" + destinationFileName;
+                        info.Updater_DownloadURL = "ftp://127.0.0.1/" + destinationFileName;
 #else
                         info.Updater_DownloadURL = "https://updater.spedit.info/" + destinationFileName;
 #endif
-                        info.UpdateVersion = version;
-                        var updateInfoString = new StringBuilder();
-
+                        info.Update_Version = version;
+                        StringBuilder updateInfoString = new StringBuilder();
                         if (versionLines.Length > 1)
                         {
-                            info.UpdateStringVersion = versionLines[1];
-
-                            for (var i = 1; i < versionLines.Length; ++i)
-                                updateInfoString.AppendLine(versionLines[i].Trim().Trim('\r'));
+                            info.Update_StringVersion = versionLines[1];
+                            for (int i = 1; i < versionLines.Length; ++i)
+                            {
+                                updateInfoString.AppendLine((versionLines[i].Trim()).Trim('\r'));
+                            }
                         }
-
-                        info.Info = updateInfoString.ToString();
+                        info.Update_Info = updateInfoString.ToString();
                     }
                     else
                     {
@@ -80,11 +80,12 @@ namespace Spedit.Interop.Updater
                 info.GotException = true;
                 info.ExceptionMessage = e.Message;
             }
-
             lock (Program.UpdateStatus) //since multiple checks can occur, we'll wont override another ones...
             {
                 if (Program.UpdateStatus.WriteAble)
+                {
                     Program.UpdateStatus = info;
+                }
             }
         }
     }

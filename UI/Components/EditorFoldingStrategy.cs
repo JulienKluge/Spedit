@@ -11,14 +11,14 @@ namespace Spedit.UI.Components
 
         public SPFoldingStrategy()
 		{
-			OpeningBrace = '{';
-			ClosingBrace = '}';
+			this.OpeningBrace = '{';
+			this.ClosingBrace = '}';
 		}
 
         public void UpdateFoldings(FoldingManager manager, TextDocument document)
         {
             int firstErrorOffset;
-            var newFoldings = CreateNewFoldings(document, out firstErrorOffset);
+            IEnumerable<NewFolding> newFoldings = CreateNewFoldings(document, out firstErrorOffset);
             manager.UpdateFoldings(newFoldings, firstErrorOffset);
         }
 
@@ -30,60 +30,86 @@ namespace Spedit.UI.Components
 
         public IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
         {
-            var newFoldings = new List<NewFolding>();
+            List<NewFolding> newFoldings = new List<NewFolding>();
 
-            var startOffsets = new Stack<int>();
-            var lastNewLineOffset = 0;
-            var inCommentMode = false;
-
-            for (var i = 0; i < document.TextLength; ++i)
+            Stack<int> startOffsets = new Stack<int>();
+            int lastNewLineOffset = 0;
+            bool InCommentMode = false;
+            for (int i = 0; i < document.TextLength; ++i)
             {
-                var c = document.GetCharAt(i);
-
+                char c = document.GetCharAt(i);
                 if (c == '\n' || c == '\r')
+                {
                     lastNewLineOffset = i + 1;
-
-                else if (inCommentMode)
-                {
-                    if (c != '/')
-                        continue;
-
-                    if (i <= 0)
-                        continue;
-
-                    if (document.GetCharAt(i - 1) != '*')
-                        continue;
-
-                    var startOffset = startOffsets.Pop();
-                    inCommentMode = false;
-
-                    if (startOffset < lastNewLineOffset)
-                        newFoldings.Add(new NewFolding(startOffset, i + 1));
                 }
-                else switch (c)
+                else if (InCommentMode)
                 {
-                    case '/':
-                        if ((i + 1) < document.TextLength)
-                            if (document.GetCharAt(i + 1) == '*')
-                            {
-                                inCommentMode = true;
-                                startOffsets.Push(i);
-                            }
-                        break;
-                    case '{':
-                        startOffsets.Push(i);
-                        break;
-                    default:
-                        if (c == '}' && startOffsets.Count > 0)
+                    if (c == '/')
+                    {
+                        if (i > 0)
                         {
-                            var startOffset = startOffsets.Pop();
-
-                            if (startOffset < lastNewLineOffset)
-                                newFoldings.Add(new NewFolding(startOffset, i + 1));
+                            if (document.GetCharAt(i - 1) == '*')
+                            {
+                                int startOffset = startOffsets.Pop();
+                                InCommentMode = false;
+                                if (startOffset < lastNewLineOffset)
+                                {
+                                    newFoldings.Add(new NewFolding(startOffset, i + 1));
+                                }
+                            }
                         }
-                        break;
+                    }
+                }
+                else if (c == '/')
+                {
+                    if ((i + 1) < document.TextLength)
+                    {
+                        if (document.GetCharAt(i + 1) == '*')
+                        {
+                            InCommentMode = true;
+                            startOffsets.Push(i);
+                        }
+                    }
+                }
+                else if (c == '{')
+                {
+                    startOffsets.Push(i);
+                }
+                else if (c == '}' && startOffsets.Count > 0)
+                {
+                    int startOffset = startOffsets.Pop();
+                    if (startOffset < lastNewLineOffset)
+                    {
+                        newFoldings.Add(new NewFolding(startOffset, i + 1));
+                    }
                 }
             }
+
+            /*Stack<int> startOffsets = new Stack<int>();
+            int lastNewLineOffset = 0;
+            char openingBrace = this.OpeningBrace;
+            char closingBrace = this.ClosingBrace;
+            for (int i = 0; i < document.TextLength; i++)
+            {
+                char c = document.GetCharAt(i);
+                if (c == openingBrace)
+                {
+                    startOffsets.Push(i);
+                }
+                else if (c == closingBrace && startOffsets.Count > 0)
+                {
+                    int startOffset = startOffsets.Pop();
+                    // don't fold if opening and closing brace are on the same line
+                    if (startOffset < lastNewLineOffset)
+                    {
+                        newFoldings.Add(new NewFolding(startOffset, i + 1));
+                    }
+                }
+                else if (c == '\n' || c == '\r')
+                {
+                    lastNewLineOffset = i + 1;
+                }
+            }*/
 
             newFoldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             return newFoldings;
