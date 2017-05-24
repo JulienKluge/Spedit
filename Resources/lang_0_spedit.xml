@@ -1741,8 +1741,202 @@
 		<highdeprecat>高亮过时语法 (即版本低于 1.7)</highdeprecat>
 		<compile>编译</compile>
 		<autosavemin>自动保存(分钟)</autosavemin>
-    <obtextfile>File Dir.</obtextfile>
-    <obtextconfig>Config Dir.</obtextconfig>
-    <obtextitem>Item Dir.</obtextitem>
+		<obtextfile>文件目录</obtextfile>
+		<obtextconfig>配置档目录</obtextconfig>
+		<obtextitem>物件目录</obtextitem>
 	</zhCN>
+	<zhTW>
+			<language>繁體中文</language>
+			<serverrunning>伺服器運行中</serverrunning>
+			<saving>保存中</saving>
+			<saveufiles>是否保存所有文件?</saveufiles>
+			<compileall>全部編譯</compileall>
+			<compilecurr>編譯當前文件</compilecurr>
+			<copy>複製</copy>
+			<ftpup>FTP 上傳</ftpup>
+			<startserver>啟動伺服器</startserver>
+			<replace>替換</replace>
+			<replaceall>全部替換</replaceall>
+			<opennewfile>打開文件</opennewfile>
+			<nofilopened>未能打開文件</nofilopened>
+			<nofileopenedcap>未能打開任何已選擇的文件。</nofileopenedcap>
+			<savefileas>文件另存為</savefileas>
+			<savefollow>保存以下文件</savefollow>
+			<chdecomp>選擇需要反編譯的插件</chdecomp>
+			<decompiling>反編譯中</decompiling>
+			<editconfig>編輯編譯配置</editconfig>
+			<foundinoff>位於 {0} 位置長度 {1} 的匹配項已找到</foundinoff>
+			<foundnothing>未找到匹配文本</foundnothing>
+			<replacedoff>已替換匹配項於位置 {0}</replacedoff>
+			<replacedocc>已替換 {1} 個文檔中的 {0} 個位置</replacedocc>
+			<occfound>個位置已找到</occfound>
+			<emptypatt>查詢表達式為空</emptypatt>
+			<novalidregex>無效的正則表達式</novalidregex>
+			<failedcheck>檢查版本更新失敗</failedcheck>
+			<errorupdate>在檢查程式更新時發生錯誤</errorupdate>
+			<versuptodate>最新版本</versuptodate>
+			<versionyour>應用程式已是最新版本({0})</versionyour>
+			<details>說明</details>
+			<compiling>正在編譯</compiling>
+			<error>發生錯誤</error>
+			<spcompnotstarted>spcomp.exe 編譯器未能正常啟動。</spcompnotstarted>
+			<spcompnotfound>未找到 spcomp.exe 編譯器。</spcompnotfound>
+			<copied>已複製</copied>
+			<deleted>已刪除</deleted>
+			<failcopy>複製失敗</failcopy>
+			<nofilescopy>未複製任何文件</nofilescopy>
+			<uploaded>已上傳</uploaded>
+			<erroruploadfile>將文件 {0} 上傳到 {1} 時出錯。</erroruploadfile>
+			<errorupload>上傳文件時發生錯誤</errorupload>
+			<done>操作完成</done>
+			<file>文件</file>
+			<new>新建</new>
+			<open>打開</open>
+			<save>保存</save>
+			<saveall>全部保存</saveall>
+			<saveas>另存為</saveas>
+			<close>關閉</close>
+			<closeall>關閉所有</closeall>
+			<build>生成</build>
+			<copyplugin>複製插件</copyplugin>
+			<sendrcon>發送 RCon 命令</sendrcon>
+			<config>配置</config>
+			<edit>編輯</edit>
+			<undo>撤銷</undo>
+			<redo>重做</redo>
+			<cut>剪切</cut>
+			<paste>貼上</paste>
+			<folding>折疊選項</folding>
+			<expandall>全部展開</expandall>
+			<collapseall>全部折疊</collapseall>
+			<jumpto>跳轉到</jumpto>
+			<togglcomment>切換注釋</togglcomment>
+			<selectall>全選</selectall>
+			<findreplace>查找和替換</findreplace>
+			<tools>工具</tools>
+			<options>選項</options>
+			<parsedincdir>從引用目錄中轉換</parsedincdir>
+			<oldapiweb>API幫助查詢網站(舊版)</oldapiweb>
+			<newapiweb>API幫助查詢網站(新版)</newapiweb>
+			<reformatter>語法格式器</reformatter>
+			<reformatcurr>設置選定內容的格式</reformatcurr>
+			<reformatall>設置文檔格式</reformatall>
+			<decompile>反編譯</decompile>
+			<reportbuggit>在GitHub上回報程式漏洞</reportbuggit>
+			<checkupdates>檢查更新</checkupdates>
+			<about>關於</about>
+			<filename>文件</filename>
+			<line>行數</line>
+			<type>類型</type>
+			<normalsearch>普通模式</normalsearch>
+			<matchwhowords>整字匹配</matchwhowords>
+			<advancsearch>進階模式</advancsearch>
+			<regexsearch>正則表達式</regexsearch>
+			<currdoc>當前文檔</currdoc>
+			<alldoc>所有已打開文檔</alldoc>
+			<find>查找</find>
+			<count>計數</count>
+			<casesen>區分大小寫</casesen>
+			<multilineregex>多行匹配(正則)</multilineregex>
+			<errorfileloadproc>加載處理文件時出錯。</errorfileloadproc>
+			<notdissmethod>無法分析反編譯代碼 {0}: {1}</notdissmethod>
+			<dfilechanged>{0} 個位置已替換.</dfilechanged>
+			<filechanged>文件已更改</filechanged>
+			<filetryreload>嘗試重新載入文件?</filetryreload>
+			<dsaveerror>保存時出現錯誤。</dsaveerror>
+			<saveerror>保存失敗</saveerror>
+			<savingfile>文件保存中</savingfile>
+			<ptabb>pt</ptabb>
+			<colabb>列</colabb>
+			<lnabb>行</lnabb>
+			<lenabb>已選擇</lenabb>
+			<speditcap>一個為 SourcePawn 而生的輕量級編輯器</speditcap>
+			<writtenby>程式作者: {0}</writtenby>
+			<license>許可協議</license>
+			<peopleinv>程式協力</peopleinv>
+			<preview>預覽</preview>
+			<newfile>新建文件</newfile>
+			<configwrongpars>當前編譯配置的引用目錄無法轉換為 SourcePawn 的定義實現。</configwrongpars>
+			<noname>未命名</noname>
+			<poslen>位置: {0} - 長度: {1}</poslen>
+			<inheritedfr>繼承自</inheritedfr>
+			<methodfrom>方法來源:</methodfrom>
+			<propertyfrom>屬性來源:</propertyfrom>
+			<search>搜索</search>
+			<delete>刪除</delete>
+			<name>配置名稱</name>
+			<scriptdir>引用目錄</scriptdir>
+			<delimitedwi>分隔符</delimitedwi>
+			<copydir>目標複製目錄</copydir>
+			<serverexe>伺服器執行檔</serverexe>
+			<serverstartargs>伺服器啟動項</serverstartargs>
+			<prebuildcom>預生成命令行</prebuildcom>
+			<postbuildcom>後生成命令行</postbuildcom>
+			<optimizelvl>優化等級</optimizelvl>
+			<verboselvl>細節等級</verboselvl>
+			<autocopy>編譯後複製到目標目錄</autocopy>
+			<deleteoldsmx>刪除已複製到目標目錄的 .smx 文件</deleteoldsmx>
+			<ftphost>FTP 主機</ftphost>
+			<ftpuser>FTP 用戶</ftpuser>
+			<ftppw>FTP 密碼</ftppw>
+			<ftpdir>FTP 目錄</ftpdir>
+			<comeditordir>SPEdit 的程式根目錄</comeditordir>
+			<comscriptdir>腳本的編譯目錄</comscriptdir>
+			<comcopydir>.smx 文件的目標複製目錄</comcopydir>
+			<comscriptfile>腳本文件所在的完整路徑</comscriptfile>
+			<comscriptname>腳本文件的名稱</comscriptname>
+			<compluginfile>腳本編譯後所在的完整路徑</compluginfile>
+			<compluginname>腳本編譯後的文件名稱</compluginname>
+			<rconengine>RCon 伺服器引擎</rconengine>
+			<rconip>RCon 伺服器地址</rconip>
+			<rconport>RCon 伺服器端口</rconport>
+			<rconpw>RCon 伺服器密碼</rconpw>
+			<rconcom>RCon 伺服器命令</rconcom>
+			<compluginsreload>重新載入所有已編譯的插件</compluginsreload>
+			<compluginsloas>載入所有已編譯的插件</compluginsloas>
+			<compluginsunload>卸載所有已編譯的插件</compluginsunload>
+			<newconfig>新建編譯配置</newconfig>
+			<cannotdelconf>無法刪除編譯配置</cannotdelconf>
+			<ycannotdelconf>你無法刪除此編譯配置</ycannotdelconf>
+			<selectexe>選擇啟動程式</selectexe>
+			<cmdlinecom>命令行內置變量</cmdlinecom>
+			<rconcmdlinecom>RCon 內置變量</rconcmdlinecom>
+			<resetoptions>恢復默認設置</resetoptions>
+			<resetoptques>你確定要將當前設置恢復到默認狀態嗎?</resetoptques>
+			<restarteditor>重新啟動</restarteditor>
+			<yrestarteditor>改動必須重啟後才能生效。</yrestarteditor>
+			<restartedifulleff>重啟以獲得最佳效果</restartedifulleff>
+			<restartedieff>設置重啟後生效</restartedieff>
+			<program>程式</program>
+			<hardwareacc>使用硬件加速(如果可用)</hardwareacc>
+			<uianim>UI 動畫特效</uianim>
+			<openinc>自動打開引用</openinc>
+			<openincrec>打開引用實現</openincrec>
+			<autoupdate>自動檢測更新</autoupdate>
+			<showtoolbar>顯示工具欄</showtoolbar>
+			<dynamicisac>動態自動補全/智能提示</dynamicisac>
+			<darktheme>深色主題</darktheme>
+			<themecolor>主題配色</themecolor>
+			<languagestr>界面語言</languagestr>
+			<editor>編輯器</editor>
+			<fontsize>字體大小</fontsize>
+			<scrollspeed>滾動速度</scrollspeed>
+			<wordwrap>自動換行</wordwrap>
+			<aggindentation>換行自增縮進</aggindentation>
+			<reformataftersem>輸入 ; 時自動設置當前行格式</reformataftersem>
+			<tabstospace>使用空格替換制表符</tabstospace>
+			<autoclosebrack>自動閉合括號</autoclosebrack>
+			<autoclosestrchr>自動閉合字符串及字符</autoclosestrchr>
+			<showsapaces>顯示空格</showsapaces>
+			<showtabs>顯示制表符</showtabs>
+			<indentationsize>縮進長度</indentationsize>
+			<fontfamily>字體</fontfamily>
+			<syntaxhigh>語法高亮</syntaxhigh>
+			<highdeprecat>高亮舊語法 (低於 1.7 版)</highdeprecat>
+			<compile>編譯</compile>
+			<autosavemin>自動保存 (分鐘)</autosavemin>
+			<obtextfile>文件目錄</obtextfile>
+			<obtextconfig>配置檔目錄</obtextconfig>
+			<obtextitem>物件目錄</obtextitem>
+	</zhTW>
 </translations>
