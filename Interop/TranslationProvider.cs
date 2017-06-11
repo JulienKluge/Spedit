@@ -757,7 +757,7 @@ namespace Spedit.Interop
 			HardwareAcc = "Use hardware acceleration (if available)";
 			UIAnim = "UI animations";
 			OpenInc = "Auto open includes";
-			OpenIncRec = "Open Includes Recursivly";
+			OpenIncRec = "Open Includes Recursively";
 			AutoUpdate = "Search automatically for updates";
 			ShowToolbar = "Show toolbar";
 			DynamicISAC = "Dynamic Autocompletition/Intellisense";

@@ -34,7 +34,14 @@ namespace Spedit.UI.Components
                     }
                     if (lastLineLastNonWhitespaceChar == '{' && currentLineFirstNonWhitespaceChar != '}')
                     {
-                        indentation += "\t";
+                        if (Program.OptionsObject.Editor_ReplaceTabsToWhitespace)
+                        {
+                            indentation += new string(' ', Program.OptionsObject.Editor_IndentationSize);
+                        }
+                        else
+                        {
+                            indentation += "\t";
+                        }
                     }
                     else if (currentLineFirstNonWhitespaceChar == '}')
                     {
