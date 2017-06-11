@@ -61,7 +61,7 @@ namespace Spedit.UI.Windows
             Program.OptionsObject.Program_OpenCustomIncludes = OpenIncludes.IsChecked.Value;
             OpenIncludesRecursive.IsEnabled = OpenIncludes.IsChecked.Value;
         }
-        private void OpenIncludeRecursivly_Changed(object sender, RoutedEventArgs e)
+        private void OpenIncludeRecursively_Changed(object sender, RoutedEventArgs e)
         {
             if (!AllowChanging) { return; }
             Program.OptionsObject.Program_OpenIncludesRecursively = OpenIncludesRecursive.IsChecked.Value;
