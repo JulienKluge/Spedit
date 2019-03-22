@@ -191,4 +191,5 @@
   <obtextfile>File Dir.</obtextfile>
   <obtextconfig>Config Dir.</obtextconfig>
   <obtextitem>Item Dir.</obtextitem>
+  <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 </en>

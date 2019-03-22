@@ -192,6 +192,7 @@
     <obtextfile>Datei Pfad</obtextfile>
     <obtextconfig>Konfig. Pfad</obtextconfig>
     <obtextitem>Listenpunkt Pfad</obtextitem>
+    <errorfileerror>Die compile-Fehlerdatei konnte nicht gelesen werden.</errorfileerror>
 	</de>
 	<fr>
 		<language>Français</language>
@@ -386,6 +387,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</fr>
 	<ko>
 		<language>한국어</language>
@@ -580,6 +582,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</ko>
 	<sv>
 		<language>Svenska</language>
@@ -774,6 +777,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</sv>
 <ru>
 		<language>Русский</language>
@@ -968,6 +972,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</ru>
 	<pt>
 		<language>Português</language>
@@ -1162,6 +1167,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</pt>
 	<pl>
 		<language>Polski</language>
@@ -1356,6 +1362,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</pl>
 	<tr>
 		<language>Türkçe</language>
@@ -1550,6 +1557,7 @@
     <obtextfile>File Dir.</obtextfile>
     <obtextconfig>Config Dir.</obtextconfig>
     <obtextitem>Item Dir.</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</tr>
 	<zhCN>
 		<language>简体中文</language>
@@ -1744,6 +1752,7 @@
 		<obtextfile>文件目录</obtextfile>
 		<obtextconfig>配置档目录</obtextconfig>
 		<obtextitem>物件目录</obtextitem>
+    <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</zhCN>
 	<zhTW>
 			<language>繁體中文</language>
@@ -1938,5 +1947,6 @@
 			<obtextfile>文件目錄</obtextfile>
 			<obtextconfig>配置檔目錄</obtextconfig>
 			<obtextitem>物件目錄</obtextitem>
+      <errorfileerror>Compile error file could not be accessed.</errorfileerror>
 	</zhTW>
 </translations>

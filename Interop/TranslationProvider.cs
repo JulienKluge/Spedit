@@ -142,8 +142,9 @@ namespace Spedit.Interop
 		public string Compile;
 		public string AutoSaveMin;
         public string OBTextFile, OBTextConfig, OBTextItem;
+        public string CompileErroFileError;
 
-		public void LoadLanguage(string lang, bool Initial = false)
+        public void LoadLanguage(string lang, bool Initial = false)
 		{
 			FillToEnglishDefaults();
 			List<string> languageList = new List<string>();
@@ -573,6 +574,8 @@ namespace Spedit.Interop
                                 OBTextConfig = nv;
                             else if (nn == "obtextitem")
                                 OBTextItem = nv;
+                            else if (nn == "errorfileerror")
+                                CompileErroFileError = nv;
                             else
                                 throw new Exception($"{nn} is not a known language-phrase");
 						}
@@ -784,6 +787,7 @@ namespace Spedit.Interop
             OBTextFile = "File Dir.";
             OBTextConfig = "Config Dir.";
             OBTextItem = "Item Dir.";
+            CompileErroFileError = "Compile error file could not be accessed.";
         }
 	}
 }

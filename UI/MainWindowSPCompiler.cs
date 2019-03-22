@@ -163,7 +163,14 @@ namespace Spedit.UI
                                             details = mc[j].Groups["details"].Value.Trim()
                                         });
                                     }
-                                    File.Delete(errorFile);
+                                    try
+                                    {
+                                        File.Delete(errorFile);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        stringOutput.AppendLine(Program.Translations.CompileErroFileError);
+                                    }
                                 }
                                 stringOutput.AppendLine(Program.Translations.Done);
                                 if (File.Exists(outFile))
