@@ -133,7 +133,7 @@
 		<ftphost>FTP Host</ftphost>
 		<ftpuser>FTP Benutzer</ftpuser>
 		<ftppw>FTP Passwort</ftppw>
-		<ftpdir>FTP Pfad</ftpdir>
+		<ftpdir>FTP Hochladepfad</ftpdir>
 		<comeditordir>Pfad zur SPEdit-Binary</comeditordir>
 		<comscriptdir>Pfad zum kompilierenden Script</comscriptdir>
 		<comcopydir>Kopierpfad für die smx</comcopydir>

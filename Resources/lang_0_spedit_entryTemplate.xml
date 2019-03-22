@@ -132,7 +132,7 @@
 	<ftphost>FTP host</ftphost>
 	<ftpuser>FTP user</ftpuser>
 	<ftppw>FTP password</ftppw>
-	<ftpdir>FTP directory</ftpdir>
+	<ftpdir>FTP upload-directory</ftpdir>
 	<comeditordir>Directory of the SPEdit binary</comeditordir>
 	<comscriptdir>Directory of the Compiling script</comscriptdir>
 	<comcopydir>Directory where the smx should be copied</comcopydir>

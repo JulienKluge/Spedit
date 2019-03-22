@@ -728,7 +728,7 @@ namespace Spedit.Interop
 			FTPHost = "FTP host";
 			FTPUser = "FTP user";
 			FTPPw = "FTP password";
-			FTPDir = "FTP directory";
+			FTPDir = "FTP upload-directory";
 			ComEditorDir = "Directory of the SPEdit binary";
 			ComScriptDir = "Directory of the Compiling script";
 			ComCopyDir = "Directory where the smx should be copied";
