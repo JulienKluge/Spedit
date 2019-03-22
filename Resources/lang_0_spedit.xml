@@ -4,20 +4,20 @@
 		<serverrunning>Server läuft</serverrunning>
 		<saving>Speichern</saving>
 		<saveufiles>Ungespeicherte Dateien speichern?</saveufiles>
-		<compileall>Alles kompillieren</compileall>
-		<compilecurr>Kompillieren</compilecurr>
+		<compileall>Alles kompilieren</compileall>
+		<compilecurr>Kompilieren</compilecurr>
 		<copy>Kopieren</copy>
 		<ftpup>Auf FTP hochladen</ftpup>
 		<startserver>Server starten</startserver>
 		<replace>Ersetzen</replace>
 		<replaceall>Alles ersetzen</replaceall>
-		<opennewfile>Neue datei öffnen</opennewfile>
-		<nofilopened>Keine dateien geöffnet</nofilopened>
+		<opennewfile>Neue Datei öffnen</opennewfile>
+		<nofilopened>Keine Dateien geöffnet</nofilopened>
 		<nofileopenedcap>Keine der selektierten Dateien konnte geöffnet werden.</nofileopenedcap>
 		<savefileas>Speichern unter</savefileas>
-		<savefollow>Folgende dateien speichern</savefollow>
-		<chdecomp>Selektiere eine Datei zum dekompillieren</chdecomp>
-		<decompiling>Dekompillieren</decompiling>
+		<savefollow>Folgende Dateien speichern</savefollow>
+		<chdecomp>Selektiere eine Datei zum dekompilieren</chdecomp>
+		<decompiling>Dekompilieren</decompiling>
 		<editconfig>Konfigurationen bearbeiten</editconfig>
 		<foundinoff>Gefunden mit Offset {0} und Länge {1}</foundinoff>
 		<foundnothing>Nichts gefunden</foundnothing>
@@ -31,21 +31,21 @@
 		<versuptodate>Aktuelle Version</versuptodate>
 		<versionyour>Die Programversion {0} ist aktuell.</versionyour>
 		<details>Details</details>
-		<compiling>Kompillieren</compiling>
+		<compiling>Kompilieren</compiling>
 		<error>Fehler</error>
 		<spcompnotstarted>Der spcomp.exe Compiler konnte nicht richtig gestartet werden.</spcompnotstarted>
 		<spcompnotfound>Der spcomp.exe Compiler konnte nicht gefunden werden.</spcompnotfound>
 		<copied>Kopiert</copied>
 		<deleted>Gelöscht</deleted>
-		<failcopy>Fehlgeschlagene Kopierung</failcopy>
+		<failcopy>Fehlgeschlagen beim Kopieren</failcopy>
 		<nofilescopy>Keine Dateien kopiert</nofilescopy>
 		<uploaded>Hochgeladen</uploaded>
 		<erroruploadfile>Fehler beim Hochladen von: {0} zu {1}</erroruploadfile>
 		<errorupload>Fehler beim Hochladen von Dateien</errorupload>
-		<done>fertig</done>
+		<done>Fertig</done>
 		<file>Datei</file>
 		<new>Neu</new>
-		<open>Öfnen</open>
+		<open>Öffnen</open>
 		<save>Speichern</save>
 		<saveall>Alle speichern</saveall>
 		<saveas>Speichern unter</saveas>
@@ -92,13 +92,13 @@
 		<count>Zählen</count>
 		<casesen>Groß/Kleinschreibung</casesen>
 		<multilineregex>Mehrzeilen Regex</multilineregex>
-		<errorfileloadproc>Fehler beim Laden unf verarbeiten der Datei.</errorfileloadproc>
+		<errorfileloadproc>Fehler beim Laden und Verarbeiten der Datei.</errorfileloadproc>
 		<notdissmethod>Die Methode {0} konnte nicht disassembled werden: {1}</notdissmethod>
 		<dfilechanged>{0} hat sich geändert.</dfilechanged>
 		<filechanged>Datei geändert</filechanged>
 		<filetryreload>Soll die Datei neu geladen werden?</filetryreload>
-		<dsaveerror>Es ist ein Fehler beim speichern aufgetreten.</dsaveerror>
-		<saveerror>Speicherfehlerr</saveerror>
+		<dsaveerror>Es ist ein Fehler beim Speichern aufgetreten.</dsaveerror>
+		<saveerror>Speicherfehler</saveerror>
 		<savingfile>Speichere Datei</savingfile>
 		<ptabb>pt</ptabb>
 		<colabb>Sp</colabb>
@@ -106,7 +106,7 @@
 		<lenabb>Lng</lenabb>
 		<speditcap>ein leichtgewichtiger Sourcepawn Editor</speditcap>
 		<writtenby>geschrieben von: {0}</writtenby>
-		<license>Lizens:</license>
+		<license>Lizenz:</license>
 		<peopleinv>Menschen involviert:</peopleinv>
 		<preview>Vorschau</preview>
 		<newfile>Neue Datei</newfile>
@@ -114,7 +114,7 @@
 		<noname>kein Name</noname>
 		<poslen>pos: {0} - lng: {1}</poslen>
 		<inheritedfr>geerbt von</inheritedfr>
-		<methodfrom>Method von</methodfrom>
+		<methodfrom>Methode von</methodfrom>
 		<propertyfrom>Property von</propertyfrom>
 		<search>Suche</search>
 		<delete>Löschen</delete>
@@ -128,27 +128,27 @@
 		<postbuildcom>Post-Build Befehle</postbuildcom>
 		<optimizelvl>Optimierungslevel</optimizelvl>
 		<verboselvl>Verbose-Level</verboselvl>
-		<autocopy>Automatisches Kopieren nach Kompillierung</autocopy>
-		<deleteoldsmx>Alte .smx nach Kompillierung löschen</deleteoldsmx>
+		<autocopy>Automatisches Kopieren nach Kompilierung</autocopy>
+		<deleteoldsmx>Alte .smx nach Kompilierung löschen</deleteoldsmx>
 		<ftphost>FTP Host</ftphost>
 		<ftpuser>FTP Benutzer</ftpuser>
 		<ftppw>FTP Passwort</ftppw>
 		<ftpdir>FTP Pfad</ftpdir>
 		<comeditordir>Pfad zur SPEdit-Binary</comeditordir>
-		<comscriptdir>Pfad zum kompillierenden Script</comscriptdir>
+		<comscriptdir>Pfad zum kompilierenden Script</comscriptdir>
 		<comcopydir>Kopierpfad für die smx</comcopydir>
 		<comscriptfile>Voller Pfad und Name zum Script</comscriptfile>
 		<comscriptname>Dateiname des Scripts</comscriptname>
-		<compluginfile>Voller Pfad und Name des kompillierten Script</compluginfile>
-		<compluginname>Dateiname des kompillierten Script</compluginname>
+		<compluginfile>Voller Pfad und Name des kompilierten Script</compluginfile>
+		<compluginname>Dateiname des kompilierten Script</compluginname>
 		<rconengine>RCon Server Engine</rconengine>
 		<rconip>RCon Server IP</rconip>
 		<rconport>RCon Server Port</rconport>
 		<rconpw>RCon Server Passwort</rconpw>
 		<rconcom>RCon Server Befehle</rconcom>
-		<compluginsreload>Alle kompillierten Plugins neu laden</compluginsreload>
-		<compluginsloas>Alle kompillierten Plugins laden</compluginsloas>
-		<compluginsunload>Alle kompillierten Plugins neu entladen</compluginsunload>
+		<compluginsreload>Alle kompilierten Plugins neu laden</compluginsreload>
+		<compluginsloas>Alle kompilierten Plugins laden</compluginsloas>
+		<compluginsunload>Alle kompilierten Plugins neu entladen</compluginsunload>
 		<newconfig>Neu Konfiguration</newconfig>
 		<cannotdelconf>Kann Konfiguration nicht löschen</cannotdelconf>
 		<ycannotdelconf>Du kannst diese Konfiguration nicht löschen.</ycannotdelconf>
@@ -156,18 +156,18 @@
 		<cmdlinecom>Befehlsvariablen</cmdlinecom>
 		<rconcmdlinecom>Rcon Befehlsvariablen</rconcmdlinecom>
 		<resetoptions>Optionen zurücksetzen</resetoptions>
-		<resetoptques>Bist du dir sicher die Optionen zurückzusetzen?</resetoptques>
-		<restarteditor>Editor neustarten</restarteditor>
-		<yrestarteditor>Du musst den Editor neu starten damit die Änderungen aktiv werden.</yrestarteditor>
-		<restartedifulleff>Starte den Editor neu damit alle Änderungen aktiv werden...</restartedifulleff>
-		<restartedieff>Starte den Editor neu damit die Änderungen aktiv werden...</restartedieff>
+		<resetoptques>Bist du dir sicher, dass du die Optionen zurücksetzen willst?</resetoptques>
+		<restarteditor>Editor neu starten</restarteditor>
+		<yrestarteditor>Du musst den Editor neu starten, damit die Änderungen aktiv werden.</yrestarteditor>
+		<restartedifulleff>Starte den Editor neu, damit alle Änderungen aktiv werden...</restartedifulleff>
+		<restartedieff>Starte den Editor neu, damit die Änderungen aktiv werden...</restartedieff>
 		<program>Programm</program>
 		<hardwareacc>Benutze Hardwarebeschleunigung (wenn verfügbar)</hardwareacc>
 		<uianim>UI Animationen</uianim>
-		<openinc>Automatisches öffnen von Includes</openinc>
+		<openinc>Automatisches Öffnen von Includes</openinc>
 		<openincrec>Includes rekursiv öffnen</openincrec>
 		<autoupdate>Automatisch nach Updates suchen</autoupdate>
-		<showtoolbar>Werkzeugleiste zeigen</showtoolbar>
+		<showtoolbar>Werkzeugleiste anzeigen</showtoolbar>
 		<dynamicisac>Dynamische Autovervollst./Intellisense</dynamicisac>
 		<darktheme>Dunkle Umgebung</darktheme>
 		<themecolor>Umgebungsfarbe</themecolor>
@@ -177,7 +177,7 @@
 		<scrollspeed>Scrollgeschwindigkeit</scrollspeed>
 		<wordwrap>Wortumbruch</wordwrap>
 		<aggindentation>Agressive Einrückung</aggindentation>
-		<reformataftersem>Zeile neuformatieren nach Semikolon</reformataftersem>
+		<reformataftersem>Zeile neu formatieren nach Semikolon</reformataftersem>
 		<tabstospace>Tabs mit Leerzeichen ersetzen</tabstospace>
 		<autoclosebrack>Automatisch Klammern schließen</autoclosebrack>
 		<autoclosestrchr>Automatisch Strings, Chars schließen</autoclosestrchr>
@@ -187,12 +187,12 @@
 		<fontfamily>Schriftart</fontfamily>
 		<syntaxhigh>Syntaxhighlighting</syntaxhigh>
 		<highdeprecat>Veraltete Syntax (&lt;1.7) anzeigen</highdeprecat>
-		<compile>Kompillieren</compile>
-		<autosavemin>Automatisches speichern (Min)</autosavemin>
-    <obtextfile>Datei Pfad</obtextfile>
-    <obtextconfig>Konfig. Pfad</obtextconfig>
-    <obtextitem>Listenpunkt Pfad</obtextitem>
-    <errorfileerror>Die compile-Fehlerdatei konnte nicht gelesen werden.</errorfileerror>
+		<compile>Kompilieren</compile>
+		<autosavemin>Automatisches Speichern (Min)</autosavemin>
+    <obtextfile>Dateipfad</obtextfile>
+    <obtextconfig>Konfigurationspfad</obtextconfig>
+    <obtextitem>Listenpunktpfad</obtextitem>
+  <errorfileerror>Die compile-Fehlerdatei konnte nicht gelesen werden.</errorfileerror>
 	</de>
 	<fr>
 		<language>Français</language>

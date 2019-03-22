@@ -164,7 +164,7 @@
 	<hardwareacc>Use hardware acceleration (if available)</hardwareacc>
 	<uianim>UI animations</uianim>
 	<openinc>Auto open includes</openinc>
-	<openincrec>Open Includes Recursivly</openincrec>
+	<openincrec>Open Includes Recursively</openincrec>
 	<autoupdate>Search automatically for updates</autoupdate>
 	<showtoolbar>Show toolbar</showtoolbar>
 	<dynamicisac>Dynamic Autocompletition/Intellisense</dynamicisac>
