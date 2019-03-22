@@ -9,8 +9,8 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 	[Serializable]
     public class OptionsControl
     {
-        public static int SVersion = 10;
-        public int Version = 10;
+        public static int SVersion = 11;
+        public int Version = 11;
 
         public byte[] Program_CryptoKey = null;
 		public bool Program_UseHardwareSalts = true;
@@ -123,11 +123,16 @@ namespace Spedit //leave this here instead of .Interop because of reasons...
 					Editor_AutoSaveInterval = 5 * 60;
 					this.ReCreateCryptoKey();
 					Program.MakeRCCKAlert();
-				}
-				if (Version < 10)
-				{
-					Program_UseHardwareSalts = true;
-				}
+                }
+                if (Version < 10)
+                {
+                    Program_UseHardwareSalts = true;
+                }
+                if (Version < 11)
+                {
+                    if (this.Program_AccentColor == "Cyan")
+                        this.Program_AccentColor = "Blue";
+                }
                 //new Optionsversion - reset new fields to default
                 this.Version = OptionsControl.SVersion; //then Update Version afterwars
             }
