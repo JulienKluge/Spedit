@@ -31,7 +31,7 @@ using System.Resources;
 //      Revision
 //
 #if (DEBUG)
-[assembly: AssemblyVersion("1.12.*")]
+[assembly: AssemblyVersion("1.13.*")]
 #else
-[assembly: AssemblyVersion("1.2.0.2")]
+[assembly: AssemblyVersion("1.2.0.3")]
 #endif
