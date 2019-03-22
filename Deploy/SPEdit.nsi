@@ -41,11 +41,16 @@ File ICSharpCode.AvalonEdit.dll
 File System.Windows.Interactivity.dll
 File Xceed.Wpf.AvalonDock.dll
 File Xceed.Wpf.AvalonDock.Themes.Metro.dll
+File Xceed.Wpf.AvalonDock.Themes.Aero.dll
+File Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+File Xceed.Wpf.Toolkit.dll
 File smxdasm.dll
 File LysisForSpedit.dll
 File QueryMaster.dll
 File Ionic.BZip2.dll
 File SourcepawnCondenser.dll
+File ControlzEx.dll
+
 File lang_0_spedit.xml
 File GPLv3.txt
 
@@ -123,10 +128,14 @@ Delete $INSTDIR\ICSharpCode.AvalonEdit.dll
 Delete $INSTDIR\System.Windows.Interactivity.dll
 Delete $INSTDIR\Xceed.Wpf.AvalonDock.dll
 Delete $INSTDIR\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+Delete $INSTDIR\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+Delete $INSTDIR\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+Delete $INSTDIR\Xceed.Wpf.Toolkit.dll
 Delete $INSTDIR\smxdasm.dll
 Delete $INSTDIR\LysisForSpedit.dll
 Delete $INSTDIR\QueryMaster.dll
 Delete $INSTDIR\Ionic.BZip2.dll
+Delete $INSTDIR\ControlzEx.dll
 Delete $INSTDIR\lang_0_spedit.xml
 Delete $INSTDIR\GPLv3.txt
 Delete $INSTDIR\*.dat

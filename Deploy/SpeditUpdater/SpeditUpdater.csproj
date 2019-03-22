@@ -51,6 +51,7 @@
     <None Include="Res\spedit1.2.0.0Update.zip" />
     <None Include="Res\spedit1.2.0.1Update.zip" />
     <None Include="Res\spedit1.2.0.2Update.zip" />
+    <None Include="Res\spedit1.2.0.3Update.zip" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
