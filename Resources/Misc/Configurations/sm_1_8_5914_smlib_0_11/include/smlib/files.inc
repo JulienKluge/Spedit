@@ -4,7 +4,7 @@
 #define _smlib_files_included
 
 #include <sourcemod>
-#include <sdktools_stringtables>
+#include <sdktools>
 #include <smlib/arrays>
 
 /**
@@ -19,20 +19,20 @@
  * @noreturn
  */
 stock bool:File_GetBaseName(const String:path[], String:buffer[], size)
-{	
+{
 	if (path[0] == '\0') {
 		buffer[0] = '\0';
 		return;
 	}
-	
+
 	new pos_start = FindCharInString(path, '/', true);
-	
+
 	if (pos_start == -1) {
 		pos_start = FindCharInString(path, '\\', true);
 	}
-	
+
 	pos_start++;
-	
+
 	strcopy(buffer, size, path[pos_start]);
 }
 
@@ -49,23 +49,23 @@ stock bool:File_GetBaseName(const String:path[], String:buffer[], size)
  * @noreturn
  */
 stock bool:File_GetDirName(const String:path[], String:buffer[], size)
-{	
+{
 	if (path[0] == '\0') {
 		buffer[0] = '\0';
 		return;
 	}
-	
+
 	new pos_start = FindCharInString(path, '/', true);
-	
+
 	if (pos_start == -1) {
 		pos_start = FindCharInString(path, '\\', true);
-		
+
 		if (pos_start == -1) {
 			buffer[0] = '\0';
 			return;
 		}
 	}
-	
+
 	strcopy(buffer, size, path);
 	buffer[pos_start] = '\0';
 }
@@ -81,14 +81,14 @@ stock bool:File_GetDirName(const String:path[], String:buffer[], size)
  * @noreturn
  */
 stock bool:File_GetFileName(const String:path[], String:buffer[], size)
-{	
+{
 	if (path[0] == '\0') {
 		buffer[0] = '\0';
 		return;
 	}
-	
+
 	File_GetBaseName(path, buffer, size);
-	
+
 	new pos_ext = FindCharInString(buffer, '.', true);
 
 	if (pos_ext != -1) {
@@ -110,7 +110,7 @@ stock bool:File_GetFileName(const String:path[], String:buffer[], size)
 stock File_GetExtension(const String:path[], String:buffer[], size)
 {
 	new extpos = FindCharInString(path, '.', true);
-	
+
 	if (extpos == -1) {
 		buffer[0] = '\0';
 		return;
@@ -144,14 +144,14 @@ stock File_AddToDownloadsTable(const String:path[], bool:recursive=true, const S
 	}
 
 	if (FileExists(path)) {
-		
-		new String:fileExtension[4];
+
+		new String:fileExtension[5];
 		File_GetExtension(path, fileExtension, sizeof(fileExtension));
-		
+
 		if (StrEqual(fileExtension, "bz2", false) || StrEqual(fileExtension, "ztmp", false)) {
 			return;
 		}
-		
+
 		if (Array_FindString(ignoreExts, size, fileExtension) != -1) {
 			return;
 		}
@@ -172,15 +172,15 @@ stock File_AddToDownloadsTable(const String:path[], bool:recursive=true, const S
 			if (StrEqual(dirEntry, ".") || StrEqual(dirEntry, "..")) {
 				continue;
 			}
-			
+
 			Format(dirEntry, sizeof(dirEntry), "%s/%s", path, dirEntry);
 			File_AddToDownloadsTable(dirEntry, recursive, ignoreExts, size);
 		}
-		
+
 		CloseHandle(__dir);
 	}
 	else if (FindCharInString(path, '*', true)) {
-		
+
 		new String:fileExtension[4];
 		File_GetExtension(path, fileExtension, sizeof(fileExtension));
 
@@ -227,7 +227,7 @@ stock File_AddToDownloadsTable(const String:path[], bool:recursive=true, const S
 stock File_ReadDownloadList(const String:path[])
 {
 	new Handle:file = OpenFile(path, "r");
-	
+
 	if (file  == INVALID_HANDLE) {
 		return;
 	}
@@ -235,13 +235,13 @@ stock File_ReadDownloadList(const String:path[])
 	new String:buffer[PLATFORM_MAX_PATH];
 	while (!IsEndOfFile(file)) {
 		ReadFileLine(file, buffer, sizeof(buffer));
-		
+
 		new pos;
 		pos = StrContains(buffer, "//");
 		if (pos != -1) {
 			buffer[pos] = '\0';
 		}
-		
+
 		pos = StrContains(buffer, "#");
 		if (pos != -1) {
 			buffer[pos] = '\0';
@@ -251,9 +251,9 @@ stock File_ReadDownloadList(const String:path[])
 		if (pos != -1) {
 			buffer[pos] = '\0';
 		}
-		
+
 		TrimString(buffer);
-		
+
 		if (buffer[0] == '\0') {
 			continue;
 		}
@@ -265,36 +265,42 @@ stock File_ReadDownloadList(const String:path[])
 }
 
 /*
- * Attempts to load a translation file and unloads the plugin if the file doesn't exist.
+ * Attempts to load a translation file and optionally unloads the plugin if the file
+ * doesn't exist (also prints an error message).
  *
- * @param file		Filename of the translations file (eg. <pluginname>.phrases).
- * @noreturn
+ * @param file			Filename of the translations file (eg. <pluginname>.phrases).
+ * @param setFailState	If true, it sets the failstate if the translations file doesn't exist
+ * @return				True on success, false otherwise (only if setFailState is set to false)
  */
-stock File_LoadTranslations(const String:file[])
+stock File_LoadTranslations(const String:file[], setFailState=true)
 {
 	decl String:path[PLATFORM_MAX_PATH];
-	
-	Format(path,sizeof(path),"translations/%s",file);
-	
-	BuildPath(Path_SM, path, sizeof(path), path);
-	
+
+	BuildPath(Path_SM, path, sizeof(path), "translations/%s", file);
+
 	if (FileExists(path)) {
 		LoadTranslations(file);
-		return;
+		return true;
 	}
-	
-	Format(path,sizeof(path),"%s.txt",path);
-	
-	if (FileExists(path)) {
-		LoadTranslations(file);
-		return;
+
+	Format(path,sizeof(path), "%s.txt", path);
+
+	if (!FileExists(path)) {
+
+		if (setFailState) {
+			SetFailState("Unable to locate translation file (%s).", path);
+		}
+
+		return false;
 	}
-	
-	SetFailState("Unable to locate translation file (%s).",path);
+
+	LoadTranslations(file);
+
+	return true;
 }
 
 /*
- * Reads the contents of a given file into a string buffer in binaey mode.
+ * Reads the contents of a given file into a string buffer in binary mode.
  *
  * @param path		Path to the file
  * @param buffer	String buffer
