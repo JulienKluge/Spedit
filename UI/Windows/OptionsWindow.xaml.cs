@@ -14,7 +14,7 @@ namespace Spedit.UI.Windows
     /// </summary>
     public partial class OptionsWindow : MetroWindow
     {
-		string[] AvailableAccents = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cyan", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber",
+		string[] AvailableAccents = { "Red", "Green", "Blue", "Purple", "Orange", "Lime", "Emerald", "Teal", "Cobalt", "Indigo", "Violet", "Pink", "Magenta", "Crimson", "Amber",
 			"Yellow", "Brown", "Olive", "Steel", "Mauve", "Taupe", "Sienna" };
         bool RestartTextIsShown = false;
         bool AllowChanging = false;
